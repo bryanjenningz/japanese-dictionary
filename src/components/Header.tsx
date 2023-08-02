@@ -34,7 +34,7 @@ export const Header = () => {
         </button>
 
         <div className="relative flex grow">
-          <input className="grow bg-slate-800 px-1 py-2" />
+          <input className="grow bg-slate-800 px-1 py-2" role="search" />
           <button className="absolute bottom-0 right-0 top-0 px-1 text-slate-300">
             <span className="sr-only">Clear input</span>
             <CloseIcon />
