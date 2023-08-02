@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrushIcon } from "~/icons/BrushIcon";
 import { CameraIcon } from "~/icons/CameraIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
@@ -5,16 +6,25 @@ import { KeyboardIcon } from "~/icons/KeyboardIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { MicrophoneIcon } from "~/icons/MicrophoneIcon";
 import { PuzzlePieceIcon } from "~/icons/PuzzlePieceIcon";
+import { classNames } from "~/utils/classNames";
 
-const headerBottomTabs = [
+type HeaderTabId = (typeof headerTabs)[number]["id"];
+
+const DEFAULT_HEADER_TAB_ID: HeaderTabId = 3;
+
+const headerTabs = [
   { id: 1, label: "Search by drawing characters", icon: <BrushIcon /> },
   { id: 2, label: "Search by character primitives", icon: <PuzzlePieceIcon /> },
   { id: 3, label: "Search by keyboard", icon: <KeyboardIcon /> },
   { id: 4, label: "Search by talking", icon: <MicrophoneIcon /> },
   { id: 5, label: "Search by picture", icon: <CameraIcon /> },
-];
+] as const;
 
 export const Header = () => {
+  const [headerTabId, setHeaderTabId] = useState<HeaderTabId>(
+    DEFAULT_HEADER_TAB_ID
+  );
+
   return (
     <header>
       <section className="flex h-14 items-center">
@@ -40,11 +50,15 @@ export const Header = () => {
       </section>
 
       <section className="flex h-14 items-center">
-        {headerBottomTabs.map(({ id, label, icon }) => {
+        {headerTabs.map(({ id, label, icon }) => {
           return (
             <button
               key={id}
-              className="flex h-full grow items-center justify-center"
+              className={classNames(
+                "flex h-full grow items-center justify-center",
+                headerTabId === id && "border-b-2 border-white"
+              )}
+              onClick={() => setHeaderTabId(id)}
             >
               <span className="sr-only">{label}</span>
               {icon}
