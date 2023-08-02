@@ -1,4 +1,5 @@
 import { BrushIcon } from "~/icons/BrushIcon";
+import { CameraIcon } from "~/icons/CameraIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
 import { KeyboardIcon } from "~/icons/KeyboardIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
@@ -10,7 +11,7 @@ const headerBottomTabs = [
   { id: 2, label: "Search by character primitives", icon: <PuzzlePieceIcon /> },
   { id: 3, label: "Search by keyboard", icon: <KeyboardIcon /> },
   { id: 4, label: "Search by talking", icon: <MicrophoneIcon /> },
-  { id: 5, label: "Search by drawing characters", icon: <BrushIcon /> },
+  { id: 5, label: "Search by picture", icon: <CameraIcon /> },
 ];
 
 export default function Home() {
