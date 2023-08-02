@@ -1,12 +1,13 @@
 import { BrushIcon } from "~/icons/BrushIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
+import { KeyboardIcon } from "~/icons/KeyboardIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { PuzzlePieceIcon } from "~/icons/PuzzlePieceIcon";
 
 const headerBottomTabs = [
   { id: 1, label: "Search by drawing characters", icon: <BrushIcon /> },
   { id: 2, label: "Search by character primitives", icon: <PuzzlePieceIcon /> },
-  { id: 3, label: "Search by drawing characters", icon: <BrushIcon /> },
+  { id: 3, label: "Search by keyboard", icon: <KeyboardIcon /> },
   { id: 4, label: "Search by drawing characters", icon: <BrushIcon /> },
   { id: 5, label: "Search by drawing characters", icon: <BrushIcon /> },
 ];
