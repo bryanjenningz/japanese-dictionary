@@ -20,7 +20,7 @@ export default function Home() {
       <div className="flex w-full max-w-2xl flex-col">
         <header>
           <section className="flex h-14 items-center">
-            <button className="h-14 px-6">
+            <button className="h-full px-6">
               <span className="sr-only">Open menu</span>
               <MenuIcon />
             </button>
@@ -33,7 +33,7 @@ export default function Home() {
               </button>
             </div>
 
-            <button className="flex h-14 items-center justify-center px-6">
+            <button className="flex h-full items-center justify-center px-6">
               <span className="flex h-6 w-6 items-center justify-center rounded border-2 border-white text-lg">
                 <span className="sr-only">English search</span>
                 <span aria-hidden>E</span>
