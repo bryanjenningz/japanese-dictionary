@@ -1,13 +1,14 @@
 import { BrushIcon } from "~/icons/BrushIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
+import { PuzzlePieceIcon } from "~/icons/PuzzlePieceIcon";
 
 const headerBottomTabs = [
-  { tab: 1, label: "Search by drawing characters", icon: <BrushIcon /> },
-  { tab: 2, label: "Search by drawing characters", icon: <BrushIcon /> },
-  { tab: 3, label: "Search by drawing characters", icon: <BrushIcon /> },
-  { tab: 4, label: "Search by drawing characters", icon: <BrushIcon /> },
-  { tab: 5, label: "Search by drawing characters", icon: <BrushIcon /> },
+  { id: 1, label: "Search by drawing characters", icon: <BrushIcon /> },
+  { id: 2, label: "Search by character primitives", icon: <PuzzlePieceIcon /> },
+  { id: 3, label: "Search by drawing characters", icon: <BrushIcon /> },
+  { id: 4, label: "Search by drawing characters", icon: <BrushIcon /> },
+  { id: 5, label: "Search by drawing characters", icon: <BrushIcon /> },
 ];
 
 export default function Home() {
@@ -38,10 +39,10 @@ export default function Home() {
           </section>
 
           <section className="flex h-14 items-center">
-            {headerBottomTabs.map(({ tab, label, icon }) => {
+            {headerBottomTabs.map(({ id, label, icon }) => {
               return (
                 <button
-                  key={tab}
+                  key={id}
                   className="flex grow items-center justify-center"
                 >
                   <span className="sr-only">{label}</span>
