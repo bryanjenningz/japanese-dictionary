@@ -46,7 +46,7 @@ export default function Home() {
               return (
                 <button
                   key={id}
-                  className="flex grow items-center justify-center"
+                  className="flex h-full grow items-center justify-center"
                 >
                   <span className="sr-only">{label}</span>
                   {icon}
