@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type Dispatch, type SetStateAction } from "react";
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
 import { SmallCameraIcon } from "~/icons/SmallCameraIcon";
@@ -65,12 +65,14 @@ const sideMenuOptionGroups = [
 export const SideMenu = ({
   isSideMenuOpen,
   closeSideMenu,
+  isDarkMode,
+  setIsDarkMode,
 }: {
   isSideMenuOpen: boolean;
   closeSideMenu: () => void;
+  isDarkMode: boolean;
+  setIsDarkMode: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
-
   return (
     <>
       <div

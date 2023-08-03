@@ -5,6 +5,7 @@ import { SideMenu } from "~/components/SideMenu";
 
 export default function Home() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-black text-white">
@@ -14,6 +15,8 @@ export default function Home() {
         <SideMenu
           isSideMenuOpen={isSideMenuOpen}
           closeSideMenu={() => setIsSideMenuOpen(false)}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
         />
 
         <EmptySearchResultsMenu />
