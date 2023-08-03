@@ -15,12 +15,12 @@ export default function Home() {
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       )}
     >
-      <div className="flex w-full max-w-2xl flex-col">
-        <Header
-          openSideMenu={() => setIsSideMenuOpen(true)}
-          isDarkMode={isDarkMode}
-        />
+      <Header
+        openSideMenu={() => setIsSideMenuOpen(true)}
+        isDarkMode={isDarkMode}
+      />
 
+      <div className="flex w-full max-w-2xl flex-col">
         <SideMenu
           isSideMenuOpen={isSideMenuOpen}
           closeSideMenu={() => setIsSideMenuOpen(false)}
