@@ -1,12 +1,13 @@
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
+import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { classNames } from "~/utils/classNames";
 
 const sideMenuOptionGroups = [
   {
     label: "Dictionary",
     options: [
-      { label: "Dictionary", icon: <></> },
+      { label: "Dictionary", icon: <SmallSearchIcon /> },
       { label: "History", icon: <></> },
     ],
   },
@@ -95,8 +96,8 @@ export const SideMenu = ({
                   const key = `${label}-${option.label}`;
                   return (
                     <li key={key}>
-                      <button className="w-full px-4 py-2 text-left text-lg">
-                        {option.label}
+                      <button className="flex w-full items-center gap-2 px-4 py-2 text-left text-lg text-white">
+                        {option.icon} {option.label}
                       </button>
                     </li>
                   );
