@@ -56,46 +56,54 @@ export const SideMenu = ({
   closeSideMenu: () => void;
 }) => {
   return (
-    <aside
-      className={classNames(
-        "absolute bottom-0 top-0 bg-black text-white transition-all duration-500",
-        isSideMenuOpen ? "left-0" : "-left-full"
-      )}
-      onClick={closeSideMenu}
-    >
-      <section className="flex">
-        <button className="flex grow basis-1 items-center justify-center py-4">
-          <span className="sr-only">Dark mode</span>
-          <MoonIcon />
-        </button>
+    <>
+      <div
+        className={classNames(
+          "absolute inset-0 bg-black opacity-40",
+          !isSideMenuOpen && "hidden"
+        )}
+        onClick={closeSideMenu}
+      ></div>
+      <aside
+        className={classNames(
+          "absolute bottom-0 top-0 bg-black text-white transition-all duration-500",
+          isSideMenuOpen ? "left-0" : "-left-full"
+        )}
+      >
+        <section className="flex">
+          <button className="flex grow basis-1 items-center justify-center py-4">
+            <span className="sr-only">Dark mode</span>
+            <MoonIcon />
+          </button>
 
-        <button className="flex grow basis-1 items-center justify-center py-4">
-          <span className="sr-only">Furigana mode</span>
-          <FuriganaIcon />
-        </button>
-      </section>
+          <button className="flex grow basis-1 items-center justify-center py-4">
+            <span className="sr-only">Furigana mode</span>
+            <FuriganaIcon />
+          </button>
+        </section>
 
-      {sideMenuOptionGroups.map(({ label, options }) => {
-        return (
-          <section key={label}>
-            <h2 className="bg-slate-900 px-4 py-2 text-xs uppercase">
-              {label}
-            </h2>
-            <ul>
-              {options.map((option) => {
-                const key = `${label}-${option.label}`;
-                return (
-                  <li key={key}>
-                    <button className="w-full px-4 py-2 text-left text-lg">
-                      {option.label}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        );
-      })}
-    </aside>
+        {sideMenuOptionGroups.map(({ label, options }) => {
+          return (
+            <section key={label}>
+              <h2 className="bg-slate-900 px-4 py-2 text-xs uppercase">
+                {label}
+              </h2>
+              <ul>
+                {options.map((option) => {
+                  const key = `${label}-${option.label}`;
+                  return (
+                    <li key={key}>
+                      <button className="w-full px-4 py-2 text-left text-lg">
+                        {option.label}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          );
+        })}
+      </aside>
+    </>
   );
 };
