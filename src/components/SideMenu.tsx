@@ -5,6 +5,7 @@ import { SmallCartIcon } from "~/icons/SmallCartIcon";
 import { SmallClipboardIcon } from "~/icons/SmallClipboardIcon";
 import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
 import { SmallImageIcon } from "~/icons/SmallImageIcon";
+import { SmallLearnIcon } from "~/icons/SmallLearnIcon";
 import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { SmallStackIcon } from "~/icons/SmallStackIcon";
@@ -41,7 +42,7 @@ const sideMenuOptionGroups = [
   },
   {
     label: "Flashcards",
-    options: [{ label: "Open AnkiDroid", icon: <></> }],
+    options: [{ label: "Open AnkiDroid", icon: <SmallLearnIcon /> }],
   },
   {
     label: "Settings",
