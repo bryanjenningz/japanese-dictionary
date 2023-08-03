@@ -39,7 +39,7 @@ export const Header = ({
   return (
     <header
       className={classNames(
-        "text-white",
+        "text-white shadow",
         isDarkMode ? "bg-black" : "bg-blue-600"
       )}
     >
