@@ -22,7 +22,13 @@ const headerTabs = [
   { id: 5, label: "Search by picture", icon: <CameraIcon /> },
 ] as const;
 
-export const Header = ({ openSideMenu }: { openSideMenu: () => void }) => {
+export const Header = ({
+  openSideMenu,
+  isDarkMode,
+}: {
+  openSideMenu: () => void;
+  isDarkMode: boolean;
+}) => {
   const [searchLanguage, setSearchLanguage] =
     useState<SearchLanguage>("English");
 
@@ -31,7 +37,12 @@ export const Header = ({ openSideMenu }: { openSideMenu: () => void }) => {
   );
 
   return (
-    <header>
+    <header
+      className={classNames(
+        "text-white",
+        isDarkMode ? "bg-black" : "bg-blue-600"
+      )}
+    >
       <section className="flex h-14 items-center">
         <button className="h-full px-6" onClick={openSideMenu}>
           <span className="sr-only">Open side menu</span>
@@ -39,8 +50,19 @@ export const Header = ({ openSideMenu }: { openSideMenu: () => void }) => {
         </button>
 
         <div className="relative flex grow">
-          <input className="grow bg-slate-800 px-1 py-2" role="search" />
-          <button className="absolute bottom-0 right-0 top-0 px-1 text-slate-300">
+          <input
+            className={classNames(
+              "grow px-1 py-2",
+              isDarkMode ? "bg-slate-800 text-white" : "bg-white text-black"
+            )}
+            role="search"
+          />
+          <button
+            className={classNames(
+              "absolute bottom-0 right-0 top-0 px-1",
+              isDarkMode ? "text-slate-300" : "text-slate-500"
+            )}
+          >
             <span className="sr-only">Clear input</span>
             <CloseIcon />
           </button>
@@ -58,8 +80,12 @@ export const Header = ({ openSideMenu }: { openSideMenu: () => void }) => {
             className={classNames(
               "flex h-6 w-6 items-center justify-center rounded border-2 border-white text-lg font-bold",
               searchLanguage === "English"
-                ? "bg-black text-white"
-                : "bg-white text-black"
+                ? isDarkMode
+                  ? "bg-black text-white"
+                  : "bg-blue-600 text-white"
+                : isDarkMode
+                ? "bg-white text-black"
+                : "bg-white text-blue-600"
             )}
           >
             <span className="sr-only">{searchLanguage} search</span>
