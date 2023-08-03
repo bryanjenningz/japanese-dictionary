@@ -1,5 +1,6 @@
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
+import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { classNames } from "~/utils/classNames";
 
@@ -8,7 +9,7 @@ const sideMenuOptionGroups = [
     label: "Dictionary",
     options: [
       { label: "Dictionary", icon: <SmallSearchIcon /> },
-      { label: "History", icon: <></> },
+      { label: "History", icon: <SmallHistoryIcon /> },
     ],
   },
   {
