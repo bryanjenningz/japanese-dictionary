@@ -8,6 +8,7 @@ import { SmallImageIcon } from "~/icons/SmallImageIcon";
 import { SmallLearnIcon } from "~/icons/SmallLearnIcon";
 import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
+import { SmallSettingsIcon } from "~/icons/SmallSettingsIcon";
 import { SmallStackIcon } from "~/icons/SmallStackIcon";
 import { classNames } from "~/utils/classNames";
 
@@ -46,7 +47,7 @@ const sideMenuOptionGroups = [
   },
   {
     label: "Settings",
-    options: [{ label: "Settings", icon: <></> }],
+    options: [{ label: "Settings", icon: <SmallSettingsIcon /> }],
   },
   {
     label: "Support",
