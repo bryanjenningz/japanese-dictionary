@@ -1,3 +1,4 @@
+import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
 import { classNames } from "~/utils/classNames";
 
@@ -70,6 +71,7 @@ export const SideMenu = ({
 
         <button className="flex grow basis-1 items-center justify-center py-4">
           <span className="sr-only">Furigana mode</span>
+          <FuriganaIcon />
         </button>
       </section>
 
