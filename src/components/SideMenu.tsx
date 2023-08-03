@@ -2,6 +2,7 @@ import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
 import { SmallCameraIcon } from "~/icons/SmallCameraIcon";
 import { SmallCartIcon } from "~/icons/SmallCartIcon";
+import { SmallClipboardIcon } from "~/icons/SmallClipboardIcon";
 import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
 import { SmallImageIcon } from "~/icons/SmallImageIcon";
 import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
@@ -33,7 +34,7 @@ const sideMenuOptionGroups = [
   {
     label: "Reader",
     options: [
-      { label: "Clip Reader", icon: <></> },
+      { label: "Clip Reader", icon: <SmallClipboardIcon /> },
       { label: "Screen Reader/OCR", icon: <></> },
     ],
   },
