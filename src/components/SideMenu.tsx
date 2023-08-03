@@ -1,3 +1,4 @@
+import { MoonIcon } from "~/icons/MoonIcon";
 import { classNames } from "~/utils/classNames";
 
 const sideMenuOptionGroups = [
@@ -62,11 +63,12 @@ export const SideMenu = ({
       onClick={closeSideMenu}
     >
       <section className="flex">
-        <button>
+        <button className="flex grow basis-1 items-center justify-center py-4">
           <span className="sr-only">Dark mode</span>
+          <MoonIcon />
         </button>
 
-        <button>
+        <button className="flex grow basis-1 items-center justify-center py-4">
           <span className="sr-only">Furigana mode</span>
         </button>
       </section>
