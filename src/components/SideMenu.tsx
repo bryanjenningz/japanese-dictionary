@@ -64,11 +64,13 @@ export const SideMenu = ({
         )}
         onClick={closeSideMenu}
       ></div>
+
       <aside
         className={classNames(
           "absolute bottom-0 top-0 bg-black text-white transition-all duration-500",
           isSideMenuOpen ? "left-0" : "-left-full"
         )}
+        aria-hidden={!isSideMenuOpen}
       >
         <section className="flex">
           <button className="flex grow basis-1 items-center justify-center py-4">
