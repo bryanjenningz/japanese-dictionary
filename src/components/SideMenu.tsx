@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
 import { SmallCameraIcon } from "~/icons/SmallCameraIcon";
@@ -12,6 +13,7 @@ import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { SmallSettingsIcon } from "~/icons/SmallSettingsIcon";
 import { SmallStackIcon } from "~/icons/SmallStackIcon";
+import { SunIcon } from "~/icons/SunIcon";
 import { classNames } from "~/utils/classNames";
 
 const sideMenuOptionGroups = [
@@ -67,6 +69,8 @@ export const SideMenu = ({
   isSideMenuOpen: boolean;
   closeSideMenu: () => void;
 }) => {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
   return (
     <>
       <div
@@ -85,9 +89,21 @@ export const SideMenu = ({
         aria-hidden={!isSideMenuOpen}
       >
         <section className="flex">
-          <button className="flex grow basis-1 items-center justify-center py-4">
-            <span className="sr-only">Dark mode</span>
-            <MoonIcon />
+          <button
+            className="flex grow basis-1 items-center justify-center py-4"
+            onClick={() => setIsDarkMode((isDarkMode) => !isDarkMode)}
+          >
+            {isDarkMode ? (
+              <>
+                <span className="sr-only">Dark mode</span>
+                <MoonIcon />
+              </>
+            ) : (
+              <>
+                <span className="sr-only">Light mode</span>
+                <SunIcon />
+              </>
+            )}
           </button>
 
           <button className="flex grow basis-1 items-center justify-center py-4">
