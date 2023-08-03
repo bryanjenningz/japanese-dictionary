@@ -7,6 +7,7 @@ import { SmallHelpIcon } from "~/icons/SmallHelpIcon";
 import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
 import { SmallImageIcon } from "~/icons/SmallImageIcon";
 import { SmallLearnIcon } from "~/icons/SmallLearnIcon";
+import { SmallMailIcon } from "~/icons/SmallMailIcon";
 import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { SmallSettingsIcon } from "~/icons/SmallSettingsIcon";
@@ -54,7 +55,7 @@ const sideMenuOptionGroups = [
     label: "Support",
     options: [
       { label: "Help", icon: <SmallHelpIcon /> },
-      { label: "Contact Us", icon: <></> },
+      { label: "Contact Us", icon: <SmallMailIcon /> },
     ],
   },
 ];
