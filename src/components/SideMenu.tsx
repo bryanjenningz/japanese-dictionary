@@ -3,6 +3,7 @@ import { MoonIcon } from "~/icons/MoonIcon";
 import { SmallCameraIcon } from "~/icons/SmallCameraIcon";
 import { SmallCartIcon } from "~/icons/SmallCartIcon";
 import { SmallClipboardIcon } from "~/icons/SmallClipboardIcon";
+import { SmallHelpIcon } from "~/icons/SmallHelpIcon";
 import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
 import { SmallImageIcon } from "~/icons/SmallImageIcon";
 import { SmallLearnIcon } from "~/icons/SmallLearnIcon";
@@ -52,7 +53,7 @@ const sideMenuOptionGroups = [
   {
     label: "Support",
     options: [
-      { label: "Help", icon: <></> },
+      { label: "Help", icon: <SmallHelpIcon /> },
       { label: "Contact Us", icon: <></> },
     ],
   },
