@@ -28,7 +28,7 @@ export default function Home() {
           setIsDarkMode={setIsDarkMode}
         />
 
-        <EmptySearchResultsMenu />
+        <EmptySearchResultsMenu isDarkMode={isDarkMode} />
       </div>
     </main>
   );
