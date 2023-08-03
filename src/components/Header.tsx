@@ -22,7 +22,7 @@ const headerTabs = [
   { id: 5, label: "Search by picture", icon: <CameraIcon /> },
 ] as const;
 
-export const Header = () => {
+export const Header = ({ openSideMenu }: { openSideMenu: () => void }) => {
   const [searchLanguage, setSearchLanguage] =
     useState<SearchLanguage>("English");
 
@@ -33,8 +33,8 @@ export const Header = () => {
   return (
     <header>
       <section className="flex h-14 items-center">
-        <button className="h-full px-6">
-          <span className="sr-only">Open menu</span>
+        <button className="h-full px-6" onClick={openSideMenu}>
+          <span className="sr-only">Open side menu</span>
           <MenuIcon />
         </button>
 
