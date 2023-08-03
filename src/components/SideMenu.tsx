@@ -7,6 +7,7 @@ import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
 import { SmallImageIcon } from "~/icons/SmallImageIcon";
 import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
+import { SmallStackIcon } from "~/icons/SmallStackIcon";
 import { classNames } from "~/utils/classNames";
 
 const sideMenuOptionGroups = [
@@ -35,7 +36,7 @@ const sideMenuOptionGroups = [
     label: "Reader",
     options: [
       { label: "Clip Reader", icon: <SmallClipboardIcon /> },
-      { label: "Screen Reader/OCR", icon: <></> },
+      { label: "Screen Reader/OCR", icon: <SmallStackIcon /> },
     ],
   },
   {
