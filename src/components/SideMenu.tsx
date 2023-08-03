@@ -79,8 +79,8 @@ export const SideMenu = ({
 
       <aside
         className={classNames(
-          "absolute bottom-0 top-0 bg-black text-white transition-all duration-500",
-          isSideMenuOpen ? "left-0" : "-left-full"
+          "absolute bottom-0 top-0 bg-black text-white transition-all duration-300",
+          isSideMenuOpen ? "left-0" : "-left-64"
         )}
         aria-hidden={!isSideMenuOpen}
       >
