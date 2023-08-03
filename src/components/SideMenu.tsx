@@ -78,7 +78,7 @@ export const SideMenu = ({
       {sideMenuOptionGroups.map(({ label, options }) => {
         return (
           <section key={label}>
-            <h2 className="bg-slate-900 px-4 py-1 text-xs uppercase">
+            <h2 className="bg-slate-900 px-4 py-2 text-xs uppercase">
               {label}
             </h2>
             <ul>
