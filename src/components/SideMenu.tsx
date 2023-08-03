@@ -83,12 +83,18 @@ export const SideMenu = ({
 
       <aside
         className={classNames(
-          "absolute bottom-0 top-0 bg-black text-white transition-all duration-300",
+          "absolute bottom-0 top-0 transition-all duration-300",
+          isDarkMode ? "bg-black text-white" : "bg-white text-black",
           isSideMenuOpen ? "left-0" : "-left-64"
         )}
         aria-hidden={!isSideMenuOpen}
       >
-        <section className="flex">
+        <section
+          className={classNames(
+            "flex text-white",
+            isDarkMode ? "" : "bg-blue-600"
+          )}
+        >
           <button
             className="flex grow basis-1 items-center justify-center py-4"
             onClick={() => setIsDarkMode((isDarkMode) => !isDarkMode)}
@@ -115,7 +121,12 @@ export const SideMenu = ({
         {sideMenuOptionGroups.map(({ label, options }) => {
           return (
             <section key={label}>
-              <h2 className="bg-slate-900 px-4 py-2 text-xs uppercase">
+              <h2
+                className={classNames(
+                  "px-4 py-2 text-xs uppercase",
+                  isDarkMode ? "bg-slate-900" : "bg-slate-200"
+                )}
+              >
                 {label}
               </h2>
               <ul>
@@ -123,7 +134,7 @@ export const SideMenu = ({
                   const key = `${label}-${option.label}`;
                   return (
                     <li key={key}>
-                      <button className="flex w-full items-center gap-2 px-4 py-2 text-left text-lg text-white">
+                      <button className="flex w-full items-center gap-2 px-4 py-2 text-left text-lg">
                         {option.icon} {option.label}
                       </button>
                     </li>
