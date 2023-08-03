@@ -2,6 +2,7 @@ import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
 import { SmallCartIcon } from "~/icons/SmallCartIcon";
 import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
+import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { classNames } from "~/utils/classNames";
 
@@ -17,7 +18,7 @@ const sideMenuOptionGroups = [
     label: "Add-ons",
     options: [
       { label: "Add-ons", icon: <SmallCartIcon /> },
-      { label: "Registration", icon: <></> },
+      { label: "Registration", icon: <SmallRegisterIcon /> },
     ],
   },
   {
