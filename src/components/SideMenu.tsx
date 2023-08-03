@@ -1,5 +1,6 @@
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
+import { SmallCameraIcon } from "~/icons/SmallCameraIcon";
 import { SmallCartIcon } from "~/icons/SmallCartIcon";
 import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
 import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
@@ -24,7 +25,7 @@ const sideMenuOptionGroups = [
   {
     label: "OCR",
     options: [
-      { label: "Live OCR", icon: <></> },
+      { label: "Live OCR", icon: <SmallCameraIcon /> },
       { label: "Still OCR", icon: <></> },
     ],
   },
