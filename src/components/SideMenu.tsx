@@ -3,6 +3,7 @@ import { MoonIcon } from "~/icons/MoonIcon";
 import { SmallCameraIcon } from "~/icons/SmallCameraIcon";
 import { SmallCartIcon } from "~/icons/SmallCartIcon";
 import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
+import { SmallImageIcon } from "~/icons/SmallImageIcon";
 import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { classNames } from "~/utils/classNames";
@@ -26,7 +27,7 @@ const sideMenuOptionGroups = [
     label: "OCR",
     options: [
       { label: "Live OCR", icon: <SmallCameraIcon /> },
-      { label: "Still OCR", icon: <></> },
+      { label: "Still OCR", icon: <SmallImageIcon /> },
     ],
   },
   {
