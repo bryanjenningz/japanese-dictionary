@@ -13,7 +13,6 @@ export const EmptySearchResultsMenu = ({
     { label: "Browse Entries" },
     { label: "History" },
     { label: "Search Tips", onClick: () => setIsSearchTipsModalShown(true) },
-    { label: "Instruction Manual" },
   ];
 
   return (
