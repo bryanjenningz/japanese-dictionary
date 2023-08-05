@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { classNames } from "~/utils/classNames";
 
 export const SearchTipsModal = ({
@@ -9,6 +10,18 @@ export const SearchTipsModal = ({
   isShown: boolean;
   closeModal: () => void;
 }) => {
+  useEffect(() => {
+    const closeModalOnEscapeKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    };
+    window.addEventListener("keydown", closeModalOnEscapeKeyDown);
+    return () => {
+      window.removeEventListener("keydown", closeModalOnEscapeKeyDown);
+    };
+  }, [closeModal]);
+
   return (
     <>
       <div
