@@ -63,12 +63,14 @@ export const SearchTipsModal = ({
 
         <button
           className={classNames(
-            "border-t-2 p-4 text-left text-lg font-bold",
-            isDarkMode ? "border-slate-500 text-blue-400" : "text-black"
+            "border-t-2 p-4 text-left",
+            isDarkMode
+              ? "border-slate-500 text-blue-400"
+              : "border-slate-200 text-black"
           )}
           onClick={closeModal}
         >
-          Ok
+          OK
         </button>
       </dialog>
     </>
