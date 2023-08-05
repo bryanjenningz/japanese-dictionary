@@ -35,11 +35,10 @@ export const SearchTipsModal = ({
 
       <dialog
         className={classNames(
-          "fixed inset-5 flex max-w-2xl flex-col p-0 shadow transition duration-300",
+          "fixed inset-5 flex max-h-[calc(100vh-40px)] max-w-2xl flex-col p-0 shadow transition duration-300",
           isShown ? "opacity-100" : "pointer-events-none opacity-0",
           isDarkMode ? "bg-slate-700 text-white" : "bg-white text-black"
         )}
-        style={{ maxHeight: "calc(100vh - 40px)" }}
         aria-hidden={!isShown}
       >
         <h2 className="p-4 text-2xl">Search Tips</h2>
