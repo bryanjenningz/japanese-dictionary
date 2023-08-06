@@ -1,3 +1,4 @@
+import { type Dispatch, type SetStateAction } from "react";
 import { HistoryIcon } from "~/icons/HistoryIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { RefreshIcon } from "~/icons/RefreshIcon";
@@ -6,9 +7,11 @@ import { classNames } from "~/utils/classNames";
 export const ClipReaderHeader = ({
   openSideMenu,
   isDarkMode,
+  setClipText,
 }: {
   openSideMenu: () => void;
   isDarkMode: boolean;
+  setClipText: Dispatch<SetStateAction<string>>;
 }) => {
   return (
     <header
@@ -28,7 +31,20 @@ export const ClipReaderHeader = ({
             <h1 className="text-lg font-semibold">Pleco</h1>
           </div>
 
-          <button className="flex h-full items-center justify-center px-4">
+          <button
+            className="flex h-full items-center justify-center px-4"
+            onClick={() => {
+              void (async () => {
+                try {
+                  setClipText(await navigator.clipboard.readText());
+                } catch {
+                  setClipText(
+                    prompt("Paste Japanese text you want to read") ?? ""
+                  );
+                }
+              })();
+            }}
+          >
             <span className="sr-only">Read text from clipboard</span>
             <RefreshIcon />
           </button>

@@ -6,6 +6,7 @@ import { classNames } from "~/utils/classNames";
 export default function Reader() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [clipText, setClipText] = useState("");
 
   return (
     <main
@@ -17,6 +18,7 @@ export default function Reader() {
       <ClipReaderHeader
         openSideMenu={() => setIsSideMenuOpen(true)}
         isDarkMode={isDarkMode}
+        setClipText={setClipText}
       />
 
       <SideMenu
@@ -26,7 +28,9 @@ export default function Reader() {
         setIsDarkMode={setIsDarkMode}
       />
 
-      <div className="flex w-full max-w-2xl flex-col"></div>
+      <div className="flex w-full max-w-2xl flex-col">
+        <p className="p-4 text-lg">{clipText}</p>
+      </div>
     </main>
   );
 }
