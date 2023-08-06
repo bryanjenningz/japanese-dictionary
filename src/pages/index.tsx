@@ -20,14 +20,14 @@ export default function Home() {
         isDarkMode={isDarkMode}
       />
 
-      <div className="flex w-full max-w-2xl flex-col">
-        <SideMenu
-          isSideMenuOpen={isSideMenuOpen}
-          closeSideMenu={() => setIsSideMenuOpen(false)}
-          isDarkMode={isDarkMode}
-          setIsDarkMode={setIsDarkMode}
-        />
+      <SideMenu
+        isSideMenuOpen={isSideMenuOpen}
+        closeSideMenu={() => setIsSideMenuOpen(false)}
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+      />
 
+      <div className="flex w-full max-w-2xl flex-col">
         <EmptySearchResultsMenu isDarkMode={isDarkMode} />
       </div>
     </main>
