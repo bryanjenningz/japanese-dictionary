@@ -55,7 +55,10 @@ const UnselectedTextMenu = ({
 const SelectedTextMenu = ({ selectedText }: { selectedText: string }) => {
   return (
     <section className="flex h-14 items-center">
-      <button className="flex h-full grow basis-1 items-center justify-center">
+      <button
+        className="flex h-full grow basis-1 items-center justify-center"
+        onClick={() => void navigator.clipboard.writeText(selectedText)}
+      >
         <span className="sr-only">Copy selected text</span>
         <ContentCopyIcon />
       </button>
