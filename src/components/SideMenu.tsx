@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { type Dispatch, type SetStateAction } from "react";
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
@@ -41,7 +42,11 @@ const sideMenuOptionGroups = [
   {
     label: "Reader",
     options: [
-      { label: "Clip Reader", icon: <SmallClipboardIcon /> },
+      {
+        label: "Clip Reader",
+        icon: <SmallClipboardIcon />,
+        href: "/clip-reader",
+      },
       { label: "Screen Reader/OCR", icon: <SmallStackIcon /> },
     ],
   },
@@ -136,9 +141,18 @@ export const SideMenu = ({
                   const key = `${label}-${option.label}`;
                   return (
                     <li key={key}>
-                      <button className="flex w-full items-center gap-2 px-4 py-2 text-left text-lg">
-                        {option.icon} {option.label}
-                      </button>
+                      {option.href ? (
+                        <Link
+                          className="flex w-full items-center gap-2 px-4 py-2 text-left text-lg"
+                          href={option.href}
+                        >
+                          {option.icon} {option.label}
+                        </Link>
+                      ) : (
+                        <button className="flex w-full items-center gap-2 px-4 py-2 text-left text-lg">
+                          {option.icon} {option.label}
+                        </button>
+                      )}
                     </li>
                   );
                 })}
