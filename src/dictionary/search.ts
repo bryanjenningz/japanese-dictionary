@@ -23,7 +23,7 @@ export const searchWord = (
   text: string
 ): WordSearchResult => {
   const wordEntries: WordEntry[] = [];
-  const searchedWords: Set<string> = new Set();
+  const searchedWords = new Set<string>();
   let selectedTextLength = 1;
   for (; text.length > 0; text = text.slice(0, -1)) {
     const deinflections = deinflect(difReasons, difRules, text);
@@ -89,14 +89,14 @@ const WORD_DICT_ENTRY_REGEX = /^(.+?)\s+(?:\[(.*?)\])?\s*\/(.+)\//;
 
 const parseWordDictLine = (line: string): WordEntry | null => {
   const [, word, pronunciation, definitions] =
-    line.match(WORD_DICT_ENTRY_REGEX) || [];
+    line.match(WORD_DICT_ENTRY_REGEX) ?? [];
   if (!word || !definitions) {
     console.log(`Improperly formatted word-dict line: ${line}`);
     return null;
   }
   return {
     word,
-    pronunciation: pronunciation || "",
+    pronunciation: pronunciation ?? "",
     definitions: definitions.split("/"),
     pitchAccents: [],
   };
