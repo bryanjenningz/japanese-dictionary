@@ -53,7 +53,7 @@ const sideMenuOptionGroups = [
   },
   {
     label: "Flashcards",
-    options: [{ label: "Open AnkiDroid", icon: <SmallLearnIcon /> }],
+    options: [{ label: "New Test", icon: <SmallLearnIcon /> }],
   },
   {
     label: "Settings",
