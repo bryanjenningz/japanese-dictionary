@@ -54,7 +54,11 @@ const UnselectedTextMenu = ({
 
 const SelectedTextMenu = ({ selectedText }: { selectedText: string }) => {
   return (
-    <section className="flex h-14 items-center">
+    <section
+      className="flex h-14 items-center"
+      // stopPropagation prevents selected text from being unselected
+      onClick={(event) => event.stopPropagation()}
+    >
       <button
         className="flex h-full grow basis-1 items-center justify-center"
         onClick={() => void navigator.clipboard.writeText(selectedText)}
