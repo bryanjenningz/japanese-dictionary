@@ -5,12 +5,12 @@ import { RefreshIcon } from "~/icons/RefreshIcon";
 import { classNames } from "~/utils/classNames";
 
 export const ClipReaderHeader = ({
-  openSideMenu,
   isDarkMode,
+  openSideMenu,
   setClipText,
 }: {
-  openSideMenu: () => void;
   isDarkMode: boolean;
+  openSideMenu: () => void;
   setClipText: Dispatch<SetStateAction<string>>;
 }) => {
   return (
