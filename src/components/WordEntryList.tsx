@@ -1,10 +1,13 @@
 import { type WordEntry } from "~/dictionary/search";
 import { Pronunciation } from "~/components/Pronunciation";
+import { classNames } from "~/utils/classNames";
 
 export const WordEntryList = ({
+  isDarkMode,
   selectedTextElementBottom,
   wordEntries,
 }: {
+  isDarkMode: boolean;
   selectedTextElementBottom: number | undefined;
   wordEntries: WordEntry[];
 }) => {
@@ -14,7 +17,12 @@ export const WordEntryList = ({
       style={{ top: selectedTextElementBottom }}
     >
       <ul
-        className="no-scrollbar flex max-h-48 w-full flex-col overflow-y-scroll border border-cyan-300 bg-black md:max-w-2xl"
+        className={classNames(
+          "no-scrollbar flex max-h-48 w-full flex-col overflow-y-scroll rounded-lg border shadow md:max-w-2xl",
+          isDarkMode
+            ? "border-white bg-black text-white"
+            : "border-black bg-white text-black"
+        )}
         // Click events outside the reading text cause the selected text to be
         // unselected. The word entry list is outside the reading text so click
         // events inside the the word entry list will cause the selected text to
@@ -33,6 +41,7 @@ export const WordEntryList = ({
                 pronunciation={pronunciation}
                 definitions={definitions}
                 pitchAccents={pitchAccents}
+                isDarkMode={isDarkMode}
               />
             );
           }
@@ -49,15 +58,22 @@ const WordEntryItem = ({
   pronunciation,
   definitions,
   pitchAccents,
-}: WordEntry) => {
+  isDarkMode,
+}: WordEntry & { isDarkMode: boolean }) => {
   return (
-    <li className="flex w-full flex-col border-b border-cyan-300 p-3">
+    <li
+      className={classNames(
+        "flex w-full flex-col border-b p-3 last:border-b-0",
+        isDarkMode ? "border-white" : "border-black"
+      )}
+    >
       <div className="flex flex-wrap gap-3">
         <div className="text-xl">{word}</div>
         <Pronunciation
           word={word}
           pronunciation={pronunciation}
           pitchAccents={pitchAccents}
+          isDarkMode={isDarkMode}
         />
       </div>
 

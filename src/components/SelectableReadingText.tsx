@@ -74,7 +74,7 @@ export const SelectableReadingText = ({
               selectedTextIndex !== null &&
                 selectedTextIndex <= i &&
                 i < selectedTextIndex + selectedTextLength &&
-                "bg-blue-700"
+                "bg-blue-600 text-white"
             )}
           >
             {char}

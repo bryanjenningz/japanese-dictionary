@@ -68,6 +68,7 @@ export default function ClipReader() {
         />
 
         <WordEntryList
+          isDarkMode={isDarkMode}
           selectedTextElementBottom={selectedTextElementBottom}
           wordEntries={wordEntries}
         />

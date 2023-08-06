@@ -5,10 +5,12 @@ export const Pronunciation = ({
   word,
   pronunciation,
   pitchAccents,
+  isDarkMode,
 }: {
   word: string;
   pronunciation: string;
   pitchAccents: number[];
+  isDarkMode: boolean;
 }) => {
   pronunciation = pronunciation || word;
   const moras = getMoras(pronunciation);
@@ -27,7 +29,8 @@ export const Pronunciation = ({
                   <div
                     key={`${mora}-${i}`}
                     className={classNames(
-                      "inline-block border-cyan-400",
+                      "inline-block",
+                      isDarkMode ? "border-blue-300" : "border-blue-500",
                       ((): string => {
                         if (fallIndex === undefined) {
                           return "";
