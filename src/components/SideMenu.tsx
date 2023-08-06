@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { type Dispatch, type SetStateAction } from "react";
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
@@ -78,6 +79,8 @@ export const SideMenu = ({
   isDarkMode: boolean;
   setIsDarkMode: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const router = useRouter();
+
   return (
     <>
       <div
@@ -143,7 +146,13 @@ export const SideMenu = ({
                     <li key={key}>
                       {option.href ? (
                         <Link
-                          className="flex w-full items-center gap-2 px-4 py-2 text-left text-lg"
+                          className={classNames(
+                            "flex w-full items-center gap-2 px-4 py-2 text-left text-lg",
+                            router.asPath === option.href &&
+                              (isDarkMode
+                                ? "bg-blue-900 text-white"
+                                : "bg-blue-300 text-black")
+                          )}
                           href={option.href}
                         >
                           {option.icon} {option.label}
