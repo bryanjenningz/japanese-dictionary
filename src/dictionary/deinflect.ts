@@ -73,11 +73,7 @@ export const deinflect = (
   const results: Deinflection[] = [{ word, type: 0xff, reason: "" }];
   const wordToResultIndex = { [word]: 0 };
 
-  for (let i = 0; i < results.length; i++) {
-    const result = results[i];
-    if (!result) {
-      break;
-    }
+  for (const result of results) {
     const { word, type } = result;
 
     for (const difRuleGroup of difRuleGroups) {
