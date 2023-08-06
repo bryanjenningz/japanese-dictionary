@@ -9,7 +9,7 @@ import { classNames } from "~/utils/classNames";
 
 const MAX_WORD_SIZE = 20;
 
-export default function Reader() {
+export default function ClipReader() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [clipText, setClipText] = useState("");
