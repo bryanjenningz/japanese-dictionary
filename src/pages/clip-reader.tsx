@@ -1,12 +1,42 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ClipReaderHeader } from "~/components/ClipReaderHeader";
+import { SelectableReadingText } from "~/components/SelectableReadingText";
 import { SideMenu } from "~/components/SideMenu";
+import { WordEntryList } from "~/components/WordEntryList";
+import { type WordSearchResult } from "~/dictionary/search";
+import { useSearch } from "~/dictionary/useSearch";
 import { classNames } from "~/utils/classNames";
+
+const MAX_WORD_SIZE = 20;
 
 export default function Reader() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [clipText, setClipText] = useState("");
+
+  const search = useSearch();
+  const selectedTextElement = useRef<HTMLButtonElement | null>(null);
+
+  const [selectedTextIndex, setSelectedTextIndex] = useState<null | number>(
+    null
+  );
+
+  const { selectedTextLength, wordEntries } = ((): WordSearchResult => {
+    if (selectedTextIndex === null) {
+      return { selectedTextLength: 1, wordEntries: [] };
+    }
+
+    const text = clipText
+      .slice(selectedTextIndex, selectedTextIndex + MAX_WORD_SIZE)
+      .trim();
+
+    return search(text);
+  })();
+
+  const selectedTextElementBottom = selectedTextElement.current
+    ? selectedTextElement.current.getBoundingClientRect().bottom +
+      window.scrollY
+    : undefined;
 
   return (
     <main
@@ -29,7 +59,18 @@ export default function Reader() {
       />
 
       <div className="flex w-full max-w-2xl flex-col">
-        <p className="p-4 text-lg">{clipText}</p>
+        <SelectableReadingText
+          readingText={clipText}
+          selectedTextIndex={selectedTextIndex}
+          selectedTextElement={selectedTextElement}
+          setSelectedTextIndex={setSelectedTextIndex}
+          selectedTextLength={selectedTextLength}
+        />
+
+        <WordEntryList
+          selectedTextElementBottom={selectedTextElementBottom}
+          wordEntries={wordEntries}
+        />
       </div>
     </main>
   );
