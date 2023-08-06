@@ -21,7 +21,7 @@ const sideMenuOptionGroups = [
   {
     label: "Dictionary",
     options: [
-      { label: "Dictionary", icon: <SmallSearchIcon /> },
+      { label: "Dictionary", icon: <SmallSearchIcon />, href: "/" },
       { label: "History", icon: <SmallHistoryIcon /> },
     ],
   },
