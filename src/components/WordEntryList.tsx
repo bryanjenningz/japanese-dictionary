@@ -18,7 +18,7 @@ export const WordEntryList = ({
     >
       <ul
         className={classNames(
-          "no-scrollbar flex max-h-48 w-full flex-col overflow-y-scroll rounded-lg border shadow md:max-w-2xl",
+          "no-scrollbar flex max-h-48 w-full flex-col overflow-y-scroll rounded-lg border shadow-lg md:max-w-2xl",
           isDarkMode
             ? "border-white bg-black text-white"
             : "border-black bg-white text-black"
