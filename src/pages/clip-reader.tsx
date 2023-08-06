@@ -38,6 +38,14 @@ export default function ClipReader() {
       window.scrollY
     : undefined;
 
+  const selectedText =
+    typeof selectedTextIndex === "number"
+      ? clipText.slice(
+          selectedTextIndex,
+          selectedTextIndex + selectedTextLength
+        )
+      : "";
+
   return (
     <main
       className={classNames(
@@ -46,8 +54,9 @@ export default function ClipReader() {
       )}
     >
       <ClipReaderHeader
-        openSideMenu={() => setIsSideMenuOpen(true)}
         isDarkMode={isDarkMode}
+        selectedText={selectedText}
+        openSideMenu={() => setIsSideMenuOpen(true)}
         setClipText={setClipText}
       />
 
