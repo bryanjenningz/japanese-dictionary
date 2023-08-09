@@ -4,7 +4,7 @@ export const useStore = <T, F>(
   store: (selector: (state: T) => F) => F,
   selector: (state: T) => F
 ) => {
-  const result = store(selector) as F;
+  const result = store(selector);
   const [data, setData] = useState<F>();
 
   useEffect(() => {
