@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { type Dispatch, type SetStateAction } from "react";
+import { useBoundStore } from "~/hooks/useBoundStore";
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
 import { SmallCameraIcon } from "~/icons/SmallCameraIcon";
@@ -71,15 +71,14 @@ const sideMenuOptionGroups = [
 export const SideMenu = ({
   isSideMenuOpen,
   closeSideMenu,
-  isDarkMode,
-  setIsDarkMode,
 }: {
   isSideMenuOpen: boolean;
   closeSideMenu: () => void;
-  isDarkMode: boolean;
-  setIsDarkMode: Dispatch<SetStateAction<boolean>>;
 }) => {
   const router = useRouter();
+
+  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+  const setIsDarkMode = useBoundStore((x) => x.setIsDarkMode);
 
   return (
     <>
@@ -107,7 +106,7 @@ export const SideMenu = ({
         >
           <button
             className="flex grow basis-1 items-center justify-center py-4"
-            onClick={() => setIsDarkMode((isDarkMode) => !isDarkMode)}
+            onClick={() => setIsDarkMode(!isDarkMode)}
           >
             {isDarkMode ? (
               <>

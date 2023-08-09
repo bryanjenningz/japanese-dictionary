@@ -13,6 +13,6 @@ export type BoundStateCreator<SliceState> = StateCreator<
   SliceState
 >;
 
-export const useBoundState = create<BoundState>((...args) => ({
+export const useBoundStore = create<BoundState>((...args) => ({
   ...createDarkModeStore(...args),
 }));

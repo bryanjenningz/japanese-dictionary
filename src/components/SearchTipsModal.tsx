@@ -1,15 +1,16 @@
 import { useEffect } from "react";
+import { useBoundStore } from "~/hooks/useBoundStore";
 import { classNames } from "~/utils/classNames";
 
 export const SearchTipsModal = ({
-  isDarkMode,
   isShown,
   closeModal,
 }: {
-  isDarkMode: boolean;
   isShown: boolean;
   closeModal: () => void;
 }) => {
+  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+
   useEffect(() => {
     const closeModalOnEscapeKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {

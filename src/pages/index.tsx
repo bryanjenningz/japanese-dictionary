@@ -5,10 +5,11 @@ import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { useSearch } from "~/dictionary/useSearch";
 import { SearchResults } from "~/components/SearchResults";
+import { useBoundStore } from "~/hooks/useBoundStore";
 
 export default function Home() {
+  const isDarkMode = useBoundStore((x) => x.isDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const [searchText, setSearchText] = useState("");
   const search = useSearch();
   const { wordEntries } = useMemo(
@@ -25,7 +26,6 @@ export default function Home() {
     >
       <Header
         openSideMenu={() => setIsSideMenuOpen(true)}
-        isDarkMode={isDarkMode}
         searchText={searchText}
         setSearchText={setSearchText}
       />
@@ -33,19 +33,17 @@ export default function Home() {
       <SideMenu
         isSideMenuOpen={isSideMenuOpen}
         closeSideMenu={() => setIsSideMenuOpen(false)}
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
       />
 
       <div className="flex w-full max-w-2xl flex-col">
         {searchText.trim().length === 0 ? (
-          <EmptySearchResultsMenu isDarkMode={isDarkMode} />
+          <EmptySearchResultsMenu />
         ) : wordEntries.length === 0 ? (
           <p className="py-4 text-center text-lg">
             No search results <span aria-hidden>{`:(`}</span>
           </p>
         ) : (
-          <SearchResults wordEntries={wordEntries} isDarkMode={isDarkMode} />
+          <SearchResults wordEntries={wordEntries} />
         )}
       </div>
     </main>

@@ -1,17 +1,18 @@
 import { getMoras } from "~/dictionary/getMoras";
+import { useBoundStore } from "~/hooks/useBoundStore";
 import { classNames } from "~/utils/classNames";
 
 export const Pronunciation = ({
   word,
   pronunciation,
   pitchAccents,
-  isDarkMode,
 }: {
   word: string;
   pronunciation: string;
   pitchAccents: number[];
-  isDarkMode: boolean;
 }) => {
+  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+
   pronunciation = pronunciation || word;
   const moras = getMoras(pronunciation);
   const fallIndexes = pitchAccents.map((pitchAccent) =>

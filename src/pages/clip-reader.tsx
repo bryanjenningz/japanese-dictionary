@@ -5,13 +5,14 @@ import { SideMenu } from "~/components/SideMenu";
 import { WordEntryList } from "~/components/WordEntryList";
 import { type WordSearchResult } from "~/dictionary/search";
 import { useSearch } from "~/dictionary/useSearch";
+import { useBoundStore } from "~/hooks/useBoundStore";
 import { classNames } from "~/utils/classNames";
 
 const MAX_WORD_SIZE = 20;
 
 export default function ClipReader() {
+  const isDarkMode = useBoundStore((x) => x.isDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const [clipText, setClipText] = useState("");
 
   const search = useSearch();
@@ -54,7 +55,6 @@ export default function ClipReader() {
       )}
     >
       <ClipReaderHeader
-        isDarkMode={isDarkMode}
         selectedText={selectedText}
         openSideMenu={() => setIsSideMenuOpen(true)}
         setClipText={setClipText}
@@ -63,8 +63,6 @@ export default function ClipReader() {
       <SideMenu
         isSideMenuOpen={isSideMenuOpen}
         closeSideMenu={() => setIsSideMenuOpen(false)}
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
       />
 
       <div className="flex w-full max-w-2xl flex-col">
@@ -77,7 +75,6 @@ export default function ClipReader() {
         />
 
         <WordEntryList
-          isDarkMode={isDarkMode}
           selectedTextElementBottom={selectedTextElementBottom}
           wordEntries={wordEntries}
         />

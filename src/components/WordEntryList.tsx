@@ -1,16 +1,17 @@
 import { type WordEntry } from "~/dictionary/search";
 import { Pronunciation } from "~/components/Pronunciation";
 import { classNames } from "~/utils/classNames";
+import { useBoundStore } from "~/hooks/useBoundStore";
 
 export const WordEntryList = ({
-  isDarkMode,
   selectedTextElementBottom,
   wordEntries,
 }: {
-  isDarkMode: boolean;
   selectedTextElementBottom: number | undefined;
   wordEntries: WordEntry[];
 }) => {
+  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+
   return selectedTextElementBottom !== undefined && wordEntries.length > 0 ? (
     <div
       className="absolute left-1 right-1 flex justify-center"
@@ -41,7 +42,6 @@ export const WordEntryList = ({
                 pronunciation={pronunciation}
                 definitions={definitions}
                 pitchAccents={pitchAccents}
-                isDarkMode={isDarkMode}
               />
             );
           }
@@ -58,8 +58,9 @@ const WordEntryItem = ({
   pronunciation,
   definitions,
   pitchAccents,
-  isDarkMode,
-}: WordEntry & { isDarkMode: boolean }) => {
+}: WordEntry) => {
+  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+
   return (
     <li
       className={classNames(
@@ -73,7 +74,6 @@ const WordEntryItem = ({
           word={word}
           pronunciation={pronunciation}
           pitchAccents={pitchAccents}
-          isDarkMode={isDarkMode}
         />
       </div>
 

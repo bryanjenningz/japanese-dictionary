@@ -1,14 +1,15 @@
 import { classNames } from "~/utils/classNames";
 import { type WordEntry } from "~/dictionary/search";
 import { Pronunciation } from "~/components/Pronunciation";
+import { useBoundStore } from "~/hooks/useBoundStore";
 
 export const SearchResults = ({
   wordEntries,
-  isDarkMode,
 }: {
   wordEntries: WordEntry[];
-  isDarkMode: boolean;
 }) => {
+  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+
   return (
     <ul>
       {wordEntries.map((wordEntry) => {
@@ -28,7 +29,6 @@ export const SearchResults = ({
                 word={word}
                 pronunciation={pronunciation}
                 pitchAccents={pitchAccents}
-                isDarkMode={isDarkMode}
               />
             </div>
             <p className={isDarkMode ? "text-slate-400" : "text-slate-700"}>

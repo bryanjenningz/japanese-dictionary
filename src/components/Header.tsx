@@ -1,4 +1,5 @@
 import { type Dispatch, type SetStateAction, useState } from "react";
+import { useBoundStore } from "~/hooks/useBoundStore";
 import { BrushIcon } from "~/icons/BrushIcon";
 import { CameraIcon } from "~/icons/CameraIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
@@ -24,15 +25,15 @@ const headerTabs = [
 
 export const Header = ({
   openSideMenu,
-  isDarkMode,
   searchText,
   setSearchText,
 }: {
   openSideMenu: () => void;
-  isDarkMode: boolean;
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
 }) => {
+  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+
   const [searchLanguage, setSearchLanguage] =
     useState<SearchLanguage>("English");
 
