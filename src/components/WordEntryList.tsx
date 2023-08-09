@@ -1,7 +1,8 @@
 import { type WordEntry } from "~/dictionary/search";
 import { Pronunciation } from "~/components/Pronunciation";
 import { classNames } from "~/utils/classNames";
-import { useBoundStore } from "~/hooks/useBoundStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
+import { useStore } from "~/stores/useStore";
 
 export const WordEntryList = ({
   selectedTextElementBottom,
@@ -10,7 +11,7 @@ export const WordEntryList = ({
   selectedTextElementBottom: number | undefined;
   wordEntries: WordEntry[];
 }) => {
-  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   return selectedTextElementBottom !== undefined && wordEntries.length > 0 ? (
     <div
@@ -59,7 +60,7 @@ const WordEntryItem = ({
   definitions,
   pitchAccents,
 }: WordEntry) => {
-  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   return (
     <li

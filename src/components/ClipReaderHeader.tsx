@@ -1,5 +1,4 @@
 import { type Dispatch, type SetStateAction } from "react";
-import { useBoundStore } from "~/hooks/useBoundStore";
 import { AddIcon } from "~/icons/AddIcon";
 import { CampaignIcon } from "~/icons/CampaignIcon";
 import { ContentCopyIcon } from "~/icons/ContentCopyIcon";
@@ -9,6 +8,8 @@ import { OpenInNewIcon } from "~/icons/OpenInNewIcon";
 import { RefreshIcon } from "~/icons/RefreshIcon";
 import { SearchIcon } from "~/icons/SearchIcon";
 import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
+import { useDarkModeStore } from "~/stores/darkModeStore";
+import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
 const UnselectedTextMenu = ({
@@ -105,7 +106,7 @@ export const ClipReaderHeader = ({
   openSideMenu: () => void;
   setClipText: Dispatch<SetStateAction<string>>;
 }) => {
-  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   return (
     <header

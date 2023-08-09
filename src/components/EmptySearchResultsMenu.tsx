@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { classNames } from "~/utils/classNames";
-import { SearchTipsModal } from "./SearchTipsModal";
-import { useBoundStore } from "~/hooks/useBoundStore";
+import { SearchTipsModal } from "~/components/SearchTipsModal";
+import { useDarkModeStore } from "~/stores/darkModeStore";
+import { useStore } from "~/stores/useStore";
 
 export const EmptySearchResultsMenu = () => {
-  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
   const [isSearchTipsModalShown, setIsSearchTipsModalShown] = useState(false);
 
   const emptySearchResultsMenu = [

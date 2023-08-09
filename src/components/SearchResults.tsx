@@ -1,14 +1,15 @@
 import { classNames } from "~/utils/classNames";
 import { type WordEntry } from "~/dictionary/search";
 import { Pronunciation } from "~/components/Pronunciation";
-import { useBoundStore } from "~/hooks/useBoundStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
+import { useStore } from "~/stores/useStore";
 
 export const SearchResults = ({
   wordEntries,
 }: {
   wordEntries: WordEntry[];
 }) => {
-  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   return (
     <ul>

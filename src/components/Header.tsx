@@ -1,5 +1,4 @@
 import { type Dispatch, type SetStateAction, useState } from "react";
-import { useBoundStore } from "~/hooks/useBoundStore";
 import { BrushIcon } from "~/icons/BrushIcon";
 import { CameraIcon } from "~/icons/CameraIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
@@ -7,6 +6,8 @@ import { KeyboardIcon } from "~/icons/KeyboardIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { MicrophoneIcon } from "~/icons/MicrophoneIcon";
 import { PuzzlePieceIcon } from "~/icons/PuzzlePieceIcon";
+import { useDarkModeStore } from "~/stores/darkModeStore";
+import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
 type SearchLanguage = "English" | "Japanese";
@@ -32,7 +33,7 @@ export const Header = ({
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
 }) => {
-  const isDarkMode = useBoundStore((x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   const [searchLanguage, setSearchLanguage] =
     useState<SearchLanguage>("English");

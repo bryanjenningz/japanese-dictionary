@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useBoundStore } from "~/hooks/useBoundStore";
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
 import { SmallCameraIcon } from "~/icons/SmallCameraIcon";
@@ -16,6 +15,8 @@ import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { SmallSettingsIcon } from "~/icons/SmallSettingsIcon";
 import { SmallStackIcon } from "~/icons/SmallStackIcon";
 import { SunIcon } from "~/icons/SunIcon";
+import { useDarkModeStore } from "~/stores/darkModeStore";
+import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
 const sideMenuOptionGroups = [
@@ -77,8 +78,8 @@ export const SideMenu = ({
 }) => {
   const router = useRouter();
 
-  const isDarkMode = useBoundStore((x) => x.isDarkMode);
-  const setIsDarkMode = useBoundStore((x) => x.setIsDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
 
   return (
     <>
