@@ -1,4 +1,4 @@
-import { type Dispatch, type SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState, useMemo } from "react";
 import { BrushIcon } from "~/icons/BrushIcon";
 import { CameraIcon } from "~/icons/CameraIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
@@ -7,8 +7,10 @@ import { MenuIcon } from "~/icons/MenuIcon";
 import { MicrophoneIcon } from "~/icons/MicrophoneIcon";
 import { PuzzlePieceIcon } from "~/icons/PuzzlePieceIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useHistory } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
+import { debounce } from "~/utils/debounce";
 
 type SearchLanguage = "English" | "Japanese";
 
@@ -37,6 +39,8 @@ export const Header = ({
     useDarkModeStore,
     (x) => x.isDarkMode
   );
+  const addSearch_ = useHistory((x) => x.addSearch);
+  const addSearch = useMemo(() => debounce(addSearch_, 500), [addSearch_]);
 
   const [searchLanguage, setSearchLanguage] =
     useState<SearchLanguage>("English");
@@ -67,7 +71,10 @@ export const Header = ({
               )}
               role="search"
               value={searchText}
-              onChange={(event) => setSearchText(event.target.value)}
+              onChange={(event) => {
+                setSearchText(event.target.value);
+                addSearch({ searchText: event.target.value, time: Date.now() });
+              }}
             />
             <button
               className={classNames(
