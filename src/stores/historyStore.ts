@@ -18,7 +18,6 @@ export type HistoryState = {
   clipReaderLookups: Lookup[];
   ocrLookups: Lookup[];
   searches: Search[];
-  cards: WordEntry[];
   addDictionaryLookup: (lookup: Lookup) => void;
   removeDictionaryLookup: (lookup: Lookup) => void;
   addClipReaderLookup: (lookup: Lookup) => void;
@@ -27,8 +26,6 @@ export type HistoryState = {
   removeOcrLookup: (lookup: Lookup) => void;
   addSearch: (search: Search) => void;
   removeSearch: (search: Search) => void;
-  addCard: (wordEntry: WordEntry) => void;
-  removeCard: (wordEntry: WordEntry) => void;
 };
 
 export const useHistory = create<HistoryState>()(
@@ -38,7 +35,6 @@ export const useHistory = create<HistoryState>()(
       clipReaderLookups: [],
       ocrLookups: [],
       searches: [],
-      cards: [],
       addDictionaryLookup: (lookup: Lookup) =>
         set({ dictionaryLookups: [lookup, ...get().dictionaryLookups] }),
       removeDictionaryLookup: (lookup: Lookup) =>
@@ -63,9 +59,6 @@ export const useHistory = create<HistoryState>()(
         set({ searches: [search, ...get().searches] }),
       removeSearch: (search: Search) =>
         set({ searches: get().searches.filter((x) => !equals(x, search)) }),
-      addCard: (card: WordEntry) => set({ cards: [card, ...get().cards] }),
-      removeCard: (card: WordEntry) =>
-        set({ cards: get().cards.filter((x) => !equals(x, card)) }),
     }),
     { name: "history" }
   )
