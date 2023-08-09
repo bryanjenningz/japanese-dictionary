@@ -1,4 +1,4 @@
-import { katakanaToHiragana } from "./katakanaToHiragana";
+import { katakanaToHiragana } from "~/dictionary/katakanaToHiragana";
 
 export const loadPitchData = async (): Promise<string[]> => {
   return (

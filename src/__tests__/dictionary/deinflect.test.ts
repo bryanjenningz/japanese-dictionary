@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { resolve } from "path";
 import { describe, expect, it } from "vitest";
-import { deinflect, parseDeinflectionData } from "../../dictionary/deinflect";
+import { deinflect, parseDeinflectionData } from "~/dictionary/deinflect";
 
 const buffer = readFileSync(resolve("public/dictionaries/deinflect.txt"))
   .toString()

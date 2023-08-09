@@ -1,5 +1,5 @@
-import { getMoras } from "./getMoras";
-import { type WordEntry } from "./search";
+import { getMoras } from "~/dictionary/getMoras";
+import { type WordEntry } from "~/dictionary/search";
 
 export const wordEntryToText = ({
   word,

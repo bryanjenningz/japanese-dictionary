@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { type WordEntry } from "../../dictionary/search";
-import { wordEntriesToAnkiText } from "../../dictionary/wordEntriesToAnkiText";
+import { type WordEntry } from "~/dictionary/search";
+import { wordEntriesToAnkiText } from "~/dictionary/wordEntriesToAnkiText";
 
 describe("wordEntriesToAnkiText", () => {
   it("Formats word entries to Anki text", () => {

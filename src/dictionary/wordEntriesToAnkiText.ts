@@ -1,5 +1,5 @@
-import { type WordEntry } from "./search";
-import { wordEntryToText } from "./wordEntryToText";
+import { type WordEntry } from "~/dictionary/search";
+import { wordEntryToText } from "~/dictionary/wordEntryToText";
 
 export const wordEntriesToAnkiText = (wordEntries: WordEntry[]): string => {
   return wordEntries

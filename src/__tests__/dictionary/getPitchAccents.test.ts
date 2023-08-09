@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import fs from "fs";
 import { resolve } from "path";
-import { getPitchAccents } from "../../dictionary/getPitchAccents";
+import { getPitchAccents } from "~/dictionary/getPitchAccents";
 
 const pitchData = fs
   .readFileSync(resolve("./public/dictionaries/pitch-accents.txt"))

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { type WordEntry } from "../../dictionary/search";
-import { wordEntryToText } from "../../dictionary/wordEntryToText";
+import { type WordEntry } from "~/dictionary/search";
+import { wordEntryToText } from "~/dictionary/wordEntryToText";
 
 const wordEntry: WordEntry = {
   word: "<word>",

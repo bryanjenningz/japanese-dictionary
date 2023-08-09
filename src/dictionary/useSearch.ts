@@ -2,9 +2,9 @@ import { useCallback, useEffect, useState } from "react";
 import {
   type DeinflectionRuleGroup,
   loadDeinflectionData,
-} from "../dictionary/deinflect";
-import { loadPitchData } from "./getPitchAccents";
-import { loadWordDict, searchWord } from "./search";
+} from "~/dictionary/deinflect";
+import { loadPitchData } from "~/dictionary/getPitchAccents";
+import { loadWordDict, searchWord } from "~/dictionary/search";
 
 export const useSearch = () => {
   const [wordDict, setWordDict] = useState("");

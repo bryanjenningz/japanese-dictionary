@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getMoras } from "../../dictionary/getMoras";
+import { getMoras } from "~/dictionary/getMoras";
 
 describe("getMoras", () => {
   it("Gets moras for `インストール`", () => {

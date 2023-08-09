@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "fs";
 import { resolve } from "path";
-import { searchWord } from "../../dictionary/search";
-import { parseDeinflectionData } from "../../dictionary/deinflect";
+import { searchWord } from "~/dictionary/search";
+import { parseDeinflectionData } from "~/dictionary/deinflect";
 
 const wordDict = readFileSync(
   resolve("./public/dictionaries/word-dict.txt")

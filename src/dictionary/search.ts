@@ -1,6 +1,6 @@
-import { type DeinflectionRuleGroup, deinflect } from "../dictionary/deinflect";
-import { getPitchAccents } from "./getPitchAccents";
-import { katakanaToHiragana } from "./katakanaToHiragana";
+import { type DeinflectionRuleGroup, deinflect } from "~/dictionary/deinflect";
+import { getPitchAccents } from "~/dictionary/getPitchAccents";
+import { katakanaToHiragana } from "~/dictionary/katakanaToHiragana";
 
 export type WordEntry = {
   word: string;

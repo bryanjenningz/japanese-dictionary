@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { katakanaToHiragana } from "../../dictionary/katakanaToHiragana";
+import { katakanaToHiragana } from "~/dictionary/katakanaToHiragana";
 
 describe("katakanaToHiragana", () => {
   it("returns hiragana for `プログラム`", () => {

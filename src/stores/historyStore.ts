@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { WordEntry } from "~/dictionary/search";
+import { type WordEntry } from "~/dictionary/search";
 import { equals } from "~/utils/equals";
 
 type Lookup = {
