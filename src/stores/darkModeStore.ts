@@ -1,7 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export const useDarkModeStore = create()(
+type DarkModeState = {
+  isDarkMode: boolean;
+  setIsDarkMode: (isDarkMode: boolean) => void;
+};
+
+export const useDarkModeStore = create<DarkModeState>()(
   persist(
     (set) => ({
       isDarkMode: false,
