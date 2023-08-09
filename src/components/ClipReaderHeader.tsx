@@ -1,4 +1,6 @@
 import { type Dispatch, type SetStateAction } from "react";
+import { type WordEntry } from "~/dictionary/search";
+import { AddBoxIcon } from "~/icons/AddBoxIcon";
 import { AddIcon } from "~/icons/AddIcon";
 import { CampaignIcon } from "~/icons/CampaignIcon";
 import { ContentCopyIcon } from "~/icons/ContentCopyIcon";
@@ -9,6 +11,10 @@ import { RefreshIcon } from "~/icons/RefreshIcon";
 import { SearchIcon } from "~/icons/SearchIcon";
 import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
 import { useDarkModeStore } from "~/stores/darkModeStore";
+import {
+  type SavedWordsState,
+  useSavedWordsStore,
+} from "~/stores/savedWordsStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
@@ -54,7 +60,26 @@ const UnselectedTextMenu = ({
   );
 };
 
-const SelectedTextMenu = ({ selectedText }: { selectedText: string }) => {
+const SelectedTextMenu = ({
+  selectedText,
+  wordEntry,
+}: {
+  selectedText: string;
+  wordEntry: WordEntry;
+}) => {
+  const savedWords = useStore<SavedWordsState, WordEntry[]>(
+    useSavedWordsStore,
+    (x) => x.savedWords
+  );
+  const saveWord = useSavedWordsStore((x) => x.saveWord);
+  const removeWord = useSavedWordsStore((x) => x.removeWord);
+
+  const wordEntryIsAlreadySaved = !!savedWords?.find(
+    (entry) =>
+      entry.word === wordEntry.word &&
+      entry.pronunciation === wordEntry.pronunciation
+  );
+
   return (
     <section
       className="flex h-14 items-center"
@@ -79,10 +104,23 @@ const SelectedTextMenu = ({ selectedText }: { selectedText: string }) => {
         <CampaignIcon />
       </button>
 
-      <button className="flex h-full grow basis-1 items-center justify-center">
-        <span className="sr-only">Add word to saved words</span>
-        <AddIcon />
-      </button>
+      {wordEntryIsAlreadySaved ? (
+        <button
+          className="flex h-full grow basis-1 items-center justify-center"
+          onClick={() => removeWord(wordEntry)}
+        >
+          <span className="sr-only">Remove saved word</span>
+          <AddBoxIcon />
+        </button>
+      ) : (
+        <button
+          className="flex h-full grow basis-1 items-center justify-center"
+          onClick={() => saveWord(wordEntry)}
+        >
+          <span className="sr-only">Save word</span>
+          <AddIcon />
+        </button>
+      )}
 
       <button className="flex h-full grow basis-1 items-center justify-center">
         <span className="sr-only">Search word</span>
@@ -98,10 +136,12 @@ const SelectedTextMenu = ({ selectedText }: { selectedText: string }) => {
 };
 
 export const ClipReaderHeader = ({
+  wordEntry,
   selectedText,
   openSideMenu,
   setClipText,
 }: {
+  wordEntry: WordEntry | undefined;
   selectedText: string;
   openSideMenu: () => void;
   setClipText: Dispatch<SetStateAction<string>>;
@@ -116,8 +156,8 @@ export const ClipReaderHeader = ({
       )}
     >
       <div className="w-full max-w-2xl">
-        {selectedText ? (
-          <SelectedTextMenu selectedText={selectedText} />
+        {selectedText && wordEntry ? (
+          <SelectedTextMenu selectedText={selectedText} wordEntry={wordEntry} />
         ) : (
           <UnselectedTextMenu
             openSideMenu={openSideMenu}

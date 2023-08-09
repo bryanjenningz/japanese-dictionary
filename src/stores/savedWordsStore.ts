@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { type WordEntry } from "~/dictionary/search";
 
-type SavedWordsState = {
+export type SavedWordsState = {
   savedWords: WordEntry[];
   saveWord: (word: WordEntry) => void;
   removeWord: (word: WordEntry) => void;
@@ -11,7 +11,7 @@ type SavedWordsState = {
 export const useSavedWordsStore = create<SavedWordsState>()(
   persist(
     (set, get) => ({
-      savedWords: [],
+      savedWords: [] satisfies WordEntry[],
       saveWord: (word) =>
         set({
           savedWords: [...removeWord(get().savedWords, word), word],

@@ -56,6 +56,7 @@ export default function ClipReader() {
       )}
     >
       <ClipReaderHeader
+        wordEntry={wordEntries[0]}
         selectedText={selectedText}
         openSideMenu={() => setIsSideMenuOpen(true)}
         setClipText={setClipText}
