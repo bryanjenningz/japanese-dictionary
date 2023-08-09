@@ -13,7 +13,7 @@ type Search = {
   searchText: string;
 };
 
-type HistoryState = {
+export type HistoryState = {
   dictionaryLookups: Lookup[];
   clipReaderLookups: Lookup[];
   ocrLookups: Lookup[];

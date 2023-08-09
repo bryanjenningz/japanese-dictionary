@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { MoreVerticalIcon } from "~/icons/MoreVerticalIcon";
 import { useDarkModeStore } from "~/stores/darkModeStore";
@@ -11,16 +11,20 @@ const DEFAULT_HISTORY_HEADER_TAB: HistoryHeaderTab = "Dict";
 
 const historyHeaderTabs = ["Dict", "Reader", "OCR", "Search", "Cards"] as const;
 
+export const useHistoryHeaderTab = () => {
+  return useState<HistoryHeaderTab>(DEFAULT_HISTORY_HEADER_TAB);
+};
+
 export const HistoryHeader = ({
   openSideMenu,
+  historyHeaderTab,
+  setHistoryHeaderTab,
 }: {
   openSideMenu: () => void;
+  historyHeaderTab: HistoryHeaderTab;
+  setHistoryHeaderTab: Dispatch<SetStateAction<HistoryHeaderTab>>;
 }) => {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
-
-  const [historyHeaderTab, setHistoryHeaderTab] = useState<HistoryHeaderTab>(
-    DEFAULT_HISTORY_HEADER_TAB
-  );
 
   return (
     <header
