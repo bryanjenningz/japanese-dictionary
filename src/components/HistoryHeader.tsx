@@ -5,11 +5,11 @@ import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
-type HeaderTabId = (typeof headerTabs)[number]["id"];
+type HistoryHeaderTabId = (typeof historyHeaderTabs)[number]["id"];
 
-const DEFAULT_HEADER_TAB_ID: HeaderTabId = 1;
+const DEFAULT_HISTORY_HEADER_TAB_ID: HistoryHeaderTabId = 1;
 
-const headerTabs = [
+const historyHeaderTabs = [
   { id: 1, label: "Dict" },
   { id: 2, label: "Reader" },
   { id: 3, label: "OCR" },
@@ -24,9 +24,8 @@ export const HistoryHeader = ({
 }) => {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
-  const [headerTabId, setHeaderTabId] = useState<HeaderTabId>(
-    DEFAULT_HEADER_TAB_ID
-  );
+  const [historyHeaderTabId, setHistoryHeaderTabId] =
+    useState<HistoryHeaderTabId>(DEFAULT_HISTORY_HEADER_TAB_ID);
 
   return (
     <header
@@ -53,15 +52,15 @@ export const HistoryHeader = ({
         </section>
 
         <section className="flex h-14 items-center">
-          {headerTabs.map(({ id, label }) => {
+          {historyHeaderTabs.map(({ id, label }) => {
             return (
               <button
                 key={id}
                 className={classNames(
                   "flex h-full grow basis-1 items-center justify-center uppercase",
-                  headerTabId === id && "border-b-2 border-white"
+                  historyHeaderTabId === id && "border-b-2 border-white"
                 )}
-                onClick={() => setHeaderTabId(id)}
+                onClick={() => setHistoryHeaderTabId(id)}
               >
                 {label}
               </button>
