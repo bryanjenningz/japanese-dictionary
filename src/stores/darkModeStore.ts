@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
 export const useDarkModeStore = create()(
   persist(
     (set) => ({
-      isDarkMode: true,
+      isDarkMode: false,
       setIsDarkMode: (isDarkMode: boolean) => set({ isDarkMode }),
     }),
     { name: "dark-mode" }
