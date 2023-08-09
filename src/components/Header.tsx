@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { BrushIcon } from "~/icons/BrushIcon";
 import { CameraIcon } from "~/icons/CameraIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
@@ -25,9 +25,13 @@ const headerTabs = [
 export const Header = ({
   openSideMenu,
   isDarkMode,
+  searchText,
+  setSearchText,
 }: {
   openSideMenu: () => void;
   isDarkMode: boolean;
+  searchText: string;
+  setSearchText: Dispatch<SetStateAction<string>>;
 }) => {
   const [searchLanguage, setSearchLanguage] =
     useState<SearchLanguage>("English");
@@ -57,6 +61,8 @@ export const Header = ({
                 isDarkMode ? "bg-slate-800 text-white" : "bg-white text-black"
               )}
               role="search"
+              value={searchText}
+              onChange={(event) => setSearchText(event.target.value)}
             />
             <button
               className={classNames(
