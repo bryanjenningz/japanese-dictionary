@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
-import { useDarkModeStore } from "~/stores/darkModeStore";
+import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { HistoryHeader, useHistoryHeaderTab } from "~/components/HistoryHeader";
 import { type HistoryState, useHistory } from "~/stores/historyStore";
@@ -12,7 +12,10 @@ import {
 import { Pronunciation } from "~/components/Pronunciation";
 
 export default function History() {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
+    useDarkModeStore,
+    (x) => x.isDarkMode
+  );
   const dictionaryLookups = useStore<
     HistoryState,
     HistoryState["dictionaryLookups"]

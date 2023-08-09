@@ -6,7 +6,7 @@ import { KeyboardIcon } from "~/icons/KeyboardIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { MicrophoneIcon } from "~/icons/MicrophoneIcon";
 import { PuzzlePieceIcon } from "~/icons/PuzzlePieceIcon";
-import { useDarkModeStore } from "~/stores/darkModeStore";
+import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
@@ -33,7 +33,10 @@ export const Header = ({
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
 }) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
+    useDarkModeStore,
+    (x) => x.isDarkMode
+  );
 
   const [searchLanguage, setSearchLanguage] =
     useState<SearchLanguage>("English");

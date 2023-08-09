@@ -5,14 +5,17 @@ import { SideMenu } from "~/components/SideMenu";
 import { WordEntryList } from "~/components/WordEntryList";
 import { type WordSearchResult } from "~/dictionary/search";
 import { useSearch } from "~/dictionary/useSearch";
-import { useDarkModeStore } from "~/stores/darkModeStore";
+import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
 const MAX_WORD_SIZE = 20;
 
 export default function ClipReader() {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
+    useDarkModeStore,
+    (x) => x.isDarkMode
+  );
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [clipText, setClipText] = useState("");
 

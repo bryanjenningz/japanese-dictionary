@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { classNames } from "~/utils/classNames";
 import { SearchTipsModal } from "~/components/SearchTipsModal";
-import { useDarkModeStore } from "~/stores/darkModeStore";
+import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 
 export const EmptySearchResultsMenu = () => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
+    useDarkModeStore,
+    (x) => x.isDarkMode
+  );
   const [isSearchTipsModalShown, setIsSearchTipsModalShown] = useState(false);
 
   const emptySearchResultsMenu = [

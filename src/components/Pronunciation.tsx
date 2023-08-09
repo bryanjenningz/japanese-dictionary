@@ -1,5 +1,5 @@
 import { getMoras } from "~/dictionary/getMoras";
-import { useDarkModeStore } from "~/stores/darkModeStore";
+import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
@@ -12,7 +12,10 @@ export const Pronunciation = ({
   pronunciation: string;
   pitchAccents: number[];
 }) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
+    useDarkModeStore,
+    (x) => x.isDarkMode
+  );
 
   pronunciation = pronunciation || word;
   const moras = getMoras(pronunciation);

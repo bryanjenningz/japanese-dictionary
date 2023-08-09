@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type DarkModeState = {
+export type DarkModeState = {
   isDarkMode: boolean;
   setIsDarkMode: (isDarkMode: boolean) => void;
 };

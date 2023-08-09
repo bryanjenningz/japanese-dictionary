@@ -15,7 +15,7 @@ import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { SmallSettingsIcon } from "~/icons/SmallSettingsIcon";
 import { SmallStackIcon } from "~/icons/SmallStackIcon";
 import { SunIcon } from "~/icons/SunIcon";
-import { useDarkModeStore } from "~/stores/darkModeStore";
+import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
@@ -78,7 +78,10 @@ export const SideMenu = ({
 }) => {
   const router = useRouter();
 
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
+    useDarkModeStore,
+    (x) => x.isDarkMode
+  );
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
 
   return (

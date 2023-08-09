@@ -1,7 +1,7 @@
 import { type Dispatch, type SetStateAction, useState } from "react";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { MoreVerticalIcon } from "~/icons/MoreVerticalIcon";
-import { useDarkModeStore } from "~/stores/darkModeStore";
+import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
@@ -24,7 +24,10 @@ export const HistoryHeader = ({
   historyHeaderTab: HistoryHeaderTab;
   setHistoryHeaderTab: Dispatch<SetStateAction<HistoryHeaderTab>>;
 }) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
+    useDarkModeStore,
+    (x) => x.isDarkMode
+  );
 
   return (
     <header

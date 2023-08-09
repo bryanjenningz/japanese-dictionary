@@ -1,7 +1,7 @@
 import { classNames } from "~/utils/classNames";
 import { type WordEntry } from "~/dictionary/search";
 import { Pronunciation } from "~/components/Pronunciation";
-import { useDarkModeStore } from "~/stores/darkModeStore";
+import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 
 export const SearchResults = ({
@@ -9,7 +9,10 @@ export const SearchResults = ({
 }: {
   wordEntries: WordEntry[];
 }) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
+    useDarkModeStore,
+    (x) => x.isDarkMode
+  );
 
   return (
     <ul>

@@ -10,7 +10,7 @@ import { OpenInNewIcon } from "~/icons/OpenInNewIcon";
 import { RefreshIcon } from "~/icons/RefreshIcon";
 import { SearchIcon } from "~/icons/SearchIcon";
 import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
-import { useDarkModeStore } from "~/stores/darkModeStore";
+import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import {
   type SavedWordsState,
   useSavedWordsStore,
@@ -146,7 +146,10 @@ export const ClipReaderHeader = ({
   openSideMenu: () => void;
   setClipText: Dispatch<SetStateAction<string>>;
 }) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
+    useDarkModeStore,
+    (x) => x.isDarkMode
+  );
 
   return (
     <header
