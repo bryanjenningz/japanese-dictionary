@@ -10,6 +10,7 @@ import {
   useSavedWordsStore,
 } from "~/stores/savedWordsStore";
 import { Pronunciation } from "~/components/Pronunciation";
+import { groupByTime } from "~/utils/groupByTime";
 
 export default function History() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -24,6 +25,8 @@ export default function History() {
     useHistory,
     (x) => x.searches
   );
+  const searchesGroupedByTime =
+    searches && groupByTime(searches, (x) => x.time, 1000 * 60 * 15);
   const clipReaderLookups = useStore<
     HistoryState,
     HistoryState["clipReaderLookups"]
@@ -108,20 +111,34 @@ export default function History() {
             case "Search":
               return (
                 <div>
-                  {searches?.map((search) => {
-                    const key = `${search.searchText}-${search.time}`;
+                  {searchesGroupedByTime?.map((searchGroup) => {
+                    const { values: searches, minTime, maxTime } = searchGroup;
                     return (
-                      <div key={key}>
+                      <article key={`${minTime}-${maxTime}`}>
                         <time
                           className={classNames(
                             "block p-1 font-semibold text-white",
                             isDarkMode ? "bg-slate-700" : "bg-slate-500"
                           )}
                         >
-                          {formatTime(search.time)}
+                          {maxTime - minTime < 1000 * 60
+                            ? formatTime(minTime)
+                            : `${formatTime(minTime)} - ${formatTime(maxTime)}`}
                         </time>
-                        <div className="p-2 text-lg">{search.searchText}</div>
-                      </div>
+                        <ul>
+                          {searches.map((search) => {
+                            const { searchText, time } = search;
+                            return (
+                              <li
+                                key={`${searchText}-${time}`}
+                                className="p-2 text-lg"
+                              >
+                                {searchText}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </article>
                     );
                   })}
                 </div>
