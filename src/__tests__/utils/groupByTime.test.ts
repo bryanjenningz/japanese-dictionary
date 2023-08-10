@@ -8,7 +8,7 @@ describe("groupByTime", () => {
     expect(result).toEqual([]);
   });
 
-  it("Returns values grouped with max time diff of 10", () => {
+  it("Returns values grouped with 10ms as the max time diff between each entry", () => {
     const times = [1, 11, 20, 31, 42, 52, 53, 64];
     const maxTimeDiff = 10;
 
