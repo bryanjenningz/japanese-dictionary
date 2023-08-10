@@ -75,28 +75,6 @@ export default function History() {
                 </div>
               );
 
-            case "Search":
-              return (
-                <div>
-                  {searches?.map((search) => {
-                    const key = `${search.searchText}-${search.time}`;
-                    return (
-                      <div key={key}>
-                        <time
-                          className={classNames(
-                            "block p-1 font-semibold text-white",
-                            isDarkMode ? "bg-slate-700" : "bg-slate-500"
-                          )}
-                        >
-                          {formatTime(search.time)}
-                        </time>
-                        <div className="p-2 text-lg">{search.searchText}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-
             case "Reader":
               return (
                 <div>
@@ -121,6 +99,28 @@ export default function History() {
                       <div key={key}>
                         <div>{lookup.time}</div>
                         <div>{lookup.wordEntry.word}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+
+            case "Search":
+              return (
+                <div>
+                  {searches?.map((search) => {
+                    const key = `${search.searchText}-${search.time}`;
+                    return (
+                      <div key={key}>
+                        <time
+                          className={classNames(
+                            "block p-1 font-semibold text-white",
+                            isDarkMode ? "bg-slate-700" : "bg-slate-500"
+                          )}
+                        >
+                          {formatTime(search.time)}
+                        </time>
+                        <div className="p-2 text-lg">{search.searchText}</div>
                       </div>
                     );
                   })}
