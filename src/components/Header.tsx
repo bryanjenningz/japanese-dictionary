@@ -81,8 +81,9 @@ export const Header = ({
                 "absolute bottom-0 right-0 top-0 px-1",
                 isDarkMode ? "text-slate-300" : "text-slate-500"
               )}
+              onClick={() => setSearchText("")}
             >
-              <span className="sr-only">Clear input</span>
+              <span className="sr-only">Clear search text</span>
               <CloseIcon />
             </button>
           </div>
