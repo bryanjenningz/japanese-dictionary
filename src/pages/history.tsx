@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
@@ -25,8 +25,19 @@ export default function History() {
     useHistory,
     (x) => x.searches
   );
-  const searchesGroupedByTime =
-    searches && groupByTime(searches, (x) => x.time, 1000 * 60 * 15);
+  const searchesGroupedByTime = useMemo(() => {
+    const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
+    if (!searches) return;
+    const groups = groupByTime(
+      searches,
+      (x) => x.time,
+      maxTimeDiffBetweenGroupValues
+    );
+    // Sort search history groups from most recent to least recent
+    groups.reverse();
+    groups.forEach((group) => group.values.reverse());
+    return groups;
+  }, [searches]);
   const clipReaderLookups = useStore<
     HistoryState,
     HistoryState["clipReaderLookups"]
