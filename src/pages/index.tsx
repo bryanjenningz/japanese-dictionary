@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Header } from "~/components/Header";
 import { EmptySearchResultsMenu } from "~/components/EmptySearchResultsMenu";
 import { SideMenu } from "~/components/SideMenu";
@@ -15,6 +15,13 @@ export default function Home() {
   );
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
+  useEffect(() => {
+    const searchText = new URLSearchParams(window.location.search).get(
+      "search"
+    );
+    if (!searchText) return;
+    setSearchText(searchText);
+  }, []);
   const search = useSearch();
   const { wordEntries } = useMemo(
     () => search(searchText.trim()),

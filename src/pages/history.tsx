@@ -11,6 +11,7 @@ import {
 } from "~/stores/savedWordsStore";
 import { Pronunciation } from "~/components/Pronunciation";
 import { groupByTime } from "~/utils/groupByTime";
+import Link from "next/link";
 
 export default function History() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -140,11 +141,13 @@ export default function History() {
                           {searches.map((search) => {
                             const { searchText, time } = search;
                             return (
-                              <li
-                                key={`${searchText}-${time}`}
-                                className="p-2 text-lg"
-                              >
-                                {searchText}
+                              <li key={`${searchText}-${time}`}>
+                                <Link
+                                  href={`/?search=${searchText}`}
+                                  className="block p-2 text-lg"
+                                >
+                                  {searchText}
+                                </Link>
                               </li>
                             );
                           })}
