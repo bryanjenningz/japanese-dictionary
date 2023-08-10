@@ -73,7 +73,9 @@ export const Header = ({
               value={searchText}
               onChange={(event) => {
                 setSearchText(event.target.value);
-                addSearch({ searchText: event.target.value, time: Date.now() });
+                const trimmedSearchText = event.target.value.trim();
+                if (!trimmedSearchText) return;
+                addSearch({ searchText: trimmedSearchText, time: Date.now() });
               }}
             />
             <button
