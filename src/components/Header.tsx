@@ -58,7 +58,7 @@ export const Header = ({
     >
       <div className="w-full max-w-2xl">
         <section className="flex h-14 items-center">
-          <button className="h-full px-6" onClick={openSideMenu}>
+          <button className="h-full px-4" onClick={openSideMenu}>
             <span className="sr-only">Open side menu</span>
             <MenuIcon />
           </button>
@@ -88,7 +88,7 @@ export const Header = ({
           </div>
 
           <button
-            className="flex h-full items-center justify-center px-6"
+            className="flex h-full items-center justify-center px-4"
             onClick={() =>
               setSearchLanguage((searchLanguage) =>
                 searchLanguage === "English" ? "Japanese" : "English"
