@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { MoreVerticalIcon } from "~/icons/MoreVerticalIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
