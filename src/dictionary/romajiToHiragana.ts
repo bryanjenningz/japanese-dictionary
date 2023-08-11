@@ -151,6 +151,7 @@ export const romajiToHiragana = (romaji: string): string => {
     }
 
     if (!found) {
+      result += romaji[i];
       i += 1;
     }
   }
