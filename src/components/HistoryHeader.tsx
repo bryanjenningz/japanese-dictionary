@@ -27,7 +27,6 @@ export const HistoryHeader = ({
     (x) => x.isDarkMode
   );
   const [isMoreMenuShown, setIsMoreMenuShown] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <header
@@ -59,14 +58,7 @@ export const HistoryHeader = ({
           <div className="relative h-full">
             <button
               className="flex h-full items-center justify-center px-4"
-              onClick={() => {
-                setTimeout(() => {
-                  setIsMoreMenuShown(true);
-                  if (dropdownRef.current) {
-                    dropdownRef.current.focus();
-                  }
-                }, 0);
-              }}
+              onClick={() => setIsMoreMenuShown(true)}
             >
               <span className="sr-only">More options</span>
               <MoreVerticalIcon />
@@ -80,8 +72,6 @@ export const HistoryHeader = ({
                   ? "opacity-100"
                   : "pointer-events-none opacity-0"
               )}
-              tabIndex={-1}
-              ref={dropdownRef}
               aria-hidden={!isMoreMenuShown}
             >
               <ul>
