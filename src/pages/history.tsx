@@ -16,6 +16,7 @@ import {
   type HistoryTabState,
   useHistoryTabStore,
 } from "~/stores/historyTabStore";
+import { Modal } from "~/components/Modal";
 
 export default function History() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -82,6 +83,8 @@ export default function History() {
     (x) => x.historyTab
   );
 
+  const [isModalShown, setIsModalShown] = useState(false);
+
   return (
     <main
       className={classNames(
@@ -102,7 +105,7 @@ export default function History() {
             case "Search":
               return clearSearchHistory();
             case "Cards":
-              return;
+              return setIsModalShown(true);
           }
         }}
       />
@@ -299,6 +302,23 @@ export default function History() {
           }
         })()}
       </div>
+
+      <Modal isShown={isModalShown} onClose={() => setIsModalShown(false)}>
+        <div className="flex flex-col gap-3">
+          <h2 className="text-lg font-semibold">{`Can't Clear Flashcards`}</h2>
+          <p>{`This tab simply displays a list of your most recently modified flashcards - pull that data directly from your flashcard database - so there's no way to "clear" it.`}</p>
+          <p>{`However, you can tap-hold on an individual card and choose "Delete Card" from the popup menu to permanently delete it.`}</p>
+          <button
+            className={classNames(
+              "self-start p-2",
+              isDarkMode ? "text-blue-500" : "text-black"
+            )}
+            onClick={() => setIsModalShown(false)}
+          >
+            OK
+          </button>
+        </div>
+      </Modal>
     </main>
   );
 }
