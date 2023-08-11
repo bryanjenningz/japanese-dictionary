@@ -30,6 +30,8 @@ export default function History() {
     useHistory,
     (x) => x.searches
   );
+  const clearDictionaryHistory = useHistory((x) => x.clearDictionaryHistory);
+
   const searchesGroupedByTime = useMemo(() => {
     const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
     if (!searches) return;
@@ -44,6 +46,7 @@ export default function History() {
     return groups;
   }, [searches]);
   const clearSearchHistory = useHistory((x) => x.clearSearchHistory);
+
   const clipReaderLookups = useStore<
     HistoryState,
     HistoryState["clipReaderLookups"]
@@ -61,10 +64,14 @@ export default function History() {
     groups.forEach((group) => group.values.reverse());
     return groups;
   }, [clipReaderLookups]);
+  const clearClipReaderHistory = useHistory((x) => x.clearClipReaderHistory);
+
   const ocrLookups = useStore<HistoryState, HistoryState["ocrLookups"]>(
     useHistory,
     (x) => x.ocrLookups
   );
+  const clearOcrHistory = useHistory((x) => x.clearOcrHistory);
+
   const savedWords = useStore<SavedWordsState, SavedWordsState["savedWords"]>(
     useSavedWordsStore,
     (x) => x.savedWords
@@ -85,8 +92,17 @@ export default function History() {
       <HistoryHeader
         openSideMenu={() => setIsSideMenuOpen(true)}
         clearCurrentList={() => {
-          if (historyTab === "Search") {
-            clearSearchHistory();
+          switch (historyTab) {
+            case "Dict":
+              return clearDictionaryHistory();
+            case "Reader":
+              return clearClipReaderHistory();
+            case "OCR":
+              return clearOcrHistory();
+            case "Search":
+              return clearSearchHistory();
+            case "Cards":
+              return;
           }
         }}
       />
