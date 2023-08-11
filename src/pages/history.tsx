@@ -337,38 +337,40 @@ export default function History() {
 
             case "Cards":
               return (
-                <div>
+                <ul>
                   {savedWords?.map((wordEntry) => {
                     const { word, pronunciation, pitchAccents, definitions } =
                       wordEntry;
                     const key = `${word}-${pronunciation}`;
                     return (
-                      <div
-                        key={key}
-                        className={classNames(
-                          "border-b p-4",
-                          isDarkMode ? "border-slate-500" : "border-slate-300"
-                        )}
-                      >
-                        <div className="flex gap-3">
-                          <div>{word}</div>
-                          <Pronunciation
-                            word={word}
-                            pronunciation={pronunciation}
-                            pitchAccents={pitchAccents}
-                          />
-                        </div>
-                        <p
+                      <li key={key}>
+                        <Link
+                          href={`/word?word=${word}`}
                           className={classNames(
-                            isDarkMode ? "text-slate-300" : "text-slate-600"
+                            "block border-b p-4",
+                            isDarkMode ? "border-slate-500" : "border-slate-300"
                           )}
                         >
-                          {definitions.join(", ")}
-                        </p>
-                      </div>
+                          <div className="flex gap-3">
+                            <div>{word}</div>
+                            <Pronunciation
+                              word={word}
+                              pronunciation={pronunciation}
+                              pitchAccents={pitchAccents}
+                            />
+                          </div>
+                          <p
+                            className={classNames(
+                              isDarkMode ? "text-slate-300" : "text-slate-600"
+                            )}
+                          >
+                            {definitions.join(", ")}
+                          </p>
+                        </Link>
+                      </li>
                     );
                   })}
-                </div>
+                </ul>
               );
 
             case undefined:
