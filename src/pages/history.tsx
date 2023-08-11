@@ -12,7 +12,10 @@ import {
 import { Pronunciation } from "~/components/Pronunciation";
 import { groupByTime } from "~/utils/groupByTime";
 import Link from "next/link";
-import { type HistoryTabState, useHistoryTabStore } from "~/stores/historyTabStore";
+import {
+  type HistoryTabState,
+  useHistoryTabStore,
+} from "~/stores/historyTabStore";
 
 export default function History() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -40,7 +43,7 @@ export default function History() {
     groups.forEach((group) => group.values.reverse());
     return groups;
   }, [searches]);
-  const removeAllSearch = useHistory((x) => x.removeAllSearch);
+  const clearSearchHistory = useHistory((x) => x.clearSearchHistory);
   const clipReaderLookups = useStore<
     HistoryState,
     HistoryState["clipReaderLookups"]
@@ -83,7 +86,7 @@ export default function History() {
         openSideMenu={() => setIsSideMenuOpen(true)}
         clearCurrentList={() => {
           if (historyTab === "Search") {
-            removeAllSearch();
+            clearSearchHistory();
           }
         }}
       />

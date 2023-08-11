@@ -26,7 +26,7 @@ export type HistoryState = {
   removeOcrLookup: (lookup: Lookup) => void;
   addSearch: (search: Search) => void;
   removeSearch: (search: Search) => void;
-  removeAllSearch: () => void;
+  clearSearchHistory: () => void;
 };
 
 export const useHistory = create<HistoryState>()(
@@ -65,7 +65,7 @@ export const useHistory = create<HistoryState>()(
         }),
       removeSearch: (search: Search) =>
         set({ searches: get().searches.filter((x) => !equals(x, search)) }),
-      removeAllSearch: () => set({ searches: [] }),
+      clearSearchHistory: () => set({ searches: [] }),
     }),
     { name: "history" }
   )
