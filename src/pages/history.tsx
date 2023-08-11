@@ -23,16 +23,30 @@ export default function History() {
     useDarkModeStore,
     (x) => x.isDarkMode
   );
+
   const dictionaryLookups = useStore<
     HistoryState,
     HistoryState["dictionaryLookups"]
   >(useHistory, (x) => x.dictionaryLookups);
+  const dictionaryLookupsGroupedByTime = useMemo(() => {
+    const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
+    if (!dictionaryLookups) return;
+    const groups = groupByTime(
+      dictionaryLookups,
+      (x) => x.time,
+      maxTimeDiffBetweenGroupValues
+    );
+    // Sort clip reader lookup groups from most recent to least recent
+    groups.reverse();
+    groups.forEach((group) => group.values.reverse());
+    return groups;
+  }, [dictionaryLookups]);
+  const clearDictionaryHistory = useHistory((x) => x.clearDictionaryHistory);
+
   const searches = useStore<HistoryState, HistoryState["searches"]>(
     useHistory,
     (x) => x.searches
   );
-  const clearDictionaryHistory = useHistory((x) => x.clearDictionaryHistory);
-
   const searchesGroupedByTime = useMemo(() => {
     const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
     if (!searches) return;
@@ -121,15 +135,75 @@ export default function History() {
             case "Dict":
               return (
                 <div>
-                  {dictionaryLookups?.map((lookup) => {
-                    const key = `${lookup.wordEntry.word}-${lookup.time}`;
-                    return (
-                      <div key={key}>
-                        <div>{lookup.time}</div>
-                        <div>{lookup.wordEntry.word}</div>
-                      </div>
-                    );
-                  })}
+                  {dictionaryLookupsGroupedByTime?.map(
+                    (dictionaryLookupGroup) => {
+                      const {
+                        values: lookups,
+                        minTime,
+                        maxTime,
+                      } = dictionaryLookupGroup;
+                      return (
+                        <article key={`${minTime}-${maxTime}`}>
+                          <time
+                            className={classNames(
+                              "block p-1 font-semibold text-white",
+                              isDarkMode ? "bg-slate-700" : "bg-slate-500"
+                            )}
+                          >
+                            {maxTime - minTime < 1000 * 60
+                              ? formatTime(minTime)
+                              : `${formatTime(minTime)} - ${formatTime(
+                                  maxTime
+                                )}`}
+                          </time>
+                          <ul>
+                            {lookups.map((lookup) => {
+                              const {
+                                wordEntry: {
+                                  word,
+                                  pronunciation,
+                                  pitchAccents,
+                                  definitions,
+                                },
+                                time,
+                              } = lookup;
+                              return (
+                                <li key={`${word}-${pronunciation}-${time}`}>
+                                  <Link
+                                    href={`/?search=${word}`}
+                                    className={classNames(
+                                      "flex flex-col border-b p-2",
+                                      isDarkMode
+                                        ? "border-slate-500"
+                                        : "border-slate-300"
+                                    )}
+                                  >
+                                    <span className="flex gap-3">
+                                      <span className="text-lg">{word}</span>
+                                      <Pronunciation
+                                        word={word}
+                                        pronunciation={pronunciation}
+                                        pitchAccents={pitchAccents}
+                                      />
+                                    </span>
+                                    <span
+                                      className={classNames(
+                                        isDarkMode
+                                          ? "text-slate-400"
+                                          : "text-slate-700"
+                                      )}
+                                    >
+                                      {definitions.join(", ")}
+                                    </span>
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </article>
+                      );
+                    }
+                  )}
                 </div>
               );
 
