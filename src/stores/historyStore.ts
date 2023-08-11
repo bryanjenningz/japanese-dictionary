@@ -45,7 +45,14 @@ export const useHistory = create<HistoryState>()(
       searches: [],
 
       addDictionaryLookup: (lookup: Lookup) =>
-        set({ dictionaryLookups: [lookup, ...get().dictionaryLookups] }),
+        set({
+          dictionaryLookups: [
+            lookup,
+            ...get().dictionaryLookups.filter(
+              (x) => x.wordEntry.word !== lookup.wordEntry.word
+            ),
+          ],
+        }),
       removeDictionaryLookup: (lookup: Lookup) =>
         set({
           dictionaryLookups: get().dictionaryLookups.filter(
