@@ -4,7 +4,7 @@ import { MoreVerticalIcon } from "~/icons/MoreVerticalIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import {
   type HistoryTabState,
-  historyHeaderTabs,
+  historyTabs,
   useHistoryTabStore,
 } from "~/stores/historyTabStore";
 import { useStore } from "~/stores/useStore";
@@ -97,7 +97,7 @@ export const HistoryHeader = ({
         </section>
 
         <section className="flex h-14 items-center">
-          {historyHeaderTabs.map((tab) => {
+          {historyTabs.map((tab) => {
             return (
               <button
                 key={tab}

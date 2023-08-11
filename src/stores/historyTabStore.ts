@@ -2,15 +2,15 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export type HistoryTabState = {
-  historyTab: HistoryHeaderTab;
-  setHistoryTab: (historyTab: HistoryHeaderTab) => void;
+  historyTab: HistoryTab;
+  setHistoryTab: (historyTab: HistoryTab) => void;
 };
 
-type HistoryHeaderTab = (typeof historyHeaderTabs)[number];
+type HistoryTab = (typeof historyTabs)[number];
 
-const DEFAULT_HISTORY_HEADER_TAB: HistoryHeaderTab = "Dict";
+const DEFAULT_HISTORY_TAB: HistoryTab = "Dict";
 
-export const historyHeaderTabs = [
+export const historyTabs = [
   "Dict",
   "Reader",
   "OCR",
@@ -21,8 +21,8 @@ export const historyHeaderTabs = [
 export const useHistoryTabStore = create<HistoryTabState>()(
   persist(
     (set) => ({
-      historyTab: DEFAULT_HISTORY_HEADER_TAB,
-      setHistoryTab: (historyTab: HistoryHeaderTab) => set({ historyTab }),
+      historyTab: DEFAULT_HISTORY_TAB,
+      setHistoryTab: (historyTab: HistoryTab) => set({ historyTab }),
     }),
     { name: "history-tab" }
   )
