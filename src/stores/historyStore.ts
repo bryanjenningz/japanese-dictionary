@@ -57,7 +57,12 @@ export const useHistory = create<HistoryState>()(
       removeOcrLookup: (lookup: Lookup) =>
         set({ ocrLookups: get().ocrLookups.filter((x) => !equals(x, lookup)) }),
       addSearch: (search: Search) =>
-        set({ searches: [search, ...get().searches] }),
+        set({
+          searches: [
+            search,
+            ...get().searches.filter((x) => x.searchText !== search.searchText),
+          ],
+        }),
       removeSearch: (search: Search) =>
         set({ searches: get().searches.filter((x) => !equals(x, search)) }),
       removeAllSearch: () => set({ searches: [] }),

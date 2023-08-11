@@ -7,8 +7,10 @@ import { useSearch } from "~/dictionary/useSearch";
 import { SearchResults } from "~/components/SearchResults";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
+import { useHistory } from "~/stores/historyStore";
 
 export default function Home() {
+  const addSearch = useHistory((x) => x.addSearch);
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
@@ -21,7 +23,8 @@ export default function Home() {
     );
     if (!searchText) return;
     setSearchText(searchText);
-  }, []);
+    addSearch({ time: Date.now(), searchText });
+  }, [addSearch]);
   const search = useSearch();
   const { wordEntries } = useMemo(
     () => search(searchText.trim()),
