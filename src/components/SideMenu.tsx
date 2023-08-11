@@ -151,7 +151,7 @@ export const SideMenu = ({
                         <Link
                           className={classNames(
                             "flex w-full items-center gap-2 px-4 py-2 text-left text-lg",
-                            router.asPath === option.href &&
+                            router.pathname === option.href &&
                               (isDarkMode
                                 ? "bg-blue-900 text-white"
                                 : "bg-blue-300 text-black")
