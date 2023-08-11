@@ -19,10 +19,12 @@ export const HistoryHeader = ({
   openSideMenu,
   historyHeaderTab,
   setHistoryHeaderTab,
+  clearCurrentList,
 }: {
   openSideMenu: () => void;
   historyHeaderTab: HistoryHeaderTab;
   setHistoryHeaderTab: Dispatch<SetStateAction<HistoryHeaderTab>>;
+  clearCurrentList: () => void;
 }) => {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
@@ -75,7 +77,8 @@ export const HistoryHeader = ({
               )}
               tabIndex={-1}
               ref={dropdownRef}
-              onBlur={() => setIsMoreMenuShown(false)}
+              // Set timeout so clicks within dropdown still register before blur event
+              onBlur={() => setTimeout(() => setIsMoreMenuShown(false), 0)}
               aria-hidden={!isMoreMenuShown}
             >
               <ul>
@@ -85,7 +88,10 @@ export const HistoryHeader = ({
                   </button>
                 </li>
                 <li>
-                  <button className="w-full whitespace-nowrap p-4 text-left">
+                  <button
+                    className="w-full whitespace-nowrap p-4 text-left"
+                    onClick={clearCurrentList}
+                  >
                     Clear current list
                   </button>
                 </li>

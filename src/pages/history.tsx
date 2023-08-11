@@ -39,6 +39,7 @@ export default function History() {
     groups.forEach((group) => group.values.reverse());
     return groups;
   }, [searches]);
+  const removeAllSearch = useHistory((x) => x.removeAllSearch);
   const clipReaderLookups = useStore<
     HistoryState,
     HistoryState["clipReaderLookups"]
@@ -65,6 +66,11 @@ export default function History() {
         openSideMenu={() => setIsSideMenuOpen(true)}
         historyHeaderTab={historyHeaderTab}
         setHistoryHeaderTab={setHistoryHeaderTab}
+        clearCurrentList={() => {
+          if (historyHeaderTab === "Search") {
+            removeAllSearch();
+          }
+        }}
       />
 
       <SideMenu
