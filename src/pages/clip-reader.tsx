@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ClipReaderHeader } from "~/components/ClipReaderHeader";
 import { SelectableReadingText } from "~/components/SelectableReadingText";
 import { SideMenu } from "~/components/SideMenu";
@@ -6,12 +6,14 @@ import { WordEntryList } from "~/components/WordEntryList";
 import { type WordSearchResult } from "~/dictionary/search";
 import { useSearch } from "~/dictionary/useSearch";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useHistory } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
 const MAX_WORD_SIZE = 20;
 
 export default function ClipReader() {
+  const addClipReaderLookup = useHistory((x) => x.addClipReaderLookup);
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
@@ -37,6 +39,12 @@ export default function ClipReader() {
 
     return search(text);
   })();
+
+  useEffect(() => {
+    if (wordEntries[0]) {
+      addClipReaderLookup({ time: Date.now(), wordEntry: wordEntries[0] });
+    }
+  }, [addClipReaderLookup, wordEntries]);
 
   const selectedTextElementBottom = selectedTextElement.current
     ? selectedTextElement.current.getBoundingClientRect().bottom +
