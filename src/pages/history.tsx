@@ -170,7 +170,7 @@ export default function History() {
                               return (
                                 <li key={`${word}-${pronunciation}-${time}`}>
                                   <Link
-                                    href={`/?search=${word}`}
+                                    href={`/word?word=${word}`}
                                     className={classNames(
                                       "flex flex-col border-b p-2",
                                       isDarkMode
