@@ -76,7 +76,7 @@ export const Header = ({
               onChange={(event) => {
                 setSearchText(event.target.value);
                 const trimmedSearchText = event.target.value.trim();
-                router.replace(`/?search=${trimmedSearchText}`);
+                void router.replace(`/?search=${trimmedSearchText}`);
                 if (!trimmedSearchText) return;
                 addSearch({ searchText: trimmedSearchText, time: Date.now() });
               }}
