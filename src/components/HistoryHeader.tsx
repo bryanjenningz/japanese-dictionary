@@ -53,10 +53,12 @@ export const HistoryHeader = ({
             <button
               className="flex h-full items-center justify-center px-4"
               onClick={() => {
-                setIsMoreMenuShown(!isMoreMenuShown);
-                if (!isMoreMenuShown && dropdownRef.current) {
-                  dropdownRef.current.focus();
-                }
+                setTimeout(() => {
+                  setIsMoreMenuShown(true);
+                  if (dropdownRef.current) {
+                    dropdownRef.current.focus();
+                  }
+                }, 0);
               }}
             >
               <span className="sr-only">More options</span>
@@ -86,7 +88,7 @@ export const HistoryHeader = ({
                 <li>
                   <button
                     className="w-full whitespace-nowrap p-4 text-left"
-                    onClick={clearCurrentList}
+                    onClick={() => setTimeout(clearCurrentList, 0)}
                   >
                     Clear current list
                   </button>
