@@ -21,14 +21,14 @@ export const SearchResults = ({
         const { word, pronunciation, pitchAccents, definitions } = wordEntry;
         const key = `${word}-${pronunciation}`;
         return (
-          <li
-            key={key}
-            className={classNames(
-              "border-b p-4",
-              isDarkMode ? "border-slate-600" : "border-slate-300"
-            )}
-          >
-            <Link href={`/word?word=${word}`}>
+          <li key={key}>
+            <Link
+              href={`/word?word=${word}`}
+              className={classNames(
+                "block border-b p-4",
+                isDarkMode ? "border-slate-600" : "border-slate-300"
+              )}
+            >
               <div className="flex items-center gap-3">
                 <h2 className="text-xl">{word}</h2>
                 <Pronunciation
