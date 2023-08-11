@@ -306,7 +306,7 @@ export default function History() {
       <Modal isShown={isModalShown} onClose={() => setIsModalShown(false)}>
         <div className="flex flex-col gap-3">
           <h2 className="text-lg font-semibold">{`Can't Clear Flashcards`}</h2>
-          <p>{`This tab simply displays a list of your most recently modified flashcards - pull that data directly from your flashcard database - so there's no way to "clear" it.`}</p>
+          <p>{`This tab simply displays a list of your most recently modified flashcards - pulling that data directly from your flashcard database - so there's no way to "clear" it.`}</p>
           <p>{`However, you can tap-hold on an individual card and choose "Delete Card" from the popup menu to permanently delete it.`}</p>
           <button
             className={classNames(
