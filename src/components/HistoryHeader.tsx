@@ -1,4 +1,4 @@
-import { type Dispatch, type SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState, useRef } from "react";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { MoreVerticalIcon } from "~/icons/MoreVerticalIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
@@ -28,6 +28,8 @@ export const HistoryHeader = ({
     useDarkModeStore,
     (x) => x.isDarkMode
   );
+  const [isMoreMenuShown, setIsMoreMenuShown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <header
@@ -47,10 +49,49 @@ export const HistoryHeader = ({
             <h1 className="text-lg font-semibold">History</h1>
           </div>
 
-          <button className="flex h-full items-center justify-center px-4">
-            <span className="sr-only">More options</span>
-            <MoreVerticalIcon />
-          </button>
+          {isMoreMenuShown && <div className="fixed inset-0"></div>}
+
+          <div className="relative h-full">
+            <button
+              className="flex h-full items-center justify-center px-4"
+              onClick={() => {
+                setIsMoreMenuShown(!isMoreMenuShown);
+                if (!isMoreMenuShown && dropdownRef.current) {
+                  dropdownRef.current.focus();
+                }
+              }}
+            >
+              <span className="sr-only">More options</span>
+              <MoreVerticalIcon />
+            </button>
+
+            <div
+              className={classNames(
+                "absolute right-2 top-2 z-10 shadow transition-all",
+                isDarkMode ? "bg-slate-700 text-white" : "bg-white text-black",
+                isMoreMenuShown
+                  ? "opacity-100"
+                  : "pointer-events-none opacity-0"
+              )}
+              tabIndex={-1}
+              ref={dropdownRef}
+              onBlur={() => setIsMoreMenuShown(false)}
+              aria-hidden={!isMoreMenuShown}
+            >
+              <ul>
+                <li>
+                  <button className="w-full whitespace-nowrap p-4 text-left">
+                    Dump current list to flashcards
+                  </button>
+                </li>
+                <li>
+                  <button className="w-full whitespace-nowrap p-4 text-left">
+                    Clear current list
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </section>
 
         <section className="flex h-14 items-center">
