@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { type Dispatch, type SetStateAction, useState, useMemo } from "react";
 import { BrushIcon } from "~/icons/BrushIcon";
 import { CameraIcon } from "~/icons/CameraIcon";
@@ -35,6 +36,7 @@ export const Header = ({
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
 }) => {
+  const router = useRouter();
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
@@ -74,6 +76,7 @@ export const Header = ({
               onChange={(event) => {
                 setSearchText(event.target.value);
                 const trimmedSearchText = event.target.value.trim();
+                router.replace(`/?search=${trimmedSearchText}`);
                 if (!trimmedSearchText) return;
                 addSearch({ searchText: trimmedSearchText, time: Date.now() });
               }}
