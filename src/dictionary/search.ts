@@ -1,6 +1,7 @@
 import { type DeinflectionRuleGroup, deinflect } from "~/dictionary/deinflect";
 import { getPitchAccents } from "~/dictionary/getPitchAccents";
 import { katakanaToHiragana } from "~/dictionary/katakanaToHiragana";
+import { romajiToHiragana } from "~/dictionary/romajiToHiragana";
 
 export type WordEntry = {
   word: string;
@@ -51,7 +52,7 @@ export const searchWord = (
           );
           break;
         }
-        const wordHiragana = katakanaToHiragana(word);
+        const wordHiragana = katakanaToHiragana(romajiToHiragana(word));
         if (midWord === wordHiragana) {
           const newEntries = midIndexes
             .map((wordDictIndex) =>
