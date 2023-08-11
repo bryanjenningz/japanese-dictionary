@@ -3,7 +3,7 @@ import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
-import { HistoryHeader, useHistoryHeaderTab } from "~/components/HistoryHeader";
+import { HistoryHeader } from "~/components/HistoryHeader";
 import { type HistoryState, useHistory } from "~/stores/historyStore";
 import {
   type SavedWordsState,
@@ -12,6 +12,7 @@ import {
 import { Pronunciation } from "~/components/Pronunciation";
 import { groupByTime } from "~/utils/groupByTime";
 import Link from "next/link";
+import { type HistoryTabState, useHistoryTabStore } from "~/stores/historyTabStore";
 
 export default function History() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -66,7 +67,10 @@ export default function History() {
     (x) => x.savedWords
   );
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const [historyHeaderTab, setHistoryHeaderTab] = useHistoryHeaderTab();
+  const historyTab = useStore<HistoryTabState, HistoryTabState["historyTab"]>(
+    useHistoryTabStore,
+    (x) => x.historyTab
+  );
 
   return (
     <main
@@ -77,10 +81,8 @@ export default function History() {
     >
       <HistoryHeader
         openSideMenu={() => setIsSideMenuOpen(true)}
-        historyHeaderTab={historyHeaderTab}
-        setHistoryHeaderTab={setHistoryHeaderTab}
         clearCurrentList={() => {
-          if (historyHeaderTab === "Search") {
+          if (historyTab === "Search") {
             removeAllSearch();
           }
         }}
@@ -93,7 +95,7 @@ export default function History() {
 
       <div className="flex w-full max-w-2xl flex-col">
         {((): JSX.Element => {
-          switch (historyHeaderTab) {
+          switch (historyTab) {
             case "Dict":
               return (
                 <div>
@@ -272,6 +274,9 @@ export default function History() {
                   })}
                 </div>
               );
+
+            case undefined:
+              return <></>;
           }
         })()}
       </div>

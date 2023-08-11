@@ -1,31 +1,27 @@
-import { type Dispatch, type SetStateAction, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { MoreVerticalIcon } from "~/icons/MoreVerticalIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import {
+  type HistoryTabState,
+  historyHeaderTabs,
+  useHistoryTabStore,
+} from "~/stores/historyTabStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
-type HistoryHeaderTab = (typeof historyHeaderTabs)[number];
-
-const DEFAULT_HISTORY_HEADER_TAB: HistoryHeaderTab = "Dict";
-
-const historyHeaderTabs = ["Dict", "Reader", "OCR", "Search", "Cards"] as const;
-
-export const useHistoryHeaderTab = () => {
-  return useState<HistoryHeaderTab>(DEFAULT_HISTORY_HEADER_TAB);
-};
-
 export const HistoryHeader = ({
   openSideMenu,
-  historyHeaderTab,
-  setHistoryHeaderTab,
   clearCurrentList,
 }: {
   openSideMenu: () => void;
-  historyHeaderTab: HistoryHeaderTab;
-  setHistoryHeaderTab: Dispatch<SetStateAction<HistoryHeaderTab>>;
   clearCurrentList: () => void;
 }) => {
+  const historyTab = useStore<HistoryTabState, HistoryTabState["historyTab"]>(
+    useHistoryTabStore,
+    (x) => x.historyTab
+  );
+  const setHistoryTab = useHistoryTabStore((x) => x.setHistoryTab);
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
@@ -107,9 +103,9 @@ export const HistoryHeader = ({
                 key={tab}
                 className={classNames(
                   "flex h-full grow basis-1 items-center justify-center uppercase",
-                  historyHeaderTab === tab && "border-b-2 border-white"
+                  historyTab === tab && "border-b-2 border-white"
                 )}
-                onClick={() => setHistoryHeaderTab(tab)}
+                onClick={() => setHistoryTab(tab)}
               >
                 {tab}
               </button>
