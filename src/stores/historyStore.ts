@@ -18,12 +18,19 @@ export type HistoryState = {
   clipReaderLookups: Lookup[];
   ocrLookups: Lookup[];
   searches: Search[];
+
   addDictionaryLookup: (lookup: Lookup) => void;
   removeDictionaryLookup: (lookup: Lookup) => void;
+  clearDictionaryHistory: () => void;
+
   addClipReaderLookup: (lookup: Lookup) => void;
   removeClipReaderLookup: (lookup: Lookup) => void;
+  clearClipReaderHistory: () => void;
+
   addOcrLookup: (lookup: Lookup) => void;
   removeOcrLookup: (lookup: Lookup) => void;
+  clearOcrHistory: () => void;
+
   addSearch: (search: Search) => void;
   removeSearch: (search: Search) => void;
   clearSearchHistory: () => void;
@@ -36,6 +43,7 @@ export const useHistory = create<HistoryState>()(
       clipReaderLookups: [],
       ocrLookups: [],
       searches: [],
+
       addDictionaryLookup: (lookup: Lookup) =>
         set({ dictionaryLookups: [lookup, ...get().dictionaryLookups] }),
       removeDictionaryLookup: (lookup: Lookup) =>
@@ -44,6 +52,8 @@ export const useHistory = create<HistoryState>()(
             (x) => !equals(x, lookup)
           ),
         }),
+      clearDictionaryHistory: () => set({ dictionaryLookups: [] }),
+
       addClipReaderLookup: (lookup: Lookup) =>
         set({ clipReaderLookups: [lookup, ...get().clipReaderLookups] }),
       removeClipReaderLookup: (lookup: Lookup) =>
@@ -52,10 +62,14 @@ export const useHistory = create<HistoryState>()(
             (x) => !equals(x, lookup)
           ),
         }),
+      clearClipReaderHistory: () => set({ clipReaderLookups: [] }),
+
       addOcrLookup: (lookup: Lookup) =>
         set({ ocrLookups: [lookup, ...get().ocrLookups] }),
       removeOcrLookup: (lookup: Lookup) =>
         set({ ocrLookups: get().ocrLookups.filter((x) => !equals(x, lookup)) }),
+      clearOcrHistory: () => set({ ocrLookups: [] }),
+
       addSearch: (search: Search) =>
         set({
           searches: [
