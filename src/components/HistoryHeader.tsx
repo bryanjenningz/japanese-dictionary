@@ -53,8 +53,6 @@ export const HistoryHeader = ({
             <h1 className="text-lg font-semibold">History</h1>
           </div>
 
-          {isMoreMenuShown && <div className="fixed inset-0"></div>}
-
           <div className="relative h-full">
             <button
               className="flex h-full items-center justify-center px-4"
