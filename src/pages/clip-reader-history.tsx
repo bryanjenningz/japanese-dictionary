@@ -28,24 +28,26 @@ export default function ClipReaderHistory() {
     >
       <ClipReaderHistoryHeader />
 
-      <ul className="pt-10">
-        {clipReaderTexts?.map(({ text, time }) => {
-          return (
-            <li
-              key={time}
-              className={classNames(
-                "line-clamp-4 flex flex-col gap-1 border-b p-4",
-                isDarkMode ? "border-slate-700" : "border-slate-300"
-              )}
-            >
-              <time className={"text-sm font-semibold text-blue-500"}>
-                {formatTime(time)}
-              </time>
-              <p>{text}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="w-full max-w-2xl">
+        <ul className="pt-10">
+          {clipReaderTexts?.map(({ text, time }) => {
+            return (
+              <li
+                key={time}
+                className={classNames(
+                  "line-clamp-4 flex flex-col gap-1 border-b p-4 last:border-b-0",
+                  isDarkMode ? "border-slate-700" : "border-slate-300"
+                )}
+              >
+                <time className={"text-sm font-semibold text-blue-500"}>
+                  {formatTime(time)}
+                </time>
+                <p>{text}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </main>
   );
 }
