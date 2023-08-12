@@ -3,18 +3,17 @@ import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { ArrowBackIcon } from "~/icons/ArrowBack";
-import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
 
-export const ClipReaderHistoryHeader = () => {
+export const ClipReaderHistoryHeader = ({
+  openModal,
+}: {
+  openModal: () => void;
+}) => {
   const router = useRouter();
 
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
-  );
-
-  const clearAllClipReaderTexts = useClipReaderTextStore(
-    (x) => x.clearAllClipReaderTexts
   );
 
   return (
@@ -33,10 +32,7 @@ export const ClipReaderHistoryHeader = () => {
 
           <h1 className="grow text-lg font-semibold">Clipboard History</h1>
 
-          <button
-            className="h-full px-4 text-sm uppercase"
-            onClick={clearAllClipReaderTexts}
-          >
+          <button className="h-full px-4 text-sm uppercase" onClick={openModal}>
             Clear all
           </button>
         </section>

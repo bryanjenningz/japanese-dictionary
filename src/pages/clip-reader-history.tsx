@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { ClipReaderHistoryHeader } from "~/components/ClipReaderHistoryHeader";
+import { Modal } from "~/components/Modal";
 import {
   type ClipReaderTextState,
   useClipReaderTextStore,
@@ -19,6 +21,12 @@ export default function ClipReaderHistory() {
     ClipReaderTextState["clipReaderTexts"]
   >(useClipReaderTextStore, (x) => x.clipReaderTexts);
 
+  const clearAllClipReaderTexts = useClipReaderTextStore(
+    (x) => x.clearAllClipReaderTexts
+  );
+
+  const [isModalShown, setIsModalShown] = useState(false);
+
   return (
     <main
       className={classNames(
@@ -26,7 +34,7 @@ export default function ClipReaderHistory() {
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       )}
     >
-      <ClipReaderHistoryHeader />
+      <ClipReaderHistoryHeader openModal={() => setIsModalShown(true)} />
 
       <div className="w-full max-w-2xl">
         <ul className="pt-10">
@@ -48,6 +56,32 @@ export default function ClipReaderHistory() {
           })}
         </ul>
       </div>
+
+      <Modal isShown={isModalShown} onClose={() => setIsModalShown(false)}>
+        <div className="flex flex-col gap-2">
+          <h2 className="text-xl font-semibold">Clear History</h2>
+          <p>{`Are you sure you want to erase your recent clipboard history?`}</p>
+          <div
+            className={classNames(
+              "flex justify-end uppercase",
+              isDarkMode ? "text-blue-500" : "text-black"
+            )}
+          >
+            <button className="px-2" onClick={() => setIsModalShown(false)}>
+              No
+            </button>
+            <button
+              className="px-2"
+              onClick={() => {
+                clearAllClipReaderTexts();
+                setIsModalShown(false);
+              }}
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </Modal>
     </main>
   );
 }
