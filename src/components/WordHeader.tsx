@@ -6,6 +6,10 @@ import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { Pronunciation } from "~/components/Pronunciation";
 import { ArrowBackIcon } from "~/icons/ArrowBack";
+import { AddIcon } from "~/icons/AddIcon";
+import { SavedWordsState, useSavedWordsStore } from "~/stores/savedWordsStore";
+import { equals } from "~/utils/equals";
+import { AddBoxIcon } from "~/icons/AddBoxIcon";
 
 type WordHeaderTab = (typeof wordHeaderTabs)[number];
 
@@ -15,6 +19,16 @@ const wordHeaderTabs = ["Dict", "Stroke", "Chars", "Words", "Sents"] as const;
 
 export const WordHeader = ({ wordEntry }: { wordEntry: WordEntry }) => {
   const router = useRouter();
+
+  const saveWord = useSavedWordsStore((x) => x.saveWord);
+  const removeWord = useSavedWordsStore((x) => x.removeWord);
+  const savedWords = useStore<SavedWordsState, SavedWordsState["savedWords"]>(
+    useSavedWordsStore,
+    (x) => x.savedWords
+  );
+  const isWordSaved = !!savedWords?.find((savedWord) =>
+    equals(wordEntry, savedWord)
+  );
 
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
@@ -41,6 +55,29 @@ export const WordHeader = ({ wordEntry }: { wordEntry: WordEntry }) => {
             </button>
 
             <h1 className="grow text-lg font-semibold">Pleco</h1>
+
+            <button
+              className="h-full px-4"
+              onClick={() => {
+                if (isWordSaved) {
+                  removeWord(wordEntry);
+                } else {
+                  saveWord(wordEntry);
+                }
+              }}
+            >
+              {isWordSaved ? (
+                <>
+                  <span className="sr-only">Remove flashcard</span>
+                  <AddBoxIcon />
+                </>
+              ) : (
+                <>
+                  <span className="sr-only">Add flashcard</span>
+                  <AddIcon />
+                </>
+              )}
+            </button>
           </section>
         </div>
       </div>
