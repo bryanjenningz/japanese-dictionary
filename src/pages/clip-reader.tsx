@@ -10,14 +10,14 @@ import {
   useClipReaderTextStore,
 } from "~/stores/clipReaderTextStore";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
-import { useHistory } from "~/stores/historyStore";
+import { useHistoryStore } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
 const MAX_WORD_SIZE = 20;
 
 export default function ClipReader() {
-  const addClipReaderLookup = useHistory((x) => x.addClipReaderLookup);
+  const addClipReaderLookup = useHistoryStore((x) => x.addClipReaderLookup);
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode

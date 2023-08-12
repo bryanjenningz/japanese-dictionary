@@ -8,7 +8,7 @@ import { MenuIcon } from "~/icons/MenuIcon";
 import { MicrophoneIcon } from "~/icons/MicrophoneIcon";
 import { PuzzlePieceIcon } from "~/icons/PuzzlePieceIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
-import { useHistory } from "~/stores/historyStore";
+import { useHistoryStore } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { debounce } from "~/utils/debounce";
@@ -41,7 +41,7 @@ export const Header = ({
     useDarkModeStore,
     (x) => x.isDarkMode
   );
-  const addSearch_ = useHistory((x) => x.addSearch);
+  const addSearch_ = useHistoryStore((x) => x.addSearch);
   const addSearch = useMemo(() => debounce(addSearch_, 500), [addSearch_]);
 
   const [searchLanguage, setSearchLanguage] =

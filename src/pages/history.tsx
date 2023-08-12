@@ -4,7 +4,7 @@ import { classNames } from "~/utils/classNames";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { HistoryHeader } from "~/components/HistoryHeader";
-import { type HistoryState, useHistory } from "~/stores/historyStore";
+import { type HistoryState, useHistoryStore } from "~/stores/historyStore";
 import {
   type SavedWordLookupState,
   useSavedWordLookupStore,
@@ -28,7 +28,7 @@ export default function History() {
   const dictionaryLookups = useStore<
     HistoryState,
     HistoryState["dictionaryLookups"]
-  >(useHistory, (x) => x.dictionaryLookups);
+  >(useHistoryStore, (x) => x.dictionaryLookups);
   const dictionaryLookupsGroupedByTime = useMemo(() => {
     const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
     if (!dictionaryLookups) return;
@@ -42,10 +42,12 @@ export default function History() {
     groups.forEach((group) => group.values.reverse());
     return groups;
   }, [dictionaryLookups]);
-  const clearDictionaryHistory = useHistory((x) => x.clearDictionaryHistory);
+  const clearDictionaryHistory = useHistoryStore(
+    (x) => x.clearDictionaryHistory
+  );
 
   const searches = useStore<HistoryState, HistoryState["searches"]>(
-    useHistory,
+    useHistoryStore,
     (x) => x.searches
   );
   const searchesGroupedByTime = useMemo(() => {
@@ -61,12 +63,12 @@ export default function History() {
     groups.forEach((group) => group.values.reverse());
     return groups;
   }, [searches]);
-  const clearSearchHistory = useHistory((x) => x.clearSearchHistory);
+  const clearSearchHistory = useHistoryStore((x) => x.clearSearchHistory);
 
   const clipReaderLookups = useStore<
     HistoryState,
     HistoryState["clipReaderLookups"]
-  >(useHistory, (x) => x.clipReaderLookups);
+  >(useHistoryStore, (x) => x.clipReaderLookups);
   const clipReaderLookupsGroupedByTime = useMemo(() => {
     const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
     if (!clipReaderLookups) return;
@@ -80,13 +82,15 @@ export default function History() {
     groups.forEach((group) => group.values.reverse());
     return groups;
   }, [clipReaderLookups]);
-  const clearClipReaderHistory = useHistory((x) => x.clearClipReaderHistory);
+  const clearClipReaderHistory = useHistoryStore(
+    (x) => x.clearClipReaderHistory
+  );
 
   const ocrLookups = useStore<HistoryState, HistoryState["ocrLookups"]>(
-    useHistory,
+    useHistoryStore,
     (x) => x.ocrLookups
   );
-  const clearOcrHistory = useHistory((x) => x.clearOcrHistory);
+  const clearOcrHistory = useHistoryStore((x) => x.clearOcrHistory);
 
   const savedWordLookups = useStore<
     SavedWordLookupState,

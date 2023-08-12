@@ -4,7 +4,7 @@ import { useSearch } from "~/dictionary/useSearch";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { WordHeader } from "~/components/WordHeader";
-import { useHistory } from "~/stores/historyStore";
+import { useHistoryStore } from "~/stores/historyStore";
 import { useRouter } from "next/router";
 
 export default function Word() {
@@ -13,7 +13,7 @@ export default function Word() {
     useDarkModeStore,
     (x) => x.isDarkMode
   );
-  const addDictionaryLookup = useHistory((x) => x.addDictionaryLookup);
+  const addDictionaryLookup = useHistoryStore((x) => x.addDictionaryLookup);
 
   const [searchText, setSearchText] = useState("");
   const [resultIndex, setResultIndex] = useState(0);

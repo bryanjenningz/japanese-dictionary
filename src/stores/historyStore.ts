@@ -38,7 +38,7 @@ export type HistoryState = {
   clearSearchHistory: () => void;
 };
 
-export const useHistory = create<HistoryState>()(
+export const useHistoryStore = create<HistoryState>()(
   persist(
     (set, get) => ({
       dictionaryLookups: [],

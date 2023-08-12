@@ -7,14 +7,14 @@ import { useSearch } from "~/dictionary/useSearch";
 import { SearchResults } from "~/components/SearchResults";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
-import { useHistory } from "~/stores/historyStore";
+import { useHistoryStore } from "~/stores/historyStore";
 import {
   type SearchTextState,
   useSearchTextStore,
 } from "~/stores/searchTextStore";
 
 export default function Home() {
-  const addSearch = useHistory((x) => x.addSearch);
+  const addSearch = useHistoryStore((x) => x.addSearch);
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
