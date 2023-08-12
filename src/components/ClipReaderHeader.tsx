@@ -25,7 +25,7 @@ const UnselectedTextMenu = ({ openSideMenu }: { openSideMenu: () => void }) => {
 
   return (
     <section className="flex h-14 items-center">
-      <button className="h-full px-6" onClick={openSideMenu}>
+      <button className="h-full px-4" onClick={openSideMenu}>
         <span className="sr-only">Open side menu</span>
         <MenuIcon />
       </button>
