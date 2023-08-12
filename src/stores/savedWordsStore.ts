@@ -14,7 +14,7 @@ export const useSavedWordsStore = create<SavedWordsState>()(
       savedWords: [] satisfies WordEntry[],
       saveWord: (word) =>
         set({
-          savedWords: [...removeWord(get().savedWords, word), word],
+          savedWords: [word, ...removeWord(get().savedWords, word)],
         }),
       removeWord: (word) =>
         set({ savedWords: removeWord(get().savedWords, word) }),
