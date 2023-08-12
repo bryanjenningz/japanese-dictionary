@@ -21,7 +21,6 @@ export const Modal = ({
           isShown ? "opacity-40" : "pointer-events-none opacity-0"
         )}
         aria-hidden={!isShown}
-        onClick={onClose}
       ></div>
 
       <div
@@ -30,7 +29,10 @@ export const Modal = ({
           isShown ? "opacity-100" : "pointer-events-none opacity-0"
         )}
         aria-hidden={!isShown}
-        onClick={onClose}
+        onClick={(event) => {
+          if (event.target !== event.currentTarget) return;
+          onClose();
+        }}
       >
         <div
           className={classNames(
