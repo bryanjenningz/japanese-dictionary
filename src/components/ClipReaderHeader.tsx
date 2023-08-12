@@ -11,10 +11,10 @@ import { SearchIcon } from "~/icons/SearchIcon";
 import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import {
-  type SavedWordsState,
-  useSavedWordsStore,
-  type SavedWord,
-} from "~/stores/savedWordsStore";
+  type SavedWordLookupState,
+  useSavedWordLookupStore,
+  type WordLookup,
+} from "~/stores/savedWordLookupStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { equals } from "~/utils/equals";
@@ -66,16 +66,16 @@ const SelectedTextMenu = ({
   wordLookup,
 }: {
   selectedText: string;
-  wordLookup: SavedWord;
+  wordLookup: WordLookup;
 }) => {
-  const savedWords = useStore<SavedWordsState, SavedWordsState["savedWords"]>(
-    useSavedWordsStore,
-    (x) => x.savedWords
-  );
-  const saveWord = useSavedWordsStore((x) => x.saveWord);
-  const removeWord = useSavedWordsStore((x) => x.removeWord);
+  const savedWordLookups = useStore<
+    SavedWordLookupState,
+    SavedWordLookupState["savedWordLookups"]
+  >(useSavedWordLookupStore, (x) => x.savedWordLookups);
+  const saveWordLookup = useSavedWordLookupStore((x) => x.saveWordLookup);
+  const removeWordLookup = useSavedWordLookupStore((x) => x.removeWordLookup);
 
-  const wordEntryIsAlreadySaved = !!savedWords?.find((lookup) =>
+  const wordEntryIsAlreadySaved = !!savedWordLookups?.find((lookup) =>
     equals(lookup.wordEntry, wordLookup.wordEntry)
   );
 
@@ -106,7 +106,7 @@ const SelectedTextMenu = ({
       {wordEntryIsAlreadySaved ? (
         <button
           className="flex h-full grow basis-1 items-center justify-center"
-          onClick={() => removeWord(wordLookup)}
+          onClick={() => removeWordLookup(wordLookup)}
         >
           <span className="sr-only">Remove saved word</span>
           <AddBoxIcon />
@@ -114,7 +114,7 @@ const SelectedTextMenu = ({
       ) : (
         <button
           className="flex h-full grow basis-1 items-center justify-center"
-          onClick={() => saveWord(wordLookup)}
+          onClick={() => saveWordLookup(wordLookup)}
         >
           <span className="sr-only">Save word</span>
           <AddIcon />
@@ -140,7 +140,7 @@ export const ClipReaderHeader = ({
   openSideMenu,
   setClipText,
 }: {
-  wordLookup: SavedWord | undefined;
+  wordLookup: WordLookup | undefined;
   selectedText: string;
   openSideMenu: () => void;
   setClipText: Dispatch<SetStateAction<string>>;

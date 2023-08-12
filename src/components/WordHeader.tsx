@@ -7,10 +7,10 @@ import { Pronunciation } from "~/components/Pronunciation";
 import { ArrowBackIcon } from "~/icons/ArrowBack";
 import { AddIcon } from "~/icons/AddIcon";
 import {
-  type SavedWordsState,
-  useSavedWordsStore,
-  type SavedWord,
-} from "~/stores/savedWordsStore";
+  type SavedWordLookupState,
+  useSavedWordLookupStore,
+  type WordLookup,
+} from "~/stores/savedWordLookupStore";
 import { equals } from "~/utils/equals";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
 
@@ -20,16 +20,16 @@ const DEFAULT_WORD_HEADER_TAB: WordHeaderTab = "Dict";
 
 const wordHeaderTabs = ["Dict", "Stroke", "Chars", "Words", "Sents"] as const;
 
-export const WordHeader = ({ word }: { word: SavedWord }) => {
+export const WordHeader = ({ word }: { word: WordLookup }) => {
   const router = useRouter();
 
-  const saveWord = useSavedWordsStore((x) => x.saveWord);
-  const removeWord = useSavedWordsStore((x) => x.removeWord);
-  const savedWords = useStore<SavedWordsState, SavedWordsState["savedWords"]>(
-    useSavedWordsStore,
-    (x) => x.savedWords
-  );
-  const isWordSaved = !!savedWords?.find((savedWord) =>
+  const saveWordLookup = useSavedWordLookupStore((x) => x.saveWordLookup);
+  const removeWordLookup = useSavedWordLookupStore((x) => x.removeWordLookup);
+  const savedWordLookups = useStore<
+    SavedWordLookupState,
+    SavedWordLookupState["savedWordLookups"]
+  >(useSavedWordLookupStore, (x) => x.savedWordLookups);
+  const isWordLookupSaved = !!savedWordLookups?.find((savedWord) =>
     equals(savedWord, word)
   );
 
@@ -62,14 +62,14 @@ export const WordHeader = ({ word }: { word: SavedWord }) => {
             <button
               className="h-full px-4"
               onClick={() => {
-                if (isWordSaved) {
-                  removeWord(word);
+                if (isWordLookupSaved) {
+                  removeWordLookup(word);
                 } else {
-                  saveWord(word);
+                  saveWordLookup(word);
                 }
               }}
             >
-              {isWordSaved ? (
+              {isWordLookupSaved ? (
                 <>
                   <span className="sr-only">Remove flashcard</span>
                   <AddBoxIcon />

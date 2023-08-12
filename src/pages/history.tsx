@@ -6,9 +6,9 @@ import { useStore } from "~/stores/useStore";
 import { HistoryHeader } from "~/components/HistoryHeader";
 import { type HistoryState, useHistory } from "~/stores/historyStore";
 import {
-  type SavedWordsState,
-  useSavedWordsStore,
-} from "~/stores/savedWordsStore";
+  type SavedWordLookupState,
+  useSavedWordLookupStore,
+} from "~/stores/savedWordLookupStore";
 import { Pronunciation } from "~/components/Pronunciation";
 import { groupByTime } from "~/utils/groupByTime";
 import Link from "next/link";
@@ -88,10 +88,10 @@ export default function History() {
   );
   const clearOcrHistory = useHistory((x) => x.clearOcrHistory);
 
-  const savedWords = useStore<SavedWordsState, SavedWordsState["savedWords"]>(
-    useSavedWordsStore,
-    (x) => x.savedWords
-  );
+  const savedWordLookups = useStore<
+    SavedWordLookupState,
+    SavedWordLookupState["savedWordLookups"]
+  >(useSavedWordLookupStore, (x) => x.savedWordLookups);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const historyTab = useStore<HistoryTabState, HistoryTabState["historyTab"]>(
     useHistoryTabStore,
@@ -349,7 +349,7 @@ export default function History() {
             case "Cards":
               return (
                 <ul>
-                  {savedWords?.map((savedWord) => {
+                  {savedWordLookups?.map((savedWord) => {
                     const {
                       searchText,
                       resultIndex,
