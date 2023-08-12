@@ -18,6 +18,7 @@ import {
 } from "~/stores/historyTabStore";
 import { Modal } from "~/components/Modal";
 import { createWordLink } from "~/utils/createWordLink";
+import { formatTime } from "~/utils/formatTime";
 
 export default function History() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -421,15 +422,3 @@ export default function History() {
     </main>
   );
 }
-
-const formatTime = (time: number): string => {
-  const date = new Date(time);
-  return (
-    date.toLocaleDateString() +
-    " " +
-    date.toLocaleTimeString(undefined, {
-      timeStyle: "short",
-      hourCycle: "h12",
-    })
-  );
-};
