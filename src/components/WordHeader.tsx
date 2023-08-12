@@ -26,53 +26,75 @@ export const WordHeader = ({ wordEntry }: { wordEntry: WordEntry }) => {
   );
 
   return (
-    <header
-      className={classNames(
-        "flex w-full justify-center text-white shadow",
-        isDarkMode ? "bg-black" : "bg-blue-600"
-      )}
-    >
-      <div className="w-full max-w-2xl">
-        <section className="flex h-14 items-center">
-          <button className="h-full px-4" onClick={() => router.back()}>
-            <span className="sr-only">Go back</span>
-            <ArrowBackIcon />
-          </button>
+    <header className="w-full">
+      <div
+        className={classNames(
+          "flex w-full flex-col items-center text-white shadow",
+          isDarkMode ? "bg-black" : "bg-blue-600"
+        )}
+      >
+        <div className="w-full max-w-2xl">
+          <section className="flex h-14 items-center">
+            <button className="h-full px-4" onClick={() => router.back()}>
+              <span className="sr-only">Go back</span>
+              <ArrowBackIcon />
+            </button>
 
-          <h1 className="grow text-lg font-semibold">Pleco</h1>
-        </section>
+            <h1 className="grow text-lg font-semibold">Pleco</h1>
+          </section>
+        </div>
+      </div>
 
-        <section className="flex h-14 items-center">
-          {wordHeaderTabs.map((tab) => {
-            return (
-              <button
-                key={tab}
-                className={classNames(
-                  "flex h-full grow items-center justify-center uppercase",
-                  wordHeaderTab === tab && "border-b-2 border-white"
-                )}
-                onClick={() => setWordHeaderTab(tab)}
-              >
-                {tab}
-              </button>
-            );
-          })}
-        </section>
+      <div
+        className={classNames(
+          "flex w-full flex-col items-center shadow",
+          isDarkMode ? "bg-black text-white" : "bg-white text-black"
+        )}
+      >
+        <div className="w-full max-w-2xl">
+          <section
+            className={classNames(
+              "p-4",
+              isDarkMode ? "bg-black text-white" : "bg-white text-black"
+            )}
+          >
+            <div className="flex gap-3 text-xl">
+              <div>{wordEntry.word}</div>
+              <Pronunciation
+                word={wordEntry.word}
+                pronunciation={wordEntry.pronunciation}
+                pitchAccents={wordEntry.pitchAccents}
+              />
+            </div>
+          </section>
 
-        <div className="p-4">
-          <div className="flex gap-3">
-            <div>{wordEntry.word}</div>
-            <Pronunciation
-              word={wordEntry.word}
-              pronunciation={wordEntry.pronunciation}
-              pitchAccents={wordEntry.pitchAccents}
-            />
-          </div>
-          <div>
-            {wordEntry.definitions.map((definition) => {
-              return <p key={definition}>{definition}</p>;
+          <section
+            className={classNames(
+              "flex h-10 items-center",
+              isDarkMode ? "bg-black text-white" : "bg-white text-black"
+            )}
+          >
+            {wordHeaderTabs.map((tab) => {
+              return (
+                <button
+                  key={tab}
+                  className={classNames(
+                    "flex h-full grow items-center justify-center text-sm font-bold uppercase",
+                    wordHeaderTab === tab
+                      ? isDarkMode
+                        ? "border-b-2 border-blue-500 text-blue-500"
+                        : "border-b-2 border-blue-700 text-blue-700"
+                      : isDarkMode
+                      ? "text-blue-300"
+                      : "text-blue-500"
+                  )}
+                  onClick={() => setWordHeaderTab(tab)}
+                >
+                  {tab}
+                </button>
+              );
             })}
-          </div>
+          </section>
         </div>
       </div>
     </header>
