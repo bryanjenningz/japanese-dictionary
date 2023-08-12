@@ -37,7 +37,7 @@ export default function ClipReaderHistory() {
       <ClipReaderHistoryHeader openModal={() => setIsModalShown(true)} />
 
       <div className="w-full max-w-2xl">
-        <ul className="pt-10">
+        <ul className="pt-14">
           {clipReaderTexts?.map(({ text, time }) => {
             return (
               <li
