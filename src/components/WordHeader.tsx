@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { type WordEntry } from "~/dictionary/search";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
@@ -10,7 +9,7 @@ import { AddIcon } from "~/icons/AddIcon";
 import {
   type SavedWordsState,
   useSavedWordsStore,
-  SavedWord,
+  type SavedWord,
 } from "~/stores/savedWordsStore";
 import { equals } from "~/utils/equals";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";

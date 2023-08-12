@@ -80,7 +80,11 @@ export default function ClipReader() {
       )}
     >
       <ClipReaderHeader
-        wordEntry={wordEntries[0]}
+        wordLookup={
+          wordEntries[0]
+            ? { searchText, resultIndex: 0, wordEntry: wordEntries[0] }
+            : undefined
+        }
         selectedText={selectedText}
         openSideMenu={() => setIsSideMenuOpen(true)}
         setClipText={setClipText}
