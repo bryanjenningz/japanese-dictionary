@@ -35,14 +35,29 @@ const search = (word: string) =>
   );
 
 describe("searchWord", () => {
-  it("Returns an empty array when you input `Rust`", () => {
+  it("Returns word entries for `ru` when you input `Rust`", () => {
     const word = "Rust";
 
     const result = search(word);
 
     expect(result).toEqual({
-      selectedTextLength: 1,
-      wordEntries: [],
+      selectedTextLength: 2,
+      wordEntries: [
+        {
+          definitions: ["(suf) (col) verb-forming suffix"],
+          pitchAccents: [],
+          pronunciation: "",
+          word: "る",
+        },
+        {
+          definitions: [
+            "(n) (hist) exile (second most severe of the five ritsuryo punishments)",
+          ],
+          pitchAccents: [1],
+          pronunciation: "る",
+          word: "流",
+        },
+      ],
     });
   });
 
