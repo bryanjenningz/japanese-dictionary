@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
 import { AddIcon } from "~/icons/AddIcon";
 import { CampaignIcon } from "~/icons/CampaignIcon";
@@ -51,10 +52,13 @@ const UnselectedTextMenu = ({ openSideMenu }: { openSideMenu: () => void }) => {
         <RefreshIcon />
       </button>
 
-      <button className="flex h-full items-center justify-center px-4">
+      <Link
+        href="/clip-reader-history"
+        className="flex h-full items-center justify-center px-4"
+      >
         <span className="sr-only">Clipboard history</span>
         <HistoryIcon />
-      </button>
+      </Link>
     </section>
   );
 };
