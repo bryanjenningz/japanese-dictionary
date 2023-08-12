@@ -1,17 +1,24 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { type WordEntry } from "~/dictionary/search";
+import { equals } from "~/utils/equals";
 
 export type SavedWordsState = {
-  savedWords: WordEntry[];
-  saveWord: (word: WordEntry) => void;
-  removeWord: (word: WordEntry) => void;
+  savedWords: SavedWord[];
+  saveWord: (word: SavedWord) => void;
+  removeWord: (word: SavedWord) => void;
+};
+
+export type SavedWord = {
+  wordEntry: WordEntry;
+  searchText: string;
+  resultIndex: number;
 };
 
 export const useSavedWordsStore = create<SavedWordsState>()(
   persist(
     (set, get) => ({
-      savedWords: [] satisfies WordEntry[],
+      savedWords: [],
       saveWord: (word) =>
         set({
           savedWords: [word, ...removeWord(get().savedWords, word)],
@@ -24,10 +31,8 @@ export const useSavedWordsStore = create<SavedWordsState>()(
 );
 
 const removeWord = (
-  savedWords: WordEntry[],
-  removed: WordEntry
-): WordEntry[] => {
-  return savedWords.filter(
-    (w) => w.word !== removed.word || w.pronunciation !== removed.pronunciation
-  );
+  savedWords: SavedWord[],
+  removed: SavedWord
+): SavedWord[] => {
+  return savedWords.filter((w) => !equals(w, removed));
 };

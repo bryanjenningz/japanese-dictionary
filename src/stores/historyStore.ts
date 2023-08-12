@@ -5,6 +5,8 @@ import { equals } from "~/utils/equals";
 
 type Lookup = {
   time: number;
+  searchText: string;
+  resultIndex: number;
   wordEntry: WordEntry;
 };
 

@@ -17,6 +17,7 @@ import {
   useHistoryTabStore,
 } from "~/stores/historyTabStore";
 import { Modal } from "~/components/Modal";
+import { createWordLink } from "~/utils/createWordLink";
 
 export default function History() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -165,12 +166,17 @@ export default function History() {
                                   pitchAccents,
                                   definitions,
                                 },
+                                searchText,
+                                resultIndex,
                                 time,
                               } = lookup;
                               return (
                                 <li key={`${word}-${pronunciation}-${time}`}>
                                   <Link
-                                    href={`/word?word=${word}`}
+                                    href={createWordLink({
+                                      searchText,
+                                      resultIndex,
+                                    })}
                                     className={classNames(
                                       "flex flex-col border-b p-2",
                                       isDarkMode
@@ -240,12 +246,17 @@ export default function History() {
                                   pitchAccents,
                                   definitions,
                                 },
+                                searchText,
+                                resultIndex,
                                 time,
                               } = lookup;
                               return (
                                 <li key={`${word}-${pronunciation}-${time}`}>
                                   <Link
-                                    href={`/word?word=${word}`}
+                                    href={createWordLink({
+                                      searchText,
+                                      resultIndex,
+                                    })}
                                     className={classNames(
                                       "flex flex-col border-b p-2",
                                       isDarkMode
@@ -338,14 +349,22 @@ export default function History() {
             case "Cards":
               return (
                 <ul>
-                  {savedWords?.map((wordEntry) => {
-                    const { word, pronunciation, pitchAccents, definitions } =
-                      wordEntry;
+                  {savedWords?.map((savedWord) => {
+                    const {
+                      searchText,
+                      resultIndex,
+                      wordEntry: {
+                        word,
+                        pronunciation,
+                        pitchAccents,
+                        definitions,
+                      },
+                    } = savedWord;
                     const key = `${word}-${pronunciation}`;
                     return (
                       <li key={key}>
                         <Link
-                          href={`/word?word=${word}`}
+                          href={createWordLink({ searchText, resultIndex })}
                           className={classNames(
                             "block border-b p-4",
                             isDarkMode ? "border-slate-500" : "border-slate-300"

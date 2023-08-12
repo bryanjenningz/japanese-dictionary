@@ -7,7 +7,11 @@ import { classNames } from "~/utils/classNames";
 import { Pronunciation } from "~/components/Pronunciation";
 import { ArrowBackIcon } from "~/icons/ArrowBack";
 import { AddIcon } from "~/icons/AddIcon";
-import { type SavedWordsState, useSavedWordsStore } from "~/stores/savedWordsStore";
+import {
+  type SavedWordsState,
+  useSavedWordsStore,
+  SavedWord,
+} from "~/stores/savedWordsStore";
 import { equals } from "~/utils/equals";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
 
@@ -17,7 +21,7 @@ const DEFAULT_WORD_HEADER_TAB: WordHeaderTab = "Dict";
 
 const wordHeaderTabs = ["Dict", "Stroke", "Chars", "Words", "Sents"] as const;
 
-export const WordHeader = ({ wordEntry }: { wordEntry: WordEntry }) => {
+export const WordHeader = ({ word }: { word: SavedWord }) => {
   const router = useRouter();
 
   const saveWord = useSavedWordsStore((x) => x.saveWord);
@@ -27,7 +31,7 @@ export const WordHeader = ({ wordEntry }: { wordEntry: WordEntry }) => {
     (x) => x.savedWords
   );
   const isWordSaved = !!savedWords?.find((savedWord) =>
-    equals(wordEntry, savedWord)
+    equals(savedWord, word)
   );
 
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -60,9 +64,9 @@ export const WordHeader = ({ wordEntry }: { wordEntry: WordEntry }) => {
               className="h-full px-4"
               onClick={() => {
                 if (isWordSaved) {
-                  removeWord(wordEntry);
+                  removeWord(word);
                 } else {
-                  saveWord(wordEntry);
+                  saveWord(word);
                 }
               }}
             >
@@ -96,11 +100,11 @@ export const WordHeader = ({ wordEntry }: { wordEntry: WordEntry }) => {
             )}
           >
             <div className="flex gap-3 text-xl">
-              <div>{wordEntry.word}</div>
+              <div>{word.wordEntry.word}</div>
               <Pronunciation
-                word={wordEntry.word}
-                pronunciation={wordEntry.pronunciation}
-                pitchAccents={wordEntry.pitchAccents}
+                word={word.wordEntry.word}
+                pronunciation={word.wordEntry.pronunciation}
+                pitchAccents={word.wordEntry.pitchAccents}
               />
             </div>
           </section>

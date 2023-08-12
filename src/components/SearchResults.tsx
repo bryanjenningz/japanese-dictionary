@@ -4,12 +4,19 @@ import { Pronunciation } from "~/components/Pronunciation";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import Link from "next/link";
+import { type SearchTextState, useSearchTextStore } from "~/stores/searchTextStore";
+import { createWordLink } from "~/utils/createWordLink";
 
 export const SearchResults = ({
   wordEntries,
 }: {
   wordEntries: WordEntry[];
 }) => {
+  const searchText =
+    useStore<SearchTextState, SearchTextState["searchText"]>(
+      useSearchTextStore,
+      (x) => x.searchText
+    ) ?? "";
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
@@ -17,13 +24,13 @@ export const SearchResults = ({
 
   return (
     <ul>
-      {wordEntries.map((wordEntry) => {
+      {wordEntries.map((wordEntry, resultIndex) => {
         const { word, pronunciation, pitchAccents, definitions } = wordEntry;
         const key = `${word}-${pronunciation}`;
         return (
           <li key={key}>
             <Link
-              href={`/word?word=${word}`}
+              href={createWordLink({ searchText, resultIndex })}
               className={classNames(
                 "block border-b p-4",
                 isDarkMode ? "border-slate-600" : "border-slate-300"

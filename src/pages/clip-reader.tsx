@@ -40,11 +40,24 @@ export default function ClipReader() {
     return search(text);
   })();
 
+  const searchText =
+    selectedTextIndex === null
+      ? ""
+      : clipText.slice(
+          selectedTextIndex,
+          selectedTextIndex + selectedTextLength
+        );
+
   useEffect(() => {
-    if (wordEntries[0]) {
-      addClipReaderLookup({ time: Date.now(), wordEntry: wordEntries[0] });
+    if (wordEntries[0] && searchText) {
+      addClipReaderLookup({
+        time: Date.now(),
+        searchText,
+        resultIndex: 0,
+        wordEntry: wordEntries[0],
+      });
     }
-  }, [addClipReaderLookup, wordEntries]);
+  }, [addClipReaderLookup, wordEntries, searchText]);
 
   const selectedTextElementBottom = selectedTextElement.current
     ? selectedTextElement.current.getBoundingClientRect().bottom +

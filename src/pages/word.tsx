@@ -5,8 +5,10 @@ import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { WordHeader } from "~/components/WordHeader";
 import { useHistory } from "~/stores/historyStore";
+import { useRouter } from "next/router";
 
 export default function Word() {
+  const router = useRouter();
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
@@ -14,22 +16,34 @@ export default function Word() {
   const addDictionaryLookup = useHistory((x) => x.addDictionaryLookup);
 
   const [searchText, setSearchText] = useState("");
+  const [resultIndex, setResultIndex] = useState(0);
   useEffect(() => {
-    const searchText = new URLSearchParams(window.location.search).get("word");
+    const searchText =
+      typeof router.query.search === "string" ? router.query.search : "";
+    const resultIndex = isNaN(Number(router.query.index))
+      ? 0
+      : Number(router.query.index);
     if (!searchText) return;
     setSearchText(searchText);
-  }, []);
+    setResultIndex(resultIndex);
+  }, [router.query.index, router.query.search]);
   const search = useSearch();
   const { wordEntries } = useMemo(
     () => search(searchText.trim()),
     [searchText, search]
   );
+  const wordEntry = wordEntries[resultIndex];
 
   useEffect(() => {
-    if (wordEntries[0]) {
-      addDictionaryLookup({ time: Date.now(), wordEntry: wordEntries[0] });
+    if (wordEntry) {
+      addDictionaryLookup({
+        time: Date.now(),
+        searchText,
+        resultIndex,
+        wordEntry,
+      });
     }
-  }, [wordEntries, addDictionaryLookup]);
+  }, [wordEntry, addDictionaryLookup, searchText, resultIndex]);
 
   return (
     <main
@@ -38,7 +52,9 @@ export default function Word() {
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       )}
     >
-      {wordEntries[0] && <WordHeader wordEntry={wordEntries[0]} />}
+      {wordEntry && (
+        <WordHeader word={{ searchText, resultIndex, wordEntry }} />
+      )}
     </main>
   );
 }
