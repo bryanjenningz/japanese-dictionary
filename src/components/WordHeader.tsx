@@ -48,7 +48,7 @@ export const WordHeader = ({ wordEntry }: { wordEntry: WordEntry }) => {
               <button
                 key={tab}
                 className={classNames(
-                  "flex h-full grow items-center justify-center",
+                  "flex h-full grow items-center justify-center uppercase",
                   wordHeaderTab === tab && "border-b-2 border-white"
                 )}
                 onClick={() => setWordHeaderTab(tab)}
