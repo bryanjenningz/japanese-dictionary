@@ -8,6 +8,10 @@ import { SearchResults } from "~/components/SearchResults";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { useHistory } from "~/stores/historyStore";
+import {
+  type SearchTextState,
+  useSearchTextStore,
+} from "~/stores/searchTextStore";
 
 export default function Home() {
   const addSearch = useHistory((x) => x.addSearch);
@@ -16,7 +20,11 @@ export default function Home() {
     (x) => x.isDarkMode
   );
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const [searchText, setSearchText] = useState("");
+  const searchText = useStore<SearchTextState, SearchTextState["searchText"]>(
+    useSearchTextStore,
+    (x) => x.searchText
+  );
+  const setSearchText = useSearchTextStore((x) => x.setSearchText);
   useEffect(() => {
     const searchText = new URLSearchParams(window.location.search).get(
       "search"
@@ -24,10 +32,10 @@ export default function Home() {
     if (!searchText) return;
     setSearchText(searchText);
     addSearch({ time: Date.now(), searchText });
-  }, [addSearch]);
+  }, [addSearch, setSearchText]);
   const search = useSearch();
   const { wordEntries } = useMemo(
-    () => search(searchText.trim()),
+    () => search(searchText?.trim() ?? ""),
     [searchText, search]
   );
 
@@ -40,7 +48,7 @@ export default function Home() {
     >
       <Header
         openSideMenu={() => setIsSideMenuOpen(true)}
-        searchText={searchText}
+        searchText={searchText ?? ""}
         setSearchText={setSearchText}
       />
 
@@ -50,7 +58,7 @@ export default function Home() {
       />
 
       <div className="flex w-full max-w-2xl flex-col">
-        {searchText.trim().length === 0 ? (
+        {(searchText?.trim().length ?? 0) === 0 ? (
           <EmptySearchResultsMenu />
         ) : wordEntries.length === 0 ? (
           <p className="py-4 text-center text-lg">

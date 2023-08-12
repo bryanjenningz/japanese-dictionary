@@ -7,7 +7,7 @@ import { classNames } from "~/utils/classNames";
 import { Pronunciation } from "~/components/Pronunciation";
 import { ArrowBackIcon } from "~/icons/ArrowBack";
 import { AddIcon } from "~/icons/AddIcon";
-import { SavedWordsState, useSavedWordsStore } from "~/stores/savedWordsStore";
+import { type SavedWordsState, useSavedWordsStore } from "~/stores/savedWordsStore";
 import { equals } from "~/utils/equals";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
 

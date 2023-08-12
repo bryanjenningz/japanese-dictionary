@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { type Dispatch, type SetStateAction, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { BrushIcon } from "~/icons/BrushIcon";
 import { CameraIcon } from "~/icons/CameraIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
@@ -34,7 +34,7 @@ export const Header = ({
 }: {
   openSideMenu: () => void;
   searchText: string;
-  setSearchText: Dispatch<SetStateAction<string>>;
+  setSearchText: (searchText: string) => void;
 }) => {
   const router = useRouter();
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
