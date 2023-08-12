@@ -1,4 +1,3 @@
-import { type Dispatch, type SetStateAction } from "react";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
 import { AddIcon } from "~/icons/AddIcon";
 import { CampaignIcon } from "~/icons/CampaignIcon";
@@ -9,6 +8,7 @@ import { OpenInNewIcon } from "~/icons/OpenInNewIcon";
 import { RefreshIcon } from "~/icons/RefreshIcon";
 import { SearchIcon } from "~/icons/SearchIcon";
 import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
+import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import {
   type SavedWordLookupState,
@@ -19,13 +19,9 @@ import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { equals } from "~/utils/equals";
 
-const UnselectedTextMenu = ({
-  openSideMenu,
-  setClipText,
-}: {
-  openSideMenu: () => void;
-  setClipText: Dispatch<SetStateAction<string>>;
-}) => {
+const UnselectedTextMenu = ({ openSideMenu }: { openSideMenu: () => void }) => {
+  const addClipReaderText = useClipReaderTextStore((x) => x.addClipReaderText);
+
   return (
     <section className="flex h-14 items-center">
       <button className="h-full px-6" onClick={openSideMenu}>
@@ -42,9 +38,11 @@ const UnselectedTextMenu = ({
         onClick={() => {
           void (async () => {
             try {
-              setClipText(await navigator.clipboard.readText());
+              const text = await navigator.clipboard.readText();
+              addClipReaderText({ time: Date.now(), text });
             } catch {
-              setClipText(prompt("Paste Japanese text you want to read") ?? "");
+              const text = prompt("Paste Japanese text you want to read") ?? "";
+              addClipReaderText({ time: Date.now(), text });
             }
           })();
         }}
@@ -138,12 +136,10 @@ export const ClipReaderHeader = ({
   wordLookup,
   selectedText,
   openSideMenu,
-  setClipText,
 }: {
   wordLookup: WordLookup | undefined;
   selectedText: string;
   openSideMenu: () => void;
-  setClipText: Dispatch<SetStateAction<string>>;
 }) => {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
@@ -164,10 +160,7 @@ export const ClipReaderHeader = ({
             wordLookup={wordLookup}
           />
         ) : (
-          <UnselectedTextMenu
-            openSideMenu={openSideMenu}
-            setClipText={setClipText}
-          />
+          <UnselectedTextMenu openSideMenu={openSideMenu} />
         )}
       </div>
     </header>

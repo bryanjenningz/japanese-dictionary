@@ -5,6 +5,10 @@ import { SideMenu } from "~/components/SideMenu";
 import { WordEntryList } from "~/components/WordEntryList";
 import { type WordSearchResult } from "~/dictionary/search";
 import { useSearch } from "~/dictionary/useSearch";
+import {
+  type ClipReaderTextState,
+  useClipReaderTextStore,
+} from "~/stores/clipReaderTextStore";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useHistory } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
@@ -19,7 +23,12 @@ export default function ClipReader() {
     (x) => x.isDarkMode
   );
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const [clipText, setClipText] = useState("");
+
+  const clipReaderTexts = useStore<
+    ClipReaderTextState,
+    ClipReaderTextState["clipReaderTexts"]
+  >(useClipReaderTextStore, (x) => x.clipReaderTexts);
+  const clipText = clipReaderTexts?.[0]?.text ?? "";
 
   const search = useSearch();
   const selectedTextElement = useRef<HTMLButtonElement | null>(null);
@@ -87,7 +96,6 @@ export default function ClipReader() {
         }
         selectedText={selectedText}
         openSideMenu={() => setIsSideMenuOpen(true)}
-        setClipText={setClipText}
       />
 
       <SideMenu
