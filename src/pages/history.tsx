@@ -21,6 +21,7 @@ import { Modal } from "~/components/Modal";
 import { createWordLink } from "~/utils/createWordLink";
 import { formatTime } from "~/utils/formatTime";
 import { useLongPress } from "~/utils/useLongPress";
+import { equals } from "~/utils/equals";
 
 export default function History() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -99,6 +100,9 @@ export default function History() {
     SavedWordLookupState,
     SavedWordLookupState["savedWordLookups"]
   >(useSavedWordLookupStore, (x) => x.savedWordLookups);
+  const saveWordLookup = useSavedWordLookupStore((x) => x.saveWordLookup);
+  const removeWordLookup = useSavedWordLookupStore((x) => x.removeWordLookup);
+
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const historyTab = useStore<HistoryTabState, HistoryTabState["historyTab"]>(
     useHistoryTabStore,
@@ -179,6 +183,11 @@ export default function History() {
                                 resultIndex,
                                 time,
                               } = lookup;
+
+                              const isSavedFlashcard = !!savedWordLookups?.find(
+                                (x) => equals(x.wordEntry, lookup.wordEntry)
+                              );
+
                               return (
                                 <li
                                   key={`${word}-${pronunciation}-${time}`}
@@ -241,8 +250,20 @@ export default function History() {
                                         >
                                           Copy Headword
                                         </button>
-                                        <button className="px-4 py-3 text-left">
-                                          Delete Flashcard
+                                        <button
+                                          className="px-4 py-3 text-left"
+                                          onClick={() => {
+                                            if (isSavedFlashcard) {
+                                              removeWordLookup(lookup);
+                                            } else {
+                                              saveWordLookup(lookup);
+                                            }
+                                            longPress.closeMenu();
+                                          }}
+                                        >
+                                          {isSavedFlashcard
+                                            ? `Delete Flashcard`
+                                            : `Add Flashcard`}
                                         </button>
                                         <button className="px-4 py-3 text-left">
                                           Remove from History
