@@ -14,6 +14,7 @@ import {
 import { equals } from "~/utils/equals";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
 import { ChevronRightIcon } from "~/icons/ChevronRightIcon";
+import { type WordEntry } from "~/dictionary/search";
 
 type WordHeaderTab = (typeof wordHeaderTabs)[number];
 
@@ -21,7 +22,13 @@ const DEFAULT_WORD_HEADER_TAB: WordHeaderTab = "Dict";
 
 const wordHeaderTabs = ["Dict", "Stroke", "Chars", "Words", "Sents"] as const;
 
-export const WordHeader = ({ word }: { word: WordLookup }) => {
+export const WordHeader = ({
+  word,
+  wordEntries,
+}: {
+  word: WordLookup;
+  wordEntries: WordEntry[];
+}) => {
   const router = useRouter();
 
   const saveWordLookup = useSavedWordLookupStore((x) => x.saveWordLookup);
@@ -33,6 +40,9 @@ export const WordHeader = ({ word }: { word: WordLookup }) => {
   const isWordLookupSaved = !!savedWordLookups?.find((savedWord) =>
     equals(savedWord, word)
   );
+
+  const hasPreviousResult = word.resultIndex > 0;
+  const hasNextResult = word.resultIndex < wordEntries.length - 1;
 
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
@@ -83,14 +93,20 @@ export const WordHeader = ({ word }: { word: WordLookup }) => {
               )}
             </button>
 
-            <button className="h-full px-4">
+            <button
+              className="h-full px-4 text-white disabled:text-slate-500"
+              disabled={!hasPreviousResult}
+            >
               <span className="sr-only">Previous result</span>
               <span className="block -rotate-90">
                 <ChevronRightIcon />
               </span>
             </button>
 
-            <button className="h-full px-4">
+            <button
+              className="h-full px-4 text-white disabled:text-slate-500"
+              disabled={!hasNextResult}
+            >
               <span className="sr-only">Next result</span>
               <span className="block rotate-90">
                 <ChevronRightIcon />

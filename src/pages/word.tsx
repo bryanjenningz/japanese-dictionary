@@ -53,7 +53,10 @@ export default function Word() {
       )}
     >
       {wordEntry && (
-        <WordHeader word={{ searchText, resultIndex, wordEntry }} />
+        <WordHeader
+          word={{ searchText, resultIndex, wordEntry }}
+          wordEntries={wordEntries}
+        />
       )}
     </main>
   );
