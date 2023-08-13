@@ -211,6 +211,10 @@ export default function History() {
                                       longPress.onTouchStart(lookup)
                                     }
                                     onTouchEnd={longPress.onTouchEnd}
+                                    onMouseDown={() =>
+                                      longPress.onTouchStart(lookup)
+                                    }
+                                    onMouseUp={longPress.onTouchEnd}
                                   >
                                     <span className="flex gap-3">
                                       <span className="text-lg">{word}</span>
