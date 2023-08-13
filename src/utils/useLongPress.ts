@@ -1,21 +1,16 @@
 import { useRef, useState } from "react";
 
-type LongPressMenu =
-  | { type: "CLOSED" }
-  | { type: "PRESSED_DOWN" }
-  | { type: "OPEN"; item: HTMLElement };
+type LongPressMenu = { type: "CLOSED" } | { type: "OPEN"; item: HTMLElement };
 
-export const useLongPress = (onLongPress: () => void) => {
+export const useLongPress = () => {
   const [menu, setMenu] = useState<LongPressMenu>({ type: "CLOSED" });
   const timeoutId = useRef<undefined | ReturnType<typeof setTimeout>>();
 
-  const onTouchStart = () => {
-    setMenu({ type: "PRESSED_DOWN" });
-    timeoutId.current = setTimeout(onLongPress, 500);
+  const onTouchStart = (item: HTMLElement) => {
+    timeoutId.current = setTimeout(() => setMenu({ type: "OPEN", item }), 500);
   };
 
-  const onTouchEnd = (item: HTMLElement) => {
-    setMenu({ type: "OPEN", item });
+  const onTouchEnd = () => {
     clearTimeout(timeoutId.current);
   };
 
