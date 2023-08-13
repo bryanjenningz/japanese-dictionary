@@ -521,7 +521,7 @@ export default function History() {
             case "Cards":
               return (
                 <ul>
-                  {savedWordLookups?.map((savedWordLookup) => {
+                  {savedWordLookups?.map((lookup) => {
                     const {
                       searchText,
                       resultIndex,
@@ -531,7 +531,7 @@ export default function History() {
                         pitchAccents,
                         definitions,
                       },
-                    } = savedWordLookup;
+                    } = lookup;
                     const key = `${word}-${pronunciation}`;
                     return (
                       <li key={key}>
