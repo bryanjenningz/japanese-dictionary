@@ -8,6 +8,7 @@ import { type HistoryState, useHistoryStore } from "~/stores/historyStore";
 import {
   type SavedWordLookupState,
   useSavedWordLookupStore,
+  type WordLookup,
 } from "~/stores/savedWordLookupStore";
 import { Pronunciation } from "~/components/Pronunciation";
 import { groupByTime } from "~/utils/groupByTime";
@@ -19,6 +20,7 @@ import {
 import { Modal } from "~/components/Modal";
 import { createWordLink } from "~/utils/createWordLink";
 import { formatTime } from "~/utils/formatTime";
+import { useLongPress } from "~/utils/useLongPress";
 
 export default function History() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -105,6 +107,8 @@ export default function History() {
 
   const [isModalShown, setIsModalShown] = useState(false);
 
+  const longPress = useLongPress<WordLookup>();
+
   return (
     <main
       className={classNames(
@@ -183,11 +187,15 @@ export default function History() {
                                       resultIndex,
                                     })}
                                     className={classNames(
-                                      "flex flex-col border-b p-2",
+                                      "relative flex flex-col border-b p-2",
                                       isDarkMode
                                         ? "border-slate-500"
                                         : "border-slate-300"
                                     )}
+                                    onTouchStart={() =>
+                                      longPress.onTouchStart(lookup)
+                                    }
+                                    onTouchEnd={longPress.onTouchEnd}
                                   >
                                     <span className="flex gap-3">
                                       <span className="text-lg">{word}</span>
@@ -206,6 +214,23 @@ export default function History() {
                                     >
                                       {definitions.join(", ")}
                                     </span>
+                                    {longPress.menu.type === "OPEN" &&
+                                      longPress.menu.target === lookup && (
+                                        <article className="absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-10 flex flex-col bg-slate-700 text-white">
+                                          <button className="px-4 py-3 text-left">
+                                            View Entry
+                                          </button>
+                                          <button className="px-4 py-3 text-left">
+                                            Copy Headword
+                                          </button>
+                                          <button className="px-4 py-3 text-left">
+                                            Delete Flashcard
+                                          </button>
+                                          <button className="px-4 py-3 text-left">
+                                            Remove from History
+                                          </button>
+                                        </article>
+                                      )}
                                   </Link>
                                 </li>
                               );
