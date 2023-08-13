@@ -89,6 +89,9 @@ export default function History() {
     groups.forEach((group) => group.values.reverse());
     return groups;
   }, [clipReaderLookups]);
+  const removeClipReaderLookup = useHistoryStore(
+    (x) => x.removeClipReaderLookup
+  );
   const clearClipReaderHistory = useHistoryStore(
     (x) => x.clearClipReaderHistory
   );
@@ -241,6 +244,7 @@ export default function History() {
                                       {definitions.join(", ")}
                                     </span>
                                   </Link>
+
                                   {longPress.menu.type === "OPEN" &&
                                     longPress.menu.target === lookup && (
                                       <article
@@ -345,8 +349,16 @@ export default function History() {
                                 resultIndex,
                                 time,
                               } = lookup;
+
+                              const isSavedFlashcard = !!savedWordLookups?.find(
+                                (x) => equals(x.wordEntry, lookup.wordEntry)
+                              );
+
                               return (
-                                <li key={`${word}-${pronunciation}-${time}`}>
+                                <li
+                                  key={`${word}-${pronunciation}-${time}`}
+                                  className="relative"
+                                >
                                   <Link
                                     href={createWordLink({
                                       searchText,
@@ -358,6 +370,14 @@ export default function History() {
                                         ? "border-slate-500"
                                         : "border-slate-300"
                                     )}
+                                    onTouchStart={() =>
+                                      longPress.onTouchStart(lookup)
+                                    }
+                                    onTouchEnd={longPress.onTouchEnd}
+                                    onMouseDown={() =>
+                                      longPress.onTouchStart(lookup)
+                                    }
+                                    onMouseUp={longPress.onTouchEnd}
                                   >
                                     <span className="flex gap-3">
                                       <span className="text-lg">{word}</span>
@@ -377,6 +397,63 @@ export default function History() {
                                       {definitions.join(", ")}
                                     </span>
                                   </Link>
+
+                                  {longPress.menu.type === "OPEN" &&
+                                    longPress.menu.target === lookup && (
+                                      <article
+                                        className={classNames(
+                                          "absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col shadow-xl",
+                                          isDarkMode
+                                            ? "bg-slate-700 text-white"
+                                            : "bg-white text-black"
+                                        )}
+                                      >
+                                        <Link
+                                          href={createWordLink({
+                                            searchText,
+                                            resultIndex,
+                                          })}
+                                          className="px-4 py-3 text-left"
+                                        >
+                                          View Entry
+                                        </Link>
+                                        <button
+                                          className="px-4 py-3 text-left"
+                                          onClick={() => {
+                                            void navigator.clipboard.writeText(
+                                              word
+                                            );
+                                            longPress.closeMenu();
+                                          }}
+                                        >
+                                          Copy Headword
+                                        </button>
+                                        <button
+                                          className="px-4 py-3 text-left"
+                                          onClick={() => {
+                                            if (isSavedFlashcard) {
+                                              removeWordLookup(lookup);
+                                            } else {
+                                              saveWordLookup(lookup);
+                                            }
+                                            longPress.closeMenu();
+                                          }}
+                                        >
+                                          {isSavedFlashcard
+                                            ? "Delete Flashcard"
+                                            : "Add Flashcard"}
+                                        </button>
+                                        <button
+                                          className="px-4 py-3 text-left"
+                                          onClick={() => {
+                                            removeClipReaderLookup(lookup);
+                                            longPress.closeMenu();
+                                          }}
+                                        >
+                                          Delete from History
+                                        </button>
+                                      </article>
+                                    )}
                                 </li>
                               );
                             })}
