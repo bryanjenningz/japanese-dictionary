@@ -276,8 +276,8 @@ export default function History() {
                                           }}
                                         >
                                           {isSavedFlashcard
-                                            ? `Delete Flashcard`
-                                            : `Add Flashcard`}
+                                            ? "Delete Flashcard"
+                                            : "Add Flashcard"}
                                         </button>
                                         <button
                                           className="px-4 py-3 text-left"
@@ -286,7 +286,7 @@ export default function History() {
                                             longPress.closeMenu();
                                           }}
                                         >
-                                          Remove from History
+                                          Delete from History
                                         </button>
                                       </article>
                                     )}
