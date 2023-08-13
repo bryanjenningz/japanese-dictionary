@@ -88,7 +88,7 @@ export const SideMenu = ({
     <>
       <div
         className={classNames(
-          "absolute inset-0 bg-black opacity-40",
+          "absolute inset-0 z-10 bg-black opacity-40",
           !isSideMenuOpen && "hidden"
         )}
         onClick={closeSideMenu}
@@ -96,7 +96,7 @@ export const SideMenu = ({
 
       <aside
         className={classNames(
-          "absolute bottom-0 top-0 transition-[left] duration-300",
+          "absolute bottom-0 top-0 z-10 transition-[left] duration-300",
           isDarkMode ? "bg-black text-white" : "bg-white text-black",
           isSideMenuOpen ? "left-0" : "-left-64"
         )}
