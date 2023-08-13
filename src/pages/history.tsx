@@ -221,9 +221,15 @@ export default function History() {
                                   {longPress.menu.type === "OPEN" &&
                                     longPress.menu.target === lookup && (
                                       <article className="absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col bg-slate-700 text-white">
-                                        <button className="px-4 py-3 text-left">
+                                        <Link
+                                          href={createWordLink({
+                                            searchText,
+                                            resultIndex,
+                                          })}
+                                          className="px-4 py-3 text-left"
+                                        >
                                           View Entry
-                                        </button>
+                                        </Link>
                                         <button className="px-4 py-3 text-left">
                                           Copy Headword
                                         </button>
