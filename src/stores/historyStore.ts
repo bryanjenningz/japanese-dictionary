@@ -3,14 +3,14 @@ import { persist } from "zustand/middleware";
 import { type WordEntry } from "~/dictionary/search";
 import { equals } from "~/utils/equals";
 
-type WordLookup = {
+export type WordLookup = {
   time: number;
   searchText: string;
   resultIndex: number;
   wordEntry: WordEntry;
 };
 
-type WordSearch = {
+export type WordSearch = {
   time: number;
   searchText: string;
 };
