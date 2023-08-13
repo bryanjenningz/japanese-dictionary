@@ -15,6 +15,7 @@ import { equals } from "~/utils/equals";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
 import { ChevronRightIcon } from "~/icons/ChevronRightIcon";
 import { type WordEntry } from "~/dictionary/search";
+import { createWordLink } from "~/utils/createWordLink";
 
 type WordHeaderTab = (typeof wordHeaderTabs)[number];
 
@@ -96,6 +97,14 @@ export const WordHeader = ({
             <button
               className="h-full px-4 text-white disabled:text-slate-500"
               disabled={!hasPreviousResult}
+              onClick={() => {
+                void router.replace(
+                  createWordLink({
+                    searchText: word.searchText,
+                    resultIndex: word.resultIndex - 1,
+                  })
+                );
+              }}
             >
               <span className="sr-only">Previous result</span>
               <span className="block -rotate-90">
@@ -106,6 +115,14 @@ export const WordHeader = ({
             <button
               className="h-full px-4 text-white disabled:text-slate-500"
               disabled={!hasNextResult}
+              onClick={() => {
+                void router.replace(
+                  createWordLink({
+                    searchText: word.searchText,
+                    resultIndex: word.resultIndex + 1,
+                  })
+                );
+              }}
             >
               <span className="sr-only">Next result</span>
               <span className="block rotate-90">
