@@ -95,7 +95,12 @@ export const WordHeader = ({
             </button>
 
             <button
-              className="h-full px-4 text-white disabled:text-slate-500"
+              className={classNames(
+                "h-full px-4 text-white",
+                isDarkMode
+                  ? "disabled:text-slate-500"
+                  : "disabled:text-blue-500"
+              )}
               disabled={!hasPreviousResult}
               onClick={() => {
                 void router.replace(
@@ -113,7 +118,12 @@ export const WordHeader = ({
             </button>
 
             <button
-              className="h-full px-4 text-white disabled:text-slate-500"
+              className={classNames(
+                "h-full px-4 text-white",
+                isDarkMode
+                  ? "disabled:text-slate-500"
+                  : "disabled:text-blue-500"
+              )}
               disabled={!hasNextResult}
               onClick={() => {
                 void router.replace(
