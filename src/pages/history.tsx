@@ -230,7 +230,15 @@ export default function History() {
                                         >
                                           View Entry
                                         </Link>
-                                        <button className="px-4 py-3 text-left">
+                                        <button
+                                          className="px-4 py-3 text-left"
+                                          onClick={() => {
+                                            void navigator.clipboard.writeText(
+                                              word
+                                            );
+                                            longPress.closeMenu();
+                                          }}
+                                        >
                                           Copy Headword
                                         </button>
                                         <button className="px-4 py-3 text-left">
