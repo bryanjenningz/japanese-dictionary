@@ -180,14 +180,17 @@ export default function History() {
                                 time,
                               } = lookup;
                               return (
-                                <li key={`${word}-${pronunciation}-${time}`}>
+                                <li
+                                  key={`${word}-${pronunciation}-${time}`}
+                                  className="relative"
+                                >
                                   <Link
                                     href={createWordLink({
                                       searchText,
                                       resultIndex,
                                     })}
                                     className={classNames(
-                                      "relative flex flex-col border-b p-2",
+                                      "flex flex-col border-b p-2",
                                       isDarkMode
                                         ? "border-slate-500"
                                         : "border-slate-300"
@@ -214,24 +217,24 @@ export default function History() {
                                     >
                                       {definitions.join(", ")}
                                     </span>
-                                    {longPress.menu.type === "OPEN" &&
-                                      longPress.menu.target === lookup && (
-                                        <article className="absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-10 flex flex-col bg-slate-700 text-white">
-                                          <button className="px-4 py-3 text-left">
-                                            View Entry
-                                          </button>
-                                          <button className="px-4 py-3 text-left">
-                                            Copy Headword
-                                          </button>
-                                          <button className="px-4 py-3 text-left">
-                                            Delete Flashcard
-                                          </button>
-                                          <button className="px-4 py-3 text-left">
-                                            Remove from History
-                                          </button>
-                                        </article>
-                                      )}
                                   </Link>
+                                  {longPress.menu.type === "OPEN" &&
+                                    longPress.menu.target === lookup && (
+                                      <article className="absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col bg-slate-700 text-white">
+                                        <button className="px-4 py-3 text-left">
+                                          View Entry
+                                        </button>
+                                        <button className="px-4 py-3 text-left">
+                                          Copy Headword
+                                        </button>
+                                        <button className="px-4 py-3 text-left">
+                                          Delete Flashcard
+                                        </button>
+                                        <button className="px-4 py-3 text-left">
+                                          Remove from History
+                                        </button>
+                                      </article>
+                                    )}
                                 </li>
                               );
                             })}
@@ -239,6 +242,12 @@ export default function History() {
                         </article>
                       );
                     }
+                  )}
+                  {longPress.menu.type === "OPEN" && (
+                    <div
+                      className="fixed inset-0"
+                      onClick={longPress.closeMenu}
+                    ></div>
                   )}
                 </div>
               );
