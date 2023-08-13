@@ -10,7 +10,7 @@ type Lookup = {
   wordEntry: WordEntry;
 };
 
-type Search = {
+type WordSearch = {
   time: number;
   searchText: string;
 };
@@ -19,7 +19,7 @@ export type HistoryState = {
   dictionaryLookups: Lookup[];
   clipReaderLookups: Lookup[];
   ocrLookups: Lookup[];
-  searches: Search[];
+  searches: WordSearch[];
 
   addDictionaryLookup: (lookup: Lookup) => void;
   removeDictionaryLookup: (lookup: Lookup) => void;
@@ -33,8 +33,8 @@ export type HistoryState = {
   removeOcrLookup: (lookup: Lookup) => void;
   clearOcrHistory: () => void;
 
-  addSearch: (search: Search) => void;
-  removeSearch: (search: Search) => void;
+  addSearch: (search: WordSearch) => void;
+  removeSearch: (search: WordSearch) => void;
   clearSearchHistory: () => void;
 };
 
@@ -79,14 +79,14 @@ export const useHistoryStore = create<HistoryState>()(
         set({ ocrLookups: get().ocrLookups.filter((x) => !equals(x, lookup)) }),
       clearOcrHistory: () => set({ ocrLookups: [] }),
 
-      addSearch: (search: Search) =>
+      addSearch: (search: WordSearch) =>
         set({
           searches: [
             search,
             ...get().searches.filter((x) => x.searchText !== search.searchText),
           ],
         }),
-      removeSearch: (search: Search) =>
+      removeSearch: (search: WordSearch) =>
         set({ searches: get().searches.filter((x) => !equals(x, search)) }),
       clearSearchHistory: () => set({ searches: [] }),
     }),
