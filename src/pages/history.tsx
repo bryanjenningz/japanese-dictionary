@@ -236,7 +236,14 @@ export default function History() {
                                   </Link>
                                   {longPress.menu.type === "OPEN" &&
                                     longPress.menu.target === lookup && (
-                                      <article className="absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col bg-slate-700 text-white">
+                                      <article
+                                        className={classNames(
+                                          "absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col shadow-xl",
+                                          isDarkMode
+                                            ? "bg-slate-700 text-white"
+                                            : "bg-white text-black"
+                                        )}
+                                      >
                                         <Link
                                           href={createWordLink({
                                             searchText,
@@ -293,7 +300,7 @@ export default function History() {
                   )}
                   {longPress.menu.type === "OPEN" && (
                     <div
-                      className="fixed inset-0"
+                      className="fixed inset-0 opacity-0"
                       onClick={longPress.closeMenu}
                     ></div>
                   )}
