@@ -171,10 +171,10 @@ export const WordHeader = ({
                     wordHeaderTab === tab
                       ? isDarkMode
                         ? "border-b-2 border-blue-500 text-blue-500"
-                        : "border-b-2 border-blue-700 text-blue-700"
+                        : "border-b-2 border-blue-600 text-blue-600"
                       : isDarkMode
-                      ? "text-blue-300"
-                      : "text-blue-500"
+                      ? "text-blue-700"
+                      : "text-blue-400"
                   )}
                   onClick={() => setWordHeaderTab(tab)}
                 >
