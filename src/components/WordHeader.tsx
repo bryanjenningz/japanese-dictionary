@@ -13,6 +13,7 @@ import {
 } from "~/stores/savedWordLookupStore";
 import { equals } from "~/utils/equals";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
+import { ChevronRightIcon } from "~/icons/ChevronRightIcon";
 
 type WordHeaderTab = (typeof wordHeaderTabs)[number];
 
@@ -80,6 +81,20 @@ export const WordHeader = ({ word }: { word: WordLookup }) => {
                   <AddIcon />
                 </>
               )}
+            </button>
+
+            <button className="h-full px-4">
+              <span className="sr-only">Previous result</span>
+              <span className="block -rotate-90">
+                <ChevronRightIcon />
+              </span>
+            </button>
+
+            <button className="h-full px-4">
+              <span className="sr-only">Next result</span>
+              <span className="block rotate-90">
+                <ChevronRightIcon />
+              </span>
             </button>
           </section>
         </div>
