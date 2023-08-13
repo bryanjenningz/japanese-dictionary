@@ -58,6 +58,12 @@ export default function Word() {
           wordEntries={wordEntries}
         />
       )}
+
+      <div className="w-full max-w-2xl">
+        <p className="flex flex-col gap-3 p-4">
+          {wordEntry?.definitions.join(", ")}
+        </p>
+      </div>
     </main>
   );
 }
