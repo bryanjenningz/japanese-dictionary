@@ -12,8 +12,10 @@ import {
   type SearchTextState,
   useSearchTextStore,
 } from "~/stores/searchTextStore";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
   const addSearch = useHistoryStore((x) => x.addSearch);
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
@@ -26,13 +28,11 @@ export default function Home() {
   );
   const setSearchText = useSearchTextStore((x) => x.setSearchText);
   useEffect(() => {
-    const searchText = new URLSearchParams(window.location.search).get(
-      "search"
-    );
-    if (!searchText) return;
+    const searchText = router.query.search;
+    if (!searchText || typeof searchText !== "string") return;
     setSearchText(searchText);
     addSearch({ time: Date.now(), searchText });
-  }, [addSearch, setSearchText]);
+  }, [addSearch, setSearchText, router.query.search]);
   const search = useSearch();
   const { wordEntries } = useMemo(
     () => search(searchText?.trim() ?? ""),
