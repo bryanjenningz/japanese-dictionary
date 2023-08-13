@@ -146,6 +146,13 @@ export default function History() {
         closeSideMenu={() => setIsSideMenuOpen(false)}
       />
 
+      {longPress.menu.type === "OPEN" && (
+        <div
+          className="fixed inset-0 z-10 opacity-0"
+          onClick={longPress.closeMenu}
+        ></div>
+      )}
+
       <div className="flex w-full max-w-2xl flex-col">
         {((): JSX.Element => {
           switch (historyTab) {
@@ -297,12 +304,6 @@ export default function History() {
                         </article>
                       );
                     }
-                  )}
-                  {longPress.menu.type === "OPEN" && (
-                    <div
-                      className="fixed inset-0 opacity-0"
-                      onClick={longPress.closeMenu}
-                    ></div>
                   )}
                 </div>
               );
