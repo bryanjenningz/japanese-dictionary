@@ -39,5 +39,7 @@ const removeWordLookup = (
   savedWordLookups: WordLookup[],
   removed: WordLookup
 ): WordLookup[] => {
-  return savedWordLookups.filter((wordLookup) => !equals(wordLookup, removed));
+  return savedWordLookups.filter(
+    (wordLookup) => !equals(wordLookup.wordEntry, removed.wordEntry)
+  );
 };
