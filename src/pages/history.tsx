@@ -46,6 +46,9 @@ export default function History() {
     groups.forEach((group) => group.values.reverse());
     return groups;
   }, [dictionaryLookups]);
+  const removeDictionaryLookup = useHistoryStore(
+    (x) => x.removeDictionaryLookup
+  );
   const clearDictionaryHistory = useHistoryStore(
     (x) => x.clearDictionaryHistory
   );
@@ -265,7 +268,13 @@ export default function History() {
                                             ? `Delete Flashcard`
                                             : `Add Flashcard`}
                                         </button>
-                                        <button className="px-4 py-3 text-left">
+                                        <button
+                                          className="px-4 py-3 text-left"
+                                          onClick={() => {
+                                            removeDictionaryLookup(lookup);
+                                            longPress.closeMenu();
+                                          }}
+                                        >
                                           Remove from History
                                         </button>
                                       </article>
