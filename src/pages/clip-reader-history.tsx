@@ -4,11 +4,13 @@ import { Modal } from "~/components/Modal";
 import {
   type ClipReaderTextState,
   useClipReaderTextStore,
+  type ClipReaderText,
 } from "~/stores/clipReaderTextStore";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { formatTime } from "~/utils/formatTime";
+import { useLongPress } from "~/utils/useLongPress";
 
 export default function ClipReaderHistory() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -20,12 +22,16 @@ export default function ClipReaderHistory() {
     ClipReaderTextState,
     ClipReaderTextState["clipReaderTexts"]
   >(useClipReaderTextStore, (x) => x.clipReaderTexts);
-
+  const removeClipReaderText = useClipReaderTextStore(
+    (x) => x.removeClipReaderText
+  );
   const clearAllClipReaderTexts = useClipReaderTextStore(
     (x) => x.clearAllClipReaderTexts
   );
 
   const [isModalShown, setIsModalShown] = useState(false);
+
+  const longPress = useLongPress<ClipReaderText>();
 
   return (
     <main
@@ -36,21 +42,59 @@ export default function ClipReaderHistory() {
     >
       <ClipReaderHistoryHeader openModal={() => setIsModalShown(true)} />
 
+      {longPress.menu.type === "OPEN" && (
+        <div
+          className="fixed inset-0 z-10 opacity-0"
+          onClick={longPress.closeMenu}
+        ></div>
+      )}
+
       <div className="w-full max-w-2xl">
         <ul className="pt-14">
-          {clipReaderTexts?.map(({ text, time }) => {
+          {clipReaderTexts?.map((clipReaderText) => {
+            const { text, time } = clipReaderText;
             return (
               <li
                 key={time}
                 className={classNames(
-                  "line-clamp-4 flex flex-col gap-1 border-b p-4 last:border-b-0",
+                  "relative border-b last:border-b-0",
                   isDarkMode ? "border-slate-700" : "border-slate-300"
                 )}
               >
-                <time className={"text-sm font-semibold text-blue-500"}>
-                  {formatTime(time)}
-                </time>
-                <p>{text}</p>
+                <button
+                  className="relative flex w-full flex-col gap-1 p-4"
+                  onTouchStart={() => longPress.onTouchStart(clipReaderText)}
+                  onTouchEnd={longPress.onTouchEnd}
+                  onMouseDown={() => longPress.onTouchStart(clipReaderText)}
+                  onMouseUp={longPress.onTouchEnd}
+                >
+                  <time className={"text-sm font-semibold text-blue-500"}>
+                    {formatTime(time)}
+                  </time>
+                  <p className="line-clamp-4">{text}</p>
+                </button>
+
+                {longPress.menu.type === "OPEN" &&
+                  longPress.menu.target === clipReaderText && (
+                    <article
+                      className={classNames(
+                        "absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col shadow-xl",
+                        isDarkMode
+                          ? "bg-slate-700 text-white"
+                          : "bg-white text-black"
+                      )}
+                    >
+                      <button
+                        className="px-4 py-3 text-left"
+                        onClick={() => {
+                          removeClipReaderText(clipReaderText);
+                          longPress.closeMenu();
+                        }}
+                      >
+                        Delete from History
+                      </button>
+                    </article>
+                  )}
               </li>
             );
           })}

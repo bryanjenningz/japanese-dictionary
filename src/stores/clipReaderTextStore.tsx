@@ -9,7 +9,7 @@ export type ClipReaderTextState = {
   clearAllClipReaderTexts: () => void;
 };
 
-type ClipReaderText = {
+export type ClipReaderText = {
   text: string;
   time: number;
 };
