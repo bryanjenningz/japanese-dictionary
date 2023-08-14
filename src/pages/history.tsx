@@ -4,7 +4,11 @@ import { classNames } from "~/utils/classNames";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { HistoryHeader } from "~/components/HistoryHeader";
-import { type HistoryState, useHistoryStore } from "~/stores/historyStore";
+import {
+  type HistoryState,
+  useHistoryStore,
+  type WordSearch,
+} from "~/stores/historyStore";
 import {
   type SavedWordLookupState,
   useSavedWordLookupStore,
@@ -70,6 +74,7 @@ export default function History() {
     groups.forEach((group) => group.values.reverse());
     return groups;
   }, [searches]);
+  const removeSearch = useHistoryStore((x) => x.removeSearch);
   const clearSearchHistory = useHistoryStore((x) => x.clearSearchHistory);
 
   const clipReaderLookups = useStore<
@@ -117,7 +122,7 @@ export default function History() {
 
   const [isModalShown, setIsModalShown] = useState(false);
 
-  const longPress = useLongPress<WordLookup>();
+  const longPress = useLongPress<WordLookup | WordSearch>();
 
   return (
     <main
@@ -501,13 +506,63 @@ export default function History() {
                           {searches.map((search) => {
                             const { searchText, time } = search;
                             return (
-                              <li key={`${searchText}-${time}`}>
+                              <li
+                                key={`${searchText}-${time}`}
+                                className="relative"
+                              >
                                 <Link
                                   href={`/?search=${searchText}`}
                                   className="block p-2 text-lg"
+                                  onTouchStart={() =>
+                                    longPress.onTouchStart(search)
+                                  }
+                                  onTouchEnd={longPress.onTouchEnd}
+                                  onMouseDown={() =>
+                                    longPress.onTouchStart(search)
+                                  }
+                                  onMouseUp={longPress.onTouchEnd}
                                 >
                                   {searchText}
                                 </Link>
+
+                                {longPress.menu.type === "OPEN" &&
+                                  longPress.menu.target === search && (
+                                    <article
+                                      className={classNames(
+                                        "absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col shadow-xl",
+                                        isDarkMode
+                                          ? "bg-slate-700 text-white"
+                                          : "bg-white text-black"
+                                      )}
+                                    >
+                                      <Link
+                                        href={`/?search=${searchText}`}
+                                        className="px-4 py-3 text-left"
+                                      >
+                                        Search for
+                                      </Link>
+                                      <button
+                                        className="px-4 py-3 text-left"
+                                        onClick={() => {
+                                          void navigator.clipboard.writeText(
+                                            searchText
+                                          );
+                                          longPress.closeMenu();
+                                        }}
+                                      >
+                                        Copy
+                                      </button>
+                                      <button
+                                        className="px-4 py-3 text-left"
+                                        onClick={() => {
+                                          removeSearch(search);
+                                          longPress.closeMenu();
+                                        }}
+                                      >
+                                        Delete from History
+                                      </button>
+                                    </article>
+                                  )}
                               </li>
                             );
                           })}
