@@ -534,13 +534,17 @@ export default function History() {
                     } = lookup;
                     const key = `${word}-${pronunciation}`;
                     return (
-                      <li key={key}>
+                      <li key={key} className="relative">
                         <Link
                           href={createWordLink({ searchText, resultIndex })}
                           className={classNames(
                             "block border-b p-4",
                             isDarkMode ? "border-slate-500" : "border-slate-300"
                           )}
+                          onTouchStart={() => longPress.onTouchStart(lookup)}
+                          onTouchEnd={longPress.onTouchEnd}
+                          onMouseDown={() => longPress.onTouchStart(lookup)}
+                          onMouseUp={longPress.onTouchEnd}
                         >
                           <div className="flex gap-3">
                             <div>{word}</div>
@@ -558,6 +562,46 @@ export default function History() {
                             {definitions.join(", ")}
                           </p>
                         </Link>
+
+                        {longPress.menu.type === "OPEN" &&
+                          longPress.menu.target === lookup && (
+                            <article
+                              className={classNames(
+                                "absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col shadow-xl",
+                                isDarkMode
+                                  ? "bg-slate-700 text-white"
+                                  : "bg-white text-black"
+                              )}
+                            >
+                              <Link
+                                href={createWordLink({
+                                  searchText,
+                                  resultIndex,
+                                })}
+                                className="px-4 py-3 text-left"
+                              >
+                                View Card
+                              </Link>
+                              <button
+                                className="px-4 py-3 text-left"
+                                onClick={() => {
+                                  void navigator.clipboard.writeText(word);
+                                  longPress.closeMenu();
+                                }}
+                              >
+                                Copy Headword
+                              </button>
+                              <button
+                                className="px-4 py-3 text-left"
+                                onClick={() => {
+                                  removeWordLookup(lookup);
+                                  longPress.closeMenu();
+                                }}
+                              >
+                                Delete Card
+                              </button>
+                            </article>
+                          )}
                       </li>
                     );
                   })}
