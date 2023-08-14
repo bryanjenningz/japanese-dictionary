@@ -3,7 +3,11 @@ import { persist } from "zustand/middleware";
 import { equals } from "~/utils/equals";
 
 export type ClipReaderTextState = {
+  selectedClipReaderText: ClipReaderText | null;
   clipReaderTexts: ClipReaderText[];
+  setSelectedClipReaderText: (
+    selectedClipReaderText: ClipReaderText | null
+  ) => void;
   addClipReaderText: (clipReaderText: ClipReaderText) => void;
   removeClipReaderText: (clipReaderText: ClipReaderText) => void;
   clearAllClipReaderTexts: () => void;
@@ -17,7 +21,11 @@ export type ClipReaderText = {
 export const useClipReaderTextStore = create<ClipReaderTextState>()(
   persist(
     (set, get) => ({
+      selectedClipReaderText: null,
       clipReaderTexts: [],
+      setSelectedClipReaderText: (
+        selectedClipReaderText: ClipReaderText | null
+      ) => set({ selectedClipReaderText }),
       addClipReaderText: (clipReaderText: ClipReaderText) =>
         set({
           clipReaderTexts: [clipReaderText, ...get().clipReaderTexts],
