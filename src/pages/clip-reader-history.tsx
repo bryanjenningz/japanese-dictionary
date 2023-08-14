@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { ClipReaderHistoryHeader } from "~/components/ClipReaderHistoryHeader";
 import { Modal } from "~/components/Modal";
@@ -13,6 +14,8 @@ import { formatTime } from "~/utils/formatTime";
 import { useLongPress } from "~/utils/useLongPress";
 
 export default function ClipReaderHistory() {
+  const router = useRouter();
+
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
@@ -22,6 +25,9 @@ export default function ClipReaderHistory() {
     ClipReaderTextState,
     ClipReaderTextState["clipReaderTexts"]
   >(useClipReaderTextStore, (x) => x.clipReaderTexts);
+  const setSelectedClipReaderText = useClipReaderTextStore(
+    (x) => x.setSelectedClipReaderText
+  );
   const removeClipReaderText = useClipReaderTextStore(
     (x) => x.removeClipReaderText
   );
@@ -67,6 +73,10 @@ export default function ClipReaderHistory() {
                   onTouchEnd={longPress.onTouchEnd}
                   onMouseDown={() => longPress.onTouchStart(clipReaderText)}
                   onMouseUp={longPress.onTouchEnd}
+                  onClick={() => {
+                    setSelectedClipReaderText(clipReaderText);
+                    void router.back();
+                  }}
                 >
                   <time className={"text-sm font-semibold text-blue-500"}>
                     {formatTime(time)}
