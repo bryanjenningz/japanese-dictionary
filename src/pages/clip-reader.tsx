@@ -28,7 +28,12 @@ export default function ClipReader() {
     ClipReaderTextState,
     ClipReaderTextState["clipReaderTexts"]
   >(useClipReaderTextStore, (x) => x.clipReaderTexts);
-  const clipText = clipReaderTexts?.[0]?.text ?? "";
+  const selectedClipReaderText = useStore<
+    ClipReaderTextState,
+    ClipReaderTextState["selectedClipReaderText"]
+  >(useClipReaderTextStore, (x) => x.selectedClipReaderText);
+  const clipText =
+    selectedClipReaderText?.text ?? clipReaderTexts?.[0]?.text ?? "";
 
   const search = useSearch();
   const selectedTextElement = useRef<HTMLButtonElement | null>(null);
