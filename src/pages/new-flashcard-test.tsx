@@ -28,7 +28,7 @@ export default function NewFlashcardTest() {
 
   const [isModalShown, setIsModalShown] = useState(false);
 
-  const newTestOptions = [
+  const newFlashcardTestOptions = [
     {
       heading: "Start",
       buttonContent: <>Begin Test Session</>,
@@ -67,7 +67,7 @@ export default function NewFlashcardTest() {
       />
 
       <div className="flex w-full max-w-2xl flex-col gap-3 p-4">
-        {newTestOptions.map(({ heading, buttonContent, onClick }) => {
+        {newFlashcardTestOptions.map(({ heading, buttonContent, onClick }) => {
           return (
             <article key={heading} className="flex flex-col">
               <h2
