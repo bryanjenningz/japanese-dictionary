@@ -9,7 +9,7 @@ import { useFlashcardStore } from "~/stores/flashcardStore";
 import { useRouter } from "next/router";
 import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
 import { BrushIcon } from "~/icons/BrushIcon";
-import { SpeakerIcon } from "~/icons/SpeakerIcon";
+import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
 
 type ModalState =
   | "HIDDEN"
@@ -171,7 +171,7 @@ export const FlashcardTestHeader = ({
               onClick={() => setModalState("AUDIO_NOT_REVEALED_MODAL")}
             >
               <span className="sr-only">Audio</span>
-              <SpeakerIcon />
+              <VolumeUpIcon />
             </button>
           </section>
         </div>
