@@ -10,8 +10,10 @@ import {
   flashcardTestMaxCardsOptions,
 } from "~/stores/flashcardStore";
 import { Modal } from "~/components/Modal";
+import { useRouter } from "next/router";
 
 export default function NewFlashcardTest() {
+  const router = useRouter();
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
@@ -25,6 +27,9 @@ export default function NewFlashcardTest() {
   const setFlashcardTestMaxCards = useFlashcardStore(
     (x) => x.setFlashcardTestMaxCards
   );
+  const startNewFlashcardTest = useFlashcardStore(
+    (x) => x.startNewFlashcardTest
+  );
 
   const [isModalShown, setIsModalShown] = useState(false);
 
@@ -32,7 +37,10 @@ export default function NewFlashcardTest() {
     {
       heading: "Start",
       buttonContent: <>Begin Test Session</>,
-      onClick: () => void 0,
+      onClick: () => {
+        startNewFlashcardTest();
+        void router.replace("/flashcard-test");
+      },
     },
     {
       heading: "Basic Settings",
