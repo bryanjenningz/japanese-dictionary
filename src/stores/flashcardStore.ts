@@ -22,6 +22,24 @@ export const flashcardTestMaxCardsOptions = [
 
 const DEFAULT_FLASHCARD_TEST_MAX_CARDS: FlashcardTestMaxCards = 5;
 
+export type Flashcard = {
+  wordEntry: WordEntry;
+  searchText: string;
+  resultIndex: number;
+};
+
+type FlashcardTest = {
+  flashcards: FlashcardTestResult[];
+  index: number;
+};
+
+type FlashcardTestResult = {
+  flashcard: Flashcard;
+  status: FlashcardTestResultStatus;
+};
+
+type FlashcardTestResultStatus = "Unseen" | "Pass" | "Fail";
+
 export type FlashcardState = {
   flashcards: Flashcard[];
   saveFlashcard: (flashcard: Flashcard) => void;
@@ -32,12 +50,8 @@ export type FlashcardState = {
   setFlashcardTestMaxCards: (
     flashcardTestMaxCards: FlashcardTestMaxCards
   ) => void;
-};
-
-export type Flashcard = {
-  wordEntry: WordEntry;
-  searchText: string;
-  resultIndex: number;
+  flashcardTest: FlashcardTest | null;
+  startNewFlashcardTest: () => void;
 };
 
 export const useFlashcardStore = create<FlashcardState>()(
@@ -64,6 +78,17 @@ export const useFlashcardStore = create<FlashcardState>()(
       setFlashcardTestMaxCards: (
         flashcardTestMaxCards: FlashcardTestMaxCards
       ) => set({ flashcardTestMaxCards }),
+      flashcardTest: null,
+      startNewFlashcardTest: () =>
+        set({
+          flashcardTest: {
+            flashcards: shuffle(get().flashcards.slice()).map((flashcard) => ({
+              flashcard,
+              status: "Unseen",
+            })),
+            index: 0,
+          },
+        }),
     }),
     { name: "flashcards" }
   )
@@ -76,4 +101,12 @@ const deleteFlashcard = (
   return flashcards.filter(
     (flashcard) => !equals(flashcard.wordEntry, removedFlashcard.wordEntry)
   );
+};
+
+const shuffle = <T>(values: T[]): T[] => {
+  for (let i = 0; i < values.length - 1; i++) {
+    const j = i + Math.floor(Math.random() * (values.length - i));
+    [values[i], values[j]] = [values[j] as T, values[i] as T];
+  }
+  return values;
 };
