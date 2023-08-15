@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { type MouseEvent, useState } from "react";
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
 import { SmallCameraIcon } from "~/icons/SmallCameraIcon";
@@ -23,6 +24,7 @@ import {
 } from "~/stores/flashcardStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
+import { Modal } from "~/components/Modal";
 
 export const SideMenu = ({
   isSideMenuOpen,
@@ -43,6 +45,11 @@ export const SideMenu = ({
     useFlashcardStore,
     (x) => !!x.flashcardTest
   );
+  const deleteCurrentFlashcardTest = useFlashcardStore(
+    (x) => x.deleteCurrentFlashcardTest
+  );
+
+  const [isModalShown, setIsModalShown] = useState(false);
 
   const sideMenuOptionGroups = [
     {
@@ -93,6 +100,12 @@ export const SideMenu = ({
           label: "New Test",
           icon: <SmallLearnIcon />,
           href: "/new-flashcard-test",
+          onClick: hasFlashcardTest
+            ? (event: MouseEvent) => {
+                event.preventDefault();
+                setIsModalShown(true);
+              }
+            : undefined,
         },
       ],
     },
@@ -118,6 +131,39 @@ export const SideMenu = ({
         )}
         onClick={closeSideMenu}
       ></div>
+
+      <div className="z-30">
+        <Modal isShown={isModalShown} onClose={() => setIsModalShown(false)}>
+          <div className="flex flex-col gap-3">
+            <h2 className="text-xl">New Test</h2>
+            <p>{`Cancel your in-progress flashcard test and start a new one? (any card scores already recorded will be preserved)`}</p>
+            <div className="flex items-center justify-between">
+              <button
+                className={classNames(
+                  "px-4 py-2 uppercase",
+                  isDarkMode ? "text-blue-500" : "text-black"
+                )}
+                onClick={() => setIsModalShown(false)}
+              >
+                No
+              </button>
+
+              <button
+                className={classNames(
+                  "px-4 py-2 uppercase",
+                  isDarkMode ? "text-blue-500" : "text-black"
+                )}
+                onClick={() => {
+                  deleteCurrentFlashcardTest();
+                  void router.push("/new-flashcard-test");
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </Modal>
+      </div>
 
       <aside
         className={classNames(
@@ -182,6 +228,9 @@ export const SideMenu = ({
                                 : "bg-blue-300 text-black")
                           )}
                           href={option.href}
+                          onClick={
+                            "onClick" in option ? option.onClick : undefined
+                          }
                         >
                           {option.icon} {option.label}
                         </Link>
