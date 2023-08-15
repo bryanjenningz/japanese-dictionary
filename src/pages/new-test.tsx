@@ -7,7 +7,9 @@ import { SimpleHeader } from "~/components/SimpleHeader";
 import {
   type FlashcardState,
   useFlashcardStore,
+  flashcardTestMaxCardsOptions,
 } from "~/stores/flashcardStore";
+import { Modal } from "~/components/Modal";
 
 export default function NewTest() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -20,6 +22,11 @@ export default function NewTest() {
     FlashcardState,
     FlashcardState["flashcardTestMaxCards"]
   >(useFlashcardStore, (x) => x.flashcardTestMaxCards);
+  const setFlashcardTestMaxCards = useFlashcardStore(
+    (x) => x.setFlashcardTestMaxCards
+  );
+
+  const [isModalShown, setIsModalShown] = useState(false);
 
   const newTestOptions = [
     {
@@ -41,7 +48,7 @@ export default function NewTest() {
           </span>
         </>
       ),
-      onClick: () => void 0,
+      onClick: () => setIsModalShown(true),
     },
   ];
 
@@ -83,6 +90,45 @@ export default function NewTest() {
             </article>
           );
         })}
+
+        <Modal isShown={isModalShown} onClose={() => setIsModalShown(false)}>
+          <div className="flex flex-col gap-5">
+            <h2 className="text-xl">Max # of cards</h2>
+
+            <ul className="flex w-64 flex-col gap-3">
+              {flashcardTestMaxCardsOptions.map((option) => {
+                return (
+                  <li key={option}>
+                    <label
+                      className="flex items-center gap-5 text-lg"
+                      onClick={() => {
+                        setFlashcardTestMaxCards(option);
+                        setIsModalShown(false);
+                      }}
+                    >
+                      <input
+                        type="radio"
+                        className="h-5 w-5 accent-blue-500"
+                        checked={option === flashcardTestMaxCards}
+                      />
+                      {option}
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <button
+              className={classNames(
+                "self-end px-4 py-2 uppercase",
+                isDarkMode ? "text-blue-500" : "text-black"
+              )}
+              onClick={() => setIsModalShown(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </Modal>
       </div>
     </main>
   );

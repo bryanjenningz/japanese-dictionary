@@ -3,9 +3,9 @@ import { persist } from "zustand/middleware";
 import { type WordEntry } from "~/dictionary/search";
 import { equals } from "~/utils/equals";
 
-type FlashcardTestMaxCards = (typeof flashcardTestMaxCards)[number];
+type FlashcardTestMaxCards = (typeof flashcardTestMaxCardsOptions)[number];
 
-export const flashcardTestMaxCards = [
+export const flashcardTestMaxCardsOptions = [
   5,
   10,
   15,
