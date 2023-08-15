@@ -9,6 +9,8 @@ import { useFlashcardStore } from "~/stores/flashcardStore";
 import { useRouter } from "next/router";
 import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
 
+type ModalState = "HIDDEN" | "EXIT_SESSION_MODAL" | "CARD_NOT_REVEALED_MODAL";
+
 export const FlashcardTestHeader = ({
   openSideMenu,
 }: {
@@ -24,40 +26,76 @@ export const FlashcardTestHeader = ({
     (x) => x.deleteCurrentFlashcardTest
   );
 
-  const [isModalShown, setIsModalShown] = useState(false);
+  const [modalState, setModalState] = useState<ModalState>("HIDDEN");
 
   return (
     <>
-      <Modal isShown={isModalShown} onClose={() => setIsModalShown(false)}>
+      <Modal
+        isShown={modalState !== "HIDDEN"}
+        onClose={() => setModalState("HIDDEN")}
+      >
         <div className="flex flex-col gap-3">
-          <h2 className="text-xl">Exit Session</h2>
+          {((): JSX.Element => {
+            switch (modalState) {
+              case "HIDDEN":
+                return <></>;
 
-          <p>{`Exit this session? (any card scores already recorded will be preserved)`}</p>
+              case "EXIT_SESSION_MODAL":
+                return (
+                  <>
+                    <h2 className="text-xl">Exit Session</h2>
 
-          <div className="flex items-center justify-end">
-            <button
-              className={classNames(
-                "px-4 py-2 uppercase",
-                isDarkMode ? "text-blue-500" : "text-black"
-              )}
-              onClick={() => setIsModalShown(false)}
-            >
-              No
-            </button>
+                    <p>{`Exit this session? (any card scores already recorded will be preserved)`}</p>
 
-            <button
-              className={classNames(
-                "px-4 py-2 uppercase",
-                isDarkMode ? "text-blue-500" : "text-black"
-              )}
-              onClick={() => {
-                deleteCurrentFlashcardTest();
-                void router.replace("/new-flashcard-test");
-              }}
-            >
-              Yes
-            </button>
-          </div>
+                    <div className="flex items-center justify-end">
+                      <button
+                        className={classNames(
+                          "px-4 py-2 uppercase",
+                          isDarkMode ? "text-blue-500" : "text-black"
+                        )}
+                        onClick={() => setModalState("HIDDEN")}
+                      >
+                        No
+                      </button>
+
+                      <button
+                        className={classNames(
+                          "px-4 py-2 uppercase",
+                          isDarkMode ? "text-blue-500" : "text-black"
+                        )}
+                        onClick={() => {
+                          deleteCurrentFlashcardTest();
+                          void router.replace("/new-flashcard-test");
+                        }}
+                      >
+                        Yes
+                      </button>
+                    </div>
+                  </>
+                );
+
+              case "CARD_NOT_REVEALED_MODAL":
+                return (
+                  <>
+                    <h2 className="text-xl">Card Not Revealed</h2>
+
+                    <p>{`Sorry, to avoid accidental cheating you can only display the dictionary definition screen for a card after it's fully revealed.`}</p>
+
+                    <div className="flex items-center">
+                      <button
+                        className={classNames(
+                          "px-4 py-2 uppercase",
+                          isDarkMode ? "text-blue-500" : "text-black"
+                        )}
+                        onClick={() => setModalState("HIDDEN")}
+                      >
+                        Ok
+                      </button>
+                    </div>
+                  </>
+                );
+            }
+          })()}
         </div>
       </Modal>
 
@@ -80,7 +118,7 @@ export const FlashcardTestHeader = ({
 
             <button
               className="h-full px-4"
-              onClick={() => setIsModalShown(true)}
+              onClick={() => setModalState("EXIT_SESSION_MODAL")}
             >
               <span className="sr-only">End session</span>
               <CloseIcon />
@@ -88,7 +126,7 @@ export const FlashcardTestHeader = ({
 
             <button
               className="h-full px-4"
-              onClick={() => setIsModalShown(true)}
+              onClick={() => setModalState("CARD_NOT_REVEALED_MODAL")}
             >
               <span className="sr-only">View in Dictionary</span>
               <ArrowOutBoxIcon />
