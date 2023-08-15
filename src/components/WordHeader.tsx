@@ -6,11 +6,7 @@ import { classNames } from "~/utils/classNames";
 import { Pronunciation } from "~/components/Pronunciation";
 import { ArrowBackIcon } from "~/icons/ArrowBack";
 import { AddIcon } from "~/icons/AddIcon";
-import {
-  type FlashcardState,
-  useFlashcardStore,
-} from "~/stores/flashcardStore";
-import { equals } from "~/utils/equals";
+import { useFlashcardStore } from "~/stores/flashcardStore";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
 import { ChevronRightIcon } from "~/icons/ChevronRightIcon";
 import { type WordEntry } from "~/dictionary/search";
@@ -34,13 +30,11 @@ export const WordHeader = ({
 
   const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
   const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
-  const flashcards = useStore<FlashcardState, FlashcardState["flashcards"]>(
-    useFlashcardStore,
-    (x) => x.flashcards
+  const isWordEntryAFlashcard = useFlashcardStore(
+    (x) => x.isWordEntryAFlashcard
   );
-  const wordEntryIsFlashcard = !!flashcards?.find((flashcard) =>
-    equals(flashcard.wordEntry, wordLookup.wordEntry)
-  );
+
+  const wordEntryIsFlashcard = isWordEntryAFlashcard(wordLookup.wordEntry);
 
   const hasPreviousResult = wordLookup.resultIndex > 0;
   const hasNextResult = wordLookup.resultIndex < wordEntries.length - 1;

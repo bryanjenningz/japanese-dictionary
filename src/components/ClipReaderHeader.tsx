@@ -11,14 +11,10 @@ import { SearchIcon } from "~/icons/SearchIcon";
 import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
 import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
-import {
-  type FlashcardState,
-  useFlashcardStore,
-} from "~/stores/flashcardStore";
+import { useFlashcardStore } from "~/stores/flashcardStore";
 import { type WordLookup } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
-import { equals } from "~/utils/equals";
 
 const UnselectedTextMenu = ({ openSideMenu }: { openSideMenu: () => void }) => {
   const addClipReaderText = useClipReaderTextStore((x) => x.addClipReaderText);
@@ -70,16 +66,13 @@ const SelectedTextMenu = ({
   selectedText: string;
   wordLookup: WordLookup;
 }) => {
-  const flashcards = useStore<FlashcardState, FlashcardState["flashcards"]>(
-    useFlashcardStore,
-    (x) => x.flashcards
-  );
   const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
   const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
-
-  const wordEntryIsFlashcard = !!flashcards?.find((lookup) =>
-    equals(lookup.wordEntry, wordLookup.wordEntry)
+  const isWordEntryAFlashcard = useFlashcardStore(
+    (x) => x.isWordEntryAFlashcard
   );
+
+  const wordEntryIsFlashcard = isWordEntryAFlashcard(wordLookup.wordEntry);
 
   return (
     <section
