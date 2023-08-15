@@ -11,7 +11,7 @@ import {
 } from "~/stores/flashcardStore";
 import { Modal } from "~/components/Modal";
 
-export default function NewTest() {
+export default function NewFlashcardTest() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode

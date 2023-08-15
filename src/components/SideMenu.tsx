@@ -55,7 +55,11 @@ const sideMenuOptionGroups = [
   {
     label: "Flashcards",
     options: [
-      { label: "New Test", icon: <SmallLearnIcon />, href: "/new-test" },
+      {
+        label: "New Test",
+        icon: <SmallLearnIcon />,
+        href: "/new-flashcard-test",
+      },
     ],
   },
   {
