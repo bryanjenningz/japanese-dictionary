@@ -12,6 +12,28 @@ export default function NewTest() {
   );
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
+  const newTestOptions = [
+    {
+      heading: "Start",
+      buttonContent: <>Begin Test Session</>,
+    },
+    {
+      heading: "Basic Settings",
+      buttonContent: (
+        <>
+          Max # of cards
+          <span
+            className={classNames(
+              isDarkMode ? "text-slate-400" : "text-slate-500"
+            )}
+          >
+            5
+          </span>
+        </>
+      ),
+    },
+  ];
+
   return (
     <main
       className={classNames(
@@ -26,7 +48,30 @@ export default function NewTest() {
         closeSideMenu={() => setIsSideMenuOpen(false)}
       />
 
-      <div className="flex w-full max-w-2xl flex-col"></div>
+      <div className="flex w-full max-w-2xl flex-col gap-3 p-4">
+        {newTestOptions.map(({ heading, buttonContent }) => {
+          return (
+            <article key={heading} className="flex flex-col">
+              <h2
+                className={classNames(
+                  "text-sm",
+                  isDarkMode ? "text-blue-500" : "text-blue-600"
+                )}
+              >
+                {heading}
+              </h2>
+              <button
+                className={classNames(
+                  "flex flex-col py-3 text-left",
+                  isDarkMode ? "text-white" : "text-black"
+                )}
+              >
+                {buttonContent}
+              </button>
+            </article>
+          );
+        })}
+      </div>
     </main>
   );
 }
