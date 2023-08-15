@@ -19,62 +19,6 @@ import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
-const sideMenuOptionGroups = [
-  {
-    label: "Dictionary",
-    options: [
-      { label: "Dictionary", icon: <SmallSearchIcon />, href: "/" },
-      { label: "History", icon: <SmallHistoryIcon />, href: "/history" },
-    ],
-  },
-  {
-    label: "Add-ons",
-    options: [
-      { label: "Add-ons", icon: <SmallCartIcon /> },
-      { label: "Registration", icon: <SmallRegisterIcon /> },
-    ],
-  },
-  {
-    label: "OCR",
-    options: [
-      { label: "Live OCR", icon: <SmallCameraIcon /> },
-      { label: "Still OCR", icon: <SmallImageIcon /> },
-    ],
-  },
-  {
-    label: "Reader",
-    options: [
-      {
-        label: "Clip Reader",
-        icon: <SmallClipboardIcon />,
-        href: "/clip-reader",
-      },
-      { label: "Screen Reader/OCR", icon: <SmallStackIcon /> },
-    ],
-  },
-  {
-    label: "Flashcards",
-    options: [
-      {
-        label: "New Test",
-        icon: <SmallLearnIcon />,
-        href: "/new-flashcard-test",
-      },
-    ],
-  },
-  {
-    label: "Settings",
-    options: [{ label: "Settings", icon: <SmallSettingsIcon /> }],
-  },
-  {
-    label: "Support",
-    options: [
-      { label: "Help", icon: <SmallHelpIcon /> },
-      { label: "Contact Us", icon: <SmallMailIcon /> },
-    ],
-  },
-];
-
 export const SideMenu = ({
   isSideMenuOpen,
   closeSideMenu,
@@ -89,6 +33,62 @@ export const SideMenu = ({
     (x) => x.isDarkMode
   );
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
+
+  const sideMenuOptionGroups = [
+    {
+      label: "Dictionary",
+      options: [
+        { label: "Dictionary", icon: <SmallSearchIcon />, href: "/" },
+        { label: "History", icon: <SmallHistoryIcon />, href: "/history" },
+      ],
+    },
+    {
+      label: "Add-ons",
+      options: [
+        { label: "Add-ons", icon: <SmallCartIcon /> },
+        { label: "Registration", icon: <SmallRegisterIcon /> },
+      ],
+    },
+    {
+      label: "OCR",
+      options: [
+        { label: "Live OCR", icon: <SmallCameraIcon /> },
+        { label: "Still OCR", icon: <SmallImageIcon /> },
+      ],
+    },
+    {
+      label: "Reader",
+      options: [
+        {
+          label: "Clip Reader",
+          icon: <SmallClipboardIcon />,
+          href: "/clip-reader",
+        },
+        { label: "Screen Reader/OCR", icon: <SmallStackIcon /> },
+      ],
+    },
+    {
+      label: "Flashcards",
+      options: [
+        {
+          label: "New Test",
+          icon: <SmallLearnIcon />,
+          href: "/new-flashcard-test",
+        },
+      ],
+    },
+    {
+      label: "Settings",
+      options: [{ label: "Settings", icon: <SmallSettingsIcon /> }],
+    },
+    {
+      label: "Support",
+      options: [
+        { label: "Help", icon: <SmallHelpIcon /> },
+        { label: "Contact Us", icon: <SmallMailIcon /> },
+      ],
+    },
+  ];
 
   return (
     <>
