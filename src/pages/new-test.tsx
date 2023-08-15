@@ -4,6 +4,7 @@ import { classNames } from "~/utils/classNames";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { SimpleHeader } from "~/components/SimpleHeader";
+import { type FlashcardState, useFlashcardStore } from "~/stores/flashcardStore";
 
 export default function NewTest() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -11,6 +12,11 @@ export default function NewTest() {
     (x) => x.isDarkMode
   );
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+
+  const flashcardTestMaxCards = useStore<
+    FlashcardState,
+    FlashcardState["flashcardTestMaxCards"]
+  >(useFlashcardStore, (x) => x.flashcardTestMaxCards);
 
   const newTestOptions = [
     {
@@ -27,7 +33,7 @@ export default function NewTest() {
               isDarkMode ? "text-slate-400" : "text-slate-500"
             )}
           >
-            5
+            {flashcardTestMaxCards}
           </span>
         </>
       ),
