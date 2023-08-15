@@ -7,6 +7,7 @@ import { classNames } from "~/utils/classNames";
 import { Modal } from "~/components/Modal";
 import { useFlashcardStore } from "~/stores/flashcardStore";
 import { useRouter } from "next/router";
+import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
 
 export const FlashcardTestHeader = ({
   openSideMenu,
@@ -83,6 +84,14 @@ export const FlashcardTestHeader = ({
             >
               <span className="sr-only">End session</span>
               <CloseIcon />
+            </button>
+
+            <button
+              className="h-full px-4"
+              onClick={() => setIsModalShown(true)}
+            >
+              <span className="sr-only">View in Dictionary</span>
+              <ArrowOutBoxIcon />
             </button>
           </section>
         </div>
