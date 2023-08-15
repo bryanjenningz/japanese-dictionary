@@ -11,12 +11,16 @@ import { SmallImageIcon } from "~/icons/SmallImageIcon";
 import { SmallLearnIcon } from "~/icons/SmallLearnIcon";
 import { SmallMailIcon } from "~/icons/SmallMailIcon";
 import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
+import { SmallRocketLaunchIcon } from "~/icons/SmallRocketLaunchIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { SmallSettingsIcon } from "~/icons/SmallSettingsIcon";
 import { SmallStackIcon } from "~/icons/SmallStackIcon";
 import { SunIcon } from "~/icons/SunIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
-import { type FlashcardState, useFlashcardStore } from "~/stores/flashcardStore";
+import {
+  type FlashcardState,
+  useFlashcardStore,
+} from "~/stores/flashcardStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
@@ -85,7 +89,7 @@ export const SideMenu = ({
           ? [
               {
                 label: "Continue Test",
-                icon: <SmallLearnIcon />,
+                icon: <SmallRocketLaunchIcon />,
                 href: "/flashcard-test",
               },
             ]
