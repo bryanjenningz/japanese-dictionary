@@ -3,7 +3,7 @@ import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
-import { SimpleHeader } from "~/components/SimpleHeader";
+import { FlashcardTestHeader } from "~/components/FlashcardTestHeader";
 
 export default function FlashcardTest() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -19,7 +19,7 @@ export default function FlashcardTest() {
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       )}
     >
-      <SimpleHeader openSideMenu={() => setIsSideMenuOpen(true)} />
+      <FlashcardTestHeader openSideMenu={() => setIsSideMenuOpen(true)} />
 
       <SideMenu
         isSideMenuOpen={isSideMenuOpen}
