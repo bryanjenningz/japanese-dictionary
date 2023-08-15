@@ -28,6 +28,7 @@ export const useClipReaderTextStore = create<ClipReaderTextState>()(
       ) => set({ selectedClipReaderText }),
       addClipReaderText: (clipReaderText: ClipReaderText) =>
         set({
+          selectedClipReaderText: clipReaderText,
           clipReaderTexts: [clipReaderText, ...get().clipReaderTexts],
         }),
       removeClipReaderText: (clipReaderText: ClipReaderText) =>
