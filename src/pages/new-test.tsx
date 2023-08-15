@@ -4,7 +4,10 @@ import { classNames } from "~/utils/classNames";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { SimpleHeader } from "~/components/SimpleHeader";
-import { type FlashcardState, useFlashcardStore } from "~/stores/flashcardStore";
+import {
+  type FlashcardState,
+  useFlashcardStore,
+} from "~/stores/flashcardStore";
 
 export default function NewTest() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -22,6 +25,7 @@ export default function NewTest() {
     {
       heading: "Start",
       buttonContent: <>Begin Test Session</>,
+      onClick: () => void 0,
     },
     {
       heading: "Basic Settings",
@@ -37,6 +41,7 @@ export default function NewTest() {
           </span>
         </>
       ),
+      onClick: () => void 0,
     },
   ];
 
@@ -55,7 +60,7 @@ export default function NewTest() {
       />
 
       <div className="flex w-full max-w-2xl flex-col gap-3 p-4">
-        {newTestOptions.map(({ heading, buttonContent }) => {
+        {newTestOptions.map(({ heading, buttonContent, onClick }) => {
           return (
             <article key={heading} className="flex flex-col">
               <h2
@@ -71,6 +76,7 @@ export default function NewTest() {
                   "flex flex-col py-3 text-left",
                   isDarkMode ? "text-white" : "text-black"
                 )}
+                onClick={onClick}
               >
                 {buttonContent}
               </button>
