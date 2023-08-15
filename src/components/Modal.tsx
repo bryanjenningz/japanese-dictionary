@@ -17,7 +17,7 @@ export const Modal = ({
     <>
       <div
         className={classNames(
-          "fixed inset-0 bg-black transition-opacity",
+          "fixed inset-0 z-10 bg-black transition-opacity",
           isShown ? "opacity-40" : "pointer-events-none opacity-0"
         )}
         aria-hidden={!isShown}
@@ -25,7 +25,7 @@ export const Modal = ({
 
       <div
         className={classNames(
-          "fixed inset-0 flex items-center justify-center p-4",
+          "fixed inset-0 z-20 flex items-center justify-center p-4",
           isShown ? "opacity-100" : "pointer-events-none opacity-0"
         )}
         aria-hidden={!isShown}
