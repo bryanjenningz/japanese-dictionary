@@ -7,15 +7,15 @@ import { Pronunciation } from "~/components/Pronunciation";
 import { ArrowBackIcon } from "~/icons/ArrowBack";
 import { AddIcon } from "~/icons/AddIcon";
 import {
-  type SavedWordLookupState,
-  useSavedWordLookupStore,
-  type WordLookup,
-} from "~/stores/savedWordLookupStore";
+  type FlashcardState,
+  useFlashcardStore,
+} from "~/stores/flashcardStore";
 import { equals } from "~/utils/equals";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
 import { ChevronRightIcon } from "~/icons/ChevronRightIcon";
 import { type WordEntry } from "~/dictionary/search";
 import { createWordLink } from "~/utils/createWordLink";
+import { type WordLookup } from "~/stores/historyStore";
 
 type WordHeaderTab = (typeof wordHeaderTabs)[number];
 
@@ -24,26 +24,26 @@ const DEFAULT_WORD_HEADER_TAB: WordHeaderTab = "Dict";
 const wordHeaderTabs = ["Dict", "Stroke", "Chars", "Words", "Sents"] as const;
 
 export const WordHeader = ({
-  word,
+  wordLookup,
   wordEntries,
 }: {
-  word: WordLookup;
+  wordLookup: WordLookup;
   wordEntries: WordEntry[];
 }) => {
   const router = useRouter();
 
-  const saveWordLookup = useSavedWordLookupStore((x) => x.saveWordLookup);
-  const removeWordLookup = useSavedWordLookupStore((x) => x.removeWordLookup);
-  const savedWordLookups = useStore<
-    SavedWordLookupState,
-    SavedWordLookupState["savedWordLookups"]
-  >(useSavedWordLookupStore, (x) => x.savedWordLookups);
-  const isWordLookupSaved = !!savedWordLookups?.find((savedWord) =>
-    equals(savedWord, word)
+  const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
+  const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
+  const flashcards = useStore<FlashcardState, FlashcardState["flashcards"]>(
+    useFlashcardStore,
+    (x) => x.flashcards
+  );
+  const wordEntryIsFlashcard = !!flashcards?.find((flashcard) =>
+    equals(flashcard.wordEntry, wordLookup.wordEntry)
   );
 
-  const hasPreviousResult = word.resultIndex > 0;
-  const hasNextResult = word.resultIndex < wordEntries.length - 1;
+  const hasPreviousResult = wordLookup.resultIndex > 0;
+  const hasNextResult = wordLookup.resultIndex < wordEntries.length - 1;
 
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
@@ -74,14 +74,14 @@ export const WordHeader = ({
             <button
               className="h-full px-4"
               onClick={() => {
-                if (isWordLookupSaved) {
-                  removeWordLookup(word);
+                if (wordEntryIsFlashcard) {
+                  deleteFlashcard(wordLookup);
                 } else {
-                  saveWordLookup(word);
+                  saveFlashcard(wordLookup);
                 }
               }}
             >
-              {isWordLookupSaved ? (
+              {wordEntryIsFlashcard ? (
                 <>
                   <span className="sr-only">Remove flashcard</span>
                   <AddBoxIcon />
@@ -105,8 +105,8 @@ export const WordHeader = ({
               onClick={() => {
                 void router.replace(
                   createWordLink({
-                    searchText: word.searchText,
-                    resultIndex: word.resultIndex - 1,
+                    searchText: wordLookup.searchText,
+                    resultIndex: wordLookup.resultIndex - 1,
                   })
                 );
               }}
@@ -128,8 +128,8 @@ export const WordHeader = ({
               onClick={() => {
                 void router.replace(
                   createWordLink({
-                    searchText: word.searchText,
-                    resultIndex: word.resultIndex + 1,
+                    searchText: wordLookup.searchText,
+                    resultIndex: wordLookup.resultIndex + 1,
                   })
                 );
               }}
@@ -157,11 +157,11 @@ export const WordHeader = ({
             )}
           >
             <div className="flex gap-3 text-xl">
-              <div>{word.wordEntry.word}</div>
+              <div>{wordLookup.wordEntry.word}</div>
               <Pronunciation
-                word={word.wordEntry.word}
-                pronunciation={word.wordEntry.pronunciation}
-                pitchAccents={word.wordEntry.pitchAccents}
+                word={wordLookup.wordEntry.word}
+                pronunciation={wordLookup.wordEntry.pronunciation}
+                pitchAccents={wordLookup.wordEntry.pitchAccents}
               />
             </div>
           </section>

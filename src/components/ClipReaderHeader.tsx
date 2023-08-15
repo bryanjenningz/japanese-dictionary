@@ -12,10 +12,10 @@ import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
 import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import {
-  type SavedWordLookupState,
-  useSavedWordLookupStore,
-  type WordLookup,
-} from "~/stores/savedWordLookupStore";
+  type FlashcardState,
+  useFlashcardStore,
+} from "~/stores/flashcardStore";
+import { type WordLookup } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { equals } from "~/utils/equals";
@@ -70,14 +70,14 @@ const SelectedTextMenu = ({
   selectedText: string;
   wordLookup: WordLookup;
 }) => {
-  const savedWordLookups = useStore<
-    SavedWordLookupState,
-    SavedWordLookupState["savedWordLookups"]
-  >(useSavedWordLookupStore, (x) => x.savedWordLookups);
-  const saveWordLookup = useSavedWordLookupStore((x) => x.saveWordLookup);
-  const removeWordLookup = useSavedWordLookupStore((x) => x.removeWordLookup);
+  const flashcards = useStore<FlashcardState, FlashcardState["flashcards"]>(
+    useFlashcardStore,
+    (x) => x.flashcards
+  );
+  const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
+  const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
 
-  const wordEntryIsAlreadySaved = !!savedWordLookups?.find((lookup) =>
+  const wordEntryIsFlashcard = !!flashcards?.find((lookup) =>
     equals(lookup.wordEntry, wordLookup.wordEntry)
   );
 
@@ -105,10 +105,10 @@ const SelectedTextMenu = ({
         <CampaignIcon />
       </button>
 
-      {wordEntryIsAlreadySaved ? (
+      {wordEntryIsFlashcard ? (
         <button
           className="flex h-full grow basis-1 items-center justify-center"
-          onClick={() => removeWordLookup(wordLookup)}
+          onClick={() => deleteFlashcard(wordLookup)}
         >
           <span className="sr-only">Remove saved word</span>
           <AddBoxIcon />
@@ -116,7 +116,7 @@ const SelectedTextMenu = ({
       ) : (
         <button
           className="flex h-full grow basis-1 items-center justify-center"
-          onClick={() => saveWordLookup(wordLookup)}
+          onClick={() => saveFlashcard(wordLookup)}
         >
           <span className="sr-only">Save word</span>
           <AddIcon />

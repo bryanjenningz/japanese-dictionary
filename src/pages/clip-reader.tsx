@@ -96,7 +96,12 @@ export default function ClipReader() {
       <ClipReaderHeader
         wordLookup={
           wordEntries[0]
-            ? { searchText, resultIndex: 0, wordEntry: wordEntries[0] }
+            ? {
+                time: Date.now(),
+                searchText,
+                resultIndex: 0,
+                wordEntry: wordEntries[0],
+              }
             : undefined
         }
         selectedText={selectedText}

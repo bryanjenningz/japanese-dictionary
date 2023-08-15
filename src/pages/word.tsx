@@ -54,7 +54,7 @@ export default function Word() {
     >
       {wordEntry && (
         <WordHeader
-          word={{ searchText, resultIndex, wordEntry }}
+          wordLookup={{ time: Date.now(), searchText, resultIndex, wordEntry }}
           wordEntries={wordEntries}
         />
       )}

@@ -10,10 +10,10 @@ import {
   type WordSearch,
 } from "~/stores/historyStore";
 import {
-  type SavedWordLookupState,
-  useSavedWordLookupStore,
-  type WordLookup,
-} from "~/stores/savedWordLookupStore";
+  type FlashcardState,
+  useFlashcardStore,
+  type Flashcard,
+} from "~/stores/flashcardStore";
 import { Pronunciation } from "~/components/Pronunciation";
 import { groupByTime } from "~/utils/groupByTime";
 import Link from "next/link";
@@ -107,12 +107,12 @@ export default function History() {
   );
   const clearOcrHistory = useHistoryStore((x) => x.clearOcrHistory);
 
-  const savedWordLookups = useStore<
-    SavedWordLookupState,
-    SavedWordLookupState["savedWordLookups"]
-  >(useSavedWordLookupStore, (x) => x.savedWordLookups);
-  const saveWordLookup = useSavedWordLookupStore((x) => x.saveWordLookup);
-  const removeWordLookup = useSavedWordLookupStore((x) => x.removeWordLookup);
+  const flashcards = useStore<FlashcardState, FlashcardState["flashcards"]>(
+    useFlashcardStore,
+    (x) => x.flashcards
+  );
+  const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
+  const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const historyTab = useStore<HistoryTabState, HistoryTabState["historyTab"]>(
@@ -122,7 +122,7 @@ export default function History() {
 
   const [isModalShown, setIsModalShown] = useState(false);
 
-  const longPress = useLongPress<WordLookup | WordSearch>();
+  const longPress = useLongPress<Flashcard | WordSearch>();
 
   return (
     <main
@@ -202,8 +202,8 @@ export default function History() {
                                 time,
                               } = lookup;
 
-                              const isSavedFlashcard = !!savedWordLookups?.find(
-                                (x) => equals(x.wordEntry, lookup.wordEntry)
+                              const isSavedFlashcard = !!flashcards?.find((x) =>
+                                equals(x.wordEntry, lookup.wordEntry)
                               );
 
                               return (
@@ -284,9 +284,9 @@ export default function History() {
                                           className="px-4 py-3 text-left"
                                           onClick={() => {
                                             if (isSavedFlashcard) {
-                                              removeWordLookup(lookup);
+                                              deleteFlashcard(lookup);
                                             } else {
-                                              saveWordLookup(lookup);
+                                              saveFlashcard(lookup);
                                             }
                                             longPress.closeMenu();
                                           }}
@@ -355,8 +355,8 @@ export default function History() {
                                 time,
                               } = lookup;
 
-                              const isSavedFlashcard = !!savedWordLookups?.find(
-                                (x) => equals(x.wordEntry, lookup.wordEntry)
+                              const isSavedFlashcard = !!flashcards?.find((x) =>
+                                equals(x.wordEntry, lookup.wordEntry)
                               );
 
                               return (
@@ -437,9 +437,9 @@ export default function History() {
                                           className="px-4 py-3 text-left"
                                           onClick={() => {
                                             if (isSavedFlashcard) {
-                                              removeWordLookup(lookup);
+                                              deleteFlashcard(lookup);
                                             } else {
-                                              saveWordLookup(lookup);
+                                              saveFlashcard(lookup);
                                             }
                                             longPress.closeMenu();
                                           }}
@@ -576,7 +576,7 @@ export default function History() {
             case "Cards":
               return (
                 <ul>
-                  {savedWordLookups?.map((lookup) => {
+                  {flashcards?.map((lookup) => {
                     const {
                       searchText,
                       resultIndex,
@@ -649,7 +649,7 @@ export default function History() {
                               <button
                                 className="px-4 py-3 text-left"
                                 onClick={() => {
-                                  removeWordLookup(lookup);
+                                  deleteFlashcard(lookup);
                                   longPress.closeMenu();
                                 }}
                               >
