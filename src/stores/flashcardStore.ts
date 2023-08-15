@@ -52,6 +52,7 @@ export type FlashcardState = {
   ) => void;
   flashcardTest: FlashcardTest | null;
   startNewFlashcardTest: () => void;
+  deleteCurrentFlashcardTest: () => void;
 };
 
 export const useFlashcardStore = create<FlashcardState>()(
@@ -89,6 +90,7 @@ export const useFlashcardStore = create<FlashcardState>()(
             index: 0,
           },
         }),
+      deleteCurrentFlashcardTest: () => set({ flashcardTest: null }),
     }),
     { name: "flashcards" }
   )
