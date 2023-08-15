@@ -30,11 +30,9 @@ export const WordHeader = ({
 
   const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
   const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
-  const isWordEntryAFlashcard = useFlashcardStore(
-    (x) => x.isWordEntryAFlashcard
+  const wordEntryIsFlashcard = useFlashcardStore((x) =>
+    x.isWordEntryAFlashcard(wordLookup.wordEntry)
   );
-
-  const wordEntryIsFlashcard = isWordEntryAFlashcard(wordLookup.wordEntry);
 
   const hasPreviousResult = wordLookup.resultIndex > 0;
   const hasNextResult = wordLookup.resultIndex < wordEntries.length - 1;
@@ -65,28 +63,23 @@ export const WordHeader = ({
 
             <h1 className="grow text-lg font-semibold">Pleco</h1>
 
-            <button
-              className="h-full px-4"
-              onClick={() => {
-                if (wordEntryIsFlashcard) {
-                  deleteFlashcard(wordLookup);
-                } else {
-                  saveFlashcard(wordLookup);
-                }
-              }}
-            >
-              {wordEntryIsFlashcard ? (
-                <>
-                  <span className="sr-only">Remove flashcard</span>
-                  <AddBoxIcon />
-                </>
-              ) : (
-                <>
-                  <span className="sr-only">Add flashcard</span>
-                  <AddIcon />
-                </>
-              )}
-            </button>
+            {wordEntryIsFlashcard ? (
+              <button
+                className="h-full px-4"
+                onClick={() => deleteFlashcard(wordLookup)}
+              >
+                <span className="sr-only">Remove flashcard</span>
+                <AddBoxIcon />
+              </button>
+            ) : (
+              <button
+                className="h-full px-4"
+                onClick={() => saveFlashcard(wordLookup)}
+              >
+                <span className="sr-only">Add flashcard</span>
+                <AddIcon />
+              </button>
+            )}
 
             <button
               className={classNames(

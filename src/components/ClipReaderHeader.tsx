@@ -68,11 +68,9 @@ const SelectedTextMenu = ({
 }) => {
   const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
   const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
-  const isWordEntryAFlashcard = useFlashcardStore(
-    (x) => x.isWordEntryAFlashcard
+  const wordEntryIsFlashcard = useFlashcardStore((x) =>
+    x.isWordEntryAFlashcard(wordLookup.wordEntry)
   );
-
-  const wordEntryIsFlashcard = isWordEntryAFlashcard(wordLookup.wordEntry);
 
   return (
     <section
