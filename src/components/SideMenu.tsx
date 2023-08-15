@@ -16,6 +16,7 @@ import { SmallSettingsIcon } from "~/icons/SmallSettingsIcon";
 import { SmallStackIcon } from "~/icons/SmallStackIcon";
 import { SunIcon } from "~/icons/SunIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { type FlashcardState, useFlashcardStore } from "~/stores/flashcardStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
@@ -33,6 +34,11 @@ export const SideMenu = ({
     (x) => x.isDarkMode
   );
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
+
+  const hasFlashcardTest = useStore<FlashcardState, boolean>(
+    useFlashcardStore,
+    (x) => !!x.flashcardTest
+  );
 
   const sideMenuOptionGroups = [
     {
@@ -75,6 +81,15 @@ export const SideMenu = ({
           icon: <SmallLearnIcon />,
           href: "/new-flashcard-test",
         },
+        ...(hasFlashcardTest
+          ? [
+              {
+                label: "Continue Test",
+                icon: <SmallLearnIcon />,
+                href: "/flashcard-test",
+              },
+            ]
+          : []),
       ],
     },
     {
