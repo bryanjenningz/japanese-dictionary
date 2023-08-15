@@ -9,6 +9,7 @@ import { useFlashcardStore } from "~/stores/flashcardStore";
 import { useRouter } from "next/router";
 import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
 import { BrushIcon } from "~/icons/BrushIcon";
+import { SpeakerIcon } from "~/icons/SpeakerIcon";
 
 type ModalState = "HIDDEN" | "EXIT_SESSION_MODAL" | "CARD_NOT_REVEALED_MODAL";
 
@@ -136,6 +137,11 @@ export const FlashcardTestHeader = ({
             <button className="h-full px-4">
               <span className="sr-only">Sketch Box</span>
               <BrushIcon />
+            </button>
+
+            <button className="h-full px-4">
+              <span className="sr-only">Audio</span>
+              <SpeakerIcon />
             </button>
           </section>
         </div>
