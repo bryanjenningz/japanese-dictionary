@@ -3,11 +3,35 @@ import { persist } from "zustand/middleware";
 import { type WordEntry } from "~/dictionary/search";
 import { equals } from "~/utils/equals";
 
+type FlashcardTestMaxCards = (typeof flashcardTestMaxCards)[number];
+
+export const flashcardTestMaxCards = [
+  5,
+  10,
+  15,
+  20,
+  30,
+  40,
+  50,
+  75,
+  100,
+  200,
+  "All",
+  "Endless",
+] as const;
+
+const DEFAULT_FLASHCARD_TEST_MAX_CARDS: FlashcardTestMaxCards = 5;
+
 export type FlashcardState = {
   flashcards: Flashcard[];
   saveFlashcard: (flashcard: Flashcard) => void;
   deleteFlashcard: (flashcard: Flashcard) => void;
   isWordEntryAFlashcard: (wordEntry: WordEntry) => boolean;
+
+  flashcardTestMaxCards: FlashcardTestMaxCards;
+  setFlashcardTestMaxCards: (
+    flashcardTestMaxCards: FlashcardTestMaxCards
+  ) => void;
 };
 
 export type Flashcard = {
@@ -35,6 +59,11 @@ export const useFlashcardStore = create<FlashcardState>()(
         !!get().flashcards.find((flashcard) =>
           equals(flashcard.wordEntry, wordEntry)
         ),
+
+      flashcardTestMaxCards: DEFAULT_FLASHCARD_TEST_MAX_CARDS,
+      setFlashcardTestMaxCards: (
+        flashcardTestMaxCards: FlashcardTestMaxCards
+      ) => set({ flashcardTestMaxCards }),
     }),
     { name: "flashcards" }
   )
