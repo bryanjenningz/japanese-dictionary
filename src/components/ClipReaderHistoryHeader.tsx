@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
-import { ArrowBackIcon } from "~/icons/ArrowBack";
+import { ArrowBackIcon } from "~/icons/ArrowBackIcon";
 
 export const ClipReaderHistoryHeader = ({
   openModal,

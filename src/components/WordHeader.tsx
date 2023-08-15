@@ -4,7 +4,7 @@ import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { Pronunciation } from "~/components/Pronunciation";
-import { ArrowBackIcon } from "~/icons/ArrowBack";
+import { ArrowBackIcon } from "~/icons/ArrowBackIcon";
 import { AddIcon } from "~/icons/AddIcon";
 import { useFlashcardStore } from "~/stores/flashcardStore";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
