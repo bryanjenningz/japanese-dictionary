@@ -80,11 +80,6 @@ export const SideMenu = ({
     {
       label: "Flashcards",
       options: [
-        {
-          label: "New Test",
-          icon: <SmallLearnIcon />,
-          href: "/new-flashcard-test",
-        },
         ...(hasFlashcardTest
           ? [
               {
@@ -94,6 +89,11 @@ export const SideMenu = ({
               },
             ]
           : []),
+        {
+          label: "New Test",
+          icon: <SmallLearnIcon />,
+          href: "/new-flashcard-test",
+        },
       ],
     },
     {
