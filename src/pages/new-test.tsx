@@ -99,16 +99,14 @@ export default function NewTest() {
               {flashcardTestMaxCardsOptions.map((option) => {
                 return (
                   <li key={option}>
-                    <label
-                      className="flex items-center gap-5 text-lg"
-                      onClick={() => {
-                        setFlashcardTestMaxCards(option);
-                        setIsModalShown(false);
-                      }}
-                    >
+                    <label className="flex items-center gap-5 text-lg">
                       <input
                         type="radio"
                         className="h-5 w-5 accent-blue-500"
+                        onChange={() => {
+                          setFlashcardTestMaxCards(option);
+                          setIsModalShown(false);
+                        }}
                         checked={option === flashcardTestMaxCards}
                       />
                       {option}
