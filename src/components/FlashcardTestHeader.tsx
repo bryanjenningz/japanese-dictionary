@@ -11,7 +11,11 @@ import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
 import { BrushIcon } from "~/icons/BrushIcon";
 import { SpeakerIcon } from "~/icons/SpeakerIcon";
 
-type ModalState = "HIDDEN" | "EXIT_SESSION_MODAL" | "CARD_NOT_REVEALED_MODAL";
+type ModalState =
+  | "HIDDEN"
+  | "EXIT_SESSION_MODAL"
+  | "CARD_NOT_REVEALED_MODAL"
+  | "AUDIO_NOT_REVEALED_MODAL";
 
 export const FlashcardTestHeader = ({
   openSideMenu,
@@ -96,6 +100,29 @@ export const FlashcardTestHeader = ({
                     </div>
                   </>
                 );
+
+              case "AUDIO_NOT_REVEALED_MODAL":
+                return (
+                  <>
+                    <h2 className="text-xl">Audio Not Revealed</h2>
+
+                    <p>{`Your current flashcard test settings only allow audio to be played after a card is fully revealed (to avoid accidentally giving away the answer).`}</p>
+
+                    <p>{`To change this, select "Audio" as one of your "Show" options in the main flashcard test configuration screen.`}</p>
+
+                    <div className="flex items-center">
+                      <button
+                        className={classNames(
+                          "px-4 py-2 uppercase",
+                          isDarkMode ? "text-blue-500" : "text-black"
+                        )}
+                        onClick={() => setModalState("HIDDEN")}
+                      >
+                        Ok
+                      </button>
+                    </div>
+                  </>
+                );
             }
           })()}
         </div>
@@ -139,7 +166,10 @@ export const FlashcardTestHeader = ({
               <BrushIcon />
             </button>
 
-            <button className="h-full px-4">
+            <button
+              className="h-full px-4"
+              onClick={() => setModalState("AUDIO_NOT_REVEALED_MODAL")}
+            >
               <span className="sr-only">Audio</span>
               <SpeakerIcon />
             </button>
