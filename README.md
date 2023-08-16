@@ -10,6 +10,25 @@ A [Pleco](https://pleco.com) web app clone for Japanese written with [React](htt
 - Quiz yourself on saved flashcards by using flashcard tests
 - Enable dark mode
 
+## Screenshots
+
+<img src="screenshots/screenshot-light-search-romaji.png" alt="" />
+<img src="screenshots/screenshot-dark-search-romaji.png" alt="" />
+<img src="screenshots/screenshot-dark-search-hiragana.png" alt="" />
+<img src="screenshots/screenshot-light-side-menu.png" alt="" />
+<img src="screenshots/screenshot-dark-side-menu.png" alt="" />
+<img src="screenshots/screenshot-dark-word-page.png" alt="" />
+<img src="screenshots/screenshot-light-clipboard-reader.png" alt="" />
+<img src="screenshots/screenshot-dark-clipboard-reader.png" alt="" />
+<img src="screenshots/screenshot-dark-clipboard-reader-lookup.png" alt="" />
+<img src="screenshots/screenshot-dark-clipboard-reader-history.png" alt="" />
+<img src="screenshots/screenshot-light-clipboard-reader-history.png" alt="" />
+<img src="screenshots/screenshot-dark-dictionary-lookup-history.png" alt="" />
+<img src="screenshots/screenshot-dark-flashcards.png" alt="" />
+<img src="screenshots/screenshot-dark-long-press-flashcard.png" alt="" />
+<img src="screenshots/screenshot-dark-flashcard-test-front.png" alt="" />
+<img src="screenshots/screenshot-dark-flashcard-test-back.png" alt="" />
+
 ## Credits
 
 - [Pleco](https://pleco.com) for design inspiration
