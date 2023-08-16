@@ -120,6 +120,8 @@ const HIRAGANA_MAP: Record<string, string> = {
   pyu: "ぴゅ",
   pyo: "ぴょ",
   n: "ん",
+
+  "-": "ー",
 };
 
 const DOUBLE_CONSONANTS = new Set(

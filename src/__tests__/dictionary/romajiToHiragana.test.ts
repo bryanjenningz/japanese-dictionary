@@ -33,4 +33,10 @@ describe("romajiToHiragana", () => {
       expect(romajiToHiragana("りゃkushoう")).toEqual("りゃくしょう");
     });
   });
+
+  describe("Strings with dashes in romaji", () => {
+    it("Returns `ろーまじ` for the string `ro-maji`", () => {
+      expect(romajiToHiragana("ro-maji")).toEqual("ろーまじ");
+    });
+  });
 });
