@@ -20,6 +20,9 @@ export default function FlashcardTest() {
     FlashcardState,
     FlashcardState["flashcardTest"]
   >(useFlashcardStore, (x) => x.flashcardTest);
+  const setCurrentFlashcardStatus = useFlashcardStore(
+    (x) => x.setCurrentFlashcardStatus
+  );
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
@@ -52,6 +55,7 @@ export default function FlashcardTest() {
               ? "border-slate-500 bg-black text-white"
               : "border-slate-400 bg-slate-200 text-slate-600"
           )}
+          onClick={() => setCurrentFlashcardStatus("Seen")}
         >
           <VisibilityIcon />
           reveal entire card
