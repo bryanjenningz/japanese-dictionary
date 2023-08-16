@@ -9,3 +9,10 @@ A [Pleco](https://pleco.com) web app clone for Japanese written with [React](htt
 - Save dictionary lookup history, clipboard reader lookup history, search history, and flashcards
 - Quiz yourself on saved flashcards by using flashcard tests
 - Enable dark mode
+
+## Credits
+
+- [Pleco](https://pleco.com) for design inspiration
+- [JMdict/EDICT](https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project) for the word dictionary
+- [Rikaikun](https://github.com/melink14/rikaikun) for the formatted word dictionary, word dictionary index, verb deconjugation code, and other pieces of code
+- [Kanjium](https://github.com/mifunetoshiro/kanjium) for the pitch accent dictionary
