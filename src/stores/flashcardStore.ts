@@ -29,11 +29,11 @@ export type Flashcard = {
 };
 
 type FlashcardTest = {
-  flashcards: FlashcardTestResult[];
+  flashcards: FlashcardTestCard[];
   index: number;
 };
 
-type FlashcardTestResult = {
+export type FlashcardTestCard = {
   flashcard: Flashcard;
   status: FlashcardTestResultStatus;
 };
@@ -52,7 +52,7 @@ export type FlashcardState = {
   ) => void;
   flashcardTest: FlashcardTest | null;
   startNewFlashcardTest: () => void;
-  getCurrentTestFlashcard: () => FlashcardTestResult | null;
+  getCurrentTestFlashcard: () => FlashcardTestCard | null;
   setCurrentFlashcardStatus: (status: FlashcardTestResultStatus) => void;
   deleteCurrentFlashcardTest: () => void;
 };
