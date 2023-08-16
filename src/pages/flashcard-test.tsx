@@ -41,24 +41,26 @@ export default function FlashcardTest() {
         closeSideMenu={() => setIsSideMenuOpen(false)}
       />
 
-      <div className="flex w-full max-w-2xl grow flex-col">
-        <div className="grow p-4 text-4xl">
-          {flashcardTestCard?.flashcard.wordEntry.word}
-        </div>
+      {flashcardTestCard && (
+        <div className="flex w-full max-w-2xl grow flex-col">
+          <div className="grow p-4 text-4xl">
+            {flashcardTestCard.flashcard.wordEntry.word}
+          </div>
 
-        <button
-          className={classNames(
-            "flex flex-col items-center gap-6 border-t p-8 text-sm font-semibold",
-            isDarkMode
-              ? "border-slate-500 bg-black text-white"
-              : "border-slate-400 bg-slate-200 text-slate-600"
-          )}
-          onClick={() => setCurrentFlashcardStatus("Seen")}
-        >
-          <VisibilityIcon />
-          reveal entire card
-        </button>
-      </div>
+          <button
+            className={classNames(
+              "flex flex-col items-center gap-6 border-t p-8 text-sm font-semibold",
+              isDarkMode
+                ? "border-slate-500 bg-black text-white"
+                : "border-slate-400 bg-slate-200 text-slate-600"
+            )}
+            onClick={() => setCurrentFlashcardStatus("Seen")}
+          >
+            <VisibilityIcon />
+            reveal entire card
+          </button>
+        </div>
+      )}
     </main>
   );
 }
