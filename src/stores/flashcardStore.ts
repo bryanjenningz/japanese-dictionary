@@ -17,7 +17,6 @@ export const flashcardTestMaxCardsOptions = [
   100,
   200,
   "All",
-  "Endless",
 ] as const;
 
 const DEFAULT_FLASHCARD_TEST_MAX_CARDS: FlashcardTestMaxCards = 5;
@@ -84,16 +83,24 @@ export const useFlashcardStore = create<FlashcardState>()(
         flashcardTestMaxCards: FlashcardTestMaxCards
       ) => set({ flashcardTestMaxCards }),
       flashcardTest: null,
-      startNewFlashcardTest: () =>
+      startNewFlashcardTest: () => {
+        const flashcardTestMaxCards = get().flashcardTestMaxCards;
+        const cardsUsed =
+          flashcardTestMaxCards === "All" ? Infinity : flashcardTestMaxCards;
         set({
           flashcardTest: {
-            flashcards: shuffle(get().flashcards.slice()).map((flashcard) => ({
-              flashcard,
-              status: "Unseen",
-            })),
+            flashcards: shuffle(get().flashcards.slice())
+              .map(
+                (flashcard): FlashcardTestCard => ({
+                  flashcard,
+                  status: "Unseen",
+                })
+              )
+              .slice(0, cardsUsed),
             index: 0,
           },
-        }),
+        });
+      },
       getCurrentTestFlashcard: () => {
         const flashcardTest = get().flashcardTest;
         if (!flashcardTest) return null;
