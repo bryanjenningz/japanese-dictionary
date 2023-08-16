@@ -7,6 +7,7 @@ import { FlashcardTestHeader } from "~/components/FlashcardTestHeader";
 import {
   type FlashcardState,
   useFlashcardStore,
+  type FlashcardTestCard,
 } from "~/stores/flashcardStore";
 import { VisibilityIcon } from "~/icons/VisibilityIcon";
 
@@ -16,10 +17,10 @@ export default function FlashcardTest() {
     (x) => x.isDarkMode
   );
 
-  const flashcardTest = useStore<
-    FlashcardState,
-    FlashcardState["flashcardTest"]
-  >(useFlashcardStore, (x) => x.flashcardTest);
+  const flashcardTestCard = useStore<FlashcardState, FlashcardTestCard | null>(
+    useFlashcardStore,
+    (x) => x.getCurrentTestFlashcard()
+  );
   const setCurrentFlashcardStatus = useFlashcardStore(
     (x) => x.setCurrentFlashcardStatus
   );
@@ -42,10 +43,7 @@ export default function FlashcardTest() {
 
       <div className="flex w-full max-w-2xl grow flex-col">
         <div className="grow p-4 text-4xl">
-          {
-            flashcardTest?.flashcards[flashcardTest.index ?? 0]?.flashcard
-              .wordEntry.word
-          }
+          {flashcardTestCard?.flashcard.wordEntry.word}
         </div>
 
         <button
