@@ -5,10 +5,12 @@ import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { Modal } from "~/components/Modal";
-import { type FlashcardState, useFlashcardStore } from "~/stores/flashcardStore";
+import {
+  type FlashcardState,
+  useFlashcardStore,
+} from "~/stores/flashcardStore";
 import { useRouter } from "next/router";
 import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
-import { BrushIcon } from "~/icons/BrushIcon";
 import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
 
 type ModalState =
@@ -82,11 +84,6 @@ export const FlashcardTestHeader = ({
             >
               <span className="sr-only">View in Dictionary</span>
               <ArrowOutBoxIcon />
-            </button>
-
-            <button className="h-full px-4">
-              <span className="sr-only">Sketch Box</span>
-              <BrushIcon />
             </button>
 
             <button
