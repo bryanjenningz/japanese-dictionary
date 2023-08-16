@@ -26,6 +26,7 @@ export default function FlashcardTest() {
   const setCurrentFlashcardStatus = useFlashcardStore(
     (x) => x.setCurrentFlashcardStatus
   );
+  const goToNextFlashcard = useFlashcardStore((x) => x.goToNextFlashcard);
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
@@ -73,7 +74,10 @@ export default function FlashcardTest() {
             >
               <button
                 className="flex h-full grow basis-1 flex-col items-center justify-center gap-5"
-                onClick={() => setCurrentFlashcardStatus("Unseen")}
+                onClick={() => {
+                  setCurrentFlashcardStatus("Pass");
+                  goToNextFlashcard();
+                }}
               >
                 <DoneIcon />
                 mark correct
@@ -86,7 +90,10 @@ export default function FlashcardTest() {
               ></div>
               <button
                 className="flex h-full grow basis-1 flex-col items-center justify-center gap-5"
-                onClick={() => setCurrentFlashcardStatus("Unseen")}
+                onClick={() => {
+                  setCurrentFlashcardStatus("Fail");
+                  goToNextFlashcard();
+                }}
               >
                 <CloseIcon />
                 mark incorrect
