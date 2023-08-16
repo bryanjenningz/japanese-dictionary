@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { type MouseEvent, useState } from "react";
-import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
 import { SmallClipboardIcon } from "~/icons/SmallClipboardIcon";
 import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
@@ -158,34 +157,25 @@ export const SideMenu = ({
         )}
         aria-hidden={!isSideMenuOpen}
       >
-        <section
+        <button
           className={classNames(
-            "flex text-white",
-            isDarkMode ? "" : "bg-blue-600"
+            "flex w-full items-center justify-center py-4 text-white",
+            isDarkMode ? "bg-black" : "bg-blue-600"
           )}
+          onClick={() => setIsDarkMode(!isDarkMode)}
         >
-          <button
-            className="flex grow basis-1 items-center justify-center py-4"
-            onClick={() => setIsDarkMode(!isDarkMode)}
-          >
-            {isDarkMode ? (
-              <>
-                <span className="sr-only">Dark mode</span>
-                <MoonIcon />
-              </>
-            ) : (
-              <>
-                <span className="sr-only">Light mode</span>
-                <SunIcon />
-              </>
-            )}
-          </button>
-
-          <button className="flex grow basis-1 items-center justify-center py-4">
-            <span className="sr-only">Furigana mode</span>
-            <FuriganaIcon />
-          </button>
-        </section>
+          {isDarkMode ? (
+            <>
+              <span className="sr-only">Dark mode</span>
+              <MoonIcon />
+            </>
+          ) : (
+            <>
+              <span className="sr-only">Light mode</span>
+              <SunIcon />
+            </>
+          )}
+        </button>
 
         {sideMenuOptionGroups.map(({ label, options }) => {
           return (
