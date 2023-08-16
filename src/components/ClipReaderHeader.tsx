@@ -102,10 +102,13 @@ const SelectedTextMenu = ({
         </button>
       )}
 
-      <button className="flex h-full grow basis-1 items-center justify-center">
+      <Link
+        href={`/?search=${selectedText}`}
+        className="flex h-full grow basis-1 items-center justify-center"
+      >
         <span className="sr-only">Search word</span>
         <SearchIcon />
-      </button>
+      </Link>
 
       <button className="flex h-full grow basis-1 items-center justify-center">
         <span className="sr-only">View word definition</span>
