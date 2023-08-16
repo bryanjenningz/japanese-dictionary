@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { Header } from "~/components/Header";
-import { EmptySearchResultsMenu } from "~/components/EmptySearchResultsMenu";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { useSearch } from "~/dictionary/useSearch";
@@ -58,15 +57,7 @@ export default function Home() {
       />
 
       <div className="flex w-full max-w-2xl flex-col">
-        {(searchText?.trim().length ?? 0) === 0 ? (
-          <EmptySearchResultsMenu />
-        ) : wordEntries.length === 0 ? (
-          <p className="py-4 text-center text-lg">
-            No search results <span aria-hidden>{`:(`}</span>
-          </p>
-        ) : (
-          <SearchResults wordEntries={wordEntries} />
-        )}
+        <SearchResults wordEntries={wordEntries} />
       </div>
     </main>
   );
