@@ -12,22 +12,24 @@ A [Pleco](https://pleco.com) web app clone for Japanese written with [React](htt
 
 ## Screenshots
 
-<img width="200" src="screenshots/screenshot-light-search-romaji.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-search-romaji.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-search-hiragana.png" alt="" />
-<img width="200" src="screenshots/screenshot-light-side-menu.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-side-menu.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-word-page.png" alt="" />
-<img width="200" src="screenshots/screenshot-light-clipboard-reader.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-clipboard-reader.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-clipboard-reader-lookup.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-clipboard-reader-history.png" alt="" />
-<img width="200" src="screenshots/screenshot-light-clipboard-reader-history.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-dictionary-lookup-history.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-flashcards.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-long-press-flashcard.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-flashcard-test-front.png" alt="" />
-<img width="200" src="screenshots/screenshot-dark-flashcard-test-back.png" alt="" />
+<div style="display: flex;">
+  <img width="200" src="screenshots/screenshot-light-search-romaji.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-search-romaji.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-search-hiragana.png" alt="" />
+  <img width="200" src="screenshots/screenshot-light-side-menu.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-side-menu.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-word-page.png" alt="" />
+  <img width="200" src="screenshots/screenshot-light-clipboard-reader.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-clipboard-reader.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-clipboard-reader-lookup.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-clipboard-reader-history.png" alt="" />
+  <img width="200" src="screenshots/screenshot-light-clipboard-reader-history.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-dictionary-lookup-history.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-flashcards.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-long-press-flashcard.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-flashcard-test-front.png" alt="" />
+  <img width="200" src="screenshots/screenshot-dark-flashcard-test-back.png" alt="" />
+</div>
 
 ## Credits
 
