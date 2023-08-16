@@ -19,6 +19,18 @@ import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { Modal } from "~/components/Modal";
 
+type SideMenuOptionGroup = {
+  label: string;
+  options: SideMenuOption[];
+};
+
+type SideMenuOption = {
+  label: string;
+  icon: JSX.Element;
+  href: string;
+  onClick?: (event: MouseEvent) => void;
+};
+
 export const SideMenu = ({
   isSideMenuOpen,
   closeSideMenu,
@@ -44,7 +56,7 @@ export const SideMenu = ({
 
   const [isModalShown, setIsModalShown] = useState(false);
 
-  const sideMenuOptionGroups = [
+  const sideMenuOptionGroups: SideMenuOptionGroup[] = [
     {
       label: "Dictionary",
       options: [
@@ -89,7 +101,9 @@ export const SideMenu = ({
     },
     {
       label: "Settings",
-      options: [{ label: "Settings", icon: <SmallSettingsIcon /> }],
+      options: [
+        { label: "Settings", icon: <SmallSettingsIcon />, href: "/settings" },
+      ],
     },
   ];
 
@@ -189,27 +203,19 @@ export const SideMenu = ({
                   const key = `${label}-${option.label}`;
                   return (
                     <li key={key}>
-                      {"href" in option ? (
-                        <Link
-                          className={classNames(
-                            "flex w-full items-center gap-2 px-4 py-2 text-left text-lg",
-                            router.pathname === option.href &&
-                              (isDarkMode
-                                ? "bg-blue-900 text-white"
-                                : "bg-blue-300 text-black")
-                          )}
-                          href={option.href}
-                          onClick={
-                            "onClick" in option ? option.onClick : undefined
-                          }
-                        >
-                          {option.icon} {option.label}
-                        </Link>
-                      ) : (
-                        <button className="flex w-full items-center gap-2 px-4 py-2 text-left text-lg">
-                          {option.icon} {option.label}
-                        </button>
-                      )}
+                      <Link
+                        className={classNames(
+                          "flex w-full items-center gap-2 px-4 py-2 text-left text-lg",
+                          router.pathname === option.href &&
+                            (isDarkMode
+                              ? "bg-blue-900 text-white"
+                              : "bg-blue-300 text-black")
+                        )}
+                        href={option.href}
+                        onClick={option.onClick}
+                      >
+                        {option.icon} {option.label}
+                      </Link>
                     </li>
                   );
                 })}
