@@ -8,10 +8,12 @@ import { Modal } from "~/components/Modal";
 import {
   type FlashcardState,
   useFlashcardStore,
+  type FlashcardTestCard,
 } from "~/stores/flashcardStore";
 import { useRouter } from "next/router";
 import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
 import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
+import { createWordLink } from "~/utils/createWordLink";
 
 type ModalState =
   | "HIDDEN"
@@ -24,6 +26,7 @@ export const FlashcardTestHeader = ({
 }: {
   openSideMenu: () => void;
 }) => {
+  const router = useRouter();
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
@@ -33,6 +36,10 @@ export const FlashcardTestHeader = ({
     FlashcardState,
     FlashcardState["flashcardTest"]
   >(useFlashcardStore, (x) => x.flashcardTest);
+  const currentFlashcard = useStore<FlashcardState, FlashcardTestCard | null>(
+    useFlashcardStore,
+    (x) => x.getCurrentTestFlashcard()
+  );
   const flashcardNumber = (flashcardTest?.index ?? 0) + 1;
   const flashcardCount = flashcardTest?.flashcards.length ?? 0;
   const flashcardsCorrect =
@@ -80,7 +87,19 @@ export const FlashcardTestHeader = ({
 
             <button
               className="h-full px-4"
-              onClick={() => setModalState("CARD_NOT_REVEALED_MODAL")}
+              onClick={() => {
+                if (!currentFlashcard) return;
+                if (currentFlashcard.status === "Unseen") {
+                  setModalState("CARD_NOT_REVEALED_MODAL");
+                } else {
+                  void router.push(
+                    createWordLink({
+                      searchText: currentFlashcard.flashcard.searchText,
+                      resultIndex: currentFlashcard.flashcard.resultIndex,
+                    })
+                  );
+                }
+              }}
             >
               <span className="sr-only">View in Dictionary</span>
               <ArrowOutBoxIcon />
