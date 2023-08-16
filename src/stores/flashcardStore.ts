@@ -35,10 +35,10 @@ type FlashcardTest = {
 
 export type FlashcardTestCard = {
   flashcard: Flashcard;
-  status: FlashcardTestResultStatus;
+  status: FlashcardTestStatus;
 };
 
-type FlashcardTestResultStatus = "Unseen" | "Seen" | "Pass" | "Fail";
+type FlashcardTestStatus = "Unseen" | "Seen" | "Pass" | "Fail";
 
 export type FlashcardState = {
   flashcards: Flashcard[];
@@ -53,7 +53,7 @@ export type FlashcardState = {
   flashcardTest: FlashcardTest | null;
   startNewFlashcardTest: () => void;
   getCurrentTestFlashcard: () => FlashcardTestCard | null;
-  setCurrentFlashcardStatus: (status: FlashcardTestResultStatus) => void;
+  setCurrentFlashcardStatus: (status: FlashcardTestStatus) => void;
   deleteCurrentFlashcardTest: () => void;
 };
 
@@ -97,7 +97,7 @@ export const useFlashcardStore = create<FlashcardState>()(
         if (!flashcardTest) return null;
         return flashcardTest.flashcards[flashcardTest.index] ?? null;
       },
-      setCurrentFlashcardStatus: (status: FlashcardTestResultStatus) => {
+      setCurrentFlashcardStatus: (status: FlashcardTestStatus) => {
         const flashcardTest = get().flashcardTest;
         if (!flashcardTest) return;
 
