@@ -4,12 +4,19 @@ import { classNames } from "~/utils/classNames";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { FlashcardTestHeader } from "~/components/FlashcardTestHeader";
+import { FlashcardState, useFlashcardStore } from "~/stores/flashcardStore";
 
 export default function FlashcardTest() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
   );
+
+  const flashcardTest = useStore<
+    FlashcardState,
+    FlashcardState["flashcardTest"]
+  >(useFlashcardStore, (x) => x.flashcardTest);
+
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   return (
@@ -26,7 +33,14 @@ export default function FlashcardTest() {
         closeSideMenu={() => setIsSideMenuOpen(false)}
       />
 
-      <div className="flex w-full max-w-2xl flex-col gap-3 p-4"></div>
+      <div className="flex w-full max-w-2xl grow flex-col">
+        <div className="grow p-4 text-4xl">
+          {
+            flashcardTest?.flashcards[flashcardTest.index ?? 0]?.flashcard
+              .wordEntry.word
+          }
+        </div>
+      </div>
     </main>
   );
 }
