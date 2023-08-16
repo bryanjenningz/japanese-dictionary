@@ -73,11 +73,13 @@ export const HistoryHeader = ({
               aria-hidden={!isMoreMenuShown}
             >
               <ul>
-                <li>
-                  <button className="w-full whitespace-nowrap p-4 text-left">
-                    Dump current list to flashcards
-                  </button>
-                </li>
+                {(historyTab === "Dict" || historyTab === "Reader") && (
+                  <li>
+                    <button className="w-full whitespace-nowrap p-4 text-left">
+                      Dump current list to flashcards
+                    </button>
+                  </li>
+                )}
                 <li>
                   <button
                     className="w-full whitespace-nowrap p-4 text-left"
