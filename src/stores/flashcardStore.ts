@@ -42,6 +42,7 @@ type FlashcardTestStatus = "Unseen" | "Seen" | "Pass" | "Fail";
 export type FlashcardState = {
   flashcards: Flashcard[];
   saveFlashcard: (flashcard: Flashcard) => void;
+  saveFlashcards: (flashcards: Flashcard[]) => void;
   deleteFlashcard: (flashcard: Flashcard) => void;
   clearAllFlashcards: () => void;
   isWordEntryAFlashcard: (wordEntry: WordEntry) => boolean;
@@ -70,6 +71,27 @@ export const useFlashcardStore = create<FlashcardState>()(
             ...deleteFlashcard(get().flashcards, flashcard),
           ],
         }),
+      saveFlashcards: (flashcards) => {
+        const serialize = (flashcard: Flashcard): string =>
+          [
+            flashcard.wordEntry.word,
+            flashcard.wordEntry.pronunciation,
+            flashcard.resultIndex,
+          ].join(";");
+        const newFlashcards = new Set();
+        const existingFlashcards = new Set(get().flashcards.map(serialize));
+        set({
+          flashcards: [
+            ...flashcards.filter((x) => {
+              if (existingFlashcards.has(serialize(x))) return false;
+              if (newFlashcards.has(serialize(x))) return false;
+              newFlashcards.add(serialize(x));
+              return true;
+            }),
+            ...get().flashcards,
+          ],
+        });
+      },
       deleteFlashcard: (flashcard) =>
         set({
           flashcards: deleteFlashcard(get().flashcards, flashcard),
