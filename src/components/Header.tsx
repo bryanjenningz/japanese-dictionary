@@ -46,6 +46,10 @@ export const Header = ({
                 isDarkMode ? "bg-slate-800 text-white" : "bg-white text-black"
               )}
               role="search"
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
               value={searchText}
               onChange={(event) => {
                 setSearchText(event.target.value);
