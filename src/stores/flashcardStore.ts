@@ -43,6 +43,7 @@ export type FlashcardState = {
   flashcards: Flashcard[];
   saveFlashcard: (flashcard: Flashcard) => void;
   deleteFlashcard: (flashcard: Flashcard) => void;
+  clearAllFlashcards: () => void;
   isWordEntryAFlashcard: (wordEntry: WordEntry) => boolean;
 
   flashcardTestMaxCards: FlashcardTestMaxCards;
@@ -73,6 +74,7 @@ export const useFlashcardStore = create<FlashcardState>()(
         set({
           flashcards: deleteFlashcard(get().flashcards, flashcard),
         }),
+      clearAllFlashcards: () => set({ flashcards: [] }),
       isWordEntryAFlashcard: (wordEntry: WordEntry) =>
         !!get().flashcards.find((flashcard) =>
           equals(flashcard.wordEntry, wordEntry)

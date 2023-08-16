@@ -21,7 +21,6 @@ import {
   type HistoryTabState,
   useHistoryTabStore,
 } from "~/stores/historyTabStore";
-import { Modal } from "~/components/Modal";
 import { createWordLink } from "~/utils/createWordLink";
 import { formatTime } from "~/utils/formatTime";
 import { useLongPress } from "~/utils/useLongPress";
@@ -107,14 +106,13 @@ export default function History() {
   );
   const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
   const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
+  const clearAllFlashcards = useFlashcardStore((x) => x.clearAllFlashcards);
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const historyTab = useStore<HistoryTabState, HistoryTabState["historyTab"]>(
     useHistoryTabStore,
     (x) => x.historyTab
   );
-
-  const [isModalShown, setIsModalShown] = useState(false);
 
   const longPress = useLongPress<Flashcard | WordSearch>();
 
@@ -136,7 +134,7 @@ export default function History() {
             case "Search":
               return clearSearchHistory();
             case "Cards":
-              return setIsModalShown(true);
+              return clearAllFlashcards();
           }
         }}
       />
@@ -645,23 +643,6 @@ export default function History() {
           }
         })()}
       </div>
-
-      <Modal isShown={isModalShown} onClose={() => setIsModalShown(false)}>
-        <div className="flex flex-col gap-3">
-          <h2 className="text-lg font-semibold">{`Can't Clear Flashcards`}</h2>
-          <p>{`This tab simply displays a list of your most recently modified flashcards - pulling that data directly from your flashcard database - so there's no way to "clear" it.`}</p>
-          <p>{`However, you can tap-hold on an individual card and choose "Delete Card" from the popup menu to permanently delete it.`}</p>
-          <button
-            className={classNames(
-              "self-start p-2",
-              isDarkMode ? "text-blue-500" : "text-black"
-            )}
-            onClick={() => setIsModalShown(false)}
-          >
-            OK
-          </button>
-        </div>
-      </Modal>
     </main>
   );
 }
