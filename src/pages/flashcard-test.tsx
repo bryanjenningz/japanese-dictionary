@@ -102,88 +102,91 @@ export default function FlashcardTest() {
       </Modal>
 
       {flashcardTestCard && (
-        <div className="flex w-full max-w-2xl grow flex-col">
-          <div className="flex grow flex-col gap-3 p-4 text-4xl">
-            <div>{flashcardTestCard.flashcard.wordEntry.word}</div>
+        <>
+          <div className="flex w-full max-w-2xl grow flex-col">
+            <div className="flex grow flex-col gap-3 p-4 text-4xl">
+              <div>{flashcardTestCard.flashcard.wordEntry.word}</div>
 
-            {flashcardTestCard.status !== "Unseen" && (
-              <div className="flex flex-col gap-3 text-2xl">
-                <Pronunciation
-                  word={flashcardTestCard.flashcard.wordEntry.word}
-                  pronunciation={
-                    flashcardTestCard.flashcard.wordEntry.pronunciation
-                  }
-                  pitchAccents={
-                    flashcardTestCard.flashcard.wordEntry.pitchAccents
-                  }
-                />
+              {flashcardTestCard.status !== "Unseen" && (
+                <div className="flex flex-col gap-3 text-2xl">
+                  <Pronunciation
+                    word={flashcardTestCard.flashcard.wordEntry.word}
+                    pronunciation={
+                      flashcardTestCard.flashcard.wordEntry.pronunciation
+                    }
+                    pitchAccents={
+                      flashcardTestCard.flashcard.wordEntry.pitchAccents
+                    }
+                  />
 
-                <p>
-                  {flashcardTestCard.flashcard.wordEntry.definitions.join(", ")}
-                </p>
-              </div>
-            )}
+                  <p>
+                    {flashcardTestCard.flashcard.wordEntry.definitions.join(
+                      ", "
+                    )}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
-          {flashcardTestCard.status === "Unseen" ? (
-            <button
-              className={classNames(
-                "flex h-36 flex-col items-center justify-center gap-5 border-t text-sm font-semibold",
-                isDarkMode
-                  ? "border-slate-500 bg-black text-white"
-                  : "border-slate-400 bg-slate-200 text-slate-600"
-              )}
-              onClick={() => setCurrentFlashcardStatus("Seen")}
-            >
-              <VisibilityIcon />
-              reveal entire card
-            </button>
-          ) : flashcardTestCard.status === "Seen" ? (
-            <div
-              className={classNames(
-                "flex h-36 border-t text-sm font-semibold",
-                isDarkMode
-                  ? "border-slate-500 bg-black text-white"
-                  : "border-slate-400 bg-slate-200 text-slate-600"
-              )}
-            >
-              <button
-                className="flex h-full grow basis-1 flex-col items-center justify-center gap-5"
-                onClick={() => {
-                  setCurrentFlashcardStatus("Pass");
-                  if (isLastFlashcard) {
-                    setIsModalShown(true);
-                  } else {
-                    goToNextFlashcard();
-                  }
-                }}
-              >
-                <DoneIcon />
-                mark correct
-              </button>
-              <div
-                className={classNames(
-                  "h-full w-[1px]",
-                  isDarkMode ? "bg-slate-500" : "bg-slate-400"
-                )}
-              ></div>
-              <button
-                className="flex h-full grow basis-1 flex-col items-center justify-center gap-5"
-                onClick={() => {
-                  setCurrentFlashcardStatus("Fail");
-                  if (isLastFlashcard) {
-                    setIsModalShown(true);
-                  } else {
-                    goToNextFlashcard();
-                  }
-                }}
-              >
-                <CloseIcon />
-                mark incorrect
-              </button>
+          <div
+            className={classNames(
+              "flex w-full justify-center border-t",
+              isDarkMode
+                ? "border-slate-500 bg-black text-white"
+                : "border-slate-400 bg-slate-200 text-slate-600"
+            )}
+          >
+            <div className="flex w-full max-w-2xl flex-col">
+              {flashcardTestCard.status === "Unseen" ? (
+                <button
+                  className="flex h-36 flex-col items-center justify-center gap-5 text-sm font-semibold"
+                  onClick={() => setCurrentFlashcardStatus("Seen")}
+                >
+                  <VisibilityIcon />
+                  reveal entire card
+                </button>
+              ) : flashcardTestCard.status === "Seen" ? (
+                <div className="flex h-36 text-sm font-semibold">
+                  <button
+                    className="flex h-full grow basis-1 flex-col items-center justify-center gap-5"
+                    onClick={() => {
+                      setCurrentFlashcardStatus("Pass");
+                      if (isLastFlashcard) {
+                        setIsModalShown(true);
+                      } else {
+                        goToNextFlashcard();
+                      }
+                    }}
+                  >
+                    <DoneIcon />
+                    mark correct
+                  </button>
+                  <div
+                    className={classNames(
+                      "h-full w-[1px]",
+                      isDarkMode ? "bg-slate-500" : "bg-slate-400"
+                    )}
+                  ></div>
+                  <button
+                    className="flex h-full grow basis-1 flex-col items-center justify-center gap-5"
+                    onClick={() => {
+                      setCurrentFlashcardStatus("Fail");
+                      if (isLastFlashcard) {
+                        setIsModalShown(true);
+                      } else {
+                        goToNextFlashcard();
+                      }
+                    }}
+                  >
+                    <CloseIcon />
+                    mark incorrect
+                  </button>
+                </div>
+              ) : null}
             </div>
-          ) : null}
-        </div>
+          </div>
+        </>
       )}
     </main>
   );
