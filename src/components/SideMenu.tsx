@@ -3,19 +3,12 @@ import { useRouter } from "next/router";
 import { type MouseEvent, useState } from "react";
 import { FuriganaIcon } from "~/icons/FuriganaIcon";
 import { MoonIcon } from "~/icons/MoonIcon";
-import { SmallCameraIcon } from "~/icons/SmallCameraIcon";
-import { SmallCartIcon } from "~/icons/SmallCartIcon";
 import { SmallClipboardIcon } from "~/icons/SmallClipboardIcon";
-import { SmallHelpIcon } from "~/icons/SmallHelpIcon";
 import { SmallHistoryIcon } from "~/icons/SmallHistoryIcon";
-import { SmallImageIcon } from "~/icons/SmallImageIcon";
 import { SmallLearnIcon } from "~/icons/SmallLearnIcon";
-import { SmallMailIcon } from "~/icons/SmallMailIcon";
-import { SmallRegisterIcon } from "~/icons/SmallRegisterIcon";
 import { SmallRocketLaunchIcon } from "~/icons/SmallRocketLaunchIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { SmallSettingsIcon } from "~/icons/SmallSettingsIcon";
-import { SmallStackIcon } from "~/icons/SmallStackIcon";
 import { SunIcon } from "~/icons/SunIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import {
@@ -60,20 +53,6 @@ export const SideMenu = ({
       ],
     },
     {
-      label: "Add-ons",
-      options: [
-        { label: "Add-ons", icon: <SmallCartIcon /> },
-        { label: "Registration", icon: <SmallRegisterIcon /> },
-      ],
-    },
-    {
-      label: "OCR",
-      options: [
-        { label: "Live OCR", icon: <SmallCameraIcon /> },
-        { label: "Still OCR", icon: <SmallImageIcon /> },
-      ],
-    },
-    {
       label: "Reader",
       options: [
         {
@@ -81,7 +60,6 @@ export const SideMenu = ({
           icon: <SmallClipboardIcon />,
           href: "/clip-reader",
         },
-        { label: "Screen Reader/OCR", icon: <SmallStackIcon /> },
       ],
     },
     {
@@ -112,13 +90,6 @@ export const SideMenu = ({
     {
       label: "Settings",
       options: [{ label: "Settings", icon: <SmallSettingsIcon /> }],
-    },
-    {
-      label: "Support",
-      options: [
-        { label: "Help", icon: <SmallHelpIcon /> },
-        { label: "Contact Us", icon: <SmallMailIcon /> },
-      ],
     },
   ];
 
@@ -167,7 +138,7 @@ export const SideMenu = ({
 
       <aside
         className={classNames(
-          "fixed bottom-0 top-0 z-10 transition-[left] duration-300",
+          "fixed bottom-0 top-0 z-10 min-w-[200px] transition-[left] duration-300",
           isDarkMode ? "bg-black text-white" : "bg-white text-black",
           isSideMenuOpen ? "left-0" : "-left-64"
         )}
@@ -218,7 +189,7 @@ export const SideMenu = ({
                   const key = `${label}-${option.label}`;
                   return (
                     <li key={key}>
-                      {option.href ? (
+                      {"href" in option ? (
                         <Link
                           className={classNames(
                             "flex w-full items-center gap-2 px-4 py-2 text-left text-lg",
