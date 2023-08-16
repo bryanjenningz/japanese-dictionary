@@ -2,6 +2,8 @@ import { useState } from "react";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { MoreVerticalIcon } from "~/icons/MoreVerticalIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useFlashcardStore } from "~/stores/flashcardStore";
+import { type HistoryState, useHistoryStore } from "~/stores/historyStore";
 import {
   type HistoryTabState,
   historyTabs,
@@ -26,6 +28,17 @@ export const HistoryHeader = ({
     useDarkModeStore,
     (x) => x.isDarkMode
   );
+
+  const saveFlashcards = useFlashcardStore((x) => x.saveFlashcards);
+  const dictionaryLookups = useStore<
+    HistoryState,
+    HistoryState["dictionaryLookups"]
+  >(useHistoryStore, (x) => x.dictionaryLookups);
+  const clipReaderLookups = useStore<
+    HistoryState,
+    HistoryState["clipReaderLookups"]
+  >(useHistoryStore, (x) => x.clipReaderLookups);
+
   const [isMoreMenuShown, setIsMoreMenuShown] = useState(false);
 
   return (
@@ -75,7 +88,20 @@ export const HistoryHeader = ({
               <ul>
                 {(historyTab === "Dict" || historyTab === "Reader") && (
                   <li>
-                    <button className="w-full whitespace-nowrap p-4 text-left">
+                    <button
+                      className="w-full whitespace-nowrap p-4 text-left"
+                      onClick={() => {
+                        if (historyTab === "Dict" && dictionaryLookups) {
+                          saveFlashcards(dictionaryLookups);
+                        } else if (
+                          historyTab === "Reader" &&
+                          clipReaderLookups
+                        ) {
+                          saveFlashcards(clipReaderLookups);
+                        }
+                        setIsMoreMenuShown(false);
+                      }}
+                    >
                       Dump current list to flashcards
                     </button>
                   </li>
