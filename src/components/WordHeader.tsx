@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
@@ -12,12 +11,6 @@ import { ChevronRightIcon } from "~/icons/ChevronRightIcon";
 import { type WordEntry } from "~/dictionary/search";
 import { createWordLink } from "~/utils/createWordLink";
 import { type WordLookup } from "~/stores/historyStore";
-
-type WordHeaderTab = (typeof wordHeaderTabs)[number];
-
-const DEFAULT_WORD_HEADER_TAB: WordHeaderTab = "Dict";
-
-const wordHeaderTabs = ["Dict", "Stroke", "Chars", "Words", "Sents"] as const;
 
 export const WordHeader = ({
   wordLookup,
@@ -40,10 +33,6 @@ export const WordHeader = ({
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
-  );
-
-  const [wordHeaderTab, setWordHeaderTab] = useState<WordHeaderTab>(
-    DEFAULT_WORD_HEADER_TAB
   );
 
   return (
@@ -151,34 +140,6 @@ export const WordHeader = ({
                 pitchAccents={wordLookup.wordEntry.pitchAccents}
               />
             </div>
-          </section>
-
-          <section
-            className={classNames(
-              "flex h-10 items-center",
-              isDarkMode ? "bg-black text-white" : "bg-white text-black"
-            )}
-          >
-            {wordHeaderTabs.map((tab) => {
-              return (
-                <button
-                  key={tab}
-                  className={classNames(
-                    "flex h-full grow items-center justify-center text-sm font-bold uppercase",
-                    wordHeaderTab === tab
-                      ? isDarkMode
-                        ? "border-b-2 border-blue-500 text-blue-500"
-                        : "border-b-2 border-blue-600 text-blue-600"
-                      : isDarkMode
-                      ? "text-blue-700"
-                      : "text-blue-400"
-                  )}
-                  onClick={() => setWordHeaderTab(tab)}
-                >
-                  {tab}
-                </button>
-              );
-            })}
           </section>
         </div>
       </div>
