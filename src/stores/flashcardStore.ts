@@ -52,6 +52,7 @@ export type FlashcardState = {
   ) => void;
   flashcardTest: FlashcardTest | null;
   startNewFlashcardTest: () => void;
+  getCurrentTestFlashcard: () => FlashcardTestResult | null;
   setCurrentFlashcardStatus: (status: FlashcardTestResultStatus) => void;
   deleteCurrentFlashcardTest: () => void;
 };
@@ -91,6 +92,11 @@ export const useFlashcardStore = create<FlashcardState>()(
             index: 0,
           },
         }),
+      getCurrentTestFlashcard: () => {
+        const flashcardTest = get().flashcardTest;
+        if (!flashcardTest) return null;
+        return flashcardTest.flashcards[flashcardTest.index] ?? null;
+      },
       setCurrentFlashcardStatus: (status: FlashcardTestResultStatus) => {
         const flashcardTest = get().flashcardTest;
         if (!flashcardTest) return;
