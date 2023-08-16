@@ -1,14 +1,12 @@
 import Link from "next/link";
 import { AddBoxIcon } from "~/icons/AddBoxIcon";
 import { AddIcon } from "~/icons/AddIcon";
-import { CampaignIcon } from "~/icons/CampaignIcon";
 import { ContentCopyIcon } from "~/icons/ContentCopyIcon";
 import { HistoryIcon } from "~/icons/HistoryIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { OpenInNewIcon } from "~/icons/OpenInNewIcon";
 import { RefreshIcon } from "~/icons/RefreshIcon";
 import { SearchIcon } from "~/icons/SearchIcon";
-import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
 import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useFlashcardStore } from "~/stores/flashcardStore";
@@ -84,16 +82,6 @@ const SelectedTextMenu = ({
       >
         <span className="sr-only">Copy selected text</span>
         <ContentCopyIcon />
-      </button>
-
-      <button className="flex h-full grow basis-1 items-center justify-center">
-        <span className="sr-only">Listen to pronunciation</span>
-        <VolumeUpIcon />
-      </button>
-
-      <button className="flex h-full grow basis-1 items-center justify-center">
-        <span className="sr-only">Read text out loud</span>
-        <CampaignIcon />
       </button>
 
       {wordEntryIsFlashcard ? (
