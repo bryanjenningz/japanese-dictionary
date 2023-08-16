@@ -1,12 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useMemo } from "react";
-import { BrushIcon } from "~/icons/BrushIcon";
-import { CameraIcon } from "~/icons/CameraIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
-import { KeyboardIcon } from "~/icons/KeyboardIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
-import { MicrophoneIcon } from "~/icons/MicrophoneIcon";
-import { PuzzlePieceIcon } from "~/icons/PuzzlePieceIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useHistoryStore } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
@@ -14,18 +9,6 @@ import { classNames } from "~/utils/classNames";
 import { debounce } from "~/utils/debounce";
 
 type SearchLanguage = "English" | "Japanese";
-
-type HeaderTabId = (typeof headerTabs)[number]["id"];
-
-const DEFAULT_HEADER_TAB_ID: HeaderTabId = 3;
-
-const headerTabs = [
-  { id: 1, label: "Search by drawing characters", icon: <BrushIcon /> },
-  { id: 2, label: "Search by character primitives", icon: <PuzzlePieceIcon /> },
-  { id: 3, label: "Search by keyboard", icon: <KeyboardIcon /> },
-  { id: 4, label: "Search by talking", icon: <MicrophoneIcon /> },
-  { id: 5, label: "Search by picture", icon: <CameraIcon /> },
-] as const;
 
 export const Header = ({
   openSideMenu,
@@ -46,10 +29,6 @@ export const Header = ({
 
   const [searchLanguage, setSearchLanguage] =
     useState<SearchLanguage>("English");
-
-  const [headerTabId, setHeaderTabId] = useState<HeaderTabId>(
-    DEFAULT_HEADER_TAB_ID
-  );
 
   return (
     <header
@@ -117,24 +96,6 @@ export const Header = ({
               <span aria-hidden>{searchLanguage[0]}</span>
             </span>
           </button>
-        </section>
-
-        <section className="flex h-14 items-center">
-          {headerTabs.map(({ id, label, icon }) => {
-            return (
-              <button
-                key={id}
-                className={classNames(
-                  "flex h-full grow items-center justify-center",
-                  headerTabId === id && "border-b-2 border-white"
-                )}
-                onClick={() => setHeaderTabId(id)}
-              >
-                <span className="sr-only">{label}</span>
-                {icon}
-              </button>
-            );
-          })}
         </section>
       </div>
     </header>
