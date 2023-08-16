@@ -13,6 +13,7 @@ import { useFlashcardStore } from "~/stores/flashcardStore";
 import { type WordLookup } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
+import { createWordLink } from "~/utils/createWordLink";
 
 const UnselectedTextMenu = ({ openSideMenu }: { openSideMenu: () => void }) => {
   const addClipReaderText = useClipReaderTextStore((x) => x.addClipReaderText);
@@ -110,10 +111,16 @@ const SelectedTextMenu = ({
         <SearchIcon />
       </Link>
 
-      <button className="flex h-full grow basis-1 items-center justify-center">
+      <Link
+        href={createWordLink({
+          searchText: wordLookup.searchText,
+          resultIndex: wordLookup.resultIndex,
+        })}
+        className="flex h-full grow basis-1 items-center justify-center"
+      >
         <span className="sr-only">View word definition</span>
         <OpenInNewIcon />
-      </button>
+      </Link>
     </section>
   );
 };
