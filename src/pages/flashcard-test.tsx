@@ -10,6 +10,8 @@ import {
   type FlashcardTestCard,
 } from "~/stores/flashcardStore";
 import { VisibilityIcon } from "~/icons/VisibilityIcon";
+import { DoneIcon } from "~/icons/DoneIcon";
+import { CloseIcon } from "~/icons/CloseIcon";
 
 export default function FlashcardTest() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -47,18 +49,50 @@ export default function FlashcardTest() {
             {flashcardTestCard.flashcard.wordEntry.word}
           </div>
 
-          <button
-            className={classNames(
-              "flex flex-col items-center gap-6 border-t p-8 text-sm font-semibold",
-              isDarkMode
-                ? "border-slate-500 bg-black text-white"
-                : "border-slate-400 bg-slate-200 text-slate-600"
-            )}
-            onClick={() => setCurrentFlashcardStatus("Seen")}
-          >
-            <VisibilityIcon />
-            reveal entire card
-          </button>
+          {flashcardTestCard.status === "Unseen" ? (
+            <button
+              className={classNames(
+                "flex h-36 flex-col items-center justify-center gap-5 border-t text-sm font-semibold",
+                isDarkMode
+                  ? "border-slate-500 bg-black text-white"
+                  : "border-slate-400 bg-slate-200 text-slate-600"
+              )}
+              onClick={() => setCurrentFlashcardStatus("Seen")}
+            >
+              <VisibilityIcon />
+              reveal entire card
+            </button>
+          ) : flashcardTestCard.status === "Seen" ? (
+            <div
+              className={classNames(
+                "flex h-36 border-t text-sm font-semibold",
+                isDarkMode
+                  ? "border-slate-500 bg-black text-white"
+                  : "border-slate-400 bg-slate-200 text-slate-600"
+              )}
+            >
+              <button
+                className="flex h-full grow basis-1 flex-col items-center justify-center gap-5"
+                onClick={() => setCurrentFlashcardStatus("Unseen")}
+              >
+                <DoneIcon />
+                mark correct
+              </button>
+              <div
+                className={classNames(
+                  "h-full w-[1px]",
+                  isDarkMode ? "bg-slate-500" : "bg-slate-400"
+                )}
+              ></div>
+              <button
+                className="flex h-full grow basis-1 flex-col items-center justify-center gap-5"
+                onClick={() => setCurrentFlashcardStatus("Unseen")}
+              >
+                <CloseIcon />
+                mark incorrect
+              </button>
+            </div>
+          ) : null}
         </div>
       )}
     </main>
