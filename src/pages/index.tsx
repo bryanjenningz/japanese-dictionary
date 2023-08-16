@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Header } from "~/components/Header";
+import { SearchHeader } from "~/components/SearchHeader";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { useSearch } from "~/dictionary/useSearch";
@@ -45,7 +45,7 @@ export default function Home() {
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       )}
     >
-      <Header
+      <SearchHeader
         openSideMenu={() => setIsSideMenuOpen(true)}
         searchText={searchText ?? ""}
         setSearchText={setSearchText}

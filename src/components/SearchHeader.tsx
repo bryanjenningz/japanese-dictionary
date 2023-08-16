@@ -8,7 +8,7 @@ import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { debounce } from "~/utils/debounce";
 
-export const Header = ({
+export const SearchHeader = ({
   openSideMenu,
   searchText,
   setSearchText,
