@@ -4,7 +4,10 @@ import { Pronunciation } from "~/components/Pronunciation";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import Link from "next/link";
-import { type SearchTextState, useSearchTextStore } from "~/stores/searchTextStore";
+import {
+  type SearchTextState,
+  useSearchTextStore,
+} from "~/stores/searchTextStore";
 import { createWordLink } from "~/utils/createWordLink";
 
 export const SearchResults = ({
@@ -26,7 +29,7 @@ export const SearchResults = ({
     <ul>
       {wordEntries.map((wordEntry, resultIndex) => {
         const { word, pronunciation, pitchAccents, definitions } = wordEntry;
-        const key = `${word}-${pronunciation}`;
+        const key = `${word}-${pronunciation}-${resultIndex}}`;
         return (
           <li key={key}>
             <Link
