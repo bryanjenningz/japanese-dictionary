@@ -14,6 +14,7 @@ import { DoneIcon } from "~/icons/DoneIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
 import { Modal } from "~/components/Modal";
 import { useRouter } from "next/router";
+import { Pronunciation } from "~/components/Pronunciation";
 
 export default function FlashcardTest() {
   const router = useRouter();
@@ -102,8 +103,26 @@ export default function FlashcardTest() {
 
       {flashcardTestCard && (
         <div className="flex w-full max-w-2xl grow flex-col">
-          <div className="grow p-4 text-4xl">
-            {flashcardTestCard.flashcard.wordEntry.word}
+          <div className="flex grow flex-col gap-3 p-4 text-4xl">
+            <div>{flashcardTestCard.flashcard.wordEntry.word}</div>
+
+            {flashcardTestCard.status !== "Unseen" && (
+              <div className="flex flex-col gap-3 text-2xl">
+                <Pronunciation
+                  word={flashcardTestCard.flashcard.wordEntry.word}
+                  pronunciation={
+                    flashcardTestCard.flashcard.wordEntry.pronunciation
+                  }
+                  pitchAccents={
+                    flashcardTestCard.flashcard.wordEntry.pitchAccents
+                  }
+                />
+
+                <p>
+                  {flashcardTestCard.flashcard.wordEntry.definitions.join(", ")}
+                </p>
+              </div>
+            )}
           </div>
 
           {flashcardTestCard.status === "Unseen" ? (
