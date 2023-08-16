@@ -4,7 +4,8 @@ import { classNames } from "~/utils/classNames";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { FlashcardTestHeader } from "~/components/FlashcardTestHeader";
-import { FlashcardState, useFlashcardStore } from "~/stores/flashcardStore";
+import { type FlashcardState, useFlashcardStore } from "~/stores/flashcardStore";
+import { VisibilityIcon } from "~/icons/VisibilityIcon";
 
 export default function FlashcardTest() {
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
@@ -40,6 +41,11 @@ export default function FlashcardTest() {
               .wordEntry.word
           }
         </div>
+
+        <button className="flex flex-col items-center gap-6 border-t border-slate-500 p-8 text-sm font-semibold">
+          <VisibilityIcon />
+          reveal entire card
+        </button>
       </div>
     </main>
   );
