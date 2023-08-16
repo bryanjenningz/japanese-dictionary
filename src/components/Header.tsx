@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { CloseIcon } from "~/icons/CloseIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
@@ -7,8 +7,6 @@ import { useHistoryStore } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { debounce } from "~/utils/debounce";
-
-type SearchLanguage = "English" | "Japanese";
 
 export const Header = ({
   openSideMenu,
@@ -27,9 +25,6 @@ export const Header = ({
   const addSearch_ = useHistoryStore((x) => x.addSearch);
   const addSearch = useMemo(() => debounce(addSearch_, 500), [addSearch_]);
 
-  const [searchLanguage, setSearchLanguage] =
-    useState<SearchLanguage>("English");
-
   return (
     <header
       className={classNames(
@@ -38,7 +33,7 @@ export const Header = ({
       )}
     >
       <div className="w-full max-w-2xl">
-        <section className="flex h-14 items-center">
+        <section className="flex h-14 items-center pr-4">
           <button className="h-full px-4" onClick={openSideMenu}>
             <span className="sr-only">Open side menu</span>
             <MenuIcon />
@@ -71,31 +66,6 @@ export const Header = ({
               <CloseIcon />
             </button>
           </div>
-
-          <button
-            className="flex h-full items-center justify-center px-4"
-            onClick={() =>
-              setSearchLanguage((searchLanguage) =>
-                searchLanguage === "English" ? "Japanese" : "English"
-              )
-            }
-          >
-            <span
-              className={classNames(
-                "flex h-6 w-6 items-center justify-center rounded border-2 border-white text-lg font-bold",
-                searchLanguage === "English"
-                  ? isDarkMode
-                    ? "bg-black text-white"
-                    : "bg-blue-600 text-white"
-                  : isDarkMode
-                  ? "bg-white text-black"
-                  : "bg-white text-blue-600"
-              )}
-            >
-              <span className="sr-only">{searchLanguage} search</span>
-              <span aria-hidden>{searchLanguage[0]}</span>
-            </span>
-          </button>
         </section>
       </div>
     </header>
