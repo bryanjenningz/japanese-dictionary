@@ -5,7 +5,7 @@ import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { Modal } from "~/components/Modal";
-import { useFlashcardStore } from "~/stores/flashcardStore";
+import { type FlashcardState, useFlashcardStore } from "~/stores/flashcardStore";
 import { useRouter } from "next/router";
 import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
 import { BrushIcon } from "~/icons/BrushIcon";
@@ -27,6 +27,21 @@ export const FlashcardTestHeader = ({
     (x) => x.isDarkMode
   );
 
+  const flashcardTest = useStore<
+    FlashcardState,
+    FlashcardState["flashcardTest"]
+  >(useFlashcardStore, (x) => x.flashcardTest);
+  const flashcardNumber = (flashcardTest?.index ?? 0) + 1;
+  const flashcardCount = flashcardTest?.flashcards.length ?? 0;
+  const flashcardsCorrect =
+    flashcardTest?.flashcards.filter((x) => x.status === "Pass").length ?? 0;
+  const flashcardsIncorrect =
+    flashcardTest?.flashcards.filter((x) => x.status === "Fail").length ?? 0;
+  const flashcardPercentCorrect =
+    Math.floor(
+      (flashcardsCorrect / (flashcardsCorrect + flashcardsIncorrect)) * 100
+    ) || 0;
+
   const [modalState, setModalState] = useState<ModalState>("HIDDEN");
 
   return (
@@ -38,7 +53,7 @@ export const FlashcardTestHeader = ({
 
       <header
         className={classNames(
-          "flex w-full justify-center text-white shadow",
+          "flex w-full flex-col items-center text-white shadow",
           isDarkMode ? "bg-black" : "bg-blue-600"
         )}
       >
@@ -82,6 +97,19 @@ export const FlashcardTestHeader = ({
               <VolumeUpIcon />
             </button>
           </section>
+        </div>
+
+        <div
+          className={classNames(
+            "flex w-full justify-center text-sm font-semibold",
+            isDarkMode ? "bg-slate-700 text-white" : "bg-slate-300 text-black"
+          )}
+        >
+          <div className="flex w-full max-w-2xl justify-between px-4">
+            <span aria-label="Flashcard number">{`${flashcardNumber}/${flashcardCount}`}</span>
+            <span aria-label="Correct and incorrect counts">{`${flashcardsCorrect}:${flashcardsIncorrect}`}</span>
+            <span aria-label="Correct percentage">{`${flashcardPercentCorrect}%`}</span>
+          </div>
         </div>
       </header>
     </>
