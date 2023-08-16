@@ -54,6 +54,7 @@ export type FlashcardState = {
   startNewFlashcardTest: () => void;
   getCurrentTestFlashcard: () => FlashcardTestCard | null;
   setCurrentFlashcardStatus: (status: FlashcardTestStatus) => void;
+  isLastFlashcard: () => boolean;
   goToNextFlashcard: () => void;
   deleteCurrentFlashcardTest: () => void;
 };
@@ -112,6 +113,9 @@ export const useFlashcardStore = create<FlashcardState>()(
           },
         });
       },
+      isLastFlashcard: () =>
+        get().flashcardTest?.index ===
+        (get().flashcardTest?.flashcards.length ?? 0) - 1,
       goToNextFlashcard: () => {
         const flashcardTest = get().flashcardTest;
         if (!flashcardTest) return;
