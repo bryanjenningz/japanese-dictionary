@@ -4,7 +4,10 @@ import { classNames } from "~/utils/classNames";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { FlashcardTestHeader } from "~/components/FlashcardTestHeader";
-import { type FlashcardState, useFlashcardStore } from "~/stores/flashcardStore";
+import {
+  type FlashcardState,
+  useFlashcardStore,
+} from "~/stores/flashcardStore";
 import { VisibilityIcon } from "~/icons/VisibilityIcon";
 
 export default function FlashcardTest() {
@@ -42,7 +45,14 @@ export default function FlashcardTest() {
           }
         </div>
 
-        <button className="flex flex-col items-center gap-6 border-t border-slate-500 p-8 text-sm font-semibold">
+        <button
+          className={classNames(
+            "flex flex-col items-center gap-6 border-t p-8 text-sm font-semibold",
+            isDarkMode
+              ? "border-slate-500 bg-black text-white"
+              : "border-slate-400 bg-slate-200 text-slate-600"
+          )}
+        >
           <VisibilityIcon />
           reveal entire card
         </button>
