@@ -12,7 +12,6 @@ import {
 } from "~/stores/flashcardStore";
 import { useRouter } from "next/router";
 import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
-import { VolumeUpIcon } from "~/icons/VolumeUpIcon";
 import { createWordLink } from "~/utils/createWordLink";
 
 type ModalState =
@@ -103,14 +102,6 @@ export const FlashcardTestHeader = ({
             >
               <span className="sr-only">View in Dictionary</span>
               <ArrowOutBoxIcon />
-            </button>
-
-            <button
-              className="h-full px-4"
-              onClick={() => setModalState("AUDIO_NOT_REVEALED_MODAL")}
-            >
-              <span className="sr-only">Audio</span>
-              <VolumeUpIcon />
             </button>
           </section>
         </div>
