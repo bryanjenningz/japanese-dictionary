@@ -10,13 +10,7 @@ type HistoryTab = (typeof historyTabs)[number];
 
 const DEFAULT_HISTORY_TAB: HistoryTab = "Dict";
 
-export const historyTabs = [
-  "Dict",
-  "Reader",
-  "OCR",
-  "Search",
-  "Cards",
-] as const;
+export const historyTabs = ["Dict", "Reader", "Search", "Cards"] as const;
 
 export const useHistoryTabStore = create<HistoryTabState>()(
   persist(

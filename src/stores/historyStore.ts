@@ -18,7 +18,6 @@ export type WordSearch = {
 export type HistoryState = {
   dictionaryLookups: WordLookup[];
   clipReaderLookups: WordLookup[];
-  ocrLookups: WordLookup[];
   searches: WordSearch[];
 
   addDictionaryLookup: (lookup: WordLookup) => void;
@@ -28,10 +27,6 @@ export type HistoryState = {
   addClipReaderLookup: (lookup: WordLookup) => void;
   removeClipReaderLookup: (lookup: WordLookup) => void;
   clearClipReaderHistory: () => void;
-
-  addOcrLookup: (lookup: WordLookup) => void;
-  removeOcrLookup: (lookup: WordLookup) => void;
-  clearOcrHistory: () => void;
 
   addSearch: (search: WordSearch) => void;
   removeSearch: (search: WordSearch) => void;
@@ -43,7 +38,6 @@ export const useHistoryStore = create<HistoryState>()(
     (set, get) => ({
       dictionaryLookups: [],
       clipReaderLookups: [],
-      ocrLookups: [],
       searches: [],
 
       addDictionaryLookup: (lookup: WordLookup) =>
@@ -72,12 +66,6 @@ export const useHistoryStore = create<HistoryState>()(
           ),
         }),
       clearClipReaderHistory: () => set({ clipReaderLookups: [] }),
-
-      addOcrLookup: (lookup: WordLookup) =>
-        set({ ocrLookups: [lookup, ...get().ocrLookups] }),
-      removeOcrLookup: (lookup: WordLookup) =>
-        set({ ocrLookups: get().ocrLookups.filter((x) => !equals(x, lookup)) }),
-      clearOcrHistory: () => set({ ocrLookups: [] }),
 
       addSearch: (search: WordSearch) =>
         set({

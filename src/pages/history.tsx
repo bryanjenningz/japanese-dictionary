@@ -101,12 +101,6 @@ export default function History() {
     (x) => x.clearClipReaderHistory
   );
 
-  const ocrLookups = useStore<HistoryState, HistoryState["ocrLookups"]>(
-    useHistoryStore,
-    (x) => x.ocrLookups
-  );
-  const clearOcrHistory = useHistoryStore((x) => x.clearOcrHistory);
-
   const flashcards = useStore<FlashcardState, FlashcardState["flashcards"]>(
     useFlashcardStore,
     (x) => x.flashcards
@@ -139,8 +133,6 @@ export default function History() {
               return clearDictionaryHistory();
             case "Reader":
               return clearClipReaderHistory();
-            case "OCR":
-              return clearOcrHistory();
             case "Search":
               return clearSearchHistory();
             case "Cards":
@@ -467,21 +459,6 @@ export default function History() {
                       );
                     }
                   )}
-                </div>
-              );
-
-            case "OCR":
-              return (
-                <div>
-                  {ocrLookups?.map((lookup) => {
-                    const key = `${lookup.wordEntry.word}-${lookup.time}`;
-                    return (
-                      <div key={key}>
-                        <div>{lookup.time}</div>
-                        <div>{lookup.wordEntry.word}</div>
-                      </div>
-                    );
-                  })}
                 </div>
               );
 
