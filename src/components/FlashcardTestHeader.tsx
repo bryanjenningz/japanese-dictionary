@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { CloseIcon } from "~/icons/CloseIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
@@ -22,111 +22,19 @@ export const FlashcardTestHeader = ({
 }: {
   openSideMenu: () => void;
 }) => {
-  const router = useRouter();
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
-  );
-
-  const deleteCurrentFlashcardTest = useFlashcardStore(
-    (x) => x.deleteCurrentFlashcardTest
   );
 
   const [modalState, setModalState] = useState<ModalState>("HIDDEN");
 
   return (
     <>
-      <Modal
-        isShown={modalState !== "HIDDEN"}
-        onClose={() => setModalState("HIDDEN")}
-      >
-        <div className="flex flex-col gap-3">
-          {((): JSX.Element => {
-            switch (modalState) {
-              case "HIDDEN":
-                return <></>;
-
-              case "EXIT_SESSION_MODAL":
-                return (
-                  <>
-                    <h2 className="text-xl">Exit Session</h2>
-
-                    <p>{`Exit this session? (any card scores already recorded will be preserved)`}</p>
-
-                    <div className="flex items-center justify-end">
-                      <button
-                        className={classNames(
-                          "px-4 py-2 uppercase",
-                          isDarkMode ? "text-blue-500" : "text-black"
-                        )}
-                        onClick={() => setModalState("HIDDEN")}
-                      >
-                        No
-                      </button>
-
-                      <button
-                        className={classNames(
-                          "px-4 py-2 uppercase",
-                          isDarkMode ? "text-blue-500" : "text-black"
-                        )}
-                        onClick={() => {
-                          deleteCurrentFlashcardTest();
-                          void router.replace("/new-flashcard-test");
-                        }}
-                      >
-                        Yes
-                      </button>
-                    </div>
-                  </>
-                );
-
-              case "CARD_NOT_REVEALED_MODAL":
-                return (
-                  <>
-                    <h2 className="text-xl">Card Not Revealed</h2>
-
-                    <p>{`Sorry, to avoid accidental cheating you can only display the dictionary definition screen for a card after it's fully revealed.`}</p>
-
-                    <div className="flex items-center">
-                      <button
-                        className={classNames(
-                          "px-4 py-2 uppercase",
-                          isDarkMode ? "text-blue-500" : "text-black"
-                        )}
-                        onClick={() => setModalState("HIDDEN")}
-                      >
-                        Ok
-                      </button>
-                    </div>
-                  </>
-                );
-
-              case "AUDIO_NOT_REVEALED_MODAL":
-                return (
-                  <>
-                    <h2 className="text-xl">Audio Not Revealed</h2>
-
-                    <p>{`Your current flashcard test settings only allow audio to be played after a card is fully revealed (to avoid accidentally giving away the answer).`}</p>
-
-                    <p>{`To change this, select "Audio" as one of your "Show" options in the main flashcard test configuration screen.`}</p>
-
-                    <div className="flex items-center">
-                      <button
-                        className={classNames(
-                          "px-4 py-2 uppercase",
-                          isDarkMode ? "text-blue-500" : "text-black"
-                        )}
-                        onClick={() => setModalState("HIDDEN")}
-                      >
-                        Ok
-                      </button>
-                    </div>
-                  </>
-                );
-            }
-          })()}
-        </div>
-      </Modal>
+      <FlashcardTestHeaderModal
+        modalState={modalState}
+        setModalState={setModalState}
+      />
 
       <header
         className={classNames(
@@ -177,5 +85,118 @@ export const FlashcardTestHeader = ({
         </div>
       </header>
     </>
+  );
+};
+
+const FlashcardTestHeaderModal = ({
+  modalState,
+  setModalState,
+}: {
+  modalState: ModalState;
+  setModalState: Dispatch<SetStateAction<ModalState>>;
+}) => {
+  const router = useRouter();
+
+  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
+    useDarkModeStore,
+    (x) => x.isDarkMode
+  );
+
+  const deleteCurrentFlashcardTest = useFlashcardStore(
+    (x) => x.deleteCurrentFlashcardTest
+  );
+
+  return (
+    <Modal
+      isShown={modalState !== "HIDDEN"}
+      onClose={() => setModalState("HIDDEN")}
+    >
+      <div className="flex flex-col gap-3">
+        {((): JSX.Element => {
+          switch (modalState) {
+            case "HIDDEN":
+              return <></>;
+
+            case "EXIT_SESSION_MODAL":
+              return (
+                <>
+                  <h2 className="text-xl">Exit Session</h2>
+
+                  <p>{`Exit this session? (any card scores already recorded will be preserved)`}</p>
+
+                  <div className="flex items-center justify-end">
+                    <button
+                      className={classNames(
+                        "px-4 py-2 uppercase",
+                        isDarkMode ? "text-blue-500" : "text-black"
+                      )}
+                      onClick={() => setModalState("HIDDEN")}
+                    >
+                      No
+                    </button>
+
+                    <button
+                      className={classNames(
+                        "px-4 py-2 uppercase",
+                        isDarkMode ? "text-blue-500" : "text-black"
+                      )}
+                      onClick={() => {
+                        deleteCurrentFlashcardTest();
+                        void router.replace("/new-flashcard-test");
+                      }}
+                    >
+                      Yes
+                    </button>
+                  </div>
+                </>
+              );
+
+            case "CARD_NOT_REVEALED_MODAL":
+              return (
+                <>
+                  <h2 className="text-xl">Card Not Revealed</h2>
+
+                  <p>{`Sorry, to avoid accidental cheating you can only display the dictionary definition screen for a card after it's fully revealed.`}</p>
+
+                  <div className="flex items-center">
+                    <button
+                      className={classNames(
+                        "px-4 py-2 uppercase",
+                        isDarkMode ? "text-blue-500" : "text-black"
+                      )}
+                      onClick={() => setModalState("HIDDEN")}
+                    >
+                      Ok
+                    </button>
+                  </div>
+                </>
+              );
+
+            case "AUDIO_NOT_REVEALED_MODAL":
+              return (
+                <>
+                  <h2 className="text-xl">Audio Not Revealed</h2>
+
+                  <p>{`Your current flashcard test settings only allow audio to be played after a card is fully revealed (to avoid accidentally giving away the answer).`}</p>
+
+                  <p>{`To change this, select "Audio" as one of your "Show" options in the main flashcard test configuration screen.`}</p>
+
+                  <div className="flex items-center">
+                    <button
+                      className={classNames(
+                        "px-4 py-2 uppercase",
+                        isDarkMode ? "text-blue-500" : "text-black"
+                      )}
+                      onClick={() => setModalState("HIDDEN")}
+                    >
+                      Ok
+                    </button>
+                  </div>
+                </>
+              );
+          }
+        })()}
+      </div>
+    </Modal>
   );
 };
