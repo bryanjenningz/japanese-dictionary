@@ -14,11 +14,7 @@ import { useRouter } from "next/router";
 import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
 import { createWordLink } from "~/utils/createWordLink";
 
-type ModalState =
-  | "HIDDEN"
-  | "EXIT_SESSION_MODAL"
-  | "CARD_NOT_REVEALED_MODAL"
-  | "AUDIO_NOT_REVEALED_MODAL";
+type ModalState = "HIDDEN" | "EXIT_SESSION_MODAL" | "CARD_NOT_REVEALED_MODAL";
 
 export const FlashcardTestHeader = ({
   openSideMenu,
@@ -192,29 +188,6 @@ const FlashcardTestHeaderModal = ({
                   <h2 className="text-xl">Card Not Revealed</h2>
 
                   <p>{`Sorry, to avoid accidental cheating you can only display the dictionary definition screen for a card after it's fully revealed.`}</p>
-
-                  <div className="flex items-center">
-                    <button
-                      className={classNames(
-                        "px-4 py-2 uppercase",
-                        isDarkMode ? "text-blue-500" : "text-black"
-                      )}
-                      onClick={() => setModalState("HIDDEN")}
-                    >
-                      Ok
-                    </button>
-                  </div>
-                </>
-              );
-
-            case "AUDIO_NOT_REVEALED_MODAL":
-              return (
-                <>
-                  <h2 className="text-xl">Audio Not Revealed</h2>
-
-                  <p>{`Your current flashcard test settings only allow audio to be played after a card is fully revealed (to avoid accidentally giving away the answer).`}</p>
-
-                  <p>{`To change this, select "Audio" as one of your "Show" options in the main flashcard test configuration screen.`}</p>
 
                   <div className="flex items-center">
                     <button
