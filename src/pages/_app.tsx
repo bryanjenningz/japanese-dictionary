@@ -9,7 +9,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <title>React Pleco</title>
         <meta
           name="description"
-          content="A Pleco web app clone written with React."
+          content="A Pleco web app clone for Japanese written with React."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
