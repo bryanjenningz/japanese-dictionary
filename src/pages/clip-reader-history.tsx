@@ -68,7 +68,7 @@ export default function ClipReaderHistory() {
                 )}
               >
                 <button
-                  className="relative flex w-full flex-col gap-1 p-4"
+                  className="relative flex w-full select-none flex-col gap-1 p-4"
                   onTouchStart={() => longPress.onTouchStart(clipReaderText)}
                   onTouchEnd={longPress.onTouchEnd}
                   onMouseDown={() => longPress.onTouchStart(clipReaderText)}
