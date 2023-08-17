@@ -34,9 +34,13 @@ describe("romajiToHiragana", () => {
     });
   });
 
-  describe("Strings with dashes in romaji", () => {
+  describe("Strings with special characters in romaji", () => {
     it("Returns `ろーまじ` for the string `ro-maji`", () => {
       expect(romajiToHiragana("ro-maji")).toEqual("ろーまじ");
+    });
+
+    it("Returns `はんい` for the string `han'i`", () => {
+      expect(romajiToHiragana("han'i")).toEqual("はんい");
     });
   });
 });

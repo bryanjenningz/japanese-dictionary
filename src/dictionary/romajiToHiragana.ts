@@ -135,6 +135,11 @@ export const romajiToHiragana = (romaji: string): string => {
   let result = "";
   let i = 0;
   while (i < romaji.length) {
+    if (romaji[i] === "'") {
+      i += 1;
+      continue;
+    }
+
     if (DOUBLE_CONSONANTS.has(romaji.slice(i, i + 2))) {
       result += DOUBLE_CONSONANT_HIRAGANA;
       i += 1;
