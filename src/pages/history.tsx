@@ -213,7 +213,7 @@ export default function History() {
                                       );
                                     }}
                                     className={classNames(
-                                      "flex select-none flex-col border-b p-2",
+                                      "flex w-full select-none flex-col border-b p-2 text-left",
                                       isDarkMode
                                         ? "border-slate-500"
                                         : "border-slate-300"
@@ -370,7 +370,7 @@ export default function History() {
                                       );
                                     }}
                                     className={classNames(
-                                      "flex select-none flex-col border-b p-2",
+                                      "flex w-full select-none flex-col border-b p-2 text-left",
                                       isDarkMode
                                         ? "border-slate-500"
                                         : "border-slate-300"
@@ -499,7 +499,7 @@ export default function History() {
                                   onClick={() => {
                                     void router.push(`/?search=${searchText}`);
                                   }}
-                                  className="block select-none p-2 text-lg"
+                                  className="block w-full select-none p-2 text-left text-lg"
                                   onTouchStart={() =>
                                     longPress.onTouchStart(search)
                                   }
@@ -584,7 +584,7 @@ export default function History() {
                             );
                           }}
                           className={classNames(
-                            "block select-none border-b p-4",
+                            "block w-full select-none border-b p-4 text-left",
                             isDarkMode ? "border-slate-500" : "border-slate-300"
                           )}
                           onTouchStart={() => longPress.onTouchStart(lookup)}
