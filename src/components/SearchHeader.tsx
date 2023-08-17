@@ -1,12 +1,9 @@
 import { useRouter } from "next/router";
-import { useMemo } from "react";
 import { CloseIcon } from "~/icons/CloseIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
-import { useHistoryStore } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
-import { debounce } from "~/utils/debounce";
 
 export const SearchHeader = ({
   openSideMenu,
@@ -22,8 +19,6 @@ export const SearchHeader = ({
     useDarkModeStore,
     (x) => x.isDarkMode
   );
-  const addSearch_ = useHistoryStore((x) => x.addSearch);
-  const addSearch = useMemo(() => debounce(addSearch_, 500), [addSearch_]);
 
   return (
     <header
@@ -54,9 +49,9 @@ export const SearchHeader = ({
               onChange={(event) => {
                 setSearchText(event.target.value);
                 const trimmedSearchText = event.target.value.trim();
-                void router.replace(`/?search=${trimmedSearchText}`);
-                if (!trimmedSearchText) return;
-                addSearch({ searchText: trimmedSearchText, time: Date.now() });
+                void router.replace(
+                  trimmedSearchText ? `/?search=${trimmedSearchText}` : "/"
+                );
               }}
             />
             <button
