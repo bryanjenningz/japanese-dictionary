@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { CloseIcon } from "~/icons/CloseIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
@@ -15,10 +15,7 @@ export const SearchHeader = ({
   setSearchText: (searchText: string) => void;
 }) => {
   const router = useRouter();
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   return (
     <header

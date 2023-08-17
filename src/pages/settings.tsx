@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { SimpleHeader } from "~/components/SimpleHeader";
 
 export default function Settings() {
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 

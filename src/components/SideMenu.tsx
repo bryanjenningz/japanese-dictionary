@@ -9,11 +9,8 @@ import { SmallRocketLaunchIcon } from "~/icons/SmallRocketLaunchIcon";
 import { SmallSearchIcon } from "~/icons/SmallSearchIcon";
 import { SmallSettingsIcon } from "~/icons/SmallSettingsIcon";
 import { SunIcon } from "~/icons/SunIcon";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
-import {
-  type FlashcardState,
-  useFlashcardStore,
-} from "~/stores/flashcardStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
+import { useFlashcardStore } from "~/stores/flashcardStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { Modal } from "~/components/Modal";
@@ -39,13 +36,10 @@ export const SideMenu = ({
 }) => {
   const router = useRouter();
 
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
 
-  const hasFlashcardTest = useStore<FlashcardState, boolean>(
+  const hasFlashcardTest = useStore(
     useFlashcardStore,
     (x) => !!x.flashcardTest
   );

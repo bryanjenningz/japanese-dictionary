@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { classNames } from "~/utils/classNames";
 import { useSearch } from "~/dictionary/useSearch";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { WordHeader } from "~/components/WordHeader";
 import { useHistoryStore } from "~/stores/historyStore";
@@ -9,10 +9,7 @@ import { useRouter } from "next/router";
 
 export default function Word() {
   const router = useRouter();
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
   const addDictionaryLookup = useHistoryStore((x) => x.addDictionaryLookup);
 
   const [searchText, setSearchText] = useState("");

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
@@ -10,10 +10,7 @@ export const SearchTipsModal = ({
   isShown: boolean;
   closeModal: () => void;
 }) => {
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   useEffect(() => {
     const closeModalOnEscapeKeyDown = (event: KeyboardEvent) => {

@@ -4,30 +4,21 @@ import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { useSearch } from "~/dictionary/useSearch";
 import { SearchResults } from "~/components/SearchResults";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { useHistoryStore } from "~/stores/historyStore";
-import {
-  type SearchTextState,
-  useSearchTextStore,
-} from "~/stores/searchTextStore";
+import { useSearchTextStore } from "~/stores/searchTextStore";
 import { useRouter } from "next/router";
 import { debounce } from "~/utils/debounce";
 
 export default function Home() {
   const router = useRouter();
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   const addSearch_ = useHistoryStore((x) => x.addSearch);
   const addSearch = useMemo(() => debounce(addSearch_, 1000), [addSearch_]);
-  const searchText = useStore<SearchTextState, SearchTextState["searchText"]>(
-    useSearchTextStore,
-    (x) => x.searchText
-  );
+  const searchText = useStore(useSearchTextStore, (x) => x.searchText);
   const setSearchText = useSearchTextStore((x) => x.setSearchText);
   useEffect(() => {
     const searchText = router.query.search;

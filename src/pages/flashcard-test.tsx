@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { FlashcardTestHeader } from "~/components/FlashcardTestHeader";
-import {
-  type FlashcardState,
-  useFlashcardStore,
-  type FlashcardTestCard,
-} from "~/stores/flashcardStore";
+import { useFlashcardStore } from "~/stores/flashcardStore";
 import { VisibilityIcon } from "~/icons/VisibilityIcon";
 import { DoneIcon } from "~/icons/DoneIcon";
 import { CloseIcon } from "~/icons/CloseIcon";
@@ -18,14 +14,10 @@ import { Pronunciation } from "~/components/Pronunciation";
 
 export default function FlashcardTest() {
   const router = useRouter();
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
-  const flashcardTestCard = useStore<FlashcardState, FlashcardTestCard | null>(
-    useFlashcardStore,
-    (x) => x.getCurrentTestFlashcard()
+  const flashcardTestCard = useStore(useFlashcardStore, (x) =>
+    x.getCurrentTestFlashcard()
   );
   const setCurrentFlashcardStatus = useFlashcardStore(
     (x) => x.setCurrentFlashcardStatus
@@ -35,10 +27,7 @@ export default function FlashcardTest() {
   const deleteCurrentFlashcardTest = useFlashcardStore(
     (x) => x.deleteCurrentFlashcardTest
   );
-  const flashcardTest = useStore<
-    FlashcardState,
-    FlashcardState["flashcardTest"]
-  >(useFlashcardStore, (x) => x.flashcardTest);
+  const flashcardTest = useStore(useFlashcardStore, (x) => x.flashcardTest);
   const flashcardsCorrect =
     flashcardTest?.flashcards.filter((x) => x.status === "Pass").length ?? 0;
   const flashcardsIncorrect =

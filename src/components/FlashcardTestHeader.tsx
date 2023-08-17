@@ -1,15 +1,11 @@
 import { type Dispatch, type SetStateAction, useState } from "react";
 import { CloseIcon } from "~/icons/CloseIcon";
 import { MenuIcon } from "~/icons/MenuIcon";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { Modal } from "~/components/Modal";
-import {
-  type FlashcardState,
-  useFlashcardStore,
-  type FlashcardTestCard,
-} from "~/stores/flashcardStore";
+import { useFlashcardStore } from "~/stores/flashcardStore";
 import { useRouter } from "next/router";
 import { ArrowOutBoxIcon } from "~/icons/ArrowOutBoxIcon";
 import { createWordLink } from "~/utils/createWordLink";
@@ -22,18 +18,11 @@ export const FlashcardTestHeader = ({
   openSideMenu: () => void;
 }) => {
   const router = useRouter();
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
-  const flashcardTest = useStore<
-    FlashcardState,
-    FlashcardState["flashcardTest"]
-  >(useFlashcardStore, (x) => x.flashcardTest);
-  const currentFlashcard = useStore<FlashcardState, FlashcardTestCard | null>(
-    useFlashcardStore,
-    (x) => x.getCurrentTestFlashcard()
+  const flashcardTest = useStore(useFlashcardStore, (x) => x.flashcardTest);
+  const currentFlashcard = useStore(useFlashcardStore, (x) =>
+    x.getCurrentTestFlashcard()
   );
   const flashcardNumber = (flashcardTest?.index ?? 0) + 1;
   const flashcardCount = flashcardTest?.flashcards.length ?? 0;
@@ -128,10 +117,7 @@ const FlashcardTestHeaderModal = ({
 }) => {
   const router = useRouter();
 
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   const deleteCurrentFlashcardTest = useFlashcardStore(
     (x) => x.deleteCurrentFlashcardTest

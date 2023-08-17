@@ -1,13 +1,10 @@
 import { classNames } from "~/utils/classNames";
 import { type WordEntry } from "~/dictionary/search";
 import { Pronunciation } from "~/components/Pronunciation";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import Link from "next/link";
-import {
-  type SearchTextState,
-  useSearchTextStore,
-} from "~/stores/searchTextStore";
+import { useSearchTextStore } from "~/stores/searchTextStore";
 import { createWordLink } from "~/utils/createWordLink";
 
 export const SearchResults = ({
@@ -15,15 +12,8 @@ export const SearchResults = ({
 }: {
   wordEntries: WordEntry[];
 }) => {
-  const searchText =
-    useStore<SearchTextState, SearchTextState["searchText"]>(
-      useSearchTextStore,
-      (x) => x.searchText
-    ) ?? "";
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const searchText = useStore(useSearchTextStore, (x) => x.searchText) ?? "";
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   return (
     <ul>

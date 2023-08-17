@@ -1,26 +1,15 @@
 import { useMemo, useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { HistoryHeader } from "~/components/HistoryHeader";
-import {
-  type HistoryState,
-  useHistoryStore,
-  type WordSearch,
-} from "~/stores/historyStore";
-import {
-  type FlashcardState,
-  useFlashcardStore,
-  type Flashcard,
-} from "~/stores/flashcardStore";
+import { useHistoryStore, type WordSearch } from "~/stores/historyStore";
+import { useFlashcardStore, type Flashcard } from "~/stores/flashcardStore";
 import { Pronunciation } from "~/components/Pronunciation";
 import { groupByTime } from "~/utils/groupByTime";
 import Link from "next/link";
-import {
-  type HistoryTabState,
-  useHistoryTabStore,
-} from "~/stores/historyTabStore";
+import { useHistoryTabStore } from "~/stores/historyTabStore";
 import { createWordLink } from "~/utils/createWordLink";
 import { formatTime } from "~/utils/formatTime";
 import { useLongPress } from "~/utils/useLongPress";
@@ -29,15 +18,12 @@ import { useRouter } from "next/router";
 
 export default function History() {
   const router = useRouter();
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
-  const dictionaryLookups = useStore<
-    HistoryState,
-    HistoryState["dictionaryLookups"]
-  >(useHistoryStore, (x) => x.dictionaryLookups);
+  const dictionaryLookups = useStore(
+    useHistoryStore,
+    (x) => x.dictionaryLookups
+  );
   const dictionaryLookupsGroupedByTime = useMemo(() => {
     const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
     if (!dictionaryLookups) return;
@@ -58,10 +44,7 @@ export default function History() {
     (x) => x.clearDictionaryHistory
   );
 
-  const searches = useStore<HistoryState, HistoryState["searches"]>(
-    useHistoryStore,
-    (x) => x.searches
-  );
+  const searches = useStore(useHistoryStore, (x) => x.searches);
   const searchesGroupedByTime = useMemo(() => {
     const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
     if (!searches) return;
@@ -78,10 +61,10 @@ export default function History() {
   const removeSearch = useHistoryStore((x) => x.removeSearch);
   const clearSearchHistory = useHistoryStore((x) => x.clearSearchHistory);
 
-  const clipReaderLookups = useStore<
-    HistoryState,
-    HistoryState["clipReaderLookups"]
-  >(useHistoryStore, (x) => x.clipReaderLookups);
+  const clipReaderLookups = useStore(
+    useHistoryStore,
+    (x) => x.clipReaderLookups
+  );
   const clipReaderLookupsGroupedByTime = useMemo(() => {
     const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
     if (!clipReaderLookups) return;
@@ -102,19 +85,13 @@ export default function History() {
     (x) => x.clearClipReaderHistory
   );
 
-  const flashcards = useStore<FlashcardState, FlashcardState["flashcards"]>(
-    useFlashcardStore,
-    (x) => x.flashcards
-  );
+  const flashcards = useStore(useFlashcardStore, (x) => x.flashcards);
   const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
   const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
   const clearAllFlashcards = useFlashcardStore((x) => x.clearAllFlashcards);
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const historyTab = useStore<HistoryTabState, HistoryTabState["historyTab"]>(
-    useHistoryTabStore,
-    (x) => x.historyTab
-  );
+  const historyTab = useStore(useHistoryTabStore, (x) => x.historyTab);
 
   const longPress = useLongPress<Flashcard | WordSearch>();
 

@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { MenuIcon } from "~/icons/MenuIcon";
 import { MoreVerticalIcon } from "~/icons/MoreVerticalIcon";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useFlashcardStore } from "~/stores/flashcardStore";
-import { type HistoryState, useHistoryStore } from "~/stores/historyStore";
-import {
-  type HistoryTabState,
-  historyTabs,
-  useHistoryTabStore,
-} from "~/stores/historyTabStore";
+import { useHistoryStore } from "~/stores/historyStore";
+import { historyTabs, useHistoryTabStore } from "~/stores/historyTabStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
@@ -19,25 +15,19 @@ export const HistoryHeader = ({
   openSideMenu: () => void;
   clearCurrentList: () => void;
 }) => {
-  const historyTab = useStore<HistoryTabState, HistoryTabState["historyTab"]>(
-    useHistoryTabStore,
-    (x) => x.historyTab
-  );
+  const historyTab = useStore(useHistoryTabStore, (x) => x.historyTab);
   const setHistoryTab = useHistoryTabStore((x) => x.setHistoryTab);
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   const saveFlashcards = useFlashcardStore((x) => x.saveFlashcards);
-  const dictionaryLookups = useStore<
-    HistoryState,
-    HistoryState["dictionaryLookups"]
-  >(useHistoryStore, (x) => x.dictionaryLookups);
-  const clipReaderLookups = useStore<
-    HistoryState,
-    HistoryState["clipReaderLookups"]
-  >(useHistoryStore, (x) => x.clipReaderLookups);
+  const dictionaryLookups = useStore(
+    useHistoryStore,
+    (x) => x.dictionaryLookups
+  );
+  const clipReaderLookups = useStore(
+    useHistoryStore,
+    (x) => x.clipReaderLookups
+  );
 
   const [isMoreMenuShown, setIsMoreMenuShown] = useState(false);
 

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { Pronunciation } from "~/components/Pronunciation";
@@ -30,10 +30,7 @@ export const WordHeader = ({
   const hasPreviousResult = wordLookup.resultIndex > 0;
   const hasNextResult = wordLookup.resultIndex < wordEntries.length - 1;
 
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   return (
     <header className="w-full">

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { SimpleHeader } from "~/components/SimpleHeader";
 import {
-  type FlashcardState,
   useFlashcardStore,
   flashcardTestMaxCardsOptions,
 } from "~/stores/flashcardStore";
@@ -14,16 +13,13 @@ import { useRouter } from "next/router";
 
 export default function NewFlashcardTest() {
   const router = useRouter();
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
-  const flashcardTestMaxCards = useStore<
-    FlashcardState,
-    FlashcardState["flashcardTestMaxCards"]
-  >(useFlashcardStore, (x) => x.flashcardTestMaxCards);
+  const flashcardTestMaxCards = useStore(
+    useFlashcardStore,
+    (x) => x.flashcardTestMaxCards
+  );
   const setFlashcardTestMaxCards = useFlashcardStore(
     (x) => x.setFlashcardTestMaxCards
   );

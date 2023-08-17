@@ -5,11 +5,8 @@ import { SideMenu } from "~/components/SideMenu";
 import { WordEntryList } from "~/components/WordEntryList";
 import { type WordSearchResult } from "~/dictionary/search";
 import { useSearch } from "~/dictionary/useSearch";
-import {
-  type ClipReaderTextState,
-  useClipReaderTextStore,
-} from "~/stores/clipReaderTextStore";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useHistoryStore } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
@@ -18,20 +15,17 @@ const MAX_WORD_SIZE = 20;
 
 export default function ClipReader() {
   const addClipReaderLookup = useHistoryStore((x) => x.addClipReaderLookup);
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
-  const clipReaderTexts = useStore<
-    ClipReaderTextState,
-    ClipReaderTextState["clipReaderTexts"]
-  >(useClipReaderTextStore, (x) => x.clipReaderTexts);
-  const selectedClipReaderText = useStore<
-    ClipReaderTextState,
-    ClipReaderTextState["selectedClipReaderText"]
-  >(useClipReaderTextStore, (x) => x.selectedClipReaderText);
+  const clipReaderTexts = useStore(
+    useClipReaderTextStore,
+    (x) => x.clipReaderTexts
+  );
+  const selectedClipReaderText = useStore(
+    useClipReaderTextStore,
+    (x) => x.selectedClipReaderText
+  );
   const clipText =
     selectedClipReaderText?.text ?? clipReaderTexts?.[0]?.text ?? "";
 

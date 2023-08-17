@@ -3,11 +3,10 @@ import { useState } from "react";
 import { ClipReaderHistoryHeader } from "~/components/ClipReaderHistoryHeader";
 import { Modal } from "~/components/Modal";
 import {
-  type ClipReaderTextState,
   useClipReaderTextStore,
   type ClipReaderText,
 } from "~/stores/clipReaderTextStore";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { formatTime } from "~/utils/formatTime";
@@ -16,15 +15,12 @@ import { useLongPress } from "~/utils/useLongPress";
 export default function ClipReaderHistory() {
   const router = useRouter();
 
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
-  const clipReaderTexts = useStore<
-    ClipReaderTextState,
-    ClipReaderTextState["clipReaderTexts"]
-  >(useClipReaderTextStore, (x) => x.clipReaderTexts);
+  const clipReaderTexts = useStore(
+    useClipReaderTextStore,
+    (x) => x.clipReaderTexts
+  );
   const setSelectedClipReaderText = useClipReaderTextStore(
     (x) => x.setSelectedClipReaderText
   );

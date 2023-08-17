@@ -8,7 +8,7 @@ import { OpenInNewIcon } from "~/icons/OpenInNewIcon";
 import { RefreshIcon } from "~/icons/RefreshIcon";
 import { SearchIcon } from "~/icons/SearchIcon";
 import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
-import { type DarkModeState, useDarkModeStore } from "~/stores/darkModeStore";
+import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useFlashcardStore } from "~/stores/flashcardStore";
 import { type WordLookup } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
@@ -134,10 +134,7 @@ export const ClipReaderHeader = ({
   selectedText: string;
   openSideMenu: () => void;
 }) => {
-  const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
-    useDarkModeStore,
-    (x) => x.isDarkMode
-  );
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
 
   return (
     <header
