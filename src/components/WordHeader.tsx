@@ -39,7 +39,7 @@ export const WordHeader = ({
     <header className="w-full">
       <div
         className={classNames(
-          "flex w-full flex-col items-center text-white shadow",
+          "flex w-full flex-col items-center text-white",
           isDarkMode ? "bg-black" : "bg-blue-600"
         )}
       >
@@ -121,7 +121,7 @@ export const WordHeader = ({
 
       <div
         className={classNames(
-          "flex w-full flex-col items-center shadow",
+          "flex w-full flex-col items-center",
           isDarkMode ? "bg-black text-white" : "bg-white text-black"
         )}
       >
