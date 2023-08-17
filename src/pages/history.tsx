@@ -25,8 +25,10 @@ import { createWordLink } from "~/utils/createWordLink";
 import { formatTime } from "~/utils/formatTime";
 import { useLongPress } from "~/utils/useLongPress";
 import { equals } from "~/utils/equals";
+import { useRouter } from "next/router";
 
 export default function History() {
+  const router = useRouter();
   const isDarkMode = useStore<DarkModeState, DarkModeState["isDarkMode"]>(
     useDarkModeStore,
     (x) => x.isDarkMode
@@ -201,13 +203,17 @@ export default function History() {
                                   key={`${word}-${pronunciation}-${time}`}
                                   className="relative"
                                 >
-                                  <Link
-                                    href={createWordLink({
-                                      searchText,
-                                      resultIndex,
-                                    })}
+                                  <button
+                                    onClick={() => {
+                                      void router.push(
+                                        createWordLink({
+                                          searchText,
+                                          resultIndex,
+                                        })
+                                      );
+                                    }}
                                     className={classNames(
-                                      "flex flex-col border-b p-2",
+                                      "flex select-none flex-col border-b p-2",
                                       isDarkMode
                                         ? "border-slate-500"
                                         : "border-slate-300"
@@ -238,7 +244,7 @@ export default function History() {
                                     >
                                       {definitions.join(", ")}
                                     </span>
-                                  </Link>
+                                  </button>
 
                                   {longPress.menu.type === "OPEN" &&
                                     longPress.menu.target === lookup && (
@@ -354,13 +360,17 @@ export default function History() {
                                   key={`${word}-${pronunciation}-${time}`}
                                   className="relative"
                                 >
-                                  <Link
-                                    href={createWordLink({
-                                      searchText,
-                                      resultIndex,
-                                    })}
+                                  <button
+                                    onClick={() => {
+                                      void router.push(
+                                        createWordLink({
+                                          searchText,
+                                          resultIndex,
+                                        })
+                                      );
+                                    }}
                                     className={classNames(
-                                      "flex flex-col border-b p-2",
+                                      "flex select-none flex-col border-b p-2",
                                       isDarkMode
                                         ? "border-slate-500"
                                         : "border-slate-300"
@@ -391,7 +401,7 @@ export default function History() {
                                     >
                                       {definitions.join(", ")}
                                     </span>
-                                  </Link>
+                                  </button>
 
                                   {longPress.menu.type === "OPEN" &&
                                     longPress.menu.target === lookup && (
@@ -485,9 +495,11 @@ export default function History() {
                                 key={`${searchText}-${time}`}
                                 className="relative"
                               >
-                                <Link
-                                  href={`/?search=${searchText}`}
-                                  className="block p-2 text-lg"
+                                <button
+                                  onClick={() => {
+                                    void router.push(`/?search=${searchText}`);
+                                  }}
+                                  className="block select-none p-2 text-lg"
                                   onTouchStart={() =>
                                     longPress.onTouchStart(search)
                                   }
@@ -498,7 +510,7 @@ export default function History() {
                                   onMouseUp={longPress.onTouchEnd}
                                 >
                                   {searchText}
-                                </Link>
+                                </button>
 
                                 {longPress.menu.type === "OPEN" &&
                                   longPress.menu.target === search && (
@@ -565,10 +577,14 @@ export default function History() {
                     const key = `${word}-${pronunciation}`;
                     return (
                       <li key={key} className="relative">
-                        <Link
-                          href={createWordLink({ searchText, resultIndex })}
+                        <button
+                          onClick={() => {
+                            void router.push(
+                              createWordLink({ searchText, resultIndex })
+                            );
+                          }}
                           className={classNames(
-                            "block border-b p-4",
+                            "block select-none border-b p-4",
                             isDarkMode ? "border-slate-500" : "border-slate-300"
                           )}
                           onTouchStart={() => longPress.onTouchStart(lookup)}
@@ -591,7 +607,7 @@ export default function History() {
                           >
                             {definitions.join(", ")}
                           </p>
-                        </Link>
+                        </button>
 
                         {longPress.menu.type === "OPEN" &&
                           longPress.menu.target === lookup && (
