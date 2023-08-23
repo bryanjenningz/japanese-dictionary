@@ -12,25 +12,10 @@ import { useRouter } from "next/router";
 import { debounce } from "~/utils/debounce";
 
 export default function Home() {
-  const router = useRouter();
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-
-  const addSearch_ = useHistoryStore((x) => x.addSearch);
-  const addSearch = useMemo(() => debounce(addSearch_, 1000), [addSearch_]);
-  const searchText = useStore(useSearchTextStore, (x) => x.searchText);
-  const setSearchText = useSearchTextStore((x) => x.setSearchText);
-  useEffect(() => {
-    const searchText = router.query.search;
-    if (!searchText || typeof searchText !== "string") return;
-    setSearchText(searchText);
-    addSearch({ time: Date.now(), searchText });
-  }, [addSearch, setSearchText, router.query.search]);
-  const search = useSearch();
-  const { wordEntries } = useMemo(
-    () => search(searchText?.trim() ?? ""),
-    [searchText, search]
-  );
+  const { searchText, setSearchText } = useSearchText();
+  const wordEntries = useWordEntries(searchText);
 
   return (
     <main
@@ -56,3 +41,27 @@ export default function Home() {
     </main>
   );
 }
+
+const useSearchText = () => {
+  const router = useRouter();
+  const searchText = useStore(useSearchTextStore, (x) => x.searchText);
+  const setSearchText = useSearchTextStore((x) => x.setSearchText);
+  const addSearch_ = useHistoryStore((x) => x.addSearch);
+  const addSearch = useMemo(() => debounce(addSearch_, 1000), [addSearch_]);
+  useEffect(() => {
+    const searchText = router.query.search;
+    if (!searchText || typeof searchText !== "string") return;
+    setSearchText(searchText);
+    addSearch({ time: Date.now(), searchText });
+  }, [addSearch, setSearchText, router.query.search]);
+  return { searchText, setSearchText };
+};
+
+const useWordEntries = (searchText: string | undefined) => {
+  const search = useSearch();
+  const { wordEntries } = useMemo(
+    () => search(searchText?.trim() ?? ""),
+    [searchText, search]
+  );
+  return wordEntries;
+};
