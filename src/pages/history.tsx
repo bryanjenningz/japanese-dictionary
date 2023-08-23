@@ -46,7 +46,10 @@ export default function History() {
               return clearSearchHistory();
             case "Cards":
               return clearAllFlashcards();
+            case undefined:
+              return;
           }
+          historyTab satisfies never;
         }}
       />
 
