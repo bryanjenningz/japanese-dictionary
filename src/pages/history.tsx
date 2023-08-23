@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { useDarkModeStore } from "~/stores/darkModeStore";
@@ -7,7 +7,6 @@ import { HistoryHeader } from "~/components/HistoryHeader";
 import { useHistoryStore, type WordSearch } from "~/stores/historyStore";
 import { useFlashcardStore, type Flashcard } from "~/stores/flashcardStore";
 import { Pronunciation } from "~/components/Pronunciation";
-import { groupByTime } from "~/utils/groupByTime";
 import Link from "next/link";
 import { useHistoryTabStore } from "~/stores/historyTabStore";
 import { createWordLink } from "~/utils/createWordLink";
@@ -15,8 +14,7 @@ import { formatTime } from "~/utils/formatTime";
 import { useLongPress } from "~/utils/useLongPress";
 import { equals } from "~/utils/equals";
 import { useRouter } from "next/router";
-
-const MAX_TIME_DIFF_BETWEEN_GROUP_VALUES = 1000 * 60 * 15; // 15 minutes
+import { useTimeGroups } from "~/utils/groupByTime";
 
 export default function History() {
   const router = useRouter();
@@ -26,18 +24,7 @@ export default function History() {
     useHistoryStore,
     (x) => x.dictionaryLookups
   );
-  const dictionaryLookupsGroupedByTime = useMemo(() => {
-    if (!dictionaryLookups) return;
-    const groups = groupByTime(
-      dictionaryLookups,
-      (x) => x.time,
-      MAX_TIME_DIFF_BETWEEN_GROUP_VALUES
-    );
-    // Sort clip reader lookup groups from most recent to least recent
-    groups.reverse();
-    groups.forEach((group) => group.values.reverse());
-    return groups;
-  }, [dictionaryLookups]);
+  const dictionaryLookupsGroupedByTime = useTimeGroups(dictionaryLookups);
   const removeDictionaryLookup = useHistoryStore(
     (x) => x.removeDictionaryLookup
   );
@@ -46,18 +33,7 @@ export default function History() {
   );
 
   const searches = useStore(useHistoryStore, (x) => x.searches);
-  const searchesGroupedByTime = useMemo(() => {
-    if (!searches) return;
-    const groups = groupByTime(
-      searches,
-      (x) => x.time,
-      MAX_TIME_DIFF_BETWEEN_GROUP_VALUES
-    );
-    // Sort search history groups from most recent to least recent
-    groups.reverse();
-    groups.forEach((group) => group.values.reverse());
-    return groups;
-  }, [searches]);
+  const searchesGroupedByTime = useTimeGroups(searches);
   const removeSearch = useHistoryStore((x) => x.removeSearch);
   const clearSearchHistory = useHistoryStore((x) => x.clearSearchHistory);
 
@@ -65,18 +41,7 @@ export default function History() {
     useHistoryStore,
     (x) => x.clipReaderLookups
   );
-  const clipReaderLookupsGroupedByTime = useMemo(() => {
-    if (!clipReaderLookups) return;
-    const groups = groupByTime(
-      clipReaderLookups,
-      (x) => x.time,
-      MAX_TIME_DIFF_BETWEEN_GROUP_VALUES
-    );
-    // Sort clip reader lookup groups from most recent to least recent
-    groups.reverse();
-    groups.forEach((group) => group.values.reverse());
-    return groups;
-  }, [clipReaderLookups]);
+  const clipReaderLookupsGroupedByTime = useTimeGroups(clipReaderLookups);
   const removeClipReaderLookup = useHistoryStore(
     (x) => x.removeClipReaderLookup
   );
