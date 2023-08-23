@@ -16,6 +16,8 @@ import { useLongPress } from "~/utils/useLongPress";
 import { equals } from "~/utils/equals";
 import { useRouter } from "next/router";
 
+const MAX_TIME_DIFF_BETWEEN_GROUP_VALUES = 1000 * 60 * 15; // 15 minutes
+
 export default function History() {
   const router = useRouter();
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
@@ -25,12 +27,11 @@ export default function History() {
     (x) => x.dictionaryLookups
   );
   const dictionaryLookupsGroupedByTime = useMemo(() => {
-    const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
     if (!dictionaryLookups) return;
     const groups = groupByTime(
       dictionaryLookups,
       (x) => x.time,
-      maxTimeDiffBetweenGroupValues
+      MAX_TIME_DIFF_BETWEEN_GROUP_VALUES
     );
     // Sort clip reader lookup groups from most recent to least recent
     groups.reverse();
@@ -46,12 +47,11 @@ export default function History() {
 
   const searches = useStore(useHistoryStore, (x) => x.searches);
   const searchesGroupedByTime = useMemo(() => {
-    const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
     if (!searches) return;
     const groups = groupByTime(
       searches,
       (x) => x.time,
-      maxTimeDiffBetweenGroupValues
+      MAX_TIME_DIFF_BETWEEN_GROUP_VALUES
     );
     // Sort search history groups from most recent to least recent
     groups.reverse();
@@ -66,12 +66,11 @@ export default function History() {
     (x) => x.clipReaderLookups
   );
   const clipReaderLookupsGroupedByTime = useMemo(() => {
-    const maxTimeDiffBetweenGroupValues = 1000 * 60 * 15; // 15 minutes
     if (!clipReaderLookups) return;
     const groups = groupByTime(
       clipReaderLookups,
       (x) => x.time,
-      maxTimeDiffBetweenGroupValues
+      MAX_TIME_DIFF_BETWEEN_GROUP_VALUES
     );
     // Sort clip reader lookup groups from most recent to least recent
     groups.reverse();
