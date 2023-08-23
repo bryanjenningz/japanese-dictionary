@@ -8,39 +8,12 @@ import { useHistoryStore } from "~/stores/historyStore";
 import { useRouter } from "next/router";
 
 export default function Word() {
-  const router = useRouter();
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
-  const addDictionaryLookup = useHistoryStore((x) => x.addDictionaryLookup);
-
-  const [searchText, setSearchText] = useState("");
-  const [resultIndex, setResultIndex] = useState(0);
-  useEffect(() => {
-    const searchText =
-      typeof router.query.search === "string" ? router.query.search : "";
-    const resultIndex = isNaN(Number(router.query.index))
-      ? 0
-      : Number(router.query.index);
-    if (!searchText) return;
-    setSearchText(searchText);
-    setResultIndex(resultIndex);
-  }, [router.query.index, router.query.search]);
-  const search = useSearch();
-  const { wordEntries } = useMemo(
-    () => search(searchText.trim()),
-    [searchText, search]
-  );
-  const wordEntry = wordEntries[resultIndex];
-
-  useEffect(() => {
-    if (wordEntry) {
-      addDictionaryLookup({
-        time: Date.now(),
-        searchText,
-        resultIndex,
-        wordEntry,
-      });
-    }
-  }, [wordEntry, addDictionaryLookup, searchText, resultIndex]);
+  const { searchText, resultIndex } = useSearchTextResultIndex();
+  const { wordEntry, wordEntries } = useWordEntries({
+    searchText,
+    resultIndex,
+  });
 
   return (
     <main
@@ -64,3 +37,47 @@ export default function Word() {
     </main>
   );
 }
+
+const useSearchTextResultIndex = () => {
+  const router = useRouter();
+  const [searchText, setSearchText] = useState("");
+  const [resultIndex, setResultIndex] = useState(0);
+  useEffect(() => {
+    const searchText =
+      typeof router.query.search === "string" ? router.query.search : "";
+    const resultIndex = isNaN(Number(router.query.index))
+      ? 0
+      : Number(router.query.index);
+    if (!searchText) return;
+    setSearchText(searchText);
+    setResultIndex(resultIndex);
+  }, [router.query.index, router.query.search]);
+  return { searchText, resultIndex };
+};
+
+const useWordEntries = ({
+  searchText,
+  resultIndex,
+}: {
+  searchText: string;
+  resultIndex: number;
+}) => {
+  const search = useSearch();
+  const { wordEntries } = useMemo(
+    () => search(searchText.trim()),
+    [searchText, search]
+  );
+  const wordEntry = wordEntries[resultIndex];
+  const addDictionaryLookup = useHistoryStore((x) => x.addDictionaryLookup);
+  useEffect(() => {
+    if (wordEntry) {
+      addDictionaryLookup({
+        time: Date.now(),
+        searchText,
+        resultIndex,
+        wordEntry,
+      });
+    }
+  }, [wordEntry, addDictionaryLookup, searchText, resultIndex]);
+  return { wordEntry, wordEntries };
+};
