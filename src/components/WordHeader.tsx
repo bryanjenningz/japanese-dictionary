@@ -138,9 +138,7 @@ export const WordHeader = ({
                 pronunciation={wordLookup.wordEntry.pronunciation}
                 pitchAccents={wordLookup.wordEntry.pitchAccents}
               />
-              <button
-                onClick={() => textToSpeech(wordLookup.wordEntry.pronunciation)}
-              >
+              <button onClick={() => textToSpeech(wordLookup.wordEntry.word)}>
                 <span className="sr-only">Play pronunciation</span>
                 <VolumeUp />
               </button>
