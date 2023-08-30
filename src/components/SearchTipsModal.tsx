@@ -10,7 +10,7 @@ export const SearchTipsModal = ({
   isShown: boolean;
   closeModal: () => void;
 }) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   useEffect(() => {
     const closeModalOnEscapeKeyDown = (event: KeyboardEvent) => {

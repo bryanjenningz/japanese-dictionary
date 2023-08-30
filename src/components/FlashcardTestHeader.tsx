@@ -18,7 +18,7 @@ export const FlashcardTestHeader = ({
   openSideMenu: () => void;
 }) => {
   const router = useRouter();
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   const flashcardTest = useStore(useFlashcardStore, (x) => x.flashcardTest);
   const currentFlashcard = useStore(useFlashcardStore, (x) =>
@@ -117,7 +117,7 @@ const FlashcardTestHeaderModal = ({
 }) => {
   const router = useRouter();
 
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   const deleteCurrentFlashcardTest = useFlashcardStore(
     (x) => x.deleteCurrentFlashcardTest

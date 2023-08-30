@@ -11,7 +11,7 @@ export const ClipReaderHistoryHeader = ({
 }) => {
   const router = useRouter();
 
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   return (
     <header

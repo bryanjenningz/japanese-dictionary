@@ -15,7 +15,7 @@ export const FlashcardList = ({
   longPress: LongPress<Flashcard | WordSearch>;
 }) => {
   const router = useRouter();
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const flashcards = useStore(useFlashcardStore, (x) => x.flashcards);
   const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
 

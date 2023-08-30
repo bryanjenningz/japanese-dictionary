@@ -14,7 +14,7 @@ import { classNames } from "~/utils/classNames";
 const MAX_WORD_SIZE = 20;
 
 export default function ClipReader() {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const clipText = useClipText();
   const {

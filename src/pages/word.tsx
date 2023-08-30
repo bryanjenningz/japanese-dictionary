@@ -8,7 +8,7 @@ import { useHistoryStore } from "~/stores/historyStore";
 import { useRouter } from "next/router";
 
 export default function Word() {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const { searchText, resultIndex } = useSearchTextResultIndex();
   const { wordEntry, wordEntries } = useWordEntries({
     searchText,

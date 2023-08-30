@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 
 export default function NewFlashcardTest() {
   const router = useRouter();
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   const flashcardTestMaxCards = useStore(

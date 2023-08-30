@@ -14,7 +14,7 @@ import { SearchHistory } from "~/components/SearchHistory";
 import { FlashcardList } from "~/components/FlashcardList";
 
 export default function History() {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const clearDictionaryHistory = useHistoryStore(
     (x) => x.clearDictionaryHistory
   );

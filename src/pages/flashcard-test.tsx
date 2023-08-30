@@ -14,7 +14,7 @@ import { Pronunciation } from "~/components/Pronunciation";
 
 export default function FlashcardTest() {
   const router = useRouter();
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   const flashcardTestCard = useStore(useFlashcardStore, (x) =>
     x.getCurrentTestFlashcard()
