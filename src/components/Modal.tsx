@@ -11,7 +11,7 @@ export const Modal = ({
   onClose: () => void;
   children: JSX.Element;
 }) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   return (
     <>

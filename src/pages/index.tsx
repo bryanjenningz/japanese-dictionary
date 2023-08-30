@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { debounce } from "~/utils/debounce";
 
 export default function Home() {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const { searchText, setSearchText } = useSearchText();
   const wordEntries = useWordEntries(searchText);

@@ -15,7 +15,7 @@ import { useLongPress } from "~/utils/useLongPress";
 export default function ClipReaderHistory() {
   const router = useRouter();
 
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   const clipReaderTexts = useStore(
     useClipReaderTextStore,

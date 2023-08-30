@@ -36,7 +36,7 @@ export const SideMenu = ({
 }) => {
   const router = useRouter();
 
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
 
   const hasFlashcardTest = useStore(

@@ -12,7 +12,7 @@ export const Pronunciation = ({
   pronunciation: string;
   pitchAccents: number[];
 }) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   pronunciation = pronunciation || word;
   const moras = getMoras(pronunciation);

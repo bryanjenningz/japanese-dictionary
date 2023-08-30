@@ -18,7 +18,7 @@ export const ClipReaderLookupHistory = ({
   longPress: LongPress<Flashcard | WordSearch>;
 }) => {
   const router = useRouter();
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const clipReaderLookups = useStore(
     useHistoryStore,
     (x) => x.clipReaderLookups

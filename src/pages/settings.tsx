@@ -6,7 +6,7 @@ import { useStore } from "~/stores/useStore";
 import { SimpleHeader } from "~/components/SimpleHeader";
 
 export default function Settings() {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 

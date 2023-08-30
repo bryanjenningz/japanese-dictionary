@@ -13,7 +13,7 @@ export const SearchResults = ({
   wordEntries: WordEntry[];
 }) => {
   const searchText = useStore(useSearchTextStore, (x) => x.searchText) ?? "";
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   return (
     <ul>

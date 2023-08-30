@@ -15,7 +15,7 @@ export const SearchHistory = ({
   longPress: LongPress<Flashcard | WordSearch>;
 }) => {
   const router = useRouter();
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const searches = useStore(useHistoryStore, (x) => x.searches);
   const searchesGroupedByTime = useTimeGroups(searches);
   const removeSearch = useHistoryStore((x) => x.removeSearch);

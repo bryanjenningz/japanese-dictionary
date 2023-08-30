@@ -32,7 +32,7 @@ export const WordHeader = ({
   const hasPreviousResult = wordLookup.resultIndex > 0;
   const hasNextResult = wordLookup.resultIndex < wordEntries.length - 1;
 
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   return (
     <header className="w-full">

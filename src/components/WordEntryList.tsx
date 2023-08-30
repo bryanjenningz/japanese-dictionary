@@ -11,7 +11,7 @@ export const WordEntryList = ({
   selectedTextElementBottom: number | undefined;
   wordEntries: WordEntry[];
 }) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   return selectedTextElementBottom !== undefined && wordEntries.length > 0 ? (
     <div
@@ -60,7 +60,7 @@ const WordEntryItem = ({
   definitions,
   pitchAccents,
 }: WordEntry) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   return (
     <li

@@ -18,7 +18,7 @@ export const DictionaryLookupHistory = ({
   longPress: LongPress<Flashcard | WordSearch>;
 }) => {
   const router = useRouter();
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const dictionaryLookups = useStore(
     useHistoryStore,
     (x) => x.dictionaryLookups

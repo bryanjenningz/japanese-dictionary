@@ -17,7 +17,7 @@ export const HistoryHeader = ({
 }) => {
   const historyTab = useStore(useHistoryTabStore, (x) => x.historyTab);
   const setHistoryTab = useHistoryTabStore((x) => x.setHistoryTab);
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   const saveFlashcards = useFlashcardStore((x) => x.saveFlashcards);
   const dictionaryLookups = useStore(

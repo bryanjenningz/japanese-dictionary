@@ -8,7 +8,7 @@ export const SimpleHeader = ({
 }: {
   openSideMenu: () => void;
 }) => {
-  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode);
+  const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   return (
     <header
