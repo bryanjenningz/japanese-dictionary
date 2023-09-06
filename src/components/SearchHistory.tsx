@@ -46,10 +46,10 @@ export const SearchHistory = ({
                         void router.push(`/?search=${searchText}`);
                       }}
                       className="block w-full select-none p-2 text-left text-lg"
-                      onTouchStart={() => longPress.onTouchStart(search)}
-                      onTouchEnd={longPress.onTouchEnd}
-                      onMouseDown={() => longPress.onTouchStart(search)}
-                      onMouseUp={longPress.onTouchEnd}
+                      onContextMenu={(event) => {
+                        event.preventDefault();
+                        longPress.onLongPress(search);
+                      }}
                     >
                       {searchText}
                     </button>

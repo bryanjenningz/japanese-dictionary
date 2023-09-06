@@ -65,10 +65,10 @@ export default function ClipReaderHistory() {
               >
                 <button
                   className="relative flex w-full select-none flex-col gap-1 p-4"
-                  onTouchStart={() => longPress.onTouchStart(clipReaderText)}
-                  onTouchEnd={longPress.onTouchEnd}
-                  onMouseDown={() => longPress.onTouchStart(clipReaderText)}
-                  onMouseUp={longPress.onTouchEnd}
+                  onContextMenu={(event) => {
+                    event.preventDefault();
+                    longPress.onLongPress(clipReaderText);
+                  }}
                   onClick={() => {
                     setSelectedClipReaderText(clipReaderText);
                     void router.back();

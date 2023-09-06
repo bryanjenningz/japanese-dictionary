@@ -78,10 +78,10 @@ export const ClipReaderLookupHistory = ({
                         "flex w-full select-none flex-col border-b p-2 text-left",
                         isDarkMode ? "border-slate-500" : "border-slate-300"
                       )}
-                      onTouchStart={() => longPress.onTouchStart(lookup)}
-                      onTouchEnd={longPress.onTouchEnd}
-                      onMouseDown={() => longPress.onTouchStart(lookup)}
-                      onMouseUp={longPress.onTouchEnd}
+                      onContextMenu={(event) => {
+                        event.preventDefault();
+                        longPress.onLongPress(lookup);
+                      }}
                     >
                       <span className="flex gap-3">
                         <span className="text-lg">{word}</span>
