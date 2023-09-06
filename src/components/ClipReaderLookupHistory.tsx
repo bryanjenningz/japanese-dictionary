@@ -7,7 +7,7 @@ import { Pronunciation } from "~/components/Pronunciation";
 import Link from "next/link";
 import { createWordLink } from "~/utils/createWordLink";
 import { formatTime } from "~/utils/formatTime";
-import { type LongPress } from "~/utils/useLongPress";
+import { type LongPressMenu } from "~/utils/useLongPressMenu";
 import { equals } from "~/utils/equals";
 import { useRouter } from "next/router";
 import { useTimeGroups } from "~/utils/groupByTime";
@@ -15,7 +15,7 @@ import { useTimeGroups } from "~/utils/groupByTime";
 export const ClipReaderLookupHistory = ({
   longPress,
 }: {
-  longPress: LongPress<Flashcard | WordSearch>;
+  longPress: LongPressMenu<Flashcard | WordSearch>;
 }) => {
   const router = useRouter();
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;

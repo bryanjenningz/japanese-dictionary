@@ -5,14 +5,14 @@ import { useHistoryStore, type WordSearch } from "~/stores/historyStore";
 import { type Flashcard } from "~/stores/flashcardStore";
 import Link from "next/link";
 import { formatTime } from "~/utils/formatTime";
-import { type LongPress } from "~/utils/useLongPress";
+import { type LongPressMenu } from "~/utils/useLongPressMenu";
 import { useRouter } from "next/router";
 import { useTimeGroups } from "~/utils/groupByTime";
 
 export const SearchHistory = ({
   longPress,
 }: {
-  longPress: LongPress<Flashcard | WordSearch>;
+  longPress: LongPressMenu<Flashcard | WordSearch>;
 }) => {
   const router = useRouter();
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;

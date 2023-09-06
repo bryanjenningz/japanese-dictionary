@@ -7,7 +7,7 @@ import { HistoryHeader } from "~/components/HistoryHeader";
 import { useHistoryStore, type WordSearch } from "~/stores/historyStore";
 import { useFlashcardStore, type Flashcard } from "~/stores/flashcardStore";
 import { useHistoryTabStore } from "~/stores/historyTabStore";
-import { useLongPress } from "~/utils/useLongPress";
+import { useLongPressMenu } from "~/utils/useLongPressMenu";
 import { DictionaryLookupHistory } from "~/components/DictionaryLookupHistory";
 import { ClipReaderLookupHistory } from "~/components/ClipReaderLookupHistory";
 import { SearchHistory } from "~/components/SearchHistory";
@@ -25,7 +25,7 @@ export default function History() {
   const clearAllFlashcards = useFlashcardStore((x) => x.clearAllFlashcards);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const historyTab = useStore(useHistoryTabStore, (x) => x.historyTab);
-  const longPress = useLongPress<Flashcard | WordSearch>();
+  const longPress = useLongPressMenu<Flashcard | WordSearch>();
 
   return (
     <main

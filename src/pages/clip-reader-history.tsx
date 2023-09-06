@@ -10,7 +10,7 @@ import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { formatTime } from "~/utils/formatTime";
-import { useLongPress } from "~/utils/useLongPress";
+import { useLongPressMenu } from "~/utils/useLongPressMenu";
 
 export default function ClipReaderHistory() {
   const router = useRouter();
@@ -33,7 +33,7 @@ export default function ClipReaderHistory() {
 
   const [isModalShown, setIsModalShown] = useState(false);
 
-  const longPress = useLongPress<ClipReaderText>();
+  const longPress = useLongPressMenu<ClipReaderText>();
 
   return (
     <main
