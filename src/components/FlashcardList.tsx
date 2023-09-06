@@ -38,10 +38,10 @@ export const FlashcardList = ({
                 "block w-full select-none border-b p-4 text-left",
                 isDarkMode ? "border-slate-500" : "border-slate-300"
               )}
-              onTouchStart={() => longPress.onTouchStart(lookup)}
-              onTouchEnd={longPress.onTouchEnd}
-              onMouseDown={() => longPress.onTouchStart(lookup)}
-              onMouseUp={longPress.onTouchEnd}
+              onContextMenu={(event) => {
+                event.preventDefault();
+                longPress.onLongPress(lookup);
+              }}
             >
               <div className="flex gap-3">
                 <div>{word}</div>
