@@ -33,7 +33,7 @@ export default function ClipReader() {
   return (
     <main
       className={classNames(
-        "flex min-h-screen flex-col items-center",
+        "flex min-h-screen flex-col items-center pt-14",
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       )}
     >
