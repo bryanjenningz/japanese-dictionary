@@ -149,7 +149,7 @@ export const ClipReaderHeader = ({
   return (
     <header
       className={classNames(
-        "flex w-full justify-center text-white",
+        "fixed left-0 right-0 top-0 flex w-full justify-center text-white",
         isDarkMode ? "bg-black" : "bg-blue-600"
       )}
     >
