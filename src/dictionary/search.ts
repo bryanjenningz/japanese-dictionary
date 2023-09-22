@@ -2,6 +2,8 @@ import { type DeinflectionRuleGroup, deinflect } from "~/dictionary/deinflect";
 import { getPitchAccents } from "~/dictionary/getPitchAccents";
 import { katakanaToHiragana } from "~/dictionary/katakanaToHiragana";
 import { romajiToHiragana } from "~/dictionary/romajiToHiragana";
+import { DEFAULT_SEARCH_TEXT } from "~/stores/searchTextStore";
+import { DEFAULT_SEARCH_RESULTS } from "~/dictionary/defaultSearchResults";
 
 export type WordEntry = {
   word: string;
@@ -23,6 +25,9 @@ export const searchWord = (
   pitchData: string[],
   text: string
 ): WordSearchResult => {
+  if (text === DEFAULT_SEARCH_TEXT) {
+    return DEFAULT_SEARCH_RESULTS;
+  }
   const wordEntries: WordEntry[] = [];
   const searchedWords = new Set<string>();
   let selectedTextLength = 1;

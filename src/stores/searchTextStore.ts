@@ -6,10 +6,12 @@ export type SearchTextState = {
   setSearchText: (searchText: string) => void;
 };
 
+export const DEFAULT_SEARCH_TEXT = "ro-maji";
+
 export const useSearchTextStore = create<SearchTextState>()(
   persist(
     (set) => ({
-      searchText: "ro-maji",
+      searchText: DEFAULT_SEARCH_TEXT,
       setSearchText: (searchText: string) => set({ searchText }),
     }),
     { name: "search-text" }
