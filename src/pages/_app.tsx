@@ -6,12 +6,14 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>React Pleco</title>
+        <title>Japleco</title>
         <meta
           name="description"
-          content="A Pleco web app clone for Japanese written with React."
+          content="A Japanese Pleco clone web app written with React, TypeScript, Next.js, TailwindCSS, and Zustand."
         />
         <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#333" />
+        <link rel="manifest" href="/app.webmanifest" />
       </Head>
       <Component {...pageProps} />
     </>
