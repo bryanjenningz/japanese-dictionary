@@ -32,7 +32,11 @@ export const SearchHeader = ({
           </button>
 
           <div className="relative flex grow">
+            <label htmlFor="search-input" className="sr-only">
+              Search
+            </label>
             <input
+              id="search-input"
               className={classNames(
                 "grow px-1 py-2",
                 isDarkMode ? "bg-slate-800 text-white" : "bg-white text-black"
