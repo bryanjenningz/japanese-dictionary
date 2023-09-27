@@ -122,6 +122,7 @@ export const SideMenu = ({
                   isDarkMode ? "text-blue-500" : "text-black"
                 )}
                 onClick={() => setIsModalShown(false)}
+                tabIndex={isModalShown ? 0 : -1}
               >
                 No
               </button>
@@ -135,6 +136,7 @@ export const SideMenu = ({
                   deleteCurrentFlashcardTest();
                   void router.push("/new-flashcard-test");
                 }}
+                tabIndex={isModalShown ? 0 : -1}
               >
                 Yes
               </button>
@@ -157,6 +159,7 @@ export const SideMenu = ({
             isDarkMode ? "bg-black" : "bg-blue-600"
           )}
           onClick={() => setIsDarkMode(!isDarkMode)}
+          tabIndex={isSideMenuOpen ? 0 : -1}
         >
           {isDarkMode ? (
             <>
@@ -188,6 +191,7 @@ export const SideMenu = ({
                   return (
                     <li key={key}>
                       <Link
+                        tabIndex={isSideMenuOpen ? 0 : -1}
                         className={classNames(
                           "flex w-full items-center gap-2 px-4 py-2 text-left text-lg",
                           router.pathname === option.href &&
