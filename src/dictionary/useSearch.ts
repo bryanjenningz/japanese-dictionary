@@ -42,7 +42,7 @@ export const useSearch = () => {
         difReasons,
         difRules,
         pitchData,
-        text
+        text.replace(/\s/g, "")
       );
     },
     [wordDict, wordDictIndex, difReasons, difRules, pitchData]
