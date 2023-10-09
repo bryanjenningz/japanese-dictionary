@@ -42,11 +42,32 @@ export const useSearch = () => {
         difReasons,
         difRules,
         pitchData,
-        text.replace(/\s/g, "")
+        removeUnusedChars(text)
       );
     },
     [wordDict, wordDictIndex, difReasons, difRules, pitchData]
   );
 
   return search;
+};
+
+const removeUnusedChars = (text: string): string => {
+  // Sometimes there are invisible characters that aren't useful for dictionary
+  // searches, so these characters can be safely removed.
+  text = text.replace(/\s/g, "");
+
+  // Sometimes kanji have their pronunciation placed in parens directly after.
+  // This pronunciation gets in the way and isn't useful for dictionary
+  // searches, so it can be safely removed.
+  const openParenIndex = text.indexOf("（");
+  const closedParenIndex = text.indexOf("）");
+  if (
+    openParenIndex >= 0 &&
+    closedParenIndex >= 0 &&
+    openParenIndex < closedParenIndex
+  ) {
+    text = text.slice(0, openParenIndex) + text.slice(closedParenIndex + 1);
+  }
+
+  return text;
 };
