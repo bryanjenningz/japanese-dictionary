@@ -9,6 +9,7 @@ A [Pleco](https://pleco.com) web app clone for Japanese written with [React](htt
 - Save dictionary lookup history, clipboard reader lookup history, search history, and flashcards
 - Quiz yourself on saved flashcards by using flashcard tests
 - Enable dark mode
+- Installable progressive web app that works entirely offline
 
 ## Screenshots
 
