@@ -11,8 +11,7 @@ import { CloseIcon } from "~/icons/CloseIcon";
 import { Modal } from "~/components/Modal";
 import { useRouter } from "next/router";
 import { Pronunciation } from "~/components/Pronunciation";
-import { textToSpeech } from "~/utils/textToSpeech";
-import { VolumeUp } from "~/icons/VolumeUp";
+import { TextToSpeechButton } from "~/components/TextToSpeechButton";
 
 export default function FlashcardTest() {
   const router = useRouter();
@@ -111,14 +110,9 @@ export default function FlashcardTest() {
                       }
                     />
 
-                    <button
-                      onClick={() =>
-                        textToSpeech(flashcardTestCard.flashcard.wordEntry.word)
-                      }
-                    >
-                      <span className="sr-only">Play pronunciation</span>
-                      <VolumeUp />
-                    </button>
+                    <TextToSpeechButton
+                      word={flashcardTestCard.flashcard.wordEntry.word}
+                    />
                   </div>
 
                   <p>

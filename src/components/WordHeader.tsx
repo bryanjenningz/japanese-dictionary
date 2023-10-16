@@ -11,8 +11,7 @@ import { ChevronRightIcon } from "~/icons/ChevronRightIcon";
 import { type WordEntry } from "~/dictionary/search";
 import { createWordLink } from "~/utils/createWordLink";
 import { type WordLookup } from "~/stores/historyStore";
-import { textToSpeech } from "~/utils/textToSpeech";
-import { VolumeUp } from "~/icons/VolumeUp";
+import { TextToSpeechButton } from "~/components/TextToSpeechButton";
 
 export const WordHeader = ({
   wordLookup,
@@ -138,10 +137,7 @@ export const WordHeader = ({
                 pronunciation={wordLookup.wordEntry.pronunciation}
                 pitchAccents={wordLookup.wordEntry.pitchAccents}
               />
-              <button onClick={() => textToSpeech(wordLookup.wordEntry.word)}>
-                <span className="sr-only">Play pronunciation</span>
-                <VolumeUp />
-              </button>
+              <TextToSpeechButton word={wordLookup.wordEntry.word} />
             </div>
           </section>
         </div>

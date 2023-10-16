@@ -7,7 +7,6 @@ import { MenuIcon } from "~/icons/MenuIcon";
 import { OpenInNewIcon } from "~/icons/OpenInNewIcon";
 import { RefreshIcon } from "~/icons/RefreshIcon";
 import { SearchIcon } from "~/icons/SearchIcon";
-import { VolumeUp } from "~/icons/VolumeUp";
 import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
 import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useFlashcardStore } from "~/stores/flashcardStore";
@@ -15,7 +14,7 @@ import { type WordLookup } from "~/stores/historyStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { createWordLink } from "~/utils/createWordLink";
-import { textToSpeech } from "~/utils/textToSpeech";
+import { TextToSpeechButton } from "~/components/TextToSpeechButton";
 
 const UnselectedTextMenu = ({ openSideMenu }: { openSideMenu: () => void }) => {
   const addClipReaderText = useClipReaderTextStore((x) => x.addClipReaderText);
@@ -87,13 +86,10 @@ const SelectedTextMenu = ({
         <ContentCopyIcon />
       </button>
 
-      <button
+      <TextToSpeechButton
         className="flex h-full grow basis-1 items-center justify-center"
-        onClick={() => textToSpeech(wordLookup.wordEntry.word)}
-      >
-        <span className="sr-only">Play pronunciation</span>
-        <VolumeUp />
-      </button>
+        word={wordLookup.wordEntry.word}
+      />
 
       {wordEntryIsFlashcard ? (
         <button
