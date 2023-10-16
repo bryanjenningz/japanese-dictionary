@@ -13,7 +13,7 @@ A [Pleco](https://pleco.com) web app clone for Japanese written with [React](htt
 
 ## Screenshots
 
-<div style="display: flex;">
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
   <img width="200" src="screenshots/screenshot-light-search-romaji.png" alt="" />
   <img width="200" src="screenshots/screenshot-dark-search-romaji.png" alt="" />
   <img width="200" src="screenshots/screenshot-dark-search-hiragana.png" alt="" />
