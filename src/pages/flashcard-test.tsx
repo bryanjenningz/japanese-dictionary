@@ -11,6 +11,8 @@ import { CloseIcon } from "~/icons/CloseIcon";
 import { Modal } from "~/components/Modal";
 import { useRouter } from "next/router";
 import { Pronunciation } from "~/components/Pronunciation";
+import { textToSpeech } from "~/utils/textToSpeech";
+import { VolumeUp } from "~/icons/VolumeUp";
 
 export default function FlashcardTest() {
   const router = useRouter();
@@ -98,15 +100,26 @@ export default function FlashcardTest() {
 
               {flashcardTestCard.status !== "Unseen" && (
                 <div className="flex flex-col gap-3 text-2xl">
-                  <Pronunciation
-                    word={flashcardTestCard.flashcard.wordEntry.word}
-                    pronunciation={
-                      flashcardTestCard.flashcard.wordEntry.pronunciation
-                    }
-                    pitchAccents={
-                      flashcardTestCard.flashcard.wordEntry.pitchAccents
-                    }
-                  />
+                  <div className="flex gap-3">
+                    <Pronunciation
+                      word={flashcardTestCard.flashcard.wordEntry.word}
+                      pronunciation={
+                        flashcardTestCard.flashcard.wordEntry.pronunciation
+                      }
+                      pitchAccents={
+                        flashcardTestCard.flashcard.wordEntry.pitchAccents
+                      }
+                    />
+
+                    <button
+                      onClick={() =>
+                        textToSpeech(flashcardTestCard.flashcard.wordEntry.word)
+                      }
+                    >
+                      <span className="sr-only">Play pronunciation</span>
+                      <VolumeUp />
+                    </button>
+                  </div>
 
                   <p>
                     {flashcardTestCard.flashcard.wordEntry.definitions.join(
