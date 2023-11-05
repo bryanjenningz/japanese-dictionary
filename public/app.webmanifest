@@ -38,5 +38,12 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Clip Reader",
+      "short_name": "Reader",
+      "url": "/clip-reader"
+    }
   ]
 }
