@@ -21,12 +21,12 @@ export default function Home() {
     <main
       className={classNames(
         "flex min-h-screen flex-col items-center",
-        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+        isDarkMode ? "bg-black text-white" : "bg-white text-black",
       )}
     >
       <SearchHeader
         openSideMenu={() => setIsSideMenuOpen(true)}
-        searchText={searchText ?? ""}
+        searchText={searchText}
         setSearchText={setSearchText}
       />
 
@@ -44,7 +44,7 @@ export default function Home() {
 
 const useSearchText = () => {
   const router = useRouter();
-  const searchText = useStore(useSearchTextStore, (x) => x.searchText);
+  const searchText = useSearchTextStore((x) => x.searchText);
   const setSearchText = useSearchTextStore((x) => x.setSearchText);
   const addSearch_ = useHistoryStore((x) => x.addSearch);
   const addSearch = useMemo(() => debounce(addSearch_, 1000), [addSearch_]);
@@ -61,7 +61,7 @@ const useWordEntries = (searchText: string | undefined) => {
   const search = useSearch();
   const { wordEntries } = useMemo(
     () => search(searchText?.trim() ?? ""),
-    [searchText, search]
+    [searchText, search],
   );
   return wordEntries;
 };
