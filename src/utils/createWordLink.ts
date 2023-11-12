@@ -5,5 +5,8 @@ export const createWordLink = ({
   searchText: string;
   resultIndex: number;
 }): string => {
-  return `/word?search=${searchText}&index=${resultIndex}`;
+  const searchParams = new URLSearchParams();
+  searchParams.set("search", searchText);
+  searchParams.set("index", String(resultIndex));
+  return `/word?${searchParams.toString()}`;
 };
