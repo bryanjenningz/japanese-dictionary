@@ -36,7 +36,7 @@ describe("debounce", () => {
     expect(mockFn).toHaveBeenCalledTimes(1);
   });
 
-  it("should debounce the function call with arguments", () => {
+  it("Debounces the function call with arguments", () => {
     const arg1 = "Hello";
     const arg2 = 42;
 
