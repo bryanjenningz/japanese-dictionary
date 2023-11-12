@@ -25,7 +25,7 @@ export const WordHeader = ({
   const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
   const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
   const wordEntryIsFlashcard = useFlashcardStore((x) =>
-    x.isWordEntryAFlashcard(wordLookup.wordEntry)
+    x.isWordEntryAFlashcard(wordLookup.wordEntry),
   );
 
   const hasPreviousResult = wordLookup.resultIndex > 0;
@@ -38,7 +38,7 @@ export const WordHeader = ({
       <div
         className={classNames(
           "flex w-full flex-col items-center text-white",
-          isDarkMode ? "bg-black" : "bg-blue-600"
+          isDarkMode ? "bg-black" : "bg-blue-600",
         )}
       >
         <div className="w-full max-w-2xl">
@@ -73,7 +73,7 @@ export const WordHeader = ({
                 "h-full px-4 text-white",
                 isDarkMode
                   ? "disabled:text-slate-500"
-                  : "disabled:text-blue-500"
+                  : "disabled:text-blue-500",
               )}
               disabled={!hasPreviousResult}
               onClick={() => {
@@ -81,7 +81,7 @@ export const WordHeader = ({
                   createWordLink({
                     searchText: wordLookup.searchText,
                     resultIndex: wordLookup.resultIndex - 1,
-                  })
+                  }),
                 );
               }}
             >
@@ -96,7 +96,7 @@ export const WordHeader = ({
                 "h-full px-4 text-white",
                 isDarkMode
                   ? "disabled:text-slate-500"
-                  : "disabled:text-blue-500"
+                  : "disabled:text-blue-500",
               )}
               disabled={!hasNextResult}
               onClick={() => {
@@ -104,7 +104,7 @@ export const WordHeader = ({
                   createWordLink({
                     searchText: wordLookup.searchText,
                     resultIndex: wordLookup.resultIndex + 1,
-                  })
+                  }),
                 );
               }}
             >
@@ -120,14 +120,14 @@ export const WordHeader = ({
       <div
         className={classNames(
           "flex w-full flex-col items-center",
-          isDarkMode ? "bg-black text-white" : "bg-white text-black"
+          isDarkMode ? "bg-black text-white" : "bg-white text-black",
         )}
       >
         <div className="w-full max-w-2xl">
           <section
             className={classNames(
               "p-4",
-              isDarkMode ? "bg-black text-white" : "bg-white text-black"
+              isDarkMode ? "bg-black text-white" : "bg-white text-black",
             )}
           >
             <div className="flex gap-3 text-xl">

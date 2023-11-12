@@ -22,7 +22,7 @@ export default function Settings() {
     <main
       className={classNames(
         "flex min-h-screen flex-col items-center",
-        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+        isDarkMode ? "bg-black text-white" : "bg-white text-black",
       )}
     >
       <SimpleHeader openSideMenu={() => setIsSideMenuOpen(true)} />
@@ -42,7 +42,7 @@ export default function Settings() {
                   <span
                     className={classNames(
                       "text-sm",
-                      isDarkMode ? "text-slate-400" : "text-slate-500"
+                      isDarkMode ? "text-slate-400" : "text-slate-500",
                     )}
                   >
                     {value ? "Enabled" : "Disabled"}

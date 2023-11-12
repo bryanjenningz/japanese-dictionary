@@ -18,15 +18,15 @@ export default function FlashcardTest() {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   const flashcardTestCard = useStore(useFlashcardStore, (x) =>
-    x.getCurrentTestFlashcard()
+    x.getCurrentTestFlashcard(),
   );
   const setCurrentFlashcardStatus = useFlashcardStore(
-    (x) => x.setCurrentFlashcardStatus
+    (x) => x.setCurrentFlashcardStatus,
   );
   const goToNextFlashcard = useFlashcardStore((x) => x.goToNextFlashcard);
   const isLastFlashcard = useFlashcardStore((x) => x.isLastFlashcard());
   const deleteCurrentFlashcardTest = useFlashcardStore(
-    (x) => x.deleteCurrentFlashcardTest
+    (x) => x.deleteCurrentFlashcardTest,
   );
   const flashcardTest = useStore(useFlashcardStore, (x) => x.flashcardTest);
   const flashcardsCorrect =
@@ -35,11 +35,11 @@ export default function FlashcardTest() {
     flashcardTest?.flashcards.filter((x) => x.status === "Fail").length ?? 0;
   const percentCorrect =
     Math.floor(
-      (flashcardsCorrect / (flashcardsCorrect + flashcardsIncorrect)) * 100
+      (flashcardsCorrect / (flashcardsCorrect + flashcardsIncorrect)) * 100,
     ) || 0;
   const percentIncorrect =
     Math.floor(
-      (flashcardsIncorrect / (flashcardsCorrect + flashcardsIncorrect)) * 100
+      (flashcardsIncorrect / (flashcardsCorrect + flashcardsIncorrect)) * 100,
     ) || 0;
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -50,7 +50,7 @@ export default function FlashcardTest() {
     <main
       className={classNames(
         "flex min-h-screen flex-col items-center",
-        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+        isDarkMode ? "bg-black text-white" : "bg-white text-black",
       )}
     >
       <FlashcardTestHeader openSideMenu={() => setIsSideMenuOpen(true)} />
@@ -78,7 +78,7 @@ export default function FlashcardTest() {
             <button
               className={classNames(
                 "px-4 py-2 uppercase",
-                isDarkMode ? "text-blue-500" : "text-black"
+                isDarkMode ? "text-blue-500" : "text-black",
               )}
               onClick={() => {
                 deleteCurrentFlashcardTest();
@@ -117,7 +117,7 @@ export default function FlashcardTest() {
 
                   <p>
                     {flashcardTestCard.flashcard.wordEntry.definitions.join(
-                      ", "
+                      ", ",
                     )}
                   </p>
                 </div>
@@ -130,7 +130,7 @@ export default function FlashcardTest() {
               "flex w-full justify-center border-t",
               isDarkMode
                 ? "border-slate-500 bg-black text-white"
-                : "border-slate-400 bg-slate-200 text-slate-600"
+                : "border-slate-400 bg-slate-200 text-slate-600",
             )}
           >
             <div className="flex w-full max-w-2xl flex-col">
@@ -161,7 +161,7 @@ export default function FlashcardTest() {
                   <div
                     className={classNames(
                       "h-full w-[1px]",
-                      isDarkMode ? "bg-slate-500" : "bg-slate-400"
+                      isDarkMode ? "bg-slate-500" : "bg-slate-400",
                     )}
                   ></div>
                   <button

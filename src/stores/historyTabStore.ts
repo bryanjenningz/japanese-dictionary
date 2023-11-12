@@ -18,6 +18,6 @@ export const useHistoryTabStore = create<HistoryTabState>()(
       historyTab: DEFAULT_HISTORY_TAB,
       setHistoryTab: (historyTab: HistoryTab) => set({ historyTab }),
     }),
-    { name: "history-tab" }
-  )
+    { name: "history-tab" },
+  ),
 );

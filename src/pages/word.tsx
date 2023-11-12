@@ -19,7 +19,7 @@ export default function Word() {
     <main
       className={classNames(
         "flex min-h-screen flex-col items-center",
-        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+        isDarkMode ? "bg-black text-white" : "bg-white text-black",
       )}
     >
       {wordEntry && (
@@ -65,7 +65,7 @@ const useWordEntries = ({
   const search = useSearch();
   const { wordEntries } = useMemo(
     () => search(searchText.trim()),
-    [searchText, search]
+    [searchText, search],
   );
   const wordEntry = wordEntries[resultIndex];
   const addDictionaryLookup = useHistoryStore((x) => x.addDictionaryLookup);

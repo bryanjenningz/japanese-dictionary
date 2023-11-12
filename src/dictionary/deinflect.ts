@@ -68,7 +68,7 @@ export type DeinflectionData = {
 export const deinflect = (
   difReasons: string[],
   difRuleGroups: DeinflectionRuleGroup[],
-  word: string
+  word: string,
 ): Deinflection[] => {
   const results: Deinflection[] = [{ word, type: 0xff, reason: "" }];
   const wordToResultIndex = { [word]: 0 };

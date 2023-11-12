@@ -29,7 +29,7 @@ export const SearchHistory = ({
             <time
               className={classNames(
                 "block p-1 font-semibold text-white",
-                isDarkMode ? "bg-slate-700" : "bg-slate-500"
+                isDarkMode ? "bg-slate-700" : "bg-slate-500",
               )}
             >
               {maxTime - minTime < 1000 * 60
@@ -61,7 +61,7 @@ export const SearchHistory = ({
                             "absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col shadow-xl",
                             isDarkMode
                               ? "bg-slate-700 text-white"
-                              : "bg-white text-black"
+                              : "bg-white text-black",
                           )}
                         >
                           <Link

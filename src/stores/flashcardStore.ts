@@ -49,7 +49,7 @@ export type FlashcardState = {
 
   flashcardTestMaxCards: FlashcardTestMaxCards;
   setFlashcardTestMaxCards: (
-    flashcardTestMaxCards: FlashcardTestMaxCards
+    flashcardTestMaxCards: FlashcardTestMaxCards,
   ) => void;
   flashcardTest: FlashcardTest | null;
   startNewFlashcardTest: () => void;
@@ -99,12 +99,12 @@ export const useFlashcardStore = create<FlashcardState>()(
       clearAllFlashcards: () => set({ flashcards: [] }),
       isWordEntryAFlashcard: (wordEntry: WordEntry) =>
         !!get().flashcards.find((flashcard) =>
-          equals(flashcard.wordEntry, wordEntry)
+          equals(flashcard.wordEntry, wordEntry),
         ),
 
       flashcardTestMaxCards: DEFAULT_FLASHCARD_TEST_MAX_CARDS,
       setFlashcardTestMaxCards: (
-        flashcardTestMaxCards: FlashcardTestMaxCards
+        flashcardTestMaxCards: FlashcardTestMaxCards,
       ) => set({ flashcardTestMaxCards }),
       flashcardTest: null,
       startNewFlashcardTest: () => {
@@ -118,7 +118,7 @@ export const useFlashcardStore = create<FlashcardState>()(
                 (flashcard): FlashcardTestCard => ({
                   flashcard,
                   status: "Unseen",
-                })
+                }),
               )
               .slice(0, cardsUsed),
             index: 0,
@@ -160,16 +160,16 @@ export const useFlashcardStore = create<FlashcardState>()(
       },
       deleteCurrentFlashcardTest: () => set({ flashcardTest: null }),
     }),
-    { name: "flashcards" }
-  )
+    { name: "flashcards" },
+  ),
 );
 
 const deleteFlashcard = (
   flashcards: Flashcard[],
-  removedFlashcard: Flashcard
+  removedFlashcard: Flashcard,
 ): Flashcard[] => {
   return flashcards.filter(
-    (flashcard) => !equals(flashcard.wordEntry, removedFlashcard.wordEntry)
+    (flashcard) => !equals(flashcard.wordEntry, removedFlashcard.wordEntry),
   );
 };
 

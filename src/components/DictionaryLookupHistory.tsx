@@ -21,11 +21,11 @@ export const DictionaryLookupHistory = ({
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const dictionaryLookups = useStore(
     useHistoryStore,
-    (x) => x.dictionaryLookups
+    (x) => x.dictionaryLookups,
   );
   const dictionaryLookupsGroupedByTime = useTimeGroups(dictionaryLookups);
   const removeDictionaryLookup = useHistoryStore(
-    (x) => x.removeDictionaryLookup
+    (x) => x.removeDictionaryLookup,
   );
   const flashcards = useStore(useFlashcardStore, (x) => x.flashcards);
   const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
@@ -40,7 +40,7 @@ export const DictionaryLookupHistory = ({
             <time
               className={classNames(
                 "block p-1 font-semibold text-white",
-                isDarkMode ? "bg-slate-700" : "bg-slate-500"
+                isDarkMode ? "bg-slate-700" : "bg-slate-500",
               )}
             >
               {maxTime - minTime < 1000 * 60
@@ -57,7 +57,7 @@ export const DictionaryLookupHistory = ({
                 } = lookup;
 
                 const isSavedFlashcard = !!flashcards?.find((x) =>
-                  equals(x.wordEntry, lookup.wordEntry)
+                  equals(x.wordEntry, lookup.wordEntry),
                 );
 
                 return (
@@ -71,12 +71,12 @@ export const DictionaryLookupHistory = ({
                           createWordLink({
                             searchText,
                             resultIndex,
-                          })
+                          }),
                         );
                       }}
                       className={classNames(
                         "flex w-full select-none flex-col border-b p-2 text-left",
-                        isDarkMode ? "border-slate-500" : "border-slate-300"
+                        isDarkMode ? "border-slate-500" : "border-slate-300",
                       )}
                       onContextMenu={(event) => {
                         event.preventDefault();
@@ -93,7 +93,7 @@ export const DictionaryLookupHistory = ({
                       </span>
                       <span
                         className={classNames(
-                          isDarkMode ? "text-slate-400" : "text-slate-700"
+                          isDarkMode ? "text-slate-400" : "text-slate-700",
                         )}
                       >
                         {definitions.join(", ")}
@@ -107,7 +107,7 @@ export const DictionaryLookupHistory = ({
                             "absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col shadow-xl",
                             isDarkMode
                               ? "bg-slate-700 text-white"
-                              : "bg-white text-black"
+                              : "bg-white text-black",
                           )}
                         >
                           <Link

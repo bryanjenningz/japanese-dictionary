@@ -6,7 +6,7 @@ export type ClipReaderTextState = {
   selectedClipReaderText: ClipReaderText | null;
   clipReaderTexts: ClipReaderText[];
   setSelectedClipReaderText: (
-    selectedClipReaderText: ClipReaderText | null
+    selectedClipReaderText: ClipReaderText | null,
   ) => void;
   addClipReaderText: (clipReaderText: ClipReaderText) => void;
   removeClipReaderText: (clipReaderText: ClipReaderText) => void;
@@ -24,7 +24,7 @@ export const useClipReaderTextStore = create<ClipReaderTextState>()(
       selectedClipReaderText: null,
       clipReaderTexts: [],
       setSelectedClipReaderText: (
-        selectedClipReaderText: ClipReaderText | null
+        selectedClipReaderText: ClipReaderText | null,
       ) => set({ selectedClipReaderText }),
       addClipReaderText: (clipReaderText: ClipReaderText) =>
         set({
@@ -35,26 +35,26 @@ export const useClipReaderTextStore = create<ClipReaderTextState>()(
         set({
           selectedClipReaderText: equals(
             get().selectedClipReaderText,
-            clipReaderText
+            clipReaderText,
           )
             ? null
             : get().selectedClipReaderText,
           clipReaderTexts: removeClipReaderText(
             get().clipReaderTexts,
-            clipReaderText
+            clipReaderText,
           ),
         }),
       clearAllClipReaderTexts: () => set({ clipReaderTexts: [] }),
     }),
-    { name: "clip-reader-texts" }
-  )
+    { name: "clip-reader-texts" },
+  ),
 );
 
 const removeClipReaderText = (
   clipReaderTexts: ClipReaderText[],
-  removed: ClipReaderText
+  removed: ClipReaderText,
 ): ClipReaderText[] => {
   return clipReaderTexts.filter(
-    (clipReaderText) => !equals(clipReaderText, removed)
+    (clipReaderText) => !equals(clipReaderText, removed),
   );
 };

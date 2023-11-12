@@ -42,10 +42,10 @@ export const useSearch = () => {
         difReasons,
         difRules,
         pitchData,
-        removeUnusedChars(text)
+        removeUnusedChars(text),
       );
     },
-    [wordDict, wordDictIndex, difReasons, difRules, pitchData]
+    [wordDict, wordDictIndex, difReasons, difRules, pitchData],
   );
 
   return search;

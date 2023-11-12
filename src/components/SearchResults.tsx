@@ -26,7 +26,7 @@ export const SearchResults = ({
               href={createWordLink({ searchText, resultIndex })}
               className={classNames(
                 "block border-b p-4",
-                isDarkMode ? "border-slate-600" : "border-slate-300"
+                isDarkMode ? "border-slate-600" : "border-slate-300",
               )}
             >
               <div className="flex items-center gap-3">

@@ -9,7 +9,7 @@ export const loadPitchData = async (): Promise<string[]> => {
 export const getPitchAccents = (
   pitchData: string[],
   word: string,
-  pronunciation: string
+  pronunciation: string,
 ): number[] => {
   pronunciation = pronunciation || word;
   let lo = 0;

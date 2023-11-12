@@ -29,7 +29,7 @@ export const SearchTipsModal = ({
       <div
         className={classNames(
           "fixed inset-0 bg-black transition duration-300",
-          isShown ? "opacity-40" : "pointer-events-none opacity-0"
+          isShown ? "opacity-40" : "pointer-events-none opacity-0",
         )}
         aria-hidden={!isShown}
         onClick={closeModal}
@@ -39,7 +39,7 @@ export const SearchTipsModal = ({
         className={classNames(
           "fixed inset-5 flex max-h-[calc(100vh-40px)] max-w-2xl flex-col p-0 shadow transition duration-300",
           isShown ? "opacity-100" : "pointer-events-none opacity-0",
-          isDarkMode ? "bg-slate-700 text-white" : "bg-white text-black"
+          isDarkMode ? "bg-slate-700 text-white" : "bg-white text-black",
         )}
         aria-hidden={!isShown}
       >
@@ -80,7 +80,7 @@ export const SearchTipsModal = ({
             "border-t-2 p-4 text-left",
             isDarkMode
               ? "border-slate-500 text-blue-400"
-              : "border-slate-200 text-black"
+              : "border-slate-200 text-black",
           )}
           onClick={closeModal}
         >

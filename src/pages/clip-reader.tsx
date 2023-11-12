@@ -34,7 +34,7 @@ export default function ClipReader() {
     <main
       className={classNames(
         "flex min-h-screen flex-col items-center pt-14",
-        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+        isDarkMode ? "bg-black text-white" : "bg-white text-black",
       )}
     >
       <ClipReaderHeader
@@ -78,11 +78,11 @@ export default function ClipReader() {
 const useClipText = () => {
   const clipReaderTexts = useStore(
     useClipReaderTextStore,
-    (x) => x.clipReaderTexts
+    (x) => x.clipReaderTexts,
   );
   const selectedClipReaderText = useStore(
     useClipReaderTextStore,
-    (x) => x.selectedClipReaderText
+    (x) => x.selectedClipReaderText,
   );
   const clipText =
     selectedClipReaderText?.text ?? clipReaderTexts?.[0]?.text ?? "";
@@ -91,7 +91,7 @@ const useClipText = () => {
 
 const useSelectedText = (clipText: string) => {
   const [selectedTextIndex, setSelectedTextIndex] = useState<null | number>(
-    null
+    null,
   );
   const search = useSearch();
   const { selectedTextLength, wordEntries } = ((): WordSearchResult => {
@@ -108,7 +108,7 @@ const useSelectedText = (clipText: string) => {
       ? ""
       : clipText.slice(
           selectedTextIndex,
-          selectedTextIndex + selectedTextLength
+          selectedTextIndex + selectedTextLength,
         );
   const addClipReaderLookup = useHistoryStore((x) => x.addClipReaderLookup);
   useEffect(() => {
@@ -125,7 +125,7 @@ const useSelectedText = (clipText: string) => {
     typeof selectedTextIndex === "number"
       ? clipText.slice(
           selectedTextIndex,
-          selectedTextIndex + selectedTextLength
+          selectedTextIndex + selectedTextLength,
         )
       : "";
   return {

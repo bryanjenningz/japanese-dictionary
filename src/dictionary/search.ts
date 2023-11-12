@@ -23,7 +23,7 @@ export const searchWord = (
   difReasons: string[],
   difRules: DeinflectionRuleGroup[],
   pitchData: string[],
-  text: string
+  text: string,
 ): WordSearchResult => {
   if (text === DEFAULT_SEARCH_TEXT) {
     return DEFAULT_SEARCH_RESULTS;
@@ -53,7 +53,7 @@ export const searchWord = (
         const midIndexes = midIndexStrings.map(Number);
         if (midIndexes.some(isNaN)) {
           console.log(
-            `Invalid indexes in word-dict-index.txt for line: ${midLine}`
+            `Invalid indexes in word-dict-index.txt for line: ${midLine}`,
           );
           break;
         }
@@ -63,8 +63,8 @@ export const searchWord = (
             .map((wordDictIndex) =>
               wordDict.slice(
                 wordDictIndex,
-                wordDict.indexOf("\n", wordDictIndex)
-              )
+                wordDict.indexOf("\n", wordDictIndex),
+              ),
             )
             .map(parseWordDictLine)
             .filter(Boolean);
@@ -73,7 +73,7 @@ export const searchWord = (
             entry.pitchAccents = getPitchAccents(
               pitchData,
               entry.word,
-              entry.pronunciation
+              entry.pronunciation,
             );
           }
 

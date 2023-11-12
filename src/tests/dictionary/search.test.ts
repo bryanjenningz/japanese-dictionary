@@ -5,15 +5,15 @@ import { searchWord } from "~/dictionary/search";
 import { parseDeinflectionData } from "~/dictionary/deinflect";
 
 const wordDict = readFileSync(
-  resolve("./public/dictionaries/word-dict.txt")
+  resolve("./public/dictionaries/word-dict.txt"),
 ).toString();
 
 const wordDictIndex = readFileSync(
-  resolve("./public/dictionaries/word-dict-index.txt")
+  resolve("./public/dictionaries/word-dict-index.txt"),
 ).toString();
 
 const pitchAccentData = readFileSync(
-  resolve("./public/dictionaries/pitch-accents.txt")
+  resolve("./public/dictionaries/pitch-accents.txt"),
 )
   .toString()
   .split("\n");
@@ -21,7 +21,7 @@ const pitchAccentData = readFileSync(
 const { difReasons, difRules } = parseDeinflectionData(
   readFileSync(resolve("./public/dictionaries/deinflect.txt"))
     .toString()
-    .split("\n")
+    .split("\n"),
 );
 
 const search = (word: string) =>
@@ -31,7 +31,7 @@ const search = (word: string) =>
     difReasons,
     difRules,
     pitchAccentData,
-    word
+    word,
   );
 
 describe("searchWord", () => {

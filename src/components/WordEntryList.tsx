@@ -23,7 +23,7 @@ export const WordEntryList = ({
           "no-scrollbar flex max-h-48 w-full flex-col overflow-y-scroll rounded-lg border shadow-lg md:max-w-2xl",
           isDarkMode
             ? "border-white bg-black text-white"
-            : "border-black bg-white text-black"
+            : "border-black bg-white text-black",
         )}
         // Click events outside the reading text cause the selected text to be
         // unselected. The word entry list is outside the reading text so click
@@ -45,7 +45,7 @@ export const WordEntryList = ({
                 pitchAccents={pitchAccents}
               />
             );
-          }
+          },
         )}
       </ul>
     </div>
@@ -66,7 +66,7 @@ const WordEntryItem = ({
     <li
       className={classNames(
         "flex w-full flex-col border-b p-3 last:border-b-0",
-        isDarkMode ? "border-white" : "border-black"
+        isDarkMode ? "border-white" : "border-black",
       )}
     >
       <div className="flex flex-wrap gap-3">

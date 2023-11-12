@@ -18,13 +18,13 @@ export default function NewFlashcardTest() {
 
   const flashcardTestMaxCards = useStore(
     useFlashcardStore,
-    (x) => x.flashcardTestMaxCards
+    (x) => x.flashcardTestMaxCards,
   );
   const setFlashcardTestMaxCards = useFlashcardStore(
-    (x) => x.setFlashcardTestMaxCards
+    (x) => x.setFlashcardTestMaxCards,
   );
   const startNewFlashcardTest = useFlashcardStore(
-    (x) => x.startNewFlashcardTest
+    (x) => x.startNewFlashcardTest,
   );
 
   const [isModalShown, setIsModalShown] = useState(false);
@@ -45,7 +45,7 @@ export default function NewFlashcardTest() {
           Max # of cards
           <span
             className={classNames(
-              isDarkMode ? "text-slate-400" : "text-slate-500"
+              isDarkMode ? "text-slate-400" : "text-slate-500",
             )}
           >
             {flashcardTestMaxCards}
@@ -60,7 +60,7 @@ export default function NewFlashcardTest() {
     <main
       className={classNames(
         "flex min-h-screen flex-col items-center",
-        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+        isDarkMode ? "bg-black text-white" : "bg-white text-black",
       )}
     >
       <SimpleHeader openSideMenu={() => setIsSideMenuOpen(true)} />
@@ -77,7 +77,7 @@ export default function NewFlashcardTest() {
               <h2
                 className={classNames(
                   "text-sm",
-                  isDarkMode ? "text-blue-500" : "text-blue-600"
+                  isDarkMode ? "text-blue-500" : "text-blue-600",
                 )}
               >
                 {heading}
@@ -85,7 +85,7 @@ export default function NewFlashcardTest() {
               <button
                 className={classNames(
                   "flex flex-col py-3 text-left",
-                  isDarkMode ? "text-white" : "text-black"
+                  isDarkMode ? "text-white" : "text-black",
                 )}
                 onClick={onClick}
               >
@@ -123,7 +123,7 @@ export default function NewFlashcardTest() {
             <button
               className={classNames(
                 "self-end px-4 py-2 uppercase",
-                isDarkMode ? "text-blue-500" : "text-black"
+                isDarkMode ? "text-blue-500" : "text-black",
               )}
               onClick={() => setIsModalShown(false)}
             >

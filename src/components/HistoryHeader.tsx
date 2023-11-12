@@ -22,11 +22,11 @@ export const HistoryHeader = ({
   const saveFlashcards = useFlashcardStore((x) => x.saveFlashcards);
   const dictionaryLookups = useStore(
     useHistoryStore,
-    (x) => x.dictionaryLookups
+    (x) => x.dictionaryLookups,
   );
   const clipReaderLookups = useStore(
     useHistoryStore,
-    (x) => x.clipReaderLookups
+    (x) => x.clipReaderLookups,
   );
 
   const [isMoreMenuShown, setIsMoreMenuShown] = useState(false);
@@ -35,7 +35,7 @@ export const HistoryHeader = ({
     <header
       className={classNames(
         "flex w-full justify-center text-white shadow",
-        isDarkMode ? "bg-black" : "bg-blue-600"
+        isDarkMode ? "bg-black" : "bg-blue-600",
       )}
     >
       {isMoreMenuShown && (
@@ -71,7 +71,7 @@ export const HistoryHeader = ({
                 isDarkMode ? "bg-slate-700 text-white" : "bg-white text-black",
                 isMoreMenuShown
                   ? "opacity-100"
-                  : "pointer-events-none opacity-0"
+                  : "pointer-events-none opacity-0",
               )}
               aria-hidden={!isMoreMenuShown}
             >
@@ -119,7 +119,7 @@ export const HistoryHeader = ({
                 key={tab}
                 className={classNames(
                   "flex h-full grow basis-1 items-center justify-center uppercase",
-                  historyTab === tab && "border-b-2 border-white"
+                  historyTab === tab && "border-b-2 border-white",
                 )}
                 onClick={() => setHistoryTab(tab)}
               >

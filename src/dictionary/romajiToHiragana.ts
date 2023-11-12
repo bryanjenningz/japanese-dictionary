@@ -125,7 +125,7 @@ const HIRAGANA_MAP: Record<string, string> = {
 };
 
 const DOUBLE_CONSONANTS = new Set(
-  "bcdfghjklmnprstvwyz".split("").map((ch) => ch + ch)
+  "bcdfghjklmnprstvwyz".split("").map((ch) => ch + ch),
 );
 
 const DOUBLE_CONSONANT_HIRAGANA = "っ";

@@ -17,7 +17,7 @@ export const Pronunciation = ({
   pronunciation = pronunciation || word;
   const moras = getMoras(pronunciation);
   const fallIndexes = pitchAccents.map((pitchAccent) =>
-    pitchAccent === 0 ? Infinity : pitchAccent
+    pitchAccent === 0 ? Infinity : pitchAccent,
   );
 
   return (
@@ -47,7 +47,7 @@ export const Pronunciation = ({
                           return "border-b border-r";
                         }
                         return "border-t";
-                      })()
+                      })(),
                     )}
                   >
                     {mora}

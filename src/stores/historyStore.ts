@@ -45,14 +45,14 @@ export const useHistoryStore = create<HistoryState>()(
           dictionaryLookups: [
             lookup,
             ...get().dictionaryLookups.filter(
-              (x) => x.wordEntry.word !== lookup.wordEntry.word
+              (x) => x.wordEntry.word !== lookup.wordEntry.word,
             ),
           ],
         }),
       removeDictionaryLookup: (lookup: WordLookup) =>
         set({
           dictionaryLookups: get().dictionaryLookups.filter(
-            (x) => !equals(x, lookup)
+            (x) => !equals(x, lookup),
           ),
         }),
       clearDictionaryHistory: () => set({ dictionaryLookups: [] }),
@@ -62,7 +62,7 @@ export const useHistoryStore = create<HistoryState>()(
       removeClipReaderLookup: (lookup: WordLookup) =>
         set({
           clipReaderLookups: get().clipReaderLookups.filter(
-            (x) => !equals(x, lookup)
+            (x) => !equals(x, lookup),
           ),
         }),
       clearClipReaderHistory: () => set({ clipReaderLookups: [] }),
@@ -78,6 +78,6 @@ export const useHistoryStore = create<HistoryState>()(
         set({ searches: get().searches.filter((x) => !equals(x, search)) }),
       clearSearchHistory: () => set({ searches: [] }),
     }),
-    { name: "history" }
-  )
+    { name: "history" },
+  ),
 );

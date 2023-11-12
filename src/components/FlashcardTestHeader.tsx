@@ -22,7 +22,7 @@ export const FlashcardTestHeader = ({
 
   const flashcardTest = useStore(useFlashcardStore, (x) => x.flashcardTest);
   const currentFlashcard = useStore(useFlashcardStore, (x) =>
-    x.getCurrentTestFlashcard()
+    x.getCurrentTestFlashcard(),
   );
   const flashcardNumber = (flashcardTest?.index ?? 0) + 1;
   const flashcardCount = flashcardTest?.flashcards.length ?? 0;
@@ -32,7 +32,7 @@ export const FlashcardTestHeader = ({
     flashcardTest?.flashcards.filter((x) => x.status === "Fail").length ?? 0;
   const flashcardPercentCorrect =
     Math.floor(
-      (flashcardsCorrect / (flashcardsCorrect + flashcardsIncorrect)) * 100
+      (flashcardsCorrect / (flashcardsCorrect + flashcardsIncorrect)) * 100,
     ) || 0;
 
   const [modalState, setModalState] = useState<ModalState>("HIDDEN");
@@ -47,7 +47,7 @@ export const FlashcardTestHeader = ({
       <header
         className={classNames(
           "flex w-full flex-col items-center text-white shadow",
-          isDarkMode ? "bg-black" : "bg-blue-600"
+          isDarkMode ? "bg-black" : "bg-blue-600",
         )}
       >
         <div className="w-full max-w-2xl">
@@ -80,7 +80,7 @@ export const FlashcardTestHeader = ({
                     createWordLink({
                       searchText: currentFlashcard.flashcard.searchText,
                       resultIndex: currentFlashcard.flashcard.resultIndex,
-                    })
+                    }),
                   );
                 }
               }}
@@ -94,7 +94,7 @@ export const FlashcardTestHeader = ({
         <div
           className={classNames(
             "flex w-full justify-center text-sm font-semibold",
-            isDarkMode ? "bg-slate-700 text-white" : "bg-slate-300 text-black"
+            isDarkMode ? "bg-slate-700 text-white" : "bg-slate-300 text-black",
           )}
         >
           <div className="flex w-full max-w-2xl justify-between px-4">
@@ -120,7 +120,7 @@ const FlashcardTestHeaderModal = ({
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   const deleteCurrentFlashcardTest = useFlashcardStore(
-    (x) => x.deleteCurrentFlashcardTest
+    (x) => x.deleteCurrentFlashcardTest,
   );
 
   return (
@@ -145,7 +145,7 @@ const FlashcardTestHeaderModal = ({
                     <button
                       className={classNames(
                         "px-4 py-2 uppercase",
-                        isDarkMode ? "text-blue-500" : "text-black"
+                        isDarkMode ? "text-blue-500" : "text-black",
                       )}
                       onClick={() => setModalState("HIDDEN")}
                     >
@@ -155,7 +155,7 @@ const FlashcardTestHeaderModal = ({
                     <button
                       className={classNames(
                         "px-4 py-2 uppercase",
-                        isDarkMode ? "text-blue-500" : "text-black"
+                        isDarkMode ? "text-blue-500" : "text-black",
                       )}
                       onClick={() => {
                         deleteCurrentFlashcardTest();
@@ -179,7 +179,7 @@ const FlashcardTestHeaderModal = ({
                     <button
                       className={classNames(
                         "px-4 py-2 uppercase",
-                        isDarkMode ? "text-blue-500" : "text-black"
+                        isDarkMode ? "text-blue-500" : "text-black",
                       )}
                       onClick={() => setModalState("HIDDEN")}
                     >

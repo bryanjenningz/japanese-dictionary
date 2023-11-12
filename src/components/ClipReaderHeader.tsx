@@ -69,7 +69,7 @@ const SelectedTextMenu = ({
   const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
   const deleteFlashcard = useFlashcardStore((x) => x.deleteFlashcard);
   const wordEntryIsFlashcard = useFlashcardStore((x) =>
-    x.isWordEntryAFlashcard(wordLookup.wordEntry)
+    x.isWordEntryAFlashcard(wordLookup.wordEntry),
   );
 
   return (
@@ -146,7 +146,7 @@ export const ClipReaderHeader = ({
     <header
       className={classNames(
         "fixed left-0 right-0 top-0 flex w-full justify-center text-white",
-        isDarkMode ? "bg-black" : "bg-blue-600"
+        isDarkMode ? "bg-black" : "bg-blue-600",
       )}
     >
       <div className="w-full max-w-2xl">

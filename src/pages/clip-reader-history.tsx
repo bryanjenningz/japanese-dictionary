@@ -19,16 +19,16 @@ export default function ClipReaderHistory() {
 
   const clipReaderTexts = useStore(
     useClipReaderTextStore,
-    (x) => x.clipReaderTexts
+    (x) => x.clipReaderTexts,
   );
   const setSelectedClipReaderText = useClipReaderTextStore(
-    (x) => x.setSelectedClipReaderText
+    (x) => x.setSelectedClipReaderText,
   );
   const removeClipReaderText = useClipReaderTextStore(
-    (x) => x.removeClipReaderText
+    (x) => x.removeClipReaderText,
   );
   const clearAllClipReaderTexts = useClipReaderTextStore(
-    (x) => x.clearAllClipReaderTexts
+    (x) => x.clearAllClipReaderTexts,
   );
 
   const [isModalShown, setIsModalShown] = useState(false);
@@ -39,7 +39,7 @@ export default function ClipReaderHistory() {
     <main
       className={classNames(
         "flex min-h-screen flex-col items-center",
-        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+        isDarkMode ? "bg-black text-white" : "bg-white text-black",
       )}
     >
       <ClipReaderHistoryHeader openModal={() => setIsModalShown(true)} />
@@ -60,7 +60,7 @@ export default function ClipReaderHistory() {
                 key={time}
                 className={classNames(
                   "relative border-b last:border-b-0",
-                  isDarkMode ? "border-slate-700" : "border-slate-300"
+                  isDarkMode ? "border-slate-700" : "border-slate-300",
                 )}
               >
                 <button
@@ -87,7 +87,7 @@ export default function ClipReaderHistory() {
                         "absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col shadow-xl",
                         isDarkMode
                           ? "bg-slate-700 text-white"
-                          : "bg-white text-black"
+                          : "bg-white text-black",
                       )}
                     >
                       <button
@@ -114,7 +114,7 @@ export default function ClipReaderHistory() {
           <div
             className={classNames(
               "flex justify-end uppercase",
-              isDarkMode ? "text-blue-500" : "text-black"
+              isDarkMode ? "text-blue-500" : "text-black",
             )}
           >
             <button className="px-2" onClick={() => setIsModalShown(false)}>

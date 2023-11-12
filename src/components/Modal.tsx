@@ -18,7 +18,7 @@ export const Modal = ({
       <div
         className={classNames(
           "fixed inset-0 z-10 bg-black transition-opacity",
-          isShown ? "opacity-40" : "pointer-events-none opacity-0"
+          isShown ? "opacity-40" : "pointer-events-none opacity-0",
         )}
         aria-hidden={!isShown}
       ></div>
@@ -26,7 +26,7 @@ export const Modal = ({
       <div
         className={classNames(
           "fixed inset-0 z-20 flex items-center justify-center p-4",
-          isShown ? "opacity-100" : "pointer-events-none opacity-0"
+          isShown ? "opacity-100" : "pointer-events-none opacity-0",
         )}
         aria-hidden={!isShown}
         onClick={(event) => {
@@ -38,7 +38,7 @@ export const Modal = ({
           className={classNames(
             "max-h-[calc(100vh-40px)] max-w-2xl p-4 transition-all",
             isDarkMode ? "bg-slate-700 text-white" : "bg-white text-black",
-            isShown ? "opacity-100" : "pointer-events-none opacity-0"
+            isShown ? "opacity-100" : "pointer-events-none opacity-0",
           )}
         >
           {children}

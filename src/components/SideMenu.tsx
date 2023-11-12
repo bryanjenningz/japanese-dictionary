@@ -41,10 +41,10 @@ export const SideMenu = ({
 
   const hasFlashcardTest = useStore(
     useFlashcardStore,
-    (x) => !!x.flashcardTest
+    (x) => !!x.flashcardTest,
   );
   const deleteCurrentFlashcardTest = useFlashcardStore(
-    (x) => x.deleteCurrentFlashcardTest
+    (x) => x.deleteCurrentFlashcardTest,
   );
 
   const [isModalShown, setIsModalShown] = useState(false);
@@ -105,7 +105,7 @@ export const SideMenu = ({
       <div
         className={classNames(
           "fixed inset-0 z-10 bg-black opacity-40",
-          !isSideMenuOpen && "hidden"
+          !isSideMenuOpen && "hidden",
         )}
         onClick={closeSideMenu}
       ></div>
@@ -119,7 +119,7 @@ export const SideMenu = ({
               <button
                 className={classNames(
                   "px-4 py-2 uppercase",
-                  isDarkMode ? "text-blue-500" : "text-black"
+                  isDarkMode ? "text-blue-500" : "text-black",
                 )}
                 onClick={() => setIsModalShown(false)}
                 tabIndex={isModalShown ? 0 : -1}
@@ -130,7 +130,7 @@ export const SideMenu = ({
               <button
                 className={classNames(
                   "px-4 py-2 uppercase",
-                  isDarkMode ? "text-blue-500" : "text-black"
+                  isDarkMode ? "text-blue-500" : "text-black",
                 )}
                 onClick={() => {
                   deleteCurrentFlashcardTest();
@@ -149,14 +149,14 @@ export const SideMenu = ({
         className={classNames(
           "fixed bottom-0 top-0 z-10 min-w-[200px] transition-[left] duration-300",
           isDarkMode ? "bg-black text-white" : "bg-white text-black",
-          isSideMenuOpen ? "left-0" : "-left-64"
+          isSideMenuOpen ? "left-0" : "-left-64",
         )}
         aria-hidden={!isSideMenuOpen}
       >
         <button
           className={classNames(
             "flex w-full items-center justify-center py-4 text-white",
-            isDarkMode ? "bg-black" : "bg-blue-600"
+            isDarkMode ? "bg-black" : "bg-blue-600",
           )}
           onClick={() => setIsDarkMode(!isDarkMode)}
           tabIndex={isSideMenuOpen ? 0 : -1}
@@ -180,7 +180,7 @@ export const SideMenu = ({
               <h2
                 className={classNames(
                   "px-4 py-2 text-xs uppercase",
-                  isDarkMode ? "bg-slate-900" : "bg-slate-200"
+                  isDarkMode ? "bg-slate-900" : "bg-slate-200",
                 )}
               >
                 {label}
@@ -197,7 +197,7 @@ export const SideMenu = ({
                           router.pathname === option.href &&
                             (isDarkMode
                               ? "bg-blue-900 text-white"
-                              : "bg-blue-300 text-black")
+                              : "bg-blue-300 text-black"),
                         )}
                         href={option.href}
                         onClick={option.onClick}

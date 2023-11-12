@@ -21,7 +21,7 @@ export const SearchHeader = ({
     <header
       className={classNames(
         "flex w-full justify-center text-white shadow",
-        isDarkMode ? "bg-black" : "bg-blue-600"
+        isDarkMode ? "bg-black" : "bg-blue-600",
       )}
     >
       <div className="w-full max-w-2xl">
@@ -39,7 +39,7 @@ export const SearchHeader = ({
               id="search-input"
               className={classNames(
                 "grow px-1 py-2",
-                isDarkMode ? "bg-slate-800 text-white" : "bg-white text-black"
+                isDarkMode ? "bg-slate-800 text-white" : "bg-white text-black",
               )}
               role="search"
               autoComplete="off"
@@ -51,14 +51,14 @@ export const SearchHeader = ({
                 setSearchText(event.target.value);
                 const trimmedSearchText = event.target.value.trim();
                 void router.replace(
-                  trimmedSearchText ? `/?search=${trimmedSearchText}` : "/"
+                  trimmedSearchText ? `/?search=${trimmedSearchText}` : "/",
                 );
               }}
             />
             <button
               className={classNames(
                 "absolute bottom-0 right-0 top-0 px-1",
-                isDarkMode ? "text-slate-300" : "text-slate-500"
+                isDarkMode ? "text-slate-300" : "text-slate-500",
               )}
               onClick={() => setSearchText("")}
             >

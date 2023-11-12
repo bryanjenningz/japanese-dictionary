@@ -14,7 +14,7 @@ export const SimpleHeader = ({
     <header
       className={classNames(
         "flex w-full justify-center text-white shadow",
-        isDarkMode ? "bg-black" : "bg-blue-600"
+        isDarkMode ? "bg-black" : "bg-blue-600",
       )}
     >
       <div className="w-full max-w-2xl">

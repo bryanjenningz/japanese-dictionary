@@ -7,7 +7,7 @@ const MAX_TIME_DIFF_BETWEEN_GROUP_VALUES = 1000 * 60 * 15; // 15 minutes
 export const groupByTime = <T>(
   values: T[],
   toTime: (value: T) => number,
-  maxTimeDiff: number
+  maxTimeDiff: number,
 ): TimeGroup<T>[] => {
   const timeGroups: TimeGroup<T>[] = [];
   values = values.slice().sort((a, b) => toTime(a) - toTime(b));
@@ -33,14 +33,14 @@ const reverseTimeGroups = <T>(groups: TimeGroup<T>[]): TimeGroup<T>[] => {
 };
 
 export const useTimeGroups = <T extends { time: number }>(
-  values: T[] | undefined
+  values: T[] | undefined,
 ): TimeGroup<T>[] | undefined => {
   return useMemo(
     () =>
       values &&
       reverseTimeGroups(
-        groupByTime(values, (x) => x.time, MAX_TIME_DIFF_BETWEEN_GROUP_VALUES)
+        groupByTime(values, (x) => x.time, MAX_TIME_DIFF_BETWEEN_GROUP_VALUES),
       ),
-    [values]
+    [values],
   );
 };

@@ -14,6 +14,6 @@ export const useSearchTextStore = create<SearchTextState>()(
       searchText: DEFAULT_SEARCH_TEXT,
       setSearchText: (searchText: string) => set({ searchText }),
     }),
-    { name: "search-text" }
-  )
+    { name: "search-text" },
+  ),
 );

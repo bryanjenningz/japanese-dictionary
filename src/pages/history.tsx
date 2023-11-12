@@ -16,10 +16,10 @@ import { FlashcardList } from "~/components/FlashcardList";
 export default function History() {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const clearDictionaryHistory = useHistoryStore(
-    (x) => x.clearDictionaryHistory
+    (x) => x.clearDictionaryHistory,
   );
   const clearClipReaderHistory = useHistoryStore(
-    (x) => x.clearClipReaderHistory
+    (x) => x.clearClipReaderHistory,
   );
   const clearSearchHistory = useHistoryStore((x) => x.clearSearchHistory);
   const clearAllFlashcards = useFlashcardStore((x) => x.clearAllFlashcards);
@@ -31,7 +31,7 @@ export default function History() {
     <main
       className={classNames(
         "flex min-h-screen flex-col items-center",
-        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+        isDarkMode ? "bg-black text-white" : "bg-white text-black",
       )}
     >
       <HistoryHeader

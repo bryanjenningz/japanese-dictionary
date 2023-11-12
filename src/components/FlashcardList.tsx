@@ -36,7 +36,7 @@ export const FlashcardList = ({
               }}
               className={classNames(
                 "block w-full select-none border-b p-4 text-left",
-                isDarkMode ? "border-slate-500" : "border-slate-300"
+                isDarkMode ? "border-slate-500" : "border-slate-300",
               )}
               onContextMenu={(event) => {
                 event.preventDefault();
@@ -53,7 +53,7 @@ export const FlashcardList = ({
               </div>
               <p
                 className={classNames(
-                  isDarkMode ? "text-slate-300" : "text-slate-600"
+                  isDarkMode ? "text-slate-300" : "text-slate-600",
                 )}
               >
                 {definitions.join(", ")}
@@ -67,7 +67,7 @@ export const FlashcardList = ({
                     "absolute left-[calc(50%-100px)] top-[calc(100%-30px)] z-20 flex flex-col shadow-xl",
                     isDarkMode
                       ? "bg-slate-700 text-white"
-                      : "bg-white text-black"
+                      : "bg-white text-black",
                   )}
                 >
                   <Link

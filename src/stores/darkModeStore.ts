@@ -12,6 +12,6 @@ export const useDarkModeStore = create<DarkModeState>()(
       isDarkMode: true,
       setIsDarkMode: (isDarkMode: boolean) => set({ isDarkMode }),
     }),
-    { name: "dark-mode" }
-  )
+    { name: "dark-mode" },
+  ),
 );

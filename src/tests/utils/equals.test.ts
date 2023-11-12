@@ -41,18 +41,18 @@ describe("equals", () => {
     expect(equals({ a: 1 }, { a: 1 })).toEqual(true);
     expect(equals({ b: 0, a: 1 }, { a: 1, b: 0 })).toEqual(true);
     expect(
-      equals({ b: 0, c: { d: 4 }, a: 1 }, { a: 1, b: 0, c: { d: 4 } })
+      equals({ b: 0, c: { d: 4 }, a: 1 }, { a: 1, b: 0, c: { d: 4 } }),
     ).toEqual(true);
     expect(equals({ a: 1 }, {})).toEqual(false);
     expect(equals({ a: 1 }, { a: 2 })).toEqual(false);
     expect(
-      equals({ b: 0, c: { d: 4 }, a: 1 }, { a: 1, b: 0, c: { d: 3 } })
+      equals({ b: 0, c: { d: 4 }, a: 1 }, { a: 1, b: 0, c: { d: 3 } }),
     ).toEqual(false);
     expect(
-      equals({ b: 0, c: { d: 4 }, a: 1 }, { a: 1, b: 0, c: { d: 4, e: 5 } })
+      equals({ b: 0, c: { d: 4 }, a: 1 }, { a: 1, b: 0, c: { d: 4, e: 5 } }),
     ).toEqual(false);
     expect(
-      equals({ a: 1, b: 0, c: { d: 4, e: 5 } }, { b: 0, c: { d: 4 }, a: 1 })
+      equals({ a: 1, b: 0, c: { d: 4, e: 5 } }, { b: 0, c: { d: 4 }, a: 1 }),
     ).toEqual(false);
   });
 
