@@ -41,7 +41,7 @@ export const SearchHeader = ({
                 "grow px-1 py-2",
                 isDarkMode ? "bg-slate-800 text-white" : "bg-white text-black",
               )}
-              role="search"
+              type="search"
               autoComplete="off"
               autoCorrect="off"
               autoCapitalize="off"
