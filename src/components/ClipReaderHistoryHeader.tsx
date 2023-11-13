@@ -16,7 +16,7 @@ export const ClipReaderHistoryHeader = ({
   return (
     <header
       className={classNames(
-        "fixed left-0 right-0 top-0 flex flex-col items-center text-white shadow",
+        "fixed left-0 right-0 top-0 z-10 flex flex-col items-center text-white shadow",
         isDarkMode ? "bg-black" : "bg-blue-600",
       )}
     >
