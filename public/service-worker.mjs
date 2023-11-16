@@ -4,9 +4,10 @@ const self = /** @type {ServiceWorkerGlobalScope} */ (
   /** @type {unknown} */ (globalThis.self)
 );
 
-const CACHE_NAME = "cache";
-const PAGES_CACHE_NAME = "pages";
-const PAGES = [
+const DYNAMIC_CACHE = "dynamic-cache";
+const STATIC_CACHE = "static-cache";
+
+const precachedPages = [
   "/",
   "/clip-reader-history",
   "/clip-reader",
@@ -20,34 +21,52 @@ const PAGES = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
-      const cache = await caches.open(PAGES_CACHE_NAME);
-      await cache.addAll(PAGES);
-    })()
+      const cache = await caches.open(STATIC_CACHE);
+      await cache.addAll(precachedPages);
+    })(),
   );
 });
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(caches.delete(CACHE_NAME));
+  event.waitUntil(caches.delete(DYNAMIC_CACHE));
 });
 
-/** @param {FetchEvent} event */
-async function fetchAndCacheResponse(event) {
-  const cache = await caches.open(CACHE_NAME);
-  await cache.add(event.request.url);
-  return /** @type {Promise<Response>} */ (cache.match(event.request.url));
+/** @param {string} url */
+async function getFromCache(url) {
+  // Try dynamic cache first since that's more up to date
+  const dynamicCache = await caches.open(DYNAMIC_CACHE);
+  const dynamicCacheResponse = await dynamicCache.match(url, {
+    ignoreSearch: true,
+  });
+  if (dynamicCacheResponse) {
+    return dynamicCacheResponse;
+  }
+
+  // Fallback to static cache
+  const staticCache = await caches.open(STATIC_CACHE);
+  const staticCacheResponse = await staticCache.match(url, {
+    ignoreSearch: true,
+  });
+  return staticCacheResponse;
+}
+
+/** @param {string} url */
+async function fetchAndSaveToDynamicCache(url) {
+  const cache = await caches.open(DYNAMIC_CACHE);
+  await cache.add(url);
+  return /** @type {Promise<Response>} */ (cache.match(url));
 }
 
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     (async () => {
-      const cachedResponse = await caches.match(event.request.url, {
-        ignoreSearch: true,
-      });
+      const { url } = event.request;
+      const cachedResponse = await getFromCache(url);
       if (!cachedResponse) {
-        return fetchAndCacheResponse(event);
+        return fetchAndSaveToDynamicCache(url);
       }
-      void fetchAndCacheResponse(event);
+      void fetchAndSaveToDynamicCache(url);
       return cachedResponse;
-    })()
+    })(),
   );
 });
