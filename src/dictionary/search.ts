@@ -1,9 +1,10 @@
-import { type DeinflectionRuleGroup, deinflect } from "~/dictionary/deinflect";
+import { deinflect } from "~/dictionary/deinflect";
 import { getPitchAccents } from "~/dictionary/getPitchAccents";
 import { katakanaToHiragana } from "~/dictionary/katakanaToHiragana";
 import { romajiToHiragana } from "~/dictionary/romajiToHiragana";
 import { DEFAULT_SEARCH_TEXT } from "~/stores/searchTextStore";
 import { DEFAULT_SEARCH_RESULTS } from "~/dictionary/defaultSearchResults";
+import { type Dictionaries } from "~/stores/useDictionariesStore";
 
 export type WordEntry = {
   word: string;
@@ -18,16 +19,14 @@ export type WordSearchResult = {
 };
 
 export const searchWord = (
-  wordDict: string,
-  wordDictIndex: string,
-  difReasons: string[],
-  difRules: DeinflectionRuleGroup[],
-  pitchData: string[],
+  dictionaries: Dictionaries,
   text: string,
 ): WordSearchResult => {
   if (text === DEFAULT_SEARCH_TEXT) {
     return DEFAULT_SEARCH_RESULTS;
   }
+  const { wordDict, wordDictIndex, difReasons, difRules, pitchData } =
+    dictionaries;
   const wordEntries: WordEntry[] = [];
   const searchedWords = new Set<string>();
   let selectedTextLength = 1;

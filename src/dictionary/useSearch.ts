@@ -1,51 +1,56 @@
-import { useCallback, useEffect, useState } from "react";
-import {
-  type DeinflectionRuleGroup,
-  loadDeinflectionData,
-} from "~/dictionary/deinflect";
+import { useCallback, useEffect } from "react";
+import { loadDeinflectionData } from "~/dictionary/deinflect";
 import { loadPitchData } from "~/dictionary/getPitchAccents";
 import { loadWordDict, searchWord } from "~/dictionary/search";
+import { useDictionariesStore } from "~/stores/useDictionariesStore";
 
 export const useSearch = () => {
-  const [wordDict, setWordDict] = useState("");
-  const [wordDictIndex, setWordDictIndex] = useState("");
-  const [difReasons, setDifReasons] = useState<string[]>([]);
-  const [difRules, setDifRules] = useState<DeinflectionRuleGroup[]>([]);
-  const [pitchData, setPitchData] = useState<string[]>([]);
+  const dictionaries = useDictionariesStore((x) => x.dictionaries);
+  const setDictionaries = useDictionariesStore((x) => x.setDictionaries);
 
   useEffect(() => {
     void (async () => {
       const startTime = performance.now();
 
-      const [{ wordDict, wordDictIndex }, { difReasons, difRules }, pitchData] =
-        await Promise.all([
+      if (!dictionaries) {
+        const [
+          { wordDict, wordDictIndex },
+          { difReasons, difRules },
+          pitchData,
+        ] = await Promise.all([
           loadWordDict(),
           loadDeinflectionData(),
           loadPitchData(),
         ]);
-      setWordDict(wordDict);
-      setWordDictIndex(wordDictIndex);
-      setDifReasons(difReasons);
-      setDifRules(difRules);
-      setPitchData(pitchData);
+
+        setDictionaries({
+          wordDict,
+          wordDictIndex,
+          difReasons,
+          difRules,
+          pitchData,
+        });
+      }
 
       const endTime = performance.now();
       console.log(`Finished loading data in ${endTime - startTime}ms`);
     })();
-  }, []);
+  }, [dictionaries, setDictionaries]);
 
   const search = useCallback(
     (text: string) => {
       return searchWord(
-        wordDict,
-        wordDictIndex,
-        difReasons,
-        difRules,
-        pitchData,
+        dictionaries ?? {
+          wordDict: "",
+          wordDictIndex: "",
+          difReasons: [],
+          difRules: [],
+          pitchData: [],
+        },
         removeUnusedChars(text),
       );
     },
-    [wordDict, wordDictIndex, difReasons, difRules, pitchData],
+    [dictionaries],
   );
 
   return search;

@@ -12,7 +12,7 @@ const wordDictIndex = readFileSync(
   resolve("./public/dictionaries/word-dict-index.txt"),
 ).toString();
 
-const pitchAccentData = readFileSync(
+const pitchData = readFileSync(
   resolve("./public/dictionaries/pitch-accents.txt"),
 )
   .toString()
@@ -26,11 +26,13 @@ const { difReasons, difRules } = parseDeinflectionData(
 
 const search = (word: string) =>
   searchWord(
-    wordDict,
-    wordDictIndex,
-    difReasons,
-    difRules,
-    pitchAccentData,
+    {
+      wordDict,
+      wordDictIndex,
+      difReasons,
+      difRules,
+      pitchData,
+    },
     word,
   );
 
