@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { useDarkModeStore } from "~/stores/darkModeStore";
@@ -19,11 +19,14 @@ type Setting =
       click: () => void;
     };
 
+const TOAST_TIMEOUT_MS = 3000;
+
 export default function Settings() {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const [isPageCacheCleared, setIsPageCacheCleared] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const toastTimeoutId = useRef<NodeJS.Timeout>();
 
   const settings: Setting[] = [
     {
@@ -40,8 +43,27 @@ export default function Settings() {
         void caches
           .keys()
           .then((keys) => void keys.forEach((key) => void caches.delete(key)));
-        setIsPageCacheCleared(true);
-        setTimeout(() => setIsPageCacheCleared(false), 3000);
+        setToast("Cached pages cleared");
+        clearTimeout(toastTimeoutId.current);
+        toastTimeoutId.current = setTimeout(
+          () => setToast(null),
+          TOAST_TIMEOUT_MS,
+        );
+      },
+    },
+    {
+      type: "BUTTON",
+      name: "Clear local storage",
+      description:
+        "All search history, lookups, reader, and saved cards will be cleared",
+      click: () => {
+        localStorage.clear();
+        setToast("Local storage cleared");
+        clearTimeout(toastTimeoutId.current);
+        toastTimeoutId.current = setTimeout(
+          () => setToast(null),
+          TOAST_TIMEOUT_MS,
+        );
       },
     },
   ];
@@ -115,14 +137,14 @@ export default function Settings() {
         })}
       </ul>
 
-      {isPageCacheCleared && (
+      {toast && (
         <div
           className={classNames(
             "fixed bottom-4 left-4 right-4 p-4 text-center text-lg text-white shadow",
             isDarkMode ? "bg-slate-800" : "bg-blue-600",
           )}
         >
-          Cached pages cleared
+          {toast}
         </div>
       )}
     </main>
