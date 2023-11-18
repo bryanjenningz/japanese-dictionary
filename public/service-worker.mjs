@@ -20,6 +20,7 @@ const precachedPages = [
 ];
 
 self.addEventListener("install", (event) => {
+  void self.skipWaiting();
   event.waitUntil(
     (async () => {
       const cache = await caches.open(STATIC_CACHE);
