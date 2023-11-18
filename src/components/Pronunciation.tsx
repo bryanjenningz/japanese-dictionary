@@ -21,7 +21,7 @@ export const Pronunciation = ({
   );
 
   return (
-    <div className="flex gap-3">
+    <div className="flex flex-wrap gap-3">
       {fallIndexes.length > 0 ? (
         fallIndexes.map((fallIndex) => {
           return (

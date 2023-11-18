@@ -99,7 +99,7 @@ export default function FlashcardTest() {
 
               {flashcardTestCard.status !== "Unseen" && (
                 <div className="flex flex-col gap-3 text-2xl">
-                  <div className="flex gap-3">
+                  <div className="flex flex-wrap gap-3">
                     <Pronunciation
                       word={flashcardTestCard.flashcard.wordEntry.word}
                       pronunciation={

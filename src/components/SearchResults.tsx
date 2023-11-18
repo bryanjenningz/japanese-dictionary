@@ -29,7 +29,7 @@ export const SearchResults = ({
                 isDarkMode ? "border-slate-600" : "border-slate-300",
               )}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <h2 className="text-xl">{word}</h2>
                 <Pronunciation
                   word={word}

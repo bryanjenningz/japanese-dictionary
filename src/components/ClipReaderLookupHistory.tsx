@@ -83,7 +83,7 @@ export const ClipReaderLookupHistory = ({
                         longPress.onLongPress(lookup);
                       }}
                     >
-                      <span className="flex gap-3">
+                      <span className="flex flex-wrap gap-3">
                         <span className="text-lg">{word}</span>
                         <Pronunciation
                           word={word}

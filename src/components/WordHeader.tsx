@@ -130,7 +130,7 @@ export const WordHeader = ({
               isDarkMode ? "bg-black text-white" : "bg-white text-black",
             )}
           >
-            <div className="flex gap-3 text-xl">
+            <div className="flex flex-wrap gap-3 text-xl">
               <div>{wordLookup.wordEntry.word}</div>
               <Pronunciation
                 word={wordLookup.wordEntry.word}

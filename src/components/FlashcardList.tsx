@@ -43,7 +43,7 @@ export const FlashcardList = ({
                 longPress.onLongPress(lookup);
               }}
             >
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 <div>{word}</div>
                 <Pronunciation
                   word={word}
