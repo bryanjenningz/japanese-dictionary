@@ -63,6 +63,54 @@ describe("searchWord", () => {
     });
   });
 
+  it("Returns word entry for `すべる` when you input `すべらない`", () => {
+    const word = "すべらない";
+
+    const result = search(word);
+
+    expect(result.wordEntries).toContainEqual({
+      definitions: [
+        "(v5r,vi) (1) to glide",
+        "to slide (e.g. on skis)",
+        "to slip",
+        "(v5r,vi) (2) to fail (an examination)",
+        "to bomb (when telling a joke)",
+        "(v5r,vi) (3) to drop",
+        "to go down",
+        "to come down",
+        "to fall (e.g. in status)",
+        "(P)",
+      ],
+      pitchAccents: [2],
+      pronunciation: "すべる",
+      word: "滑る",
+    });
+  });
+
+  it("Returns word entry for `すべる` when you input `suberanai`", () => {
+    const word = "suberanai";
+
+    const result = search(word);
+
+    expect(result.wordEntries).toContainEqual({
+      definitions: [
+        "(v5r,vi) (1) to glide",
+        "to slide (e.g. on skis)",
+        "to slip",
+        "(v5r,vi) (2) to fail (an examination)",
+        "to bomb (when telling a joke)",
+        "(v5r,vi) (3) to drop",
+        "to go down",
+        "to come down",
+        "to fall (e.g. in status)",
+        "(P)",
+      ],
+      pitchAccents: [2],
+      pronunciation: "すべる",
+      word: "滑る",
+    });
+  });
+
   it("Returns a word entry for `結構` when you input `結構難しい話で`", () => {
     const word = "結構難しい話で";
 

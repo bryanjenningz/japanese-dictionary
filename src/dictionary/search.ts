@@ -31,7 +31,11 @@ export const searchWord = (
   const searchedWords = new Set<string>();
   let selectedTextLength = 1;
   for (; text.length > 0; text = text.slice(0, -1)) {
-    const deinflections = deinflect(difReasons, difRules, text);
+    const deinflections = deinflect(
+      difReasons,
+      difRules,
+      katakanaToHiragana(romajiToHiragana(text)),
+    );
     for (const { word } of deinflections) {
       if (searchedWords.has(word)) {
         continue;
