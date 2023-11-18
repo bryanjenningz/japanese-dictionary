@@ -35,17 +35,6 @@ export default function Settings() {
     },
     {
       type: "BUTTON",
-      name: "Clear cached pages",
-      description: "Pages will get re-cached as you visit them",
-      click: () => {
-        void caches
-          .keys()
-          .then((keys) => void keys.forEach((key) => void caches.delete(key)));
-        setToast("Cached pages cleared");
-      },
-    },
-    {
-      type: "BUTTON",
       name: "Clear local storage",
       description:
         "All search history, lookups, reader, and saved cards will be cleared",
