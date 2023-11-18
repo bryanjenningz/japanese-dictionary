@@ -39,7 +39,7 @@ export default function Settings() {
       type: "BUTTON",
       name: "Clear local storage",
       description:
-        "All search history, lookups, reader, and saved cards will be cleared",
+        "All search history, lookups, reader, and saved cards will be cleared.",
       click: () => setIsModalShown(true),
     },
   ];
@@ -134,7 +134,7 @@ export default function Settings() {
               isDarkMode ? "text-slate-300" : "text-slate-700",
             )}
           >
-            All search history, lookups, reader, and saved cards will be cleared
+            {`All search history, lookups, reader, and saved cards will be cleared.`}
           </p>
           <div className="flex items-center justify-end gap-3">
             <button
