@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { useDarkModeStore } from "~/stores/darkModeStore";
@@ -19,14 +19,28 @@ type Setting =
       click: () => void;
     };
 
-const TOAST_TIMEOUT_MS = 3000;
+function useToast(timeoutMs = 3000) {
+  const [toast, setToast] = useState<string | null>(null);
+  const toastTimeoutId = useRef<NodeJS.Timeout>();
+  const updateToast = useCallback(
+    (toast: string) => {
+      clearTimeout(toastTimeoutId.current);
+      setToast(toast);
+      toastTimeoutId.current = setTimeout(() => setToast(null), timeoutMs);
+    },
+    [timeoutMs],
+  );
+  return {
+    toast,
+    setToast: updateToast,
+  };
+}
 
 export default function Settings() {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const [toast, setToast] = useState<string | null>(null);
-  const toastTimeoutId = useRef<NodeJS.Timeout>();
+  const { toast, setToast } = useToast();
 
   const settings: Setting[] = [
     {
@@ -44,11 +58,6 @@ export default function Settings() {
           .keys()
           .then((keys) => void keys.forEach((key) => void caches.delete(key)));
         setToast("Cached pages cleared");
-        clearTimeout(toastTimeoutId.current);
-        toastTimeoutId.current = setTimeout(
-          () => setToast(null),
-          TOAST_TIMEOUT_MS,
-        );
       },
     },
     {
@@ -59,11 +68,6 @@ export default function Settings() {
       click: () => {
         localStorage.clear();
         setToast("Local storage cleared");
-        clearTimeout(toastTimeoutId.current);
-        toastTimeoutId.current = setTimeout(
-          () => setToast(null),
-          TOAST_TIMEOUT_MS,
-        );
       },
     },
   ];
