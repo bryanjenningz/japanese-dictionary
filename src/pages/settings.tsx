@@ -1,9 +1,10 @@
-import { useCallback, useRef, useState } from "react";
+import { useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { SimpleHeader } from "~/components/SimpleHeader";
+import { useToast } from "~/utils/useToast";
 
 type Setting =
   | {
@@ -18,23 +19,6 @@ type Setting =
       description: string;
       click: () => void;
     };
-
-function useToast(timeoutMs = 3000) {
-  const [toast, setToast] = useState<string | null>(null);
-  const toastTimeoutId = useRef<NodeJS.Timeout>();
-  const updateToast = useCallback(
-    (toast: string) => {
-      clearTimeout(toastTimeoutId.current);
-      setToast(toast);
-      toastTimeoutId.current = setTimeout(() => setToast(null), timeoutMs);
-    },
-    [timeoutMs],
-  );
-  return {
-    toast,
-    setToast: updateToast,
-  };
-}
 
 export default function Settings() {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
