@@ -10,6 +10,7 @@ import { useHistoryStore } from "~/stores/historyStore";
 import { useSearchTextStore } from "~/stores/searchTextStore";
 import { useRouter } from "next/router";
 import { debounce } from "~/utils/debounce";
+import { Dynamic } from "~/components/Dynamic";
 
 export default function Home() {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
@@ -36,7 +37,9 @@ export default function Home() {
       />
 
       <div className="flex w-full max-w-2xl flex-col">
-        <SearchResults wordEntries={wordEntries} />
+        <Dynamic>
+          <SearchResults wordEntries={wordEntries} />
+        </Dynamic>
       </div>
     </main>
   );
