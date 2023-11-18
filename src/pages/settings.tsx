@@ -5,6 +5,7 @@ import { useDarkModeStore } from "~/stores/darkModeStore";
 import { useStore } from "~/stores/useStore";
 import { SimpleHeader } from "~/components/SimpleHeader";
 import { useToast } from "~/utils/useToast";
+import { Modal } from "~/components/Modal";
 
 type Setting =
   | {
@@ -24,6 +25,7 @@ export default function Settings() {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const [isModalShown, setIsModalShown] = useState(false);
   const { toast, setToast } = useToast();
 
   const settings: Setting[] = [
@@ -38,10 +40,7 @@ export default function Settings() {
       name: "Clear local storage",
       description:
         "All search history, lookups, reader, and saved cards will be cleared",
-      click: () => {
-        localStorage.clear();
-        setToast("Local storage cleared");
-      },
+      click: () => setIsModalShown(true),
     },
   ];
 
@@ -124,6 +123,39 @@ export default function Settings() {
           {toast}
         </div>
       )}
+
+      <Modal isShown={isModalShown} onClose={() => setIsModalShown(false)}>
+        <div className="flex flex-col gap-2">
+          <h2 className="text-xl">
+            Are you sure you want to clear local storage?
+          </h2>
+          <p
+            className={classNames(
+              isDarkMode ? "text-slate-300" : "text-slate-700",
+            )}
+          >
+            All search history, lookups, reader, and saved cards will be cleared
+          </p>
+          <div className="flex items-center justify-end gap-3">
+            <button
+              className="p-2 uppercase"
+              onClick={() => {
+                setIsModalShown(false);
+                localStorage.clear();
+                setToast("Local storage cleared");
+              }}
+            >
+              Yes
+            </button>
+            <button
+              className="p-2 uppercase"
+              onClick={() => setIsModalShown(false)}
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </Modal>
     </main>
   );
 }
