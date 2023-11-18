@@ -4,6 +4,7 @@ const self = /** @type {ServiceWorkerGlobalScope} */ (
   /** @type {unknown} */ (globalThis.self)
 );
 
+// Static cache is cached at install time, dynamic cache is cached on each request
 const DYNAMIC_CACHE = "dynamic-cache";
 const STATIC_CACHE = "static-cache";
 
