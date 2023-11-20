@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SideMenu } from "~/components/SideMenu";
 import { classNames } from "~/utils/classNames";
 import { useDarkModeStore } from "~/stores/darkModeStore";
@@ -12,6 +12,7 @@ import { Modal } from "~/components/Modal";
 import { useRouter } from "next/router";
 import { Pronunciation } from "~/components/Pronunciation";
 import { TextToSpeechButton } from "~/components/TextToSpeechButton";
+import { textToSpeech } from "~/utils/textToSpeech";
 
 export default function FlashcardTest() {
   const router = useRouter();
@@ -45,6 +46,14 @@ export default function FlashcardTest() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   const [isModalShown, setIsModalShown] = useState(false);
+
+  const autoplayFlashcardAudio =
+    useStore(useFlashcardStore, (x) => x.autoplayFlashcardAudio) ?? true;
+  useEffect(() => {
+    if (autoplayFlashcardAudio && flashcardTestCard?.status === "Unseen") {
+      textToSpeech(flashcardTestCard.flashcard.wordEntry.word);
+    }
+  }, [autoplayFlashcardAudio, flashcardTestCard]);
 
   return (
     <main

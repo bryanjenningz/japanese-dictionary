@@ -58,6 +58,9 @@ export type FlashcardState = {
   isLastFlashcard: () => boolean;
   goToNextFlashcard: () => void;
   deleteCurrentFlashcardTest: () => void;
+
+  autoplayFlashcardAudio: boolean;
+  toggleAutoplayFlashcardAudio: () => void;
 };
 
 export const useFlashcardStore = create<FlashcardState>()(
@@ -159,6 +162,12 @@ export const useFlashcardStore = create<FlashcardState>()(
         });
       },
       deleteCurrentFlashcardTest: () => set({ flashcardTest: null }),
+
+      autoplayFlashcardAudio: true,
+      toggleAutoplayFlashcardAudio: () =>
+        set(({ autoplayFlashcardAudio }) => ({
+          autoplayFlashcardAudio: !autoplayFlashcardAudio,
+        })),
     }),
     { name: "flashcards" },
   ),

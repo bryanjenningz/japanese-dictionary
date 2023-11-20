@@ -6,6 +6,7 @@ import { useStore } from "~/stores/useStore";
 import { SimpleHeader } from "~/components/SimpleHeader";
 import { useToast } from "~/utils/useToast";
 import { Modal } from "~/components/Modal";
+import { useFlashcardStore } from "~/stores/flashcardStore";
 
 type Setting =
   | {
@@ -24,6 +25,11 @@ type Setting =
 export default function Settings() {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const setIsDarkMode = useDarkModeStore((x) => x.setIsDarkMode);
+  const autoplayFlashcardAudio =
+    useStore(useFlashcardStore, (x) => x.autoplayFlashcardAudio) ?? true;
+  const toggleAutoplayFlashcardAudio = useFlashcardStore(
+    (x) => x.toggleAutoplayFlashcardAudio,
+  );
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isModalShown, setIsModalShown] = useState(false);
   const { toast, setToast } = useToast();
@@ -34,6 +40,12 @@ export default function Settings() {
       name: "Dark mode",
       value: !!isDarkMode,
       toggle: () => setIsDarkMode(!isDarkMode),
+    },
+    {
+      type: "CHECKBOX",
+      name: "Autoplay audio on flashcard tests",
+      value: autoplayFlashcardAudio,
+      toggle: toggleAutoplayFlashcardAudio,
     },
     {
       type: "BUTTON",
