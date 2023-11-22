@@ -15,6 +15,7 @@ export default function NewFlashcardTest() {
   const router = useRouter();
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const cardCount = useStore(useFlashcardStore, (x) => x.flashcards.length);
 
   const flashcardTestMaxCards = useStore(
     useFlashcardStore,
@@ -32,8 +33,14 @@ export default function NewFlashcardTest() {
   const newFlashcardTestOptions = [
     {
       heading: "Start",
-      buttonContent: <>Begin Test Session</>,
+      buttonContent:
+        cardCount === 0 ? (
+          <>{`You don't have any flashcards saved`}</>
+        ) : (
+          <>Begin Test Session</>
+        ),
       onClick: () => {
+        if (cardCount === 0) return;
         startNewFlashcardTest();
         void router.replace("/flashcard-test");
       },
