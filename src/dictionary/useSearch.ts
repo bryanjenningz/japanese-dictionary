@@ -10,8 +10,6 @@ export const useSearch = () => {
 
   useEffect(() => {
     void (async () => {
-      const startTime = performance.now();
-
       if (!dictionaries) {
         const [
           { wordDict, wordDictIndex },
@@ -31,9 +29,6 @@ export const useSearch = () => {
           pitchData,
         });
       }
-
-      const endTime = performance.now();
-      console.log(`Finished loading data in ${endTime - startTime}ms`);
     })();
   }, [dictionaries, setDictionaries]);
 
