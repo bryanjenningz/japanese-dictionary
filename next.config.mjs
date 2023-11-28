@@ -18,23 +18,6 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
-
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      Object.assign(
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        config.resolve.alias,
-        {
-          "react/jsx-runtime.js": "preact/compat/jsx-runtime",
-          react: "preact/compat",
-          "react-dom/test-utils": "preact/test-utils",
-          "react-dom": "preact/compat",
-        },
-      );
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return config;
-  },
 };
 
 export default config;
