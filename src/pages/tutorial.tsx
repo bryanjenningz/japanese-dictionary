@@ -7,6 +7,8 @@ import NewFlashcardTest from "~/pages/new-flashcard-test";
 import ClipReader from "~/pages/clip-reader";
 import { createWordLink } from "~/utils/createWordLink";
 
+const TUTORIAL_BUTTON_WIDTH = 40;
+
 type TutorialStep =
   | { type: "START" }
   | {
@@ -242,7 +244,7 @@ export default function Tutorial() {
       const { x, y, width } = element.getBoundingClientRect();
       // Wait for off-screen elements like the side-menu to appear
       if (x < 0 || y < 0) return void requestAnimationFrame(setup);
-      setTutorialButtonXY({ x: x + width / 2 - 20, y });
+      setTutorialButtonXY({ x: x + width / 2 - TUTORIAL_BUTTON_WIDTH / 2, y });
     },
     [tutorialStep],
   );
@@ -295,8 +297,8 @@ export default function Tutorial() {
                   ? {
                       left: tutorialButtonXY.x,
                       top: tutorialButtonXY.y,
-                      width: 40,
-                      height: 40,
+                      width: TUTORIAL_BUTTON_WIDTH,
+                      height: TUTORIAL_BUTTON_WIDTH,
                     }
                   : { display: "none" }
               }
