@@ -6,6 +6,7 @@ import Word from "~/pages/word";
 import NewFlashcardTest from "~/pages/new-flashcard-test";
 import ClipReader from "~/pages/clip-reader";
 import { createWordLink } from "~/utils/createWordLink";
+import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
 
 const TUTORIAL_BUTTON_WIDTH = 40;
 
@@ -29,6 +30,7 @@ export default function Tutorial() {
     x: number;
     y: number;
   }>(null);
+  const addClipReaderText = useClipReaderTextStore((x) => x.addClipReaderText);
 
   const tutorialSteps: TutorialStep[] = useMemo(
     () => [
@@ -132,19 +134,9 @@ export default function Tutorial() {
         onClick: function onClick() {
           const tutorialExampleText =
             "今季限りでヤクルトを戦力外となった松本友内野手（２８）が、警察官になるため試験を受けることが１８日、分かった。ＮＰＢでの現役続行は断念し、２０２４年１月に予定されている警視庁の採用試験を受けることを決断した。";
-          void navigator.clipboard
-            .writeText(tutorialExampleText)
-            .finally(() => {
-              const element = document.getElementById(
-                "clip-reader-paste-button",
-              );
-              if (!element || !(element instanceof HTMLButtonElement)) {
-                return void requestAnimationFrame(onClick);
-              }
-              element.click();
-              setTutorialIndex((x) => x + 1);
-              setTutorialButtonXY(null);
-            });
+          addClipReaderText({ time: Date.now(), text: tutorialExampleText });
+          setTutorialIndex((x) => x + 1);
+          setTutorialButtonXY(null);
         },
       },
       {
@@ -229,7 +221,7 @@ export default function Tutorial() {
       },
       { type: "FINISH" },
     ],
-    [router],
+    [router, addClipReaderText],
   );
 
   const tutorialStep = tutorialSteps[tutorialIndex];
