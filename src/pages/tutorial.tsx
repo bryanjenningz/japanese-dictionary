@@ -269,10 +269,10 @@ export default function Tutorial() {
       case "CLICK": {
         return (
           <>
-            <div className="fixed inset-0 z-50 flex flex-col justify-end gap-4 bg-gradient-to-b from-transparent to-black p-4 text-center text-2xl text-white">
-              <p>{tutorialStep.instructions}</p>
+            <div className="fixed inset-0 z-50 flex flex-col items-center justify-end gap-4 bg-gradient-to-b from-transparent to-black p-4 text-center text-2xl text-white">
+              <p className="w-full max-w-2xl">{tutorialStep.instructions}</p>
 
-              <div className="h-5 w-full overflow-hidden rounded-full bg-slate-800">
+              <div className="h-5 w-full max-w-2xl overflow-hidden rounded-full bg-slate-800">
                 <div
                   className="h-full bg-blue-700"
                   style={{
