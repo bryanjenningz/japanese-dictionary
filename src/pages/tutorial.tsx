@@ -275,8 +275,8 @@ export default function Tutorial() {
       case "CLICK": {
         return (
           <>
-            <p className="fixed inset-0 z-50 flex flex-col justify-end gap-4 bg-gradient-to-b from-transparent to-black p-4 text-center text-2xl text-white">
-              {tutorialStep.instructions}
+            <div className="fixed inset-0 z-50 flex flex-col justify-end gap-4 bg-gradient-to-b from-transparent to-black p-4 text-center text-2xl text-white">
+              <p>{tutorialStep.instructions}</p>
 
               <div className="h-5 w-full overflow-hidden rounded-full bg-slate-800">
                 <div
@@ -286,7 +286,7 @@ export default function Tutorial() {
                   }}
                 ></div>
               </div>
-            </p>
+            </div>
 
             <button
               className="fixed z-50 animate-ping rounded-full bg-blue-700 text-xs text-white"
