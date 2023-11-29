@@ -35,10 +35,11 @@ export default function Tutorial() {
         type: "CLICK",
         nodeId: "search-input",
         instructions: 'Search for Japanese words like "ro-maji" or "ringo"',
-        onClick: () => {
+        onClick: function onClick() {
           const element = document.getElementById("search-input");
-          if (!element || !(element instanceof HTMLInputElement)) return;
-          element.focus();
+          if (!element || !(element instanceof HTMLInputElement)) {
+            return void requestAnimationFrame(onClick);
+          }
           element.value = "ro-maji";
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
@@ -48,11 +49,15 @@ export default function Tutorial() {
         type: "CLICK",
         nodeId: "search-results",
         instructions: "Click on search results to see their definition",
-        onClick: () => {
+        onClick: function onClick() {
           const element = document.getElementById("search-results");
-          if (!element) return;
+          if (!element) {
+            return void requestAnimationFrame(onClick);
+          }
           const firstLink = element.querySelector("a");
-          if (!firstLink || !(firstLink instanceof HTMLAnchorElement)) return;
+          if (!firstLink) {
+            return void requestAnimationFrame(onClick);
+          }
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
           void router.replace(
@@ -68,9 +73,11 @@ export default function Tutorial() {
         type: "CLICK",
         nodeId: "save-flashcard",
         instructions: "Click to save the word as a flashcard to review later",
-        onClick: () => {
+        onClick: function onClick() {
           const element = document.getElementById("save-flashcard");
-          if (!element || !(element instanceof HTMLButtonElement)) return;
+          if (!element || !(element instanceof HTMLButtonElement)) {
+            return void requestAnimationFrame(onClick);
+          }
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
         },
@@ -79,9 +86,11 @@ export default function Tutorial() {
         type: "CLICK",
         nodeId: "back-button",
         instructions: "Click the back button to go back",
-        onClick: () => {
+        onClick: function onClick() {
           const element = document.getElementById("back-button");
-          if (!element || !(element instanceof HTMLButtonElement)) return;
+          if (!element || !(element instanceof HTMLButtonElement)) {
+            return void requestAnimationFrame(onClick);
+          }
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
           setTutorialPage("HOME");
@@ -92,9 +101,11 @@ export default function Tutorial() {
         type: "CLICK",
         nodeId: "side-menu-button",
         instructions: "Click on the menu button to see the menu",
-        onClick: () => {
+        onClick: function onClick() {
           const element = document.getElementById("side-menu-button");
-          if (!element || !(element instanceof HTMLButtonElement)) return;
+          if (!element || !(element instanceof HTMLButtonElement)) {
+            return void requestAnimationFrame(onClick);
+          }
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
           element.click();
@@ -116,16 +127,19 @@ export default function Tutorial() {
         nodeId: "clip-reader-paste-button",
         instructions:
           "Click the clip board refresh button to paste Japanese text from your clipboard",
-        onClick: () => {
+        onClick: function onClick() {
+          const tutorialExampleText =
+            "今季限りでヤクルトを戦力外となった松本友内野手（２８）が、警察官になるため試験を受けることが１８日、分かった。ＮＰＢでの現役続行は断念し、２０２４年１月に予定されている警視庁の採用試験を受けることを決断した。";
           void navigator.clipboard
-            .writeText(
-              "今季限りでヤクルトを戦力外となった松本友内野手（２８）が、警察官になるため試験を受けることが１８日、分かった。ＮＰＢでの現役続行は断念し、２０２４年１月に予定されている警視庁の採用試験を受けることを決断した。",
-            )
+            .writeText(tutorialExampleText)
             .finally(() => {
               const element = document.getElementById(
                 "clip-reader-paste-button",
               );
-              element?.click();
+              if (!element || !(element instanceof HTMLButtonElement)) {
+                return void requestAnimationFrame(onClick);
+              }
+              element.click();
               setTutorialIndex((x) => x + 1);
               setTutorialButtonXY(null);
             });
@@ -135,9 +149,11 @@ export default function Tutorial() {
         type: "CLICK",
         nodeId: "clip-reader-text",
         instructions: "Click on Japanese text to look it up",
-        onClick: () => {
+        onClick: function onClick() {
           const element = document.querySelector("#clip-reader-text button");
-          if (!element || !(element instanceof HTMLButtonElement)) return;
+          if (!element || !(element instanceof HTMLButtonElement)) {
+            return void requestAnimationFrame(onClick);
+          }
           requestAnimationFrame(() => element.click());
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
@@ -148,9 +164,11 @@ export default function Tutorial() {
         nodeId: "clip-reader-text",
         instructions:
           "Here you can copy, listen, save, search, and view each word lookup. Click away to hide the lookup panel.",
-        onClick: () => {
+        onClick: function onClick() {
           const element = document.querySelector("#clip-reader-text button");
-          if (!element || !(element instanceof HTMLButtonElement)) return;
+          if (!element || !(element instanceof HTMLButtonElement)) {
+            return void requestAnimationFrame(onClick);
+          }
           element.click();
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
@@ -186,9 +204,11 @@ export default function Tutorial() {
         nodeId: "side-menu-button",
         instructions:
           "You can start a flashcard test once you have saved flashcards, now click the menu button",
-        onClick: () => {
+        onClick: function onClick() {
           const element = document.getElementById("side-menu-button");
-          if (!element || !(element instanceof HTMLButtonElement)) return;
+          if (!element || !(element instanceof HTMLButtonElement)) {
+            return void requestAnimationFrame(onClick);
+          }
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
           element.click();
@@ -214,6 +234,7 @@ export default function Tutorial() {
 
   useEffect(
     function setup() {
+      window.scrollTo(0, 0);
       if (!tutorialStep || tutorialStep.type !== "CLICK") return;
       const element = document.getElementById(tutorialStep.nodeId);
       // Wait for hidden elements to appear
