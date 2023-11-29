@@ -7,10 +7,14 @@ import NewFlashcardTest from "~/pages/new-flashcard-test";
 import ClipReader from "~/pages/clip-reader";
 import { createWordLink } from "~/utils/createWordLink";
 import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
-import { useSearchTextStore } from "~/stores/searchTextStore";
+import {
+  DEFAULT_SEARCH_TEXT,
+  useSearchTextStore,
+} from "~/stores/searchTextStore";
+import { useFlashcardStore } from "~/stores/flashcardStore";
+import { DEFAULT_SEARCH_RESULTS_FIRST_WORD_ENTRY } from "~/dictionary/defaultSearchResults";
 
 const TUTORIAL_BUTTON_WIDTH = 40;
-const TUTORIAL_SEARCH_TEXT = "ro-maji";
 
 type TutorialStep =
   | { type: "START" }
@@ -33,6 +37,7 @@ export default function Tutorial() {
     y: number;
   }>(null);
   const setSearchText = useSearchTextStore((x) => x.setSearchText);
+  const saveFlashcard = useFlashcardStore((x) => x.saveFlashcard);
   const addClipReaderText = useClipReaderTextStore((x) => x.addClipReaderText);
 
   const tutorialSteps: TutorialStep[] = useMemo(
@@ -41,9 +46,9 @@ export default function Tutorial() {
       {
         type: "CLICK",
         nodeId: "search-input",
-        instructions: 'Search for Japanese words like "ro-maji" or "ringo"',
+        instructions: `Search for Japanese words like "${DEFAULT_SEARCH_TEXT}"`,
         onClick: function onClick() {
-          setSearchText(TUTORIAL_SEARCH_TEXT);
+          setSearchText(DEFAULT_SEARCH_TEXT);
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
         },
@@ -57,7 +62,7 @@ export default function Tutorial() {
           setTutorialButtonXY(null);
           void router.replace(
             createWordLink({
-              searchText: TUTORIAL_SEARCH_TEXT,
+              searchText: DEFAULT_SEARCH_TEXT,
               resultIndex: 0,
             }).replace("word", "tutorial"),
           );
@@ -69,6 +74,11 @@ export default function Tutorial() {
         nodeId: "save-flashcard",
         instructions: "Click to save the word as a flashcard to review later",
         onClick: () => {
+          saveFlashcard({
+            wordEntry: DEFAULT_SEARCH_RESULTS_FIRST_WORD_ENTRY,
+            resultIndex: 0,
+            searchText: DEFAULT_SEARCH_TEXT,
+          });
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
         },
@@ -204,7 +214,7 @@ export default function Tutorial() {
       },
       { type: "FINISH" },
     ],
-    [router, addClipReaderText, setSearchText],
+    [router, addClipReaderText, setSearchText, saveFlashcard],
   );
 
   const tutorialStep = tutorialSteps[tutorialIndex];
