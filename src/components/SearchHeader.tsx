@@ -28,7 +28,11 @@ export const SearchHeader = ({
     >
       <div className="w-full max-w-2xl">
         <section className="flex h-14 items-center pr-4">
-          <button className="h-full px-4" onClick={openSideMenu}>
+          <button
+            id="side-menu-button"
+            className="h-full px-4"
+            onClick={openSideMenu}
+          >
             <span className="sr-only">Open side menu</span>
             <MenuIcon />
           </button>

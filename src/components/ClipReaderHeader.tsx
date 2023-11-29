@@ -21,7 +21,11 @@ const UnselectedTextMenu = ({ openSideMenu }: { openSideMenu: () => void }) => {
 
   return (
     <section className="flex h-14 items-center">
-      <button className="h-full px-4" onClick={openSideMenu}>
+      <button
+        id="side-menu-button"
+        className="h-full px-4"
+        onClick={openSideMenu}
+      >
         <span className="sr-only">Open side menu</span>
         <MenuIcon />
       </button>
@@ -31,6 +35,7 @@ const UnselectedTextMenu = ({ openSideMenu }: { openSideMenu: () => void }) => {
       </div>
 
       <button
+        id="clip-reader-paste-button"
         className="flex h-full items-center justify-center px-4"
         onClick={() => {
           void (async () => {

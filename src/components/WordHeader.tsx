@@ -43,7 +43,11 @@ export const WordHeader = ({
       >
         <div className="w-full max-w-2xl">
           <section className="flex h-14 items-center">
-            <button className="h-full px-4" onClick={() => router.back()}>
+            <button
+              id="back-button"
+              className="h-full px-4"
+              onClick={() => router.back()}
+            >
               <span className="sr-only">Go back</span>
               <ArrowBackIcon />
             </button>
@@ -52,6 +56,7 @@ export const WordHeader = ({
 
             {wordEntryIsFlashcard ? (
               <button
+                id="save-flashcard"
                 className="h-full px-4"
                 onClick={() => deleteFlashcard(wordLookup)}
               >
@@ -60,6 +65,7 @@ export const WordHeader = ({
               </button>
             ) : (
               <button
+                id="save-flashcard"
                 className="h-full px-4"
                 onClick={() => saveFlashcard(wordLookup)}
               >

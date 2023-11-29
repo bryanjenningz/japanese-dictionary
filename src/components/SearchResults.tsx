@@ -16,7 +16,7 @@ export const SearchResults = ({
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
 
   return (
-    <ul>
+    <ul id="search-results">
       {wordEntries.map((wordEntry, resultIndex) => {
         const { word, pronunciation, pitchAccents, definitions } = wordEntry;
         const key = `${word}-${pronunciation}-${resultIndex}}`;
