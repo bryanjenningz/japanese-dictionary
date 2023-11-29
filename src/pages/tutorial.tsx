@@ -275,12 +275,21 @@ export default function Tutorial() {
       case "CLICK": {
         return (
           <>
-            <p className="fixed inset-0 z-50 flex flex-col justify-end bg-gradient-to-b from-transparent to-black p-4 pb-20 text-center text-2xl text-white">
+            <p className="fixed inset-0 z-50 flex flex-col justify-end gap-4 bg-gradient-to-b from-transparent to-black p-4 text-center text-2xl text-white">
               {tutorialStep.instructions}
+
+              <div className="h-5 w-full overflow-hidden rounded-full bg-slate-800">
+                <div
+                  className="h-full bg-blue-700"
+                  style={{
+                    width: `${(tutorialIndex / tutorialSteps.length) * 100}%`,
+                  }}
+                ></div>
+              </div>
             </p>
 
             <button
-              className="fixed z-50 animate-ping rounded-full bg-blue-600 text-xs text-white"
+              className="fixed z-50 animate-ping rounded-full bg-blue-700 text-xs text-white"
               style={
                 tutorialButtonXY
                   ? {
