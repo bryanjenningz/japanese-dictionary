@@ -53,15 +53,7 @@ export default function Tutorial() {
         type: "CLICK",
         nodeId: "search-results",
         instructions: "Click on search results to see their definition",
-        onClick: function onClick() {
-          const element = document.getElementById("search-results");
-          if (!element) {
-            return void requestAnimationFrame(onClick);
-          }
-          const firstLink = element.querySelector("a");
-          if (!firstLink) {
-            return void requestAnimationFrame(onClick);
-          }
+        onClick: () => {
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
           void router.replace(
@@ -77,11 +69,7 @@ export default function Tutorial() {
         type: "CLICK",
         nodeId: "save-flashcard",
         instructions: "Click to save the word as a flashcard to review later",
-        onClick: function onClick() {
-          const element = document.getElementById("save-flashcard");
-          if (!element || !(element instanceof HTMLButtonElement)) {
-            return void requestAnimationFrame(onClick);
-          }
+        onClick: () => {
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
         },
@@ -90,11 +78,7 @@ export default function Tutorial() {
         type: "CLICK",
         nodeId: "back-button",
         instructions: "Click the back button to go back",
-        onClick: function onClick() {
-          const element = document.getElementById("back-button");
-          if (!element || !(element instanceof HTMLButtonElement)) {
-            return void requestAnimationFrame(onClick);
-          }
+        onClick: () => {
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
           setTutorialPage("HOME");
