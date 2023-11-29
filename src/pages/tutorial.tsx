@@ -7,8 +7,10 @@ import NewFlashcardTest from "~/pages/new-flashcard-test";
 import ClipReader from "~/pages/clip-reader";
 import { createWordLink } from "~/utils/createWordLink";
 import { useClipReaderTextStore } from "~/stores/clipReaderTextStore";
+import { useSearchTextStore } from "~/stores/searchTextStore";
 
 const TUTORIAL_BUTTON_WIDTH = 40;
+const TUTORIAL_SEARCH_TEXT = "ro-maji";
 
 type TutorialStep =
   | { type: "START" }
@@ -30,6 +32,7 @@ export default function Tutorial() {
     x: number;
     y: number;
   }>(null);
+  const setSearchText = useSearchTextStore((x) => x.setSearchText);
   const addClipReaderText = useClipReaderTextStore((x) => x.addClipReaderText);
 
   const tutorialSteps: TutorialStep[] = useMemo(
@@ -40,11 +43,7 @@ export default function Tutorial() {
         nodeId: "search-input",
         instructions: 'Search for Japanese words like "ro-maji" or "ringo"',
         onClick: function onClick() {
-          const element = document.getElementById("search-input");
-          if (!element || !(element instanceof HTMLInputElement)) {
-            return void requestAnimationFrame(onClick);
-          }
-          element.value = "ro-maji";
+          setSearchText(TUTORIAL_SEARCH_TEXT);
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
         },
@@ -57,10 +56,10 @@ export default function Tutorial() {
           setTutorialIndex((x) => x + 1);
           setTutorialButtonXY(null);
           void router.replace(
-            createWordLink({ searchText: "ro-maji", resultIndex: 0 }).replace(
-              "word",
-              "tutorial",
-            ),
+            createWordLink({
+              searchText: TUTORIAL_SEARCH_TEXT,
+              resultIndex: 0,
+            }).replace("word", "tutorial"),
           );
           setTutorialPage("WORD");
         },
@@ -205,7 +204,7 @@ export default function Tutorial() {
       },
       { type: "FINISH" },
     ],
-    [router, addClipReaderText],
+    [router, addClipReaderText, setSearchText],
   );
 
   const tutorialStep = tutorialSteps[tutorialIndex];
