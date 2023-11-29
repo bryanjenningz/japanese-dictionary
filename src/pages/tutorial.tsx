@@ -241,7 +241,7 @@ export default function Tutorial() {
       if (!element) return void requestAnimationFrame(setup);
       const { x, y, width } = element.getBoundingClientRect();
       // Wait for off-screen elements like the side-menu to appear
-      if (x < 0) return void requestAnimationFrame(setup);
+      if (x < 0 || y < 0) return void requestAnimationFrame(setup);
       setTutorialButtonXY({ x: x + width / 2 - 20, y });
     },
     [tutorialStep],
