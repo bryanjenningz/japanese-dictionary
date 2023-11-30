@@ -43,6 +43,7 @@ export const SelectableReadingText = ({
 
   return (
     <p
+      id="clip-reader-text"
       className="grow p-4 pb-48 text-2xl"
       ref={paragraphRef}
       onClick={(e) => {

@@ -1,19 +1,23 @@
-export const DEFAULT_SEARCH_RESULTS = {
+import { type WordSearchResult, type WordEntry } from "~/dictionary/search";
+
+export const DEFAULT_SEARCH_RESULTS_FIRST_WORD_ENTRY: WordEntry = {
+  word: "ローマ字",
+  pronunciation: "ローマじ",
+  definitions: [
+    "(n) (1) Latin alphabet",
+    "Roman alphabet",
+    "(n) (2) romaji",
+    "romanized Japanese",
+    "system of transliterating Japanese into the Latin alphabet",
+    "(P)",
+  ],
+  pitchAccents: [3, 0],
+};
+
+export const DEFAULT_SEARCH_RESULTS: WordSearchResult = {
   selectedTextLength: 7,
   wordEntries: [
-    {
-      word: "ローマ字",
-      pronunciation: "ローマじ",
-      definitions: [
-        "(n) (1) Latin alphabet",
-        "Roman alphabet",
-        "(n) (2) romaji",
-        "romanized Japanese",
-        "system of transliterating Japanese into the Latin alphabet",
-        "(P)",
-      ],
-      pitchAccents: [3, 0],
-    },
+    DEFAULT_SEARCH_RESULTS_FIRST_WORD_ENTRY,
     {
       word: "羅馬字",
       pronunciation: "ローマじ",

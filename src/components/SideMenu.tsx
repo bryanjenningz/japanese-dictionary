@@ -14,6 +14,7 @@ import { useFlashcardStore } from "~/stores/flashcardStore";
 import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 import { Modal } from "~/components/Modal";
+import { SmallLocalLibraryIcon } from "~/icons/SmallLocalLibraryIcon";
 
 type SideMenuOptionGroup = {
   label: string;
@@ -53,7 +54,15 @@ export const SideMenu = ({
     {
       label: "Dictionary",
       options: [
-        { label: "Dictionary", icon: <SmallSearchIcon />, href: "/" },
+        {
+          label: "Dictionary",
+          icon: (
+            <span id="home-link">
+              <SmallSearchIcon />
+            </span>
+          ),
+          href: "/",
+        },
         { label: "History", icon: <SmallHistoryIcon />, href: "/history" },
       ],
     },
@@ -62,7 +71,11 @@ export const SideMenu = ({
       options: [
         {
           label: "Clip Reader",
-          icon: <SmallClipboardIcon />,
+          icon: (
+            <span id="clip-reader-link">
+              <SmallClipboardIcon />
+            </span>
+          ),
           href: "/clip-reader",
         },
       ],
@@ -81,7 +94,11 @@ export const SideMenu = ({
           : []),
         {
           label: "New Test",
-          icon: <SmallLearnIcon />,
+          icon: (
+            <span id="new-flashcard-test-link">
+              <SmallLearnIcon />
+            </span>
+          ),
           href: "/new-flashcard-test",
           onClick: hasFlashcardTest
             ? (event: MouseEvent) => {
@@ -96,6 +113,16 @@ export const SideMenu = ({
       label: "Settings",
       options: [
         { label: "Settings", icon: <SmallSettingsIcon />, href: "/settings" },
+      ],
+    },
+    {
+      label: "Other",
+      options: [
+        {
+          label: "Tutorial (Beta)",
+          icon: <SmallLocalLibraryIcon />,
+          href: "/tutorial",
+        },
       ],
     },
   ];
