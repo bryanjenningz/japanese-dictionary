@@ -299,7 +299,7 @@ export default function Tutorial() {
           <>
             <div className="fixed inset-0 z-50 bg-black opacity-75"></div>
             <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 p-4 text-white">
-              <p className="text-center text-2xl">{`Welcome to the tutorial. We'll go over how to use this web app to learn Japanese.`}</p>
+              <p className="w-full max-w-2xl text-center text-2xl">{`Welcome to the tutorial. We'll go over how to use this web app to learn Japanese.`}</p>
               <button
                 className="rounded-full bg-blue-700 px-4 py-2 text-white"
                 onClick={() => {
@@ -317,7 +317,7 @@ export default function Tutorial() {
           <>
             <div className="fixed inset-0 z-50 bg-black opacity-75"></div>
             <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 p-4 text-white">
-              <p className="text-center text-2xl">{`Congratulations! You finished the tutorial. Now you can start learning Japanese!`}</p>
+              <p className="w-full max-w-2xl text-center text-2xl">{`Congratulations! You finished the tutorial. Now you can start learning Japanese!`}</p>
               <button
                 className="rounded-full bg-blue-700 px-4 py-2 text-white"
                 onClick={() => {
