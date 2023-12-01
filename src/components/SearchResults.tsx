@@ -7,6 +7,12 @@ import Link from "next/link";
 import { useSearchTextStore } from "~/stores/searchTextStore";
 import { createWordLink } from "~/utils/createWordLink";
 
+const emptyWordEntriesList = [
+  { text: "History", href: "/history" },
+  { text: "Clip Reader", href: "/clip-reader" },
+  { text: "Tutorial", href: "/tutorial" },
+] as const;
+
 export const SearchResults = ({
   wordEntries,
 }: {
@@ -14,6 +20,28 @@ export const SearchResults = ({
 }) => {
   const searchText = useStore(useSearchTextStore, (x) => x.searchText) ?? "";
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
+
+  if (wordEntries.length === 0) {
+    return (
+      <ul>
+        {emptyWordEntriesList.map(({ text, href }) => {
+          return (
+            <li key={text}>
+              <Link
+                href={href}
+                className={classNames(
+                  "block border-b p-4 text-lg",
+                  isDarkMode ? "border-slate-600" : "border-slate-300",
+                )}
+              >
+                {text}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
 
   return (
     <ul id="search-results">
