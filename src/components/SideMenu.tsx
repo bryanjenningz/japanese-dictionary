@@ -119,7 +119,7 @@ export const SideMenu = ({
       label: "Other",
       options: [
         {
-          label: "Tutorial (Beta)",
+          label: "Tutorial",
           icon: <SmallLocalLibraryIcon />,
           href: "/tutorial",
         },
