@@ -10,6 +10,7 @@ import { createWordLink } from "~/utils/createWordLink";
 const emptyWordEntriesList = [
   { text: "History", href: "/history" },
   { text: "Clip Reader", href: "/clip-reader" },
+  { text: "Flashcard Test", href: "/new-flashcard-test" },
   { text: "Tutorial", href: "/tutorial" },
 ] as const;
 
