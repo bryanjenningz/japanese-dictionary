@@ -267,7 +267,7 @@ export default function Tutorial() {
 
               <div className="h-5 w-full max-w-2xl overflow-hidden rounded-full bg-slate-800">
                 <div
-                  className="h-full bg-blue-700"
+                  className="h-full bg-blue-700 transition-all duration-300"
                   style={{
                     width: `${(tutorialIndex / tutorialSteps.length) * 100}%`,
                   }}
