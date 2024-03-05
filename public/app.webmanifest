@@ -43,7 +43,15 @@
     {
       "name": "Clip Reader",
       "short_name": "Reader",
-      "url": "/clip-reader"
+      "url": "/clip-reader",
+      "icons": [
+        {
+          "src": "/clip-reader-shortcut-icon.svg",
+          "sizes": "20x20",
+          "type": "image/svg+xml",
+          "purpose": "maskable"
+        }
+      ]
     }
   ]
 }
