@@ -70,7 +70,10 @@ export default function NewFlashcardTest() {
         isDarkMode ? "bg-black text-white" : "bg-white text-black",
       )}
     >
-      <SimpleHeader openSideMenu={() => setIsSideMenuOpen(true)} />
+      <SimpleHeader
+        title="Flashcard Test"
+        openSideMenu={() => setIsSideMenuOpen(true)}
+      />
 
       <SideMenu
         isSideMenuOpen={isSideMenuOpen}

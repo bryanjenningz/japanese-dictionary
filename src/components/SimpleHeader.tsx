@@ -4,8 +4,10 @@ import { useStore } from "~/stores/useStore";
 import { classNames } from "~/utils/classNames";
 
 export const SimpleHeader = ({
+  title,
   openSideMenu,
 }: {
+  title: string;
   openSideMenu: () => void;
 }) => {
   const isDarkMode = useStore(useDarkModeStore, (x) => x.isDarkMode) ?? true;
@@ -29,7 +31,7 @@ export const SimpleHeader = ({
           </button>
 
           <div className="relative flex grow">
-            <h1 className="text-lg font-semibold">Pleco</h1>
+            <h1 className="text-lg font-semibold">{title}</h1>
           </div>
         </section>
       </div>

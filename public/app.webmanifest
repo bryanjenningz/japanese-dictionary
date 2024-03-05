@@ -1,11 +1,11 @@
 {
-  "name": "React Pleco",
-  "short_name": "Pleco",
+  "name": "Japanese Dictionary",
+  "short_name": "Dictionary",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000",
   "theme_color": "#000",
-  "description": "A Japanese Pleco clone web app written with React, TypeScript, Next.js, TailwindCSS, and Zustand.",
+  "description": "A Japanese dictionary progressive web app written with React, TypeScript, Next.js, TailwindCSS, and Zustand. Inspired by Pleco. Initialized with create-t3-app.",
   "icons": [
     {
       "src": "/favicon-16x16.png",

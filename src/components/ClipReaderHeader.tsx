@@ -31,7 +31,7 @@ const UnselectedTextMenu = ({ openSideMenu }: { openSideMenu: () => void }) => {
       </button>
 
       <div className="relative flex grow">
-        <h1 className="text-lg font-semibold">Pleco</h1>
+        <h1 className="text-lg font-semibold">Clip Reader</h1>
       </div>
 
       <button

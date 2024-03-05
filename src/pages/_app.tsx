@@ -9,10 +9,10 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>React Pleco</title>
+        <title>Japanese Dictionary</title>
         <meta
           name="description"
-          content="A Japanese Pleco clone web app written with React, TypeScript, Next.js, TailwindCSS, and Zustand."
+          content="A Japanese progressive web app written with React, TypeScript, Next.js, TailwindCSS, and Zustand. Inspired by Pleco. Initialized with create-t3-app."
         />
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#000" />

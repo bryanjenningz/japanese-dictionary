@@ -63,7 +63,10 @@ export default function Settings() {
         isDarkMode ? "bg-black text-white" : "bg-white text-black",
       )}
     >
-      <SimpleHeader openSideMenu={() => setIsSideMenuOpen(true)} />
+      <SimpleHeader
+        title="Settings"
+        openSideMenu={() => setIsSideMenuOpen(true)}
+      />
 
       <SideMenu
         isSideMenuOpen={isSideMenuOpen}

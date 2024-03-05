@@ -52,7 +52,7 @@ export const WordHeader = ({
               <ArrowBackIcon />
             </button>
 
-            <h1 className="grow text-lg font-semibold">Pleco</h1>
+            <h1 className="grow text-lg font-semibold">Dictionary</h1>
 
             {wordEntryIsFlashcard ? (
               <button
