@@ -1,6 +1,6 @@
-# React Pleco
+# Japanese Dictionary
 
-A [Pleco](https://pleco.com) web app clone for Japanese written with [React](https://react.dev), [Next.js](https://nextjs.org), [TypeScript](https://typescriptlang.org), [TailwindCSS](https://tailwindcss.com), and [Zustand](https://github.com/pmndrs/zustand). Initialized with [create-t3-app](https://create.t3.gg).
+A Japanese dictionary progressive web app written with [React](https://react.dev), [Next.js](https://nextjs.org), [TypeScript](https://typescriptlang.org), [TailwindCSS](https://tailwindcss.com), and [Zustand](https://github.com/pmndrs/zustand). Inspired by [Pleco](https://pleco.com). Initialized with [create-t3-app](https://create.t3.gg).
 
 ## Features
 
@@ -9,7 +9,8 @@ A [Pleco](https://pleco.com) web app clone for Japanese written with [React](htt
 - Save dictionary lookup history, clipboard reader lookup history, search history, and flashcards
 - Quiz yourself on saved flashcards by using flashcard tests
 - Enable dark mode
-- Installable progressive web app that works entirely offline
+- Installable on iOS, Android, Windows, Mac OS, and Linux
+- Works entirely offline
 
 ## Screenshots
 
